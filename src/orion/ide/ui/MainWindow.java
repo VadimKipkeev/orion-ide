@@ -7,10 +7,17 @@
 */
 package orion.ide.ui;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
+
 // Main application window class
 public class MainWindow extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainWindow.class.getName());
+    
+    // Set FlatLaf SVG icons
+    public final FlatSVGIcon newFileIcon = new FlatSVGIcon("resources/icons/new_file.svg", 16, 16);
+    public final FlatSVGIcon openFileIcon = new FlatSVGIcon("resources/icons/open_file.svg", 16, 16);
+    public final FlatSVGIcon saveFileIcon = new FlatSVGIcon("resources/icons/save_file.svg", 16, 16);
 
     /**
      * Creates new form MainWindow
@@ -79,8 +86,16 @@ public class MainWindow extends javax.swing.JFrame {
         InstallPkgBuildItem = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
         ConfigBuildItem = new javax.swing.JMenuItem();
-        ToolsMenu = new javax.swing.JMenu();
+        ResManagerToolsItem = new javax.swing.JMenu();
+        GitToolsItem = new javax.swing.JMenuItem();
+        TerminalToolsItem = new javax.swing.JMenuItem();
+        DesignerToolsItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         HelpMenu = new javax.swing.JMenu();
+        ContentsHelpItem = new javax.swing.JMenuItem();
+        SamplesHelpItem = new javax.swing.JMenuItem();
+        jSeparator12 = new javax.swing.JPopupMenu.Separator();
+        AboutHelpItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -91,14 +106,17 @@ public class MainWindow extends javax.swing.JFrame {
         FileMenu.setText("File");
 
         NewFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        NewFileItem.setIcon(newFileIcon);
         NewFileItem.setText("New...");
         FileMenu.add(NewFileItem);
 
         OpenFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        OpenFileItem.setIcon(openFileIcon);
         OpenFileItem.setText("Open...");
         FileMenu.add(OpenFileItem);
 
         SaveFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        SaveFileItem.setIcon(saveFileIcon);
         SaveFileItem.setText("Save");
         FileMenu.add(SaveFileItem);
 
@@ -247,10 +265,36 @@ public class MainWindow extends javax.swing.JFrame {
 
         MainMenubar.add(BuildMenu);
 
-        ToolsMenu.setText("Tools");
-        MainMenubar.add(ToolsMenu);
+        ResManagerToolsItem.setText("Tools");
+
+        GitToolsItem.setText("Git");
+        ResManagerToolsItem.add(GitToolsItem);
+
+        TerminalToolsItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        TerminalToolsItem.setText("Terminal");
+        ResManagerToolsItem.add(TerminalToolsItem);
+
+        DesignerToolsItem.setText("UI designer");
+        ResManagerToolsItem.add(DesignerToolsItem);
+
+        jMenuItem1.setText("Resources manager...");
+        ResManagerToolsItem.add(jMenuItem1);
+
+        MainMenubar.add(ResManagerToolsItem);
 
         HelpMenu.setText("Help");
+
+        ContentsHelpItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        ContentsHelpItem.setText("Contents...");
+        HelpMenu.add(ContentsHelpItem);
+
+        SamplesHelpItem.setText("Samples");
+        HelpMenu.add(SamplesHelpItem);
+        HelpMenu.add(jSeparator12);
+
+        AboutHelpItem.setText("About...");
+        HelpMenu.add(AboutHelpItem);
+
         MainMenubar.add(HelpMenu);
 
         setJMenuBar(MainMenubar);
@@ -298,17 +342,21 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AboutHelpItem;
     private javax.swing.JMenu BookmarksMenu;
     private javax.swing.JMenu BuildMenu;
     private javax.swing.JMenuItem ConfigBuildItem;
+    private javax.swing.JMenuItem ContentsHelpItem;
     private javax.swing.JMenuItem CopyEditItem;
     private javax.swing.JMenuItem CutEditItem;
     private javax.swing.JMenuItem DebugBuildItem;
+    private javax.swing.JMenuItem DesignerToolsItem;
     private javax.swing.JMenu EditMenu;
     private javax.swing.JMenuItem EnumInsertItem;
     private javax.swing.JMenu FileMenu;
     private javax.swing.JMenuItem FindEditItem;
     private javax.swing.JMenuItem FunctInsertItem;
+    private javax.swing.JMenuItem GitToolsItem;
     private javax.swing.JMenuItem GoToViewItem;
     private javax.swing.JMenu HelpMenu;
     private javax.swing.JMenu InsertMenu;
@@ -327,6 +375,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem QuitItem;
     private javax.swing.JMenuItem RedoEditItem;
     private javax.swing.JMenuItem ReleaseBuildItem;
+    private javax.swing.JMenu ResManagerToolsItem;
+    private javax.swing.JMenuItem SamplesHelpItem;
     private javax.swing.JMenuItem SaveAllItem;
     private javax.swing.JMenuItem SaveAsFileItem;
     private javax.swing.JMenuItem SaveFileItem;
@@ -335,14 +385,16 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem SettingsItem;
     private javax.swing.JMenuItem StructInsertItem;
     private javax.swing.JMenuItem TemplateInsertItem;
-    private javax.swing.JMenu ToolsMenu;
+    private javax.swing.JMenuItem TerminalToolsItem;
     private javax.swing.JMenuItem UndoEditItem;
     private javax.swing.JMenu ViewMenu;
     private javax.swing.JMenuItem ZoomInViewItem;
     private javax.swing.JMenuItem ZoomOutViewItem;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JPopupMenu.Separator jSeparator12;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
