@@ -28,28 +28,59 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        MainMenubar = new javax.swing.JMenuBar();
+        FileMenu = new javax.swing.JMenu();
+        NewFileItem = new javax.swing.JMenuItem();
+        OpenFileItem = new javax.swing.JMenuItem();
+        SaveFileItem = new javax.swing.JMenuItem();
+        SaveAsFileItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        NewProjectItem = new javax.swing.JMenuItem();
+        OpenProjectItem = new javax.swing.JMenuItem();
+        SaveProjectItem = new javax.swing.JMenuItem();
+        SaveAllItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        PrintFileItem = new javax.swing.JMenuItem();
+        PrintSetupItem = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
+        QuitItem = new javax.swing.JMenuItem();
+        EditMenu = new javax.swing.JMenu();
+        UndoEditItem = new javax.swing.JMenuItem();
+        RedoEditItem = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        CutEditItem = new javax.swing.JMenuItem();
+        CopyEditItem = new javax.swing.JMenuItem();
+        PasteEditItem = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        FindEditItem = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        BookmarksMenu = new javax.swing.JMenu();
+        NewBookmarkItem = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        PrevBookmarkItem = new javax.swing.JMenuItem();
+        NextBookmarkItem = new javax.swing.JMenuItem();
+        jSeparator10 = new javax.swing.JPopupMenu.Separator();
+        SettingsItem = new javax.swing.JMenuItem();
+        ViewMenu = new javax.swing.JMenu();
+        ZoomInViewItem = new javax.swing.JMenuItem();
+        ZoomOutViewItem = new javax.swing.JMenuItem();
+        SetDefViewItem = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        GoToViewItem = new javax.swing.JMenuItem();
+        InsertMenu = new javax.swing.JMenu();
+        StructInsertItem = new javax.swing.JMenuItem();
+        EnumInsertItem = new javax.swing.JMenuItem();
+        FunctInsertItem = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        TemplateInsertItem = new javax.swing.JMenuItem();
+        BuildMenu = new javax.swing.JMenu();
+        ReleaseBuildItem = new javax.swing.JMenuItem();
+        DebugBuildItem = new javax.swing.JMenuItem();
+        InstallPkgBuildItem = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        ConfigBuildItem = new javax.swing.JMenuItem();
+        ToolsMenu = new javax.swing.JMenu();
+        HelpMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -57,74 +88,172 @@ public class MainWindow extends javax.swing.JFrame {
         setName("MainWindow"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1024, 768));
 
-        jMenu1.setText("File");
+        FileMenu.setText("File");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem1.setText("New...");
-        jMenu1.add(jMenuItem1);
+        NewFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        NewFileItem.setText("New...");
+        FileMenu.add(NewFileItem);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem2.setText("Open...");
-        jMenu1.add(jMenuItem2);
+        OpenFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        OpenFileItem.setText("Open...");
+        FileMenu.add(OpenFileItem);
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem3.setText("Save");
-        jMenu1.add(jMenuItem3);
+        SaveFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        SaveFileItem.setText("Save");
+        FileMenu.add(SaveFileItem);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem4.setText("Save as...");
-        jMenu1.add(jMenuItem4);
-        jMenu1.add(jSeparator1);
+        SaveAsFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        SaveAsFileItem.setText("Save as...");
+        FileMenu.add(SaveAsFileItem);
+        FileMenu.add(jSeparator1);
 
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem5.setText("New project...");
-        jMenu1.add(jMenuItem5);
+        NewProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        NewProjectItem.setText("New project...");
+        FileMenu.add(NewProjectItem);
 
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem6.setText("Open project...");
-        jMenu1.add(jMenuItem6);
+        OpenProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        OpenProjectItem.setText("Open project...");
+        FileMenu.add(OpenProjectItem);
 
-        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem7.setText("Save project");
-        jMenu1.add(jMenuItem7);
+        SaveProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        SaveProjectItem.setText("Save project");
+        FileMenu.add(SaveProjectItem);
 
-        jMenuItem8.setText("Save all");
-        jMenu1.add(jMenuItem8);
-        jMenu1.add(jSeparator2);
+        SaveAllItem.setText("Save all");
+        FileMenu.add(SaveAllItem);
+        FileMenu.add(jSeparator2);
 
-        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem9.setText("Print");
-        jMenu1.add(jMenuItem9);
+        PrintFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        PrintFileItem.setText("Print");
+        FileMenu.add(PrintFileItem);
 
-        jMenuItem10.setText("Print setup...");
-        jMenu1.add(jMenuItem10);
-        jMenu1.add(jSeparator3);
+        PrintSetupItem.setText("Print setup...");
+        FileMenu.add(PrintSetupItem);
+        FileMenu.add(jSeparator3);
 
-        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        jMenuItem11.setText("Quit");
-        jMenu1.add(jMenuItem11);
+        QuitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        QuitItem.setText("Quit");
+        FileMenu.add(QuitItem);
 
-        jMenuBar1.add(jMenu1);
+        MainMenubar.add(FileMenu);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        EditMenu.setText("Edit");
 
-        jMenu3.setText("View");
-        jMenuBar1.add(jMenu3);
+        UndoEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        UndoEditItem.setText("Undo");
+        EditMenu.add(UndoEditItem);
 
-        jMenu4.setText("Insert");
-        jMenuBar1.add(jMenu4);
+        RedoEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        RedoEditItem.setText("Redo");
+        EditMenu.add(RedoEditItem);
+        EditMenu.add(jSeparator4);
 
-        jMenu5.setText("Build");
-        jMenuBar1.add(jMenu5);
+        CutEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        CutEditItem.setText("Cut");
+        EditMenu.add(CutEditItem);
 
-        jMenu6.setText("Tools");
-        jMenuBar1.add(jMenu6);
+        CopyEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        CopyEditItem.setText("Copy");
+        EditMenu.add(CopyEditItem);
 
-        jMenu7.setText("Help");
-        jMenuBar1.add(jMenu7);
+        PasteEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        PasteEditItem.setText("Paste");
+        EditMenu.add(PasteEditItem);
+        EditMenu.add(jSeparator5);
 
-        setJMenuBar(jMenuBar1);
+        FindEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        FindEditItem.setText("Find and replace...");
+        EditMenu.add(FindEditItem);
+        EditMenu.add(jSeparator6);
+
+        BookmarksMenu.setText("Bookmarks");
+
+        NewBookmarkItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        NewBookmarkItem.setText("New");
+        BookmarksMenu.add(NewBookmarkItem);
+        BookmarksMenu.add(jSeparator7);
+
+        PrevBookmarkItem.setText("Preview");
+        BookmarksMenu.add(PrevBookmarkItem);
+
+        NextBookmarkItem.setText("Next");
+        BookmarksMenu.add(NextBookmarkItem);
+
+        EditMenu.add(BookmarksMenu);
+        EditMenu.add(jSeparator10);
+
+        SettingsItem.setText("Settings...");
+        EditMenu.add(SettingsItem);
+
+        MainMenubar.add(EditMenu);
+
+        ViewMenu.setText("View");
+
+        ZoomInViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_EQUALS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        ZoomInViewItem.setText("Zoom in");
+        ViewMenu.add(ZoomInViewItem);
+
+        ZoomOutViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_MINUS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        ZoomOutViewItem.setText("Zoom out");
+        ViewMenu.add(ZoomOutViewItem);
+
+        SetDefViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        SetDefViewItem.setText("Set default");
+        ViewMenu.add(SetDefViewItem);
+        ViewMenu.add(jSeparator8);
+
+        GoToViewItem.setText("Go to...");
+        ViewMenu.add(GoToViewItem);
+
+        MainMenubar.add(ViewMenu);
+
+        InsertMenu.setText("Insert");
+
+        StructInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        StructInsertItem.setText("Structure");
+        InsertMenu.add(StructInsertItem);
+
+        EnumInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        EnumInsertItem.setText("Enumeration");
+        InsertMenu.add(EnumInsertItem);
+
+        FunctInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        FunctInsertItem.setText("Function");
+        InsertMenu.add(FunctInsertItem);
+        InsertMenu.add(jSeparator9);
+
+        TemplateInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        TemplateInsertItem.setText("Template...");
+        InsertMenu.add(TemplateInsertItem);
+
+        MainMenubar.add(InsertMenu);
+
+        BuildMenu.setText("Build");
+
+        ReleaseBuildItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, 0));
+        ReleaseBuildItem.setText("Release");
+        BuildMenu.add(ReleaseBuildItem);
+
+        DebugBuildItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        DebugBuildItem.setText("Debug");
+        BuildMenu.add(DebugBuildItem);
+
+        InstallPkgBuildItem.setText("Install package");
+        BuildMenu.add(InstallPkgBuildItem);
+        BuildMenu.add(jSeparator11);
+
+        ConfigBuildItem.setText("Configure...");
+        BuildMenu.add(ConfigBuildItem);
+
+        MainMenubar.add(BuildMenu);
+
+        ToolsMenu.setText("Tools");
+        MainMenubar.add(ToolsMenu);
+
+        HelpMenu.setText("Help");
+        MainMenubar.add(HelpMenu);
+
+        setJMenuBar(MainMenubar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,27 +298,58 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenu BookmarksMenu;
+    private javax.swing.JMenu BuildMenu;
+    private javax.swing.JMenuItem ConfigBuildItem;
+    private javax.swing.JMenuItem CopyEditItem;
+    private javax.swing.JMenuItem CutEditItem;
+    private javax.swing.JMenuItem DebugBuildItem;
+    private javax.swing.JMenu EditMenu;
+    private javax.swing.JMenuItem EnumInsertItem;
+    private javax.swing.JMenu FileMenu;
+    private javax.swing.JMenuItem FindEditItem;
+    private javax.swing.JMenuItem FunctInsertItem;
+    private javax.swing.JMenuItem GoToViewItem;
+    private javax.swing.JMenu HelpMenu;
+    private javax.swing.JMenu InsertMenu;
+    private javax.swing.JMenuItem InstallPkgBuildItem;
+    private javax.swing.JMenuBar MainMenubar;
+    private javax.swing.JMenuItem NewBookmarkItem;
+    private javax.swing.JMenuItem NewFileItem;
+    private javax.swing.JMenuItem NewProjectItem;
+    private javax.swing.JMenuItem NextBookmarkItem;
+    private javax.swing.JMenuItem OpenFileItem;
+    private javax.swing.JMenuItem OpenProjectItem;
+    private javax.swing.JMenuItem PasteEditItem;
+    private javax.swing.JMenuItem PrevBookmarkItem;
+    private javax.swing.JMenuItem PrintFileItem;
+    private javax.swing.JMenuItem PrintSetupItem;
+    private javax.swing.JMenuItem QuitItem;
+    private javax.swing.JMenuItem RedoEditItem;
+    private javax.swing.JMenuItem ReleaseBuildItem;
+    private javax.swing.JMenuItem SaveAllItem;
+    private javax.swing.JMenuItem SaveAsFileItem;
+    private javax.swing.JMenuItem SaveFileItem;
+    private javax.swing.JMenuItem SaveProjectItem;
+    private javax.swing.JMenuItem SetDefViewItem;
+    private javax.swing.JMenuItem SettingsItem;
+    private javax.swing.JMenuItem StructInsertItem;
+    private javax.swing.JMenuItem TemplateInsertItem;
+    private javax.swing.JMenu ToolsMenu;
+    private javax.swing.JMenuItem UndoEditItem;
+    private javax.swing.JMenu ViewMenu;
+    private javax.swing.JMenuItem ZoomInViewItem;
+    private javax.swing.JMenuItem ZoomOutViewItem;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
     // End of variables declaration//GEN-END:variables
 }
