@@ -47,6 +47,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Shift+Ctrl+S"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="saveAsIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Save as..."/>
               </Properties>
             </MenuItem>
@@ -57,6 +60,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+Alt+N"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="newProjectIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="New project..."/>
               </Properties>
             </MenuItem>
@@ -64,6 +70,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+Alt+O"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="openProjectIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Open project..."/>
               </Properties>
@@ -73,11 +82,17 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+Alt+S"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="saveProjectIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Save project"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SaveAllItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="saveAllIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Save all"/>
               </Properties>
             </MenuItem>
@@ -88,11 +103,17 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+P"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="printFileIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Print"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="PrintSetupItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="printSetupIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Print setup..."/>
               </Properties>
             </MenuItem>
@@ -102,6 +123,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+F4"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="quitAppIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Quit"/>
               </Properties>
@@ -118,6 +142,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+Z"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="undoEditIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Undo"/>
               </Properties>
             </MenuItem>
@@ -125,6 +152,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+Y"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="redoEditIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Redo"/>
               </Properties>
@@ -136,6 +166,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+X"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="cutEditIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cut"/>
               </Properties>
             </MenuItem>
@@ -144,6 +177,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+C"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="copyEditIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Copy"/>
               </Properties>
             </MenuItem>
@@ -151,6 +187,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+V"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="pasteEditIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Paste"/>
               </Properties>
@@ -161,6 +200,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+F"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="findAndReplaceIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Find and replace..."/>
               </Properties>
@@ -177,6 +219,9 @@
                     <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                       <KeyStroke key="Shift+Ctrl+B"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="newBookmarkIcon" type="code"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="New"/>
                   </Properties>
                 </MenuItem>
@@ -184,11 +229,17 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="PrevBookmarkItem">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="prevBookmarkIcon" type="code"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Preview"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="NextBookmarkItem">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="nextBookmarkIcon" type="code"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Next"/>
                   </Properties>
                 </MenuItem>
@@ -198,6 +249,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SettingsItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="settingsAppIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Settings..."/>
               </Properties>
             </MenuItem>
@@ -213,6 +267,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+EQUALS"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="zoomInViewIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Zoom in"/>
               </Properties>
             </MenuItem>
@@ -220,6 +277,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+MINUS"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="zoomOutViewIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Zoom out"/>
               </Properties>
@@ -229,6 +289,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+0"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="setDefaultViewIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Set default"/>
               </Properties>
             </MenuItem>
@@ -236,6 +299,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="GoToViewItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="goToViewIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Go to..."/>
               </Properties>
             </MenuItem>
@@ -251,6 +317,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+S"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="structureInsertIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Structure"/>
               </Properties>
             </MenuItem>
@@ -259,6 +328,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+E"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="enumerationInsertIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Enumeration"/>
               </Properties>
             </MenuItem>
@@ -266,6 +338,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+F"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="functionInsertIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Function"/>
               </Properties>
@@ -276,6 +351,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+T"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="templateInsertIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Template..."/>
               </Properties>
@@ -292,6 +370,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="F11"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="releaseBuildIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Release"/>
               </Properties>
             </MenuItem>
@@ -300,11 +381,17 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Shift+F11"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="debugBuildIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Debug"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="InstallPkgBuildItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="installPackageBuildIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Install package"/>
               </Properties>
             </MenuItem>
@@ -312,6 +399,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ConfigBuildItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="configBuildIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Configure..."/>
               </Properties>
             </MenuItem>
@@ -324,6 +414,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="GitToolsItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="gitToolsIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Git"/>
               </Properties>
             </MenuItem>
@@ -332,16 +425,25 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Shift+Ctrl+T"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="terminalToolsIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Terminal"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="DesignerToolsItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="uiDesignerToolsIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="UI designer"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="packageManagerIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Resources manager..."/>
               </Properties>
             </MenuItem>
@@ -357,11 +459,17 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="F1"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="contentsHelpIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Contents..."/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SamplesHelpItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="samplesHelpIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Samples"/>
               </Properties>
             </MenuItem>
@@ -369,6 +477,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="AboutHelpItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="aboutHelpIcon" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="About..."/>
               </Properties>
             </MenuItem>
@@ -379,6 +490,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Orion IDE"/>
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
       <Color id="Default Cursor"/>
     </Property>

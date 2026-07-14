@@ -14,10 +14,63 @@ public class MainWindow extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainWindow.class.getName());
     
-    // Set FlatLaf SVG icons
+    /**
+     * Set FlatLaf SVG icons
+     */
+    
+    // File menu icons
     public final FlatSVGIcon newFileIcon = new FlatSVGIcon("resources/icons/new_file.svg", 16, 16);
     public final FlatSVGIcon openFileIcon = new FlatSVGIcon("resources/icons/open_file.svg", 16, 16);
     public final FlatSVGIcon saveFileIcon = new FlatSVGIcon("resources/icons/save_file.svg", 16, 16);
+    public final FlatSVGIcon saveAsIcon = new FlatSVGIcon("resources/icons/save_as.svg", 16, 16);
+    public final FlatSVGIcon newProjectIcon = new FlatSVGIcon("resources/icons/new_project.svg", 16, 16);
+    public final FlatSVGIcon openProjectIcon = new FlatSVGIcon("resources/icons/open_project.svg", 16, 16);
+    public final FlatSVGIcon saveProjectIcon = new FlatSVGIcon("resources/icons/save_project.svg", 16, 16);
+    public final FlatSVGIcon saveAllIcon = new FlatSVGIcon("resources/icons/save_all.svg", 16, 16);
+    public final FlatSVGIcon printFileIcon = new FlatSVGIcon("resources/icons/print_file.svg", 16, 16);
+    public final FlatSVGIcon printSetupIcon = new FlatSVGIcon("resources/icons/print_setup.svg", 16, 16);
+    public final FlatSVGIcon quitAppIcon = new FlatSVGIcon("resources/icons/quit_app.svg", 16, 16);
+    
+    // Edit menu icons
+    public final FlatSVGIcon undoEditIcon = new FlatSVGIcon("resources/icons/undo_edit.svg", 16, 16);
+    public final FlatSVGIcon redoEditIcon = new FlatSVGIcon("resources/icons/redo_edit.svg", 16, 16);
+    public final FlatSVGIcon cutEditIcon = new FlatSVGIcon("resources/icons/cut_edit.svg", 16, 16);
+    public final FlatSVGIcon copyEditIcon = new FlatSVGIcon("resources/icons/copy_edit.svg", 16, 16);
+    public final FlatSVGIcon pasteEditIcon = new FlatSVGIcon("resources/icons/paste_edit.svg", 16, 16);
+    public final FlatSVGIcon findAndReplaceIcon = new FlatSVGIcon("resources/icons/find_and_replace.svg", 16, 16);
+    public final FlatSVGIcon newBookmarkIcon = new FlatSVGIcon("resources/icons/new_bookmark.svg", 16, 16);
+    public final FlatSVGIcon nextBookmarkIcon = new FlatSVGIcon("resources/icons/next_bookmark.svg", 16, 16);
+    public final FlatSVGIcon prevBookmarkIcon = new FlatSVGIcon("resources/icons/prev_bookmark.svg", 16, 16);
+    public final FlatSVGIcon settingsAppIcon = new FlatSVGIcon("resources/icons/settings_app.svg", 16, 16);
+    
+    // View menu icons
+    public final FlatSVGIcon zoomInViewIcon = new FlatSVGIcon("resources/icons/zoom_in.svg", 16, 16);
+    public final FlatSVGIcon zoomOutViewIcon = new FlatSVGIcon("resources/icons/zoom_out.svg", 16, 16);
+    public final FlatSVGIcon setDefaultViewIcon = new FlatSVGIcon("resources/icons/set_def_view.svg", 16, 16);
+    public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/go_to_view.svg", 16, 16);
+    
+    // Insert menu icons
+    public final FlatSVGIcon structureInsertIcon = new FlatSVGIcon("resources/icons/ins_structure.svg", 16, 16);
+    public final FlatSVGIcon enumerationInsertIcon = new FlatSVGIcon("resources/icons/ins_enum.svg", 16, 16);
+    public final FlatSVGIcon functionInsertIcon = new FlatSVGIcon("resources/icons/ins_function.svg", 16, 16);
+    public final FlatSVGIcon templateInsertIcon = new FlatSVGIcon("resources/icons/ins_template.svg", 16, 16);
+    
+    // Build menu icons
+    public final FlatSVGIcon releaseBuildIcon = new FlatSVGIcon("resources/icons/release_build.svg", 16, 16);
+    public final FlatSVGIcon debugBuildIcon = new FlatSVGIcon("resources/icons/debug_build.svg", 16, 16);
+    public final FlatSVGIcon installPackageBuildIcon = new FlatSVGIcon("resources/icons/install_package_build.svg", 16, 16);
+    public final FlatSVGIcon configBuildIcon = new FlatSVGIcon("resources/icons/config_build.svg", 16, 16);
+    
+    // Tools menu icons
+    public final FlatSVGIcon gitToolsIcon = new FlatSVGIcon("resources/icons/git_tools.svg", 16, 16);
+    public final FlatSVGIcon terminalToolsIcon = new FlatSVGIcon("resources/icons/terminal_tools.svg", 16, 16);
+    public final FlatSVGIcon uiDesignerToolsIcon = new FlatSVGIcon("resources/icons/ui_designer_tools.svg", 16, 16);
+    public final FlatSVGIcon packageManagerIcon = new FlatSVGIcon("resources/icons/package_manager.svg", 16, 16);
+    
+    // Help menu icons
+    public final FlatSVGIcon contentsHelpIcon = new FlatSVGIcon("resources/icons/contents_help.svg", 16, 16);
+    public final FlatSVGIcon samplesHelpIcon = new FlatSVGIcon("resources/icons/samples_help.svg", 16, 16);
+    public final FlatSVGIcon aboutHelpIcon = new FlatSVGIcon("resources/icons/about_help.svg", 16, 16);
 
     /**
      * Creates new form MainWindow
@@ -98,6 +151,7 @@ public class MainWindow extends javax.swing.JFrame {
         AboutHelpItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Orion IDE");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(240, 320));
         setName("MainWindow"); // NOI18N
@@ -121,35 +175,43 @@ public class MainWindow extends javax.swing.JFrame {
         FileMenu.add(SaveFileItem);
 
         SaveAsFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        SaveAsFileItem.setIcon(saveAsIcon);
         SaveAsFileItem.setText("Save as...");
         FileMenu.add(SaveAsFileItem);
         FileMenu.add(jSeparator1);
 
         NewProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        NewProjectItem.setIcon(newProjectIcon);
         NewProjectItem.setText("New project...");
         FileMenu.add(NewProjectItem);
 
         OpenProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        OpenProjectItem.setIcon(openProjectIcon);
         OpenProjectItem.setText("Open project...");
         FileMenu.add(OpenProjectItem);
 
         SaveProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        SaveProjectItem.setIcon(saveProjectIcon);
         SaveProjectItem.setText("Save project");
         FileMenu.add(SaveProjectItem);
 
+        SaveAllItem.setIcon(saveAllIcon);
         SaveAllItem.setText("Save all");
         FileMenu.add(SaveAllItem);
         FileMenu.add(jSeparator2);
 
         PrintFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        PrintFileItem.setIcon(printFileIcon);
         PrintFileItem.setText("Print");
         FileMenu.add(PrintFileItem);
 
+        PrintSetupItem.setIcon(printSetupIcon);
         PrintSetupItem.setText("Print setup...");
         FileMenu.add(PrintSetupItem);
         FileMenu.add(jSeparator3);
 
         QuitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        QuitItem.setIcon(quitAppIcon);
         QuitItem.setText("Quit");
         FileMenu.add(QuitItem);
 
@@ -158,28 +220,34 @@ public class MainWindow extends javax.swing.JFrame {
         EditMenu.setText("Edit");
 
         UndoEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        UndoEditItem.setIcon(undoEditIcon);
         UndoEditItem.setText("Undo");
         EditMenu.add(UndoEditItem);
 
         RedoEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        RedoEditItem.setIcon(redoEditIcon);
         RedoEditItem.setText("Redo");
         EditMenu.add(RedoEditItem);
         EditMenu.add(jSeparator4);
 
         CutEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        CutEditItem.setIcon(cutEditIcon);
         CutEditItem.setText("Cut");
         EditMenu.add(CutEditItem);
 
         CopyEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        CopyEditItem.setIcon(copyEditIcon);
         CopyEditItem.setText("Copy");
         EditMenu.add(CopyEditItem);
 
         PasteEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        PasteEditItem.setIcon(pasteEditIcon);
         PasteEditItem.setText("Paste");
         EditMenu.add(PasteEditItem);
         EditMenu.add(jSeparator5);
 
         FindEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        FindEditItem.setIcon(findAndReplaceIcon);
         FindEditItem.setText("Find and replace...");
         EditMenu.add(FindEditItem);
         EditMenu.add(jSeparator6);
@@ -187,19 +255,23 @@ public class MainWindow extends javax.swing.JFrame {
         BookmarksMenu.setText("Bookmarks");
 
         NewBookmarkItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        NewBookmarkItem.setIcon(newBookmarkIcon);
         NewBookmarkItem.setText("New");
         BookmarksMenu.add(NewBookmarkItem);
         BookmarksMenu.add(jSeparator7);
 
+        PrevBookmarkItem.setIcon(prevBookmarkIcon);
         PrevBookmarkItem.setText("Preview");
         BookmarksMenu.add(PrevBookmarkItem);
 
+        NextBookmarkItem.setIcon(nextBookmarkIcon);
         NextBookmarkItem.setText("Next");
         BookmarksMenu.add(NextBookmarkItem);
 
         EditMenu.add(BookmarksMenu);
         EditMenu.add(jSeparator10);
 
+        SettingsItem.setIcon(settingsAppIcon);
         SettingsItem.setText("Settings...");
         EditMenu.add(SettingsItem);
 
@@ -208,18 +280,22 @@ public class MainWindow extends javax.swing.JFrame {
         ViewMenu.setText("View");
 
         ZoomInViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_EQUALS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        ZoomInViewItem.setIcon(zoomInViewIcon);
         ZoomInViewItem.setText("Zoom in");
         ViewMenu.add(ZoomInViewItem);
 
         ZoomOutViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_MINUS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        ZoomOutViewItem.setIcon(zoomOutViewIcon);
         ZoomOutViewItem.setText("Zoom out");
         ViewMenu.add(ZoomOutViewItem);
 
         SetDefViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        SetDefViewItem.setIcon(setDefaultViewIcon);
         SetDefViewItem.setText("Set default");
         ViewMenu.add(SetDefViewItem);
         ViewMenu.add(jSeparator8);
 
+        GoToViewItem.setIcon(goToViewIcon);
         GoToViewItem.setText("Go to...");
         ViewMenu.add(GoToViewItem);
 
@@ -228,19 +304,23 @@ public class MainWindow extends javax.swing.JFrame {
         InsertMenu.setText("Insert");
 
         StructInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        StructInsertItem.setIcon(structureInsertIcon);
         StructInsertItem.setText("Structure");
         InsertMenu.add(StructInsertItem);
 
         EnumInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        EnumInsertItem.setIcon(enumerationInsertIcon);
         EnumInsertItem.setText("Enumeration");
         InsertMenu.add(EnumInsertItem);
 
         FunctInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        FunctInsertItem.setIcon(functionInsertIcon);
         FunctInsertItem.setText("Function");
         InsertMenu.add(FunctInsertItem);
         InsertMenu.add(jSeparator9);
 
         TemplateInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        TemplateInsertItem.setIcon(templateInsertIcon);
         TemplateInsertItem.setText("Template...");
         InsertMenu.add(TemplateInsertItem);
 
@@ -249,17 +329,21 @@ public class MainWindow extends javax.swing.JFrame {
         BuildMenu.setText("Build");
 
         ReleaseBuildItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, 0));
+        ReleaseBuildItem.setIcon(releaseBuildIcon);
         ReleaseBuildItem.setText("Release");
         BuildMenu.add(ReleaseBuildItem);
 
         DebugBuildItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        DebugBuildItem.setIcon(debugBuildIcon);
         DebugBuildItem.setText("Debug");
         BuildMenu.add(DebugBuildItem);
 
+        InstallPkgBuildItem.setIcon(installPackageBuildIcon);
         InstallPkgBuildItem.setText("Install package");
         BuildMenu.add(InstallPkgBuildItem);
         BuildMenu.add(jSeparator11);
 
+        ConfigBuildItem.setIcon(configBuildIcon);
         ConfigBuildItem.setText("Configure...");
         BuildMenu.add(ConfigBuildItem);
 
@@ -267,16 +351,20 @@ public class MainWindow extends javax.swing.JFrame {
 
         ResManagerToolsItem.setText("Tools");
 
+        GitToolsItem.setIcon(gitToolsIcon);
         GitToolsItem.setText("Git");
         ResManagerToolsItem.add(GitToolsItem);
 
         TerminalToolsItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        TerminalToolsItem.setIcon(terminalToolsIcon);
         TerminalToolsItem.setText("Terminal");
         ResManagerToolsItem.add(TerminalToolsItem);
 
+        DesignerToolsItem.setIcon(uiDesignerToolsIcon);
         DesignerToolsItem.setText("UI designer");
         ResManagerToolsItem.add(DesignerToolsItem);
 
+        jMenuItem1.setIcon(packageManagerIcon);
         jMenuItem1.setText("Resources manager...");
         ResManagerToolsItem.add(jMenuItem1);
 
@@ -285,13 +373,16 @@ public class MainWindow extends javax.swing.JFrame {
         HelpMenu.setText("Help");
 
         ContentsHelpItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        ContentsHelpItem.setIcon(contentsHelpIcon);
         ContentsHelpItem.setText("Contents...");
         HelpMenu.add(ContentsHelpItem);
 
+        SamplesHelpItem.setIcon(samplesHelpIcon);
         SamplesHelpItem.setText("Samples");
         HelpMenu.add(SamplesHelpItem);
         HelpMenu.add(jSeparator12);
 
+        AboutHelpItem.setIcon(aboutHelpIcon);
         AboutHelpItem.setText("About...");
         HelpMenu.add(AboutHelpItem);
 
