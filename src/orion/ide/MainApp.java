@@ -17,7 +17,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 public class MainApp {
     
     // Set FlatLaf theme
-    public static boolean isDarkTheme = true;
+    public static boolean isDarkTheme;
     
     // Entry point in application
     public static void main(String[] args) {
@@ -25,18 +25,19 @@ public class MainApp {
         // Initualize FlatLaf Swing theme
         if(isDarkTheme == false) {
             try {
-                FlatLightLaf.setup();
+                FlatLightLaf.setup(); // Light theme enabled
             } catch (Exception ex) {
                 System.err.println("FlatLaf library not loaded!");
             }
         } else {
             try {
-                FlatDarkLaf.setup();
+                FlatDarkLaf.setup(); // Dark theme enabled
             } catch (Exception ex) {
                 System.err.println("FlatLaf library not loaded!");
             }
         }
         
+        // Run code by timer
         javax.swing.SwingUtilities.invokeLater(() -> {
             
             // First show preloader window
