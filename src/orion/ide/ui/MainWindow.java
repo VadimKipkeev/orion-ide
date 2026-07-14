@@ -65,7 +65,7 @@ public class MainWindow extends javax.swing.JFrame {
     public final FlatSVGIcon gitToolsIcon = new FlatSVGIcon("resources/icons/git_tools.svg", 16, 16);
     public final FlatSVGIcon terminalToolsIcon = new FlatSVGIcon("resources/icons/terminal_tools.svg", 16, 16);
     public final FlatSVGIcon uiDesignerToolsIcon = new FlatSVGIcon("resources/icons/ui_designer_tools.svg", 16, 16);
-    public final FlatSVGIcon packageManagerIcon = new FlatSVGIcon("resources/icons/package_manager.svg", 16, 16);
+    public final FlatSVGIcon resourcesManagerIcon = new FlatSVGIcon("resources/icons/resources_manager.svg", 16, 16);
     
     // Help menu icons
     public final FlatSVGIcon contentsHelpIcon = new FlatSVGIcon("resources/icons/contents_help.svg", 16, 16);
@@ -364,7 +364,7 @@ public class MainWindow extends javax.swing.JFrame {
         DesignerToolsItem.setText("UI designer");
         ResManagerToolsItem.add(DesignerToolsItem);
 
-        jMenuItem1.setIcon(packageManagerIcon);
+        jMenuItem1.setIcon(resourcesManagerIcon);
         jMenuItem1.setText("Resources manager...");
         ResManagerToolsItem.add(jMenuItem1);
 
