@@ -9,7 +9,7 @@ package orion.ide.ui;
 
 import com.formdev.flatlaf.FlatLaf;
 import orion.ide.ui.theme.FlatLafVSLight;
-// import orion.ide.ui.theme.FlatLafVSDark;
+import orion.ide.ui.theme.FlatLafVSDark;
 
 // FlatLaf theme manager class
 public class ThemeManager {
@@ -28,7 +28,7 @@ public class ThemeManager {
             }
             
             case 1 -> {
-                // FlatLafVSDark.setup();
+                FlatLafVSDark.setup();
                 return true;
             }
             
@@ -46,7 +46,7 @@ public class ThemeManager {
         if(!FlatLaf.isLafDark()) {
             themeName = FlatLafVSLight.THEME_NAME;
         } else {
-            // themeName = FlatLafVSDark.THEME_NAME;
+            themeName = FlatLafVSDark.THEME_NAME;
         }
         
         return themeName;
