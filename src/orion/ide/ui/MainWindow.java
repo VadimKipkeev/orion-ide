@@ -17,66 +17,80 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Set FlatLaf SVG icons
      */
+    private final String iconsFolder = setIconsFolder();
     
     // File menu icons
-    public final FlatSVGIcon newFileIcon = new FlatSVGIcon("resources/icons/new_file.svg", 16, 16);
-    public final FlatSVGIcon openFileIcon = new FlatSVGIcon("resources/icons/open_file.svg", 16, 16);
-    public final FlatSVGIcon saveFileIcon = new FlatSVGIcon("resources/icons/save_file.svg", 16, 16);
-    public final FlatSVGIcon saveAsIcon = new FlatSVGIcon("resources/icons/save_as.svg", 16, 16);
-    public final FlatSVGIcon newProjectIcon = new FlatSVGIcon("resources/icons/new_project.svg", 16, 16);
-    public final FlatSVGIcon openProjectIcon = new FlatSVGIcon("resources/icons/open_project.svg", 16, 16);
-    public final FlatSVGIcon saveProjectIcon = new FlatSVGIcon("resources/icons/save_project.svg", 16, 16);
-    public final FlatSVGIcon saveAllIcon = new FlatSVGIcon("resources/icons/save_all.svg", 16, 16);
-    public final FlatSVGIcon printFileIcon = new FlatSVGIcon("resources/icons/print_file.svg", 16, 16);
-    public final FlatSVGIcon printSetupIcon = new FlatSVGIcon("resources/icons/print_setup.svg", 16, 16);
-    public final FlatSVGIcon quitAppIcon = new FlatSVGIcon("resources/icons/quit_app.svg", 16, 16);
+    public final FlatSVGIcon newFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_file.svg", 16, 16);
+    public final FlatSVGIcon openFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/open_file.svg", 16, 16);
+    public final FlatSVGIcon saveFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/save_file.svg", 16, 16);
+    public final FlatSVGIcon saveAsIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/save_as.svg", 16, 16);
+    public final FlatSVGIcon newProjectIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_project.svg", 16, 16);
+    public final FlatSVGIcon openProjectIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/open_project.svg", 16, 16);
+    public final FlatSVGIcon saveProjectIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/save_project.svg", 16, 16);
+    public final FlatSVGIcon saveAllIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/save_all.svg", 16, 16);
+    public final FlatSVGIcon printFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/print_file.svg", 16, 16);
+    public final FlatSVGIcon printSetupIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/print_setup.svg", 16, 16);
+    public final FlatSVGIcon quitAppIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/quit_app.svg", 16, 16);
     
     // Edit menu icons
-    public final FlatSVGIcon undoEditIcon = new FlatSVGIcon("resources/icons/undo_edit.svg", 16, 16);
-    public final FlatSVGIcon redoEditIcon = new FlatSVGIcon("resources/icons/redo_edit.svg", 16, 16);
-    public final FlatSVGIcon cutEditIcon = new FlatSVGIcon("resources/icons/cut_edit.svg", 16, 16);
-    public final FlatSVGIcon copyEditIcon = new FlatSVGIcon("resources/icons/copy_edit.svg", 16, 16);
-    public final FlatSVGIcon pasteEditIcon = new FlatSVGIcon("resources/icons/paste_edit.svg", 16, 16);
-    public final FlatSVGIcon findAndReplaceIcon = new FlatSVGIcon("resources/icons/find_and_replace.svg", 16, 16);
-    public final FlatSVGIcon newBookmarkIcon = new FlatSVGIcon("resources/icons/new_bookmark.svg", 16, 16);
-    public final FlatSVGIcon nextBookmarkIcon = new FlatSVGIcon("resources/icons/next_bookmark.svg", 16, 16);
-    public final FlatSVGIcon prevBookmarkIcon = new FlatSVGIcon("resources/icons/prev_bookmark.svg", 16, 16);
-    public final FlatSVGIcon settingsAppIcon = new FlatSVGIcon("resources/icons/settings_app.svg", 16, 16);
+    public final FlatSVGIcon undoEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/undo_edit.svg", 16, 16);
+    public final FlatSVGIcon redoEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/redo_edit.svg", 16, 16);
+    public final FlatSVGIcon cutEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/cut_edit.svg", 16, 16);
+    public final FlatSVGIcon copyEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/copy_edit.svg", 16, 16);
+    public final FlatSVGIcon pasteEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/paste_edit.svg", 16, 16);
+    public final FlatSVGIcon findAndReplaceIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/find_and_replace.svg", 16, 16);
+    public final FlatSVGIcon newBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_bookmark.svg", 16, 16);
+    public final FlatSVGIcon nextBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/next_bookmark.svg", 16, 16);
+    public final FlatSVGIcon prevBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/prev_bookmark.svg", 16, 16);
+    public final FlatSVGIcon settingsAppIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/settings_app.svg", 16, 16);
     
     // View menu icons
-    public final FlatSVGIcon zoomInViewIcon = new FlatSVGIcon("resources/icons/zoom_in.svg", 16, 16);
-    public final FlatSVGIcon zoomOutViewIcon = new FlatSVGIcon("resources/icons/zoom_out.svg", 16, 16);
-    public final FlatSVGIcon setDefaultViewIcon = new FlatSVGIcon("resources/icons/set_def_view.svg", 16, 16);
-    public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/go_to_view.svg", 16, 16);
+    public final FlatSVGIcon zoomInViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/zoom_in.svg", 16, 16);
+    public final FlatSVGIcon zoomOutViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/zoom_out.svg", 16, 16);
+    public final FlatSVGIcon setDefaultViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/set_def_view.svg", 16, 16);
+    public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/go_to_view.svg", 16, 16);
     
     // Insert menu icons
-    public final FlatSVGIcon structureInsertIcon = new FlatSVGIcon("resources/icons/ins_structure.svg", 16, 16);
-    public final FlatSVGIcon enumerationInsertIcon = new FlatSVGIcon("resources/icons/ins_enum.svg", 16, 16);
-    public final FlatSVGIcon functionInsertIcon = new FlatSVGIcon("resources/icons/ins_function.svg", 16, 16);
-    public final FlatSVGIcon templateInsertIcon = new FlatSVGIcon("resources/icons/ins_template.svg", 16, 16);
+    public final FlatSVGIcon structureInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_structure.svg", 16, 16);
+    public final FlatSVGIcon enumerationInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_enum.svg", 16, 16);
+    public final FlatSVGIcon functionInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_function.svg", 16, 16);
+    public final FlatSVGIcon templateInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_template.svg", 16, 16);
     
     // Build menu icons
-    public final FlatSVGIcon releaseBuildIcon = new FlatSVGIcon("resources/icons/release_build.svg", 16, 16);
-    public final FlatSVGIcon debugBuildIcon = new FlatSVGIcon("resources/icons/debug_build.svg", 16, 16);
-    public final FlatSVGIcon installPackageBuildIcon = new FlatSVGIcon("resources/icons/install_package_build.svg", 16, 16);
-    public final FlatSVGIcon configBuildIcon = new FlatSVGIcon("resources/icons/config_build.svg", 16, 16);
+    public final FlatSVGIcon releaseBuildIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/release_build.svg", 16, 16);
+    public final FlatSVGIcon debugBuildIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/debug_build.svg", 16, 16);
+    public final FlatSVGIcon installPackageBuildIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/install_package_build.svg", 16, 16);
+    public final FlatSVGIcon configBuildIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/config_build.svg", 16, 16);
     
     // Tools menu icons
-    public final FlatSVGIcon gitToolsIcon = new FlatSVGIcon("resources/icons/git_tools.svg", 16, 16);
-    public final FlatSVGIcon terminalToolsIcon = new FlatSVGIcon("resources/icons/terminal_tools.svg", 16, 16);
-    public final FlatSVGIcon uiDesignerToolsIcon = new FlatSVGIcon("resources/icons/ui_designer_tools.svg", 16, 16);
-    public final FlatSVGIcon resourcesManagerIcon = new FlatSVGIcon("resources/icons/resources_manager.svg", 16, 16);
+    public final FlatSVGIcon gitToolsIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/git_tools.svg", 16, 16);
+    public final FlatSVGIcon terminalToolsIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/terminal_tools.svg", 16, 16);
+    public final FlatSVGIcon uiDesignerToolsIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ui_designer_tools.svg", 16, 16);
+    public final FlatSVGIcon resourcesManagerIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/resources_manager.svg", 16, 16);
     
     // Help menu icons
-    public final FlatSVGIcon contentsHelpIcon = new FlatSVGIcon("resources/icons/contents_help.svg", 16, 16);
-    public final FlatSVGIcon samplesHelpIcon = new FlatSVGIcon("resources/icons/samples_help.svg", 16, 16);
-    public final FlatSVGIcon aboutHelpIcon = new FlatSVGIcon("resources/icons/about_help.svg", 16, 16);
+    public final FlatSVGIcon contentsHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/contents_help.svg", 16, 16);
+    public final FlatSVGIcon samplesHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/samples_help.svg", 16, 16);
+    public final FlatSVGIcon aboutHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/about_help.svg", 16, 16);
 
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
+    }
+    
+    // Set icons folder by current theme type
+    private static String setIconsFolder() {
+        String iconsFolder = new String();
+        
+        if(!ThemeManager.getCurrentThemeType()) {
+            iconsFolder = "light";
+        } else {
+            iconsFolder = "dark";
+        }
+        
+        return iconsFolder;
     }
 
     /**

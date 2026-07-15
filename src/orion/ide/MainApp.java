@@ -9,32 +9,18 @@ package orion.ide;
 
 import orion.ide.ui.MainWindow;
 import orion.ide.ui.PreloaderWindow;
+import orion.ide.ui.ThemeManager;
 import javax.swing.*;
-import orion.ide.ui.theme.FlatLafVSLight;
 
 // Orion IDE application main class
 public class MainApp {
     
-    // Set FlatLaf theme
-    public static boolean isDarkTheme;
-    
     // Entry point in application
     public static void main(String[] args) {
         
-        // Initualize FlatLaf Swing theme
-        if(isDarkTheme == false) {
-            try {
-                FlatLafVSLight.setup();
-            } catch (Exception ex) {
-                System.err.println("FlatLaf library not loaded!");
-            }
-        } else {
-            try {
-                //FlatDarkLaf.setup(); // Dark theme enabled
-            } catch (Exception ex) {
-                System.err.println("FlatLaf library not loaded!");
-            }
-        }
+        // Init FlatLaf theme
+        ThemeManager uiTheme = new ThemeManager();
+        uiTheme.init(0); // Light theme by default, later read from configuration file
         
         // Run code by timer
         javax.swing.SwingUtilities.invokeLater(() -> {
