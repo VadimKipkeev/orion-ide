@@ -10,8 +10,7 @@ package orion.ide;
 import orion.ide.ui.MainWindow;
 import orion.ide.ui.PreloaderWindow;
 import javax.swing.*;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
+import orion.ide.ui.theme.FlatLafVSLight;
 
 // Orion IDE application main class
 public class MainApp {
@@ -25,13 +24,13 @@ public class MainApp {
         // Initualize FlatLaf Swing theme
         if(isDarkTheme == false) {
             try {
-                FlatLightLaf.setup(); // Light theme enabled
+                FlatLafVSLight.setup();
             } catch (Exception ex) {
                 System.err.println("FlatLaf library not loaded!");
             }
         } else {
             try {
-                FlatDarkLaf.setup(); // Dark theme enabled
+                //FlatDarkLaf.setup(); // Dark theme enabled
             } catch (Exception ex) {
                 System.err.println("FlatLaf library not loaded!");
             }
