@@ -15,6 +15,8 @@
  */
 package orion.ide.ui;
 
+import javax.swing.UIManager;
+import javax.swing.LookAndFeel;
 import com.formdev.flatlaf.FlatLaf;
 import orion.ide.ui.theme.FlatLafVSLight;
 import orion.ide.ui.theme.FlatLafVSDark;
@@ -48,13 +50,16 @@ public class ThemeManager {
     
     // Get FlatLaf theme name method
     public static String getCurrentThemeName() {
-        String themeName;
-        FlatLaf theme = new FlatLaf();
-        if(!FlatLaftheme.isLafDark()) {
-            themeName = FlatLaf.getClass().getName();
-        }
+        final String themeName;
+        final LookAndFeel currentTheme = UIManager.getLookAndFeel();
         
-        return themeName;
+        if(currentTheme instanceof FlatLaf) {
+            themeName = currentTheme.getName();
+            return themeName;
+        } else {
+            System.err.println("Current look and feel of application is not FlatLaf!");
+            return null;
+        }
     }
     
     // Get FlatLaf theme type method
