@@ -4,21 +4,28 @@
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
  * -----------------------------------------------------------------------------
-*/
+ */
+
+/*
+ *******************************************************************************
+ * Theme manager class
+ *******************************************************************************
+ * Control application FlatLaf Swing themes
+ *******************************************************************************
+ */
 package orion.ide.ui;
 
 import com.formdev.flatlaf.FlatLaf;
 import orion.ide.ui.theme.FlatLafVSLight;
 import orion.ide.ui.theme.FlatLafVSDark;
 
-// FlatLaf theme manager class
 public class ThemeManager {
     
     // Current theme name
-    public static String currentThemeName = new String();
+    public static String currentThemeName;
     
-    // FlatLaf theme init
-    public boolean init(int themeID) {
+    // FlatLaf theme init method
+    public final boolean init(int themeID) {
         
         // Set FlatLaf theme by ID
         switch(themeID) {
@@ -39,14 +46,12 @@ public class ThemeManager {
         }
     }
     
-    // Get FlatLaf theme name
+    // Get FlatLaf theme name method
     public static String getCurrentThemeName() {
-        String themeName = new String();
-        
-        if(!FlatLaf.isLafDark()) {
-            themeName = FlatLafVSLight.THEME_NAME;
-        } else {
-            themeName = FlatLafVSDark.THEME_NAME;
+        String themeName;
+        FlatLaf theme = new FlatLaf();
+        if(!FlatLaftheme.isLafDark()) {
+            themeName = FlatLaf.getClass().getName();
         }
         
         return themeName;

@@ -4,22 +4,31 @@
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
  * -----------------------------------------------------------------------------
-*/
+ */
+
+/*
+ *******************************************************************************
+ * Preloader window class
+ *******************************************************************************
+ * Show and close preloader window, needed for loading application resources
+ *******************************************************************************
+ */
 package orion.ide.ui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
-// Preloader window class
 public class PreloaderWindow {
     
+    // Preloader window
     private final JWindow window = new JWindow();
     
+    // Constructor
     public PreloaderWindow() {
         
         // Set preloader background image
-        URL imageURL;
+        final URL imageURL;
         imageURL = getClass().getResource("/resources/images/preloader.png");
         
         // Check preloader background image to exist
@@ -27,11 +36,11 @@ public class PreloaderWindow {
             System.err.println("Preloader image is not exists!");
         }
         
-        Image image = Toolkit.getDefaultToolkit().getImage(imageURL);
-        ImageIcon icon = new ImageIcon(image);
+        final Image image = Toolkit.getDefaultToolkit().getImage(imageURL);
+        final ImageIcon icon = new ImageIcon(image);
         
-        // Set preloader window
-        JLabel label = new JLabel(icon) {
+        // Attach image to preloader window
+        final JLabel label = new JLabel(icon) {
             
             @Override
             protected void paintComponent(Graphics g) {
@@ -56,18 +65,18 @@ public class PreloaderWindow {
         window.pack();
         
         // Set preloader window location by center of screen
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenX = (screenSize.width - window.getWidth()) / 2;
         int screenY = (screenSize.height - window.getHeight()) / 2;
         window.setLocation(screenX, screenY);
     }
     
-    // Show preloader window
+    // Show preloader window method
     public void show(boolean flag) {
         window.setVisible(flag);
     }
     
-    // Close preloader window
+    // Close preloader window method
     public void close() {
         window.dispose();
     }

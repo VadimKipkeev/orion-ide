@@ -4,20 +4,29 @@
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
  * -----------------------------------------------------------------------------
-*/
+ */
+
+/*
+ *******************************************************************************
+ * Application main window class
+ *******************************************************************************
+ * Controled all sub windows and panels
+ *******************************************************************************
+ */
 package orion.ide.ui;
 
+import javax.swing.*;
+import java.util.logging.Logger;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 
-// Main application window class
-public class MainWindow extends javax.swing.JFrame {
+public class MainWindow extends JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainWindow.class.getName());
+    private static final Logger logger = Logger.getLogger(MainWindow.class.getName());
     
     /**
      * Set FlatLaf SVG icons
      */
-    private final String iconsFolder = setIconsFolder();
+    private final String iconsFolder = getIconsFolder(); // Icons folder by current theme type
     
     // File menu icons
     public final FlatSVGIcon newFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_file.svg", 16, 16);
@@ -80,9 +89,9 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-    // Set icons folder by current theme type
-    private static String setIconsFolder() {
-        String iconsFolder = new String();
+    // Get icons folder name by current theme type function
+    private static String getIconsFolder() {
+        String iconsFolder;
         
         if(!ThemeManager.getCurrentThemeType()) {
             iconsFolder = "light";
@@ -420,31 +429,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainWindow().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AboutHelpItem;
