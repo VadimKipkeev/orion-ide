@@ -16,12 +16,9 @@
 package orion.ide.ui;
 
 import javax.swing.*;
-import java.util.logging.Logger;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 
 public class MainWindow extends JFrame {
-    
-    private static final Logger logger = Logger.getLogger(MainWindow.class.getName());
     
     /**
      * Set FlatLaf SVG icons
@@ -111,6 +108,17 @@ public class MainWindow extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CommonToolbar = new javax.swing.JToolBar();
+        NewFileButton = new javax.swing.JButton();
+        OpenFileButton = new javax.swing.JButton();
+        SaveFileButton = new javax.swing.JButton();
+        jSeparator13 = new javax.swing.JToolBar.Separator();
+        ContentsHelpButton = new javax.swing.JButton();
+        jSeparator14 = new javax.swing.JToolBar.Separator();
+        UndoEditButton = new javax.swing.JButton();
+        RedoEditButton = new javax.swing.JButton();
+        jSeparator15 = new javax.swing.JToolBar.Separator();
+        FindAndReplaceButton = new javax.swing.JButton();
         MainMenubar = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
         NewFileItem = new javax.swing.JMenuItem();
@@ -179,6 +187,77 @@ public class MainWindow extends JFrame {
         setMinimumSize(new java.awt.Dimension(240, 320));
         setName("MainWindow"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1024, 768));
+
+        CommonToolbar.setFloatable(true);
+        CommonToolbar.setRollover(true);
+        CommonToolbar.setName(""); // NOI18N
+
+        NewFileButton.setIcon(newFileIcon);
+        NewFileButton.setToolTipText("Create new file");
+        NewFileButton.setAlignmentX(0.5F);
+        NewFileButton.setFocusable(false);
+        NewFileButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        NewFileButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        NewFileButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        NewFileButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CommonToolbar.add(NewFileButton);
+
+        OpenFileButton.setIcon(openFileIcon);
+        OpenFileButton.setToolTipText("Open file");
+        OpenFileButton.setFocusable(false);
+        OpenFileButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        OpenFileButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        OpenFileButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        OpenFileButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CommonToolbar.add(OpenFileButton);
+
+        SaveFileButton.setIcon(saveFileIcon);
+        SaveFileButton.setToolTipText("Save file");
+        SaveFileButton.setFocusable(false);
+        SaveFileButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        SaveFileButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        SaveFileButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        SaveFileButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CommonToolbar.add(SaveFileButton);
+        CommonToolbar.add(jSeparator13);
+
+        ContentsHelpButton.setIcon(contentsHelpIcon);
+        ContentsHelpButton.setToolTipText("Show help manual");
+        ContentsHelpButton.setFocusable(false);
+        ContentsHelpButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ContentsHelpButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        ContentsHelpButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        ContentsHelpButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CommonToolbar.add(ContentsHelpButton);
+        CommonToolbar.add(jSeparator14);
+
+        UndoEditButton.setIcon(undoEditIcon);
+        UndoEditButton.setToolTipText("Undo");
+        UndoEditButton.setFocusable(false);
+        UndoEditButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UndoEditButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        UndoEditButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        UndoEditButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CommonToolbar.add(UndoEditButton);
+
+        RedoEditButton.setIcon(redoEditIcon);
+        RedoEditButton.setToolTipText("Redo");
+        RedoEditButton.setFocusable(false);
+        RedoEditButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        RedoEditButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        RedoEditButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        RedoEditButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CommonToolbar.add(RedoEditButton);
+        CommonToolbar.add(jSeparator15);
+
+        FindAndReplaceButton.setIcon(findAndReplaceIcon);
+        FindAndReplaceButton.setToolTipText("Find and replace");
+        FindAndReplaceButton.setFocusable(false);
+        FindAndReplaceButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        FindAndReplaceButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        FindAndReplaceButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        FindAndReplaceButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CommonToolbar.add(FindAndReplaceButton);
 
         FileMenu.setText("File");
 
@@ -417,11 +496,15 @@ public class MainWindow extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1024, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(CommonToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 824, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 745, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(CommonToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 720, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("MainWindow");
@@ -434,7 +517,9 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem AboutHelpItem;
     private javax.swing.JMenu BookmarksMenu;
     private javax.swing.JMenu BuildMenu;
+    private javax.swing.JToolBar CommonToolbar;
     private javax.swing.JMenuItem ConfigBuildItem;
+    private javax.swing.JButton ContentsHelpButton;
     private javax.swing.JMenuItem ContentsHelpItem;
     private javax.swing.JMenuItem CopyEditItem;
     private javax.swing.JMenuItem CutEditItem;
@@ -443,6 +528,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenu EditMenu;
     private javax.swing.JMenuItem EnumInsertItem;
     private javax.swing.JMenu FileMenu;
+    private javax.swing.JButton FindAndReplaceButton;
     private javax.swing.JMenuItem FindEditItem;
     private javax.swing.JMenuItem FunctInsertItem;
     private javax.swing.JMenuItem GitToolsItem;
@@ -452,9 +538,11 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem InstallPkgBuildItem;
     private javax.swing.JMenuBar MainMenubar;
     private javax.swing.JMenuItem NewBookmarkItem;
+    private javax.swing.JButton NewFileButton;
     private javax.swing.JMenuItem NewFileItem;
     private javax.swing.JMenuItem NewProjectItem;
     private javax.swing.JMenuItem NextBookmarkItem;
+    private javax.swing.JButton OpenFileButton;
     private javax.swing.JMenuItem OpenFileItem;
     private javax.swing.JMenuItem OpenProjectItem;
     private javax.swing.JMenuItem PasteEditItem;
@@ -462,12 +550,14 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem PrintFileItem;
     private javax.swing.JMenuItem PrintSetupItem;
     private javax.swing.JMenuItem QuitItem;
+    private javax.swing.JButton RedoEditButton;
     private javax.swing.JMenuItem RedoEditItem;
     private javax.swing.JMenuItem ReleaseBuildItem;
     private javax.swing.JMenu ResManagerToolsItem;
     private javax.swing.JMenuItem SamplesHelpItem;
     private javax.swing.JMenuItem SaveAllItem;
     private javax.swing.JMenuItem SaveAsFileItem;
+    private javax.swing.JButton SaveFileButton;
     private javax.swing.JMenuItem SaveFileItem;
     private javax.swing.JMenuItem SaveProjectItem;
     private javax.swing.JMenuItem SetDefViewItem;
@@ -475,6 +565,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem StructInsertItem;
     private javax.swing.JMenuItem TemplateInsertItem;
     private javax.swing.JMenuItem TerminalToolsItem;
+    private javax.swing.JButton UndoEditButton;
     private javax.swing.JMenuItem UndoEditItem;
     private javax.swing.JMenu ViewMenu;
     private javax.swing.JMenuItem ZoomInViewItem;
@@ -484,6 +575,9 @@ public class MainWindow extends JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator12;
+    private javax.swing.JToolBar.Separator jSeparator13;
+    private javax.swing.JToolBar.Separator jSeparator14;
+    private javax.swing.JToolBar.Separator jSeparator15;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
