@@ -201,13 +201,13 @@ public class MainWindow extends JFrame {
 
         AboutDialogWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         AboutDialogWindow.setTitle("About");
-        AboutDialogWindow.setMaximumSize(new java.awt.Dimension(450, 250));
-        AboutDialogWindow.setMinimumSize(new java.awt.Dimension(450, 250));
+        AboutDialogWindow.setMaximumSize(new java.awt.Dimension(455, 250));
+        AboutDialogWindow.setMinimumSize(new java.awt.Dimension(455, 250));
         AboutDialogWindow.setModal(true);
         AboutDialogWindow.setName("AboutDialogWindow"); // NOI18N
-        AboutDialogWindow.setPreferredSize(new java.awt.Dimension(450, 250));
+        AboutDialogWindow.setPreferredSize(new java.awt.Dimension(455, 250));
         AboutDialogWindow.setResizable(false);
-        AboutDialogWindow.setSize(new java.awt.Dimension(450, 250));
+        AboutDialogWindow.setSize(new java.awt.Dimension(455, 250));
         AboutDialogWindow.setType(java.awt.Window.Type.POPUP);
 
         AppTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -243,13 +243,13 @@ public class MainWindow extends JFrame {
                         .addGroup(AboutDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(AppTitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(AppVersionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         AboutDialogWindowLayout.setVerticalGroup(
             AboutDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AboutDialogWindowLayout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addComponent(AppTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AppVersionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -690,7 +690,7 @@ public class MainWindow extends JFrame {
     
     // Show about application dialog window function
     private void AboutHelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutHelpItemActionPerformed
-        AboutDialogWindow.setSize(450, 250); // Set window size
+        AboutDialogWindow.setSize(455, 250); // Set window size
         AboutDialogWindow.setLocationRelativeTo(null); // Set window position to center of screen
         AboutDialogWindow.setVisible(true);
     }//GEN-LAST:event_AboutHelpItemActionPerformed
