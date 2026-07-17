@@ -108,6 +108,12 @@ public class MainWindow extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        AboutDialogWindow = new javax.swing.JDialog();
+        AppTitleLabel = new javax.swing.JLabel();
+        AppVersionLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        AppDescriptionText = new javax.swing.JTextArea();
+        OkButton = new javax.swing.JButton();
         MainToolbarsPanel = new javax.swing.JPanel();
         CommonToolbar = new javax.swing.JToolBar();
         NewFileButton = new javax.swing.JButton();
@@ -192,6 +198,67 @@ public class MainWindow extends JFrame {
         SamplesHelpItem = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
         AboutHelpItem = new javax.swing.JMenuItem();
+
+        AboutDialogWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        AboutDialogWindow.setTitle("About");
+        AboutDialogWindow.setMaximumSize(new java.awt.Dimension(450, 250));
+        AboutDialogWindow.setMinimumSize(new java.awt.Dimension(450, 250));
+        AboutDialogWindow.setModal(true);
+        AboutDialogWindow.setName("AboutDialogWindow"); // NOI18N
+        AboutDialogWindow.setPreferredSize(new java.awt.Dimension(450, 250));
+        AboutDialogWindow.setResizable(false);
+        AboutDialogWindow.setSize(new java.awt.Dimension(450, 250));
+        AboutDialogWindow.setType(java.awt.Window.Type.POPUP);
+
+        AppTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        AppTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        AppTitleLabel.setText("Orion IDE");
+
+        AppVersionLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        AppVersionLabel.setText("version 1.0.0 (Alnitak)");
+
+        AppDescriptionText.setEditable(false);
+        AppDescriptionText.setColumns(20);
+        AppDescriptionText.setLineWrap(true);
+        AppDescriptionText.setRows(5);
+        AppDescriptionText.setText("(c) 2026 CrayZor. All rights reserved.\nCode editor and IDE for development native Motorola Platform 2000 applications, know as ELFs.");
+        AppDescriptionText.setEnabled(false);
+        AppDescriptionText.setFocusable(false);
+        jScrollPane1.setViewportView(AppDescriptionText);
+
+        OkButton.setText("OK");
+        OkButton.addActionListener(this::OkButtonActionPerformed);
+
+        javax.swing.GroupLayout AboutDialogWindowLayout = new javax.swing.GroupLayout(AboutDialogWindow.getContentPane());
+        AboutDialogWindow.getContentPane().setLayout(AboutDialogWindowLayout);
+        AboutDialogWindowLayout.setHorizontalGroup(
+            AboutDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AboutDialogWindowLayout.createSequentialGroup()
+                .addGroup(AboutDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(AboutDialogWindowLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(OkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(AboutDialogWindowLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(AboutDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AppTitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(AppVersionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        AboutDialogWindowLayout.setVerticalGroup(
+            AboutDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AboutDialogWindowLayout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(AppTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AppVersionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OkButton)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Orion IDE");
@@ -436,6 +503,7 @@ public class MainWindow extends JFrame {
         QuitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
         QuitItem.setIcon(quitAppIcon);
         QuitItem.setText("Quit");
+        QuitItem.addActionListener(this::QuitItemActionPerformed);
         FileMenu.add(QuitItem);
 
         MainMenubar.add(FileMenu);
@@ -607,6 +675,7 @@ public class MainWindow extends JFrame {
 
         AboutHelpItem.setIcon(aboutHelpIcon);
         AboutHelpItem.setText("About...");
+        AboutHelpItem.addActionListener(this::AboutHelpItemActionPerformed);
         HelpMenu.add(AboutHelpItem);
 
         MainMenubar.add(HelpMenu);
@@ -618,9 +687,31 @@ public class MainWindow extends JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    // Show about application dialog window function
+    private void AboutHelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutHelpItemActionPerformed
+        AboutDialogWindow.setSize(450, 250); // Set window size
+        AboutDialogWindow.setLocationRelativeTo(null); // Set window position to center of screen
+        AboutDialogWindow.setVisible(true);
+    }//GEN-LAST:event_AboutHelpItemActionPerformed
+
+    // Close about application dialog window by OK button click function
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
+        AboutDialogWindow.dispose();
+    }//GEN-LAST:event_OkButtonActionPerformed
+    
+    // Close main window and exit from application
+    private void QuitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitItemActionPerformed
+        this.dispose();
+        System.exit(0); // Exist from application process
+    }//GEN-LAST:event_QuitItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog AboutDialogWindow;
     private javax.swing.JMenuItem AboutHelpItem;
+    private javax.swing.JTextArea AppDescriptionText;
+    private javax.swing.JLabel AppTitleLabel;
+    private javax.swing.JLabel AppVersionLabel;
     private javax.swing.JMenu BookmarksMenu;
     private javax.swing.JButton BuildDebugButton;
     private javax.swing.JMenu BuildMenu;
@@ -657,6 +748,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem NewFileItem;
     private javax.swing.JMenuItem NewProjectItem;
     private javax.swing.JMenuItem NextBookmarkItem;
+    private javax.swing.JButton OkButton;
     private javax.swing.JButton OpenFileButton;
     private javax.swing.JMenuItem OpenFileItem;
     private javax.swing.JMenuItem OpenProjectItem;
@@ -687,6 +779,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem ZoomInViewItem;
     private javax.swing.JMenuItem ZoomOutViewItem;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;

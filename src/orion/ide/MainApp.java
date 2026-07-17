@@ -27,7 +27,7 @@ public class MainApp {
         
         // Init FlatLaf theme at application start
         ThemeManager uiThemeManager = new ThemeManager();
-        uiThemeManager.init(0); // Light theme by default, later read from configuration file
+        uiThemeManager.init(1); // Light theme by default, later read from configuration file
         
         // Run code by timer
         javax.swing.SwingUtilities.invokeLater(() -> {
