@@ -137,6 +137,13 @@ public class MainWindow extends JFrame {
         BuildDebugButton = new javax.swing.JButton();
         jSeparator17 = new javax.swing.JToolBar.Separator();
         TerminalButton = new javax.swing.JButton();
+        StatusbarPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        AppStatusLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        CapsStatusLabel = new javax.swing.JLabel();
+        jSeparator18 = new javax.swing.JSeparator();
+        EncodeStatusLabel = new javax.swing.JLabel();
         MainMenubar = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
         NewFileItem = new javax.swing.JMenuItem();
@@ -201,11 +208,9 @@ public class MainWindow extends JFrame {
 
         AboutDialogWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         AboutDialogWindow.setTitle("About");
-        AboutDialogWindow.setMaximumSize(new java.awt.Dimension(455, 250));
         AboutDialogWindow.setMinimumSize(new java.awt.Dimension(455, 250));
         AboutDialogWindow.setModal(true);
         AboutDialogWindow.setName("AboutDialogWindow"); // NOI18N
-        AboutDialogWindow.setPreferredSize(new java.awt.Dimension(455, 250));
         AboutDialogWindow.setResizable(false);
         AboutDialogWindow.setSize(new java.awt.Dimension(455, 250));
         AboutDialogWindow.setType(java.awt.Window.Type.POPUP);
@@ -267,6 +272,7 @@ public class MainWindow extends JFrame {
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(1024, 768));
 
+        MainToolbarsPanel.setMaximumSize(new java.awt.Dimension(32767, 26));
         MainToolbarsPanel.setMinimumSize(new java.awt.Dimension(800, 26));
         MainToolbarsPanel.setPreferredSize(new java.awt.Dimension(1024, 26));
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0);
@@ -446,6 +452,90 @@ public class MainWindow extends JFrame {
         MainToolbarsPanel.add(BuildToolbar);
 
         getContentPane().add(MainToolbarsPanel, java.awt.BorderLayout.NORTH);
+
+        StatusbarPanel.setMaximumSize(new java.awt.Dimension(32767, 26));
+        StatusbarPanel.setMinimumSize(new java.awt.Dimension(800, 26));
+        StatusbarPanel.setPreferredSize(new java.awt.Dimension(1024, 26));
+        StatusbarPanel.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setFocusable(false);
+        jPanel1.setMaximumSize(new java.awt.Dimension(100, 26));
+        jPanel1.setMinimumSize(new java.awt.Dimension(100, 26));
+        jPanel1.setName(""); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 26));
+        jPanel1.setRequestFocusEnabled(false);
+        jPanel1.setVerifyInputWhenFocusTarget(false);
+
+        AppStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        AppStatusLabel.setText("Ready");
+        AppStatusLabel.setAlignmentY(0.0F);
+        AppStatusLabel.setFocusable(false);
+        AppStatusLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        AppStatusLabel.setMaximumSize(new java.awt.Dimension(90, 26));
+        AppStatusLabel.setMinimumSize(new java.awt.Dimension(90, 26));
+        AppStatusLabel.setName(""); // NOI18N
+        AppStatusLabel.setPreferredSize(new java.awt.Dimension(90, 26));
+        AppStatusLabel.setRequestFocusEnabled(false);
+        AppStatusLabel.setVerifyInputWhenFocusTarget(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AppStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(AppStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        StatusbarPanel.add(jPanel1, java.awt.BorderLayout.WEST);
+
+        jPanel2.setFocusable(false);
+        jPanel2.setMaximumSize(new java.awt.Dimension(100, 26));
+        jPanel2.setMinimumSize(new java.awt.Dimension(100, 26));
+        jPanel2.setPreferredSize(new java.awt.Dimension(100, 26));
+        jPanel2.setRequestFocusEnabled(false);
+        jPanel2.setVerifyInputWhenFocusTarget(false);
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        CapsStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CapsStatusLabel.setText("OFF");
+        CapsStatusLabel.setToolTipText("Caps Lock status");
+        CapsStatusLabel.setAlignmentY(0.0F);
+        CapsStatusLabel.setFocusable(false);
+        CapsStatusLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CapsStatusLabel.setMaximumSize(new java.awt.Dimension(48, 26));
+        CapsStatusLabel.setMinimumSize(new java.awt.Dimension(48, 26));
+        CapsStatusLabel.setPreferredSize(new java.awt.Dimension(48, 26));
+        CapsStatusLabel.setRequestFocusEnabled(false);
+        CapsStatusLabel.setVerifyInputWhenFocusTarget(false);
+        jPanel2.add(CapsStatusLabel, java.awt.BorderLayout.WEST);
+
+        jSeparator18.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel2.add(jSeparator18, java.awt.BorderLayout.CENTER);
+
+        EncodeStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        EncodeStatusLabel.setText("NOT");
+        EncodeStatusLabel.setToolTipText("Text encoding information");
+        EncodeStatusLabel.setAlignmentY(0.0F);
+        EncodeStatusLabel.setFocusable(false);
+        EncodeStatusLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        EncodeStatusLabel.setMaximumSize(new java.awt.Dimension(48, 26));
+        EncodeStatusLabel.setMinimumSize(new java.awt.Dimension(48, 26));
+        EncodeStatusLabel.setPreferredSize(new java.awt.Dimension(48, 26));
+        EncodeStatusLabel.setRequestFocusEnabled(false);
+        EncodeStatusLabel.setVerifyInputWhenFocusTarget(false);
+        jPanel2.add(EncodeStatusLabel, java.awt.BorderLayout.EAST);
+
+        StatusbarPanel.add(jPanel2, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(StatusbarPanel, java.awt.BorderLayout.SOUTH);
 
         FileMenu.setText("File");
 
@@ -710,6 +800,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JDialog AboutDialogWindow;
     private javax.swing.JMenuItem AboutHelpItem;
     private javax.swing.JTextArea AppDescriptionText;
+    private javax.swing.JLabel AppStatusLabel;
     private javax.swing.JLabel AppTitleLabel;
     private javax.swing.JLabel AppVersionLabel;
     private javax.swing.JMenu BookmarksMenu;
@@ -717,6 +808,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenu BuildMenu;
     private javax.swing.JButton BuildReleaseButton;
     private javax.swing.JToolBar BuildToolbar;
+    private javax.swing.JLabel CapsStatusLabel;
     private javax.swing.JToolBar CodeToolbar;
     private javax.swing.JToolBar CommonToolbar;
     private javax.swing.JMenuItem ConfigBuildItem;
@@ -727,6 +819,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem DebugBuildItem;
     private javax.swing.JMenuItem DesignerToolsItem;
     private javax.swing.JMenu EditMenu;
+    private javax.swing.JLabel EncodeStatusLabel;
     private javax.swing.JMenuItem EnumInsertItem;
     private javax.swing.JMenu FileMenu;
     private javax.swing.JButton FindAndReplaceButton;
@@ -769,6 +862,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem SaveProjectItem;
     private javax.swing.JMenuItem SetDefViewItem;
     private javax.swing.JMenuItem SettingsItem;
+    private javax.swing.JPanel StatusbarPanel;
     private javax.swing.JMenuItem StructInsertItem;
     private javax.swing.JMenuItem TemplateInsertItem;
     private javax.swing.JButton TerminalButton;
@@ -779,6 +873,8 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem ZoomInViewItem;
     private javax.swing.JMenuItem ZoomOutViewItem;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
@@ -789,6 +885,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JToolBar.Separator jSeparator15;
     private javax.swing.JToolBar.Separator jSeparator16;
     private javax.swing.JToolBar.Separator jSeparator17;
+    private javax.swing.JSeparator jSeparator18;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
