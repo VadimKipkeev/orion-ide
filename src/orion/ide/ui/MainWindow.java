@@ -17,6 +17,7 @@ package orion.ide.ui;
 
 import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.beans.PropertyVetoException;
 
 public class MainWindow extends JFrame {
     
@@ -144,6 +145,11 @@ public class MainWindow extends JFrame {
         CapsStatusLabel = new javax.swing.JLabel();
         jSeparator18 = new javax.swing.JSeparator();
         EncodeStatusLabel = new javax.swing.JLabel();
+        FrameSplitPanel = new javax.swing.JSplitPane();
+        ProjectExplorerFrame = new javax.swing.JInternalFrame();
+        EditorSplitPanel = new javax.swing.JSplitPane();
+        OutputFrame = new javax.swing.JInternalFrame();
+        EditorMDIFrame = new javax.swing.JDesktopPane();
         MainMenubar = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
         NewFileItem = new javax.swing.JMenuItem();
@@ -183,6 +189,9 @@ public class MainWindow extends JFrame {
         SetDefViewItem = new javax.swing.JMenuItem();
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
         GoToViewItem = new javax.swing.JMenuItem();
+        jSeparator19 = new javax.swing.JPopupMenu.Separator();
+        ProjectExplorerItem = new javax.swing.JCheckBoxMenuItem();
+        OutputWindowItem = new javax.swing.JCheckBoxMenuItem();
         InsertMenu = new javax.swing.JMenu();
         StructInsertItem = new javax.swing.JMenuItem();
         EnumInsertItem = new javax.swing.JMenuItem();
@@ -537,6 +546,132 @@ public class MainWindow extends JFrame {
 
         getContentPane().add(StatusbarPanel, java.awt.BorderLayout.SOUTH);
 
+        FrameSplitPanel.setDividerLocation(200);
+        FrameSplitPanel.setLastDividerLocation(200);
+        FrameSplitPanel.setMinimumSize(new java.awt.Dimension(200, 36));
+        FrameSplitPanel.setPreferredSize(new java.awt.Dimension(200, 36));
+
+        ProjectExplorerFrame.setClosable(true);
+        ProjectExplorerFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        ProjectExplorerFrame.setResizable(true);
+        ProjectExplorerFrame.setTitle("Project explorer");
+        ProjectExplorerFrame.setAlignmentX(0.0F);
+        ProjectExplorerFrame.setAlignmentY(0.0F);
+        ProjectExplorerFrame.setFrameIcon(null);
+        ProjectExplorerFrame.setMinimumSize(new java.awt.Dimension(200, 13));
+        ProjectExplorerFrame.setName(""); // NOI18N
+        ProjectExplorerFrame.setPreferredSize(new java.awt.Dimension(200, 36));
+        ProjectExplorerFrame.setVisible(true);
+        ProjectExplorerFrame.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                ProjectExplorerFrameInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+        ProjectExplorerFrame.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                ProjectExplorerFrameComponentHidden(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ProjectExplorerFrameLayout = new javax.swing.GroupLayout(ProjectExplorerFrame.getContentPane());
+        ProjectExplorerFrame.getContentPane().setLayout(ProjectExplorerFrameLayout);
+        ProjectExplorerFrameLayout.setHorizontalGroup(
+            ProjectExplorerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        ProjectExplorerFrameLayout.setVerticalGroup(
+            ProjectExplorerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        FrameSplitPanel.setLeftComponent(ProjectExplorerFrame);
+
+        EditorSplitPanel.setDividerLocation(800);
+        EditorSplitPanel.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        EditorSplitPanel.setLastDividerLocation(800);
+        EditorSplitPanel.setMinimumSize(new java.awt.Dimension(93, 200));
+        EditorSplitPanel.setPreferredSize(new java.awt.Dimension(93, 200));
+
+        OutputFrame.setClosable(true);
+        OutputFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        OutputFrame.setResizable(true);
+        OutputFrame.setTitle("Output");
+        OutputFrame.setAlignmentX(0.0F);
+        OutputFrame.setAlignmentY(0.0F);
+        OutputFrame.setFrameIcon(null);
+        OutputFrame.setMinimumSize(new java.awt.Dimension(56, 200));
+        OutputFrame.setPreferredSize(new java.awt.Dimension(28, 200));
+        OutputFrame.setVisible(true);
+        OutputFrame.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                OutputFrameInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+        OutputFrame.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                OutputFrameComponentHidden(evt);
+            }
+        });
+
+        javax.swing.GroupLayout OutputFrameLayout = new javax.swing.GroupLayout(OutputFrame.getContentPane());
+        OutputFrame.getContentPane().setLayout(OutputFrameLayout);
+        OutputFrameLayout.setHorizontalGroup(
+            OutputFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        OutputFrameLayout.setVerticalGroup(
+            OutputFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        EditorSplitPanel.setBottomComponent(OutputFrame);
+
+        EditorMDIFrame.setAlignmentX(0.0F);
+        EditorMDIFrame.setAlignmentY(0.0F);
+        EditorMDIFrame.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        EditorMDIFrame.setDesktopManager(null);
+
+        javax.swing.GroupLayout EditorMDIFrameLayout = new javax.swing.GroupLayout(EditorMDIFrame);
+        EditorMDIFrame.setLayout(EditorMDIFrameLayout);
+        EditorMDIFrameLayout.setHorizontalGroup(
+            EditorMDIFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 824, Short.MAX_VALUE)
+        );
+        EditorMDIFrameLayout.setVerticalGroup(
+            EditorMDIFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 688, Short.MAX_VALUE)
+        );
+
+        EditorSplitPanel.setTopComponent(EditorMDIFrame);
+
+        FrameSplitPanel.setBottomComponent(EditorSplitPanel);
+
+        getContentPane().add(FrameSplitPanel, java.awt.BorderLayout.CENTER);
+
         FileMenu.setText("File");
 
         NewFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -679,6 +814,17 @@ public class MainWindow extends JFrame {
         GoToViewItem.setIcon(goToViewIcon);
         GoToViewItem.setText("Go to...");
         ViewMenu.add(GoToViewItem);
+        ViewMenu.add(jSeparator19);
+
+        ProjectExplorerItem.setSelected(true);
+        ProjectExplorerItem.setText("Project explorer");
+        ProjectExplorerItem.addActionListener(this::ProjectExplorerItemActionPerformed);
+        ViewMenu.add(ProjectExplorerItem);
+
+        OutputWindowItem.setSelected(true);
+        OutputWindowItem.setText("Output window");
+        OutputWindowItem.addActionListener(this::OutputWindowItemActionPerformed);
+        ViewMenu.add(OutputWindowItem);
 
         MainMenubar.add(ViewMenu);
 
@@ -790,12 +936,60 @@ public class MainWindow extends JFrame {
         AboutDialogWindow.dispose();
     }//GEN-LAST:event_OkButtonActionPerformed
     
-    // Close main window and exit from application
+    // Close main window and exit from application function
     private void QuitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitItemActionPerformed
         this.dispose();
         System.exit(0); // Exist from application process
     }//GEN-LAST:event_QuitItemActionPerformed
 
+    // Set focus on project explorer frame function 
+    private void ProjectExplorerFrameInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_ProjectExplorerFrameInternalFrameActivated
+        try {
+            OutputFrame.setSelected(false); // Switch focus from output frame
+        } catch (PropertyVetoException ex) {
+            System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_ProjectExplorerFrameInternalFrameActivated
+
+    // Set focus on output frame function
+    private void OutputFrameInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_OutputFrameInternalFrameActivated
+        try {
+            ProjectExplorerFrame.setSelected(false); // Switch focus from project explorer frame
+        } catch (PropertyVetoException ex) {
+            System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_OutputFrameInternalFrameActivated
+
+    // Switch project explorer frame view state function
+    private void ProjectExplorerItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProjectExplorerItemActionPerformed
+        if(ProjectExplorerItem.isSelected()) {
+            FrameSplitPanel.setDividerLocation(ProjectExplorerFrame.getWidth()); // Set left side of split panel
+            ProjectExplorerFrame.show();
+        } else {
+            ProjectExplorerFrame.hide();
+        }
+    }//GEN-LAST:event_ProjectExplorerItemActionPerformed
+
+    // Same too function
+    private void ProjectExplorerFrameComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ProjectExplorerFrameComponentHidden
+        ProjectExplorerItem.setSelected(false);
+    }//GEN-LAST:event_ProjectExplorerFrameComponentHidden
+
+    // Switch output frame view state function
+    private void OutputWindowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OutputWindowItemActionPerformed
+        if(OutputWindowItem.isSelected()) {
+            EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
+            OutputFrame.show();
+        } else {
+            OutputFrame.hide();
+        }
+    }//GEN-LAST:event_OutputWindowItemActionPerformed
+
+    // Same too function
+    private void OutputFrameComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_OutputFrameComponentHidden
+        OutputWindowItem.setSelected(false);
+    }//GEN-LAST:event_OutputFrameComponentHidden
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog AboutDialogWindow;
     private javax.swing.JMenuItem AboutHelpItem;
@@ -819,11 +1013,14 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem DebugBuildItem;
     private javax.swing.JMenuItem DesignerToolsItem;
     private javax.swing.JMenu EditMenu;
+    private javax.swing.JDesktopPane EditorMDIFrame;
+    private javax.swing.JSplitPane EditorSplitPanel;
     private javax.swing.JLabel EncodeStatusLabel;
     private javax.swing.JMenuItem EnumInsertItem;
     private javax.swing.JMenu FileMenu;
     private javax.swing.JButton FindAndReplaceButton;
     private javax.swing.JMenuItem FindEditItem;
+    private javax.swing.JSplitPane FrameSplitPanel;
     private javax.swing.JMenuItem FunctInsertItem;
     private javax.swing.JMenuItem GitToolsItem;
     private javax.swing.JButton GoToViewButton;
@@ -845,10 +1042,14 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton OpenFileButton;
     private javax.swing.JMenuItem OpenFileItem;
     private javax.swing.JMenuItem OpenProjectItem;
+    private javax.swing.JInternalFrame OutputFrame;
+    private javax.swing.JCheckBoxMenuItem OutputWindowItem;
     private javax.swing.JMenuItem PasteEditItem;
     private javax.swing.JMenuItem PrevBookmarkItem;
     private javax.swing.JMenuItem PrintFileItem;
     private javax.swing.JMenuItem PrintSetupItem;
+    private javax.swing.JInternalFrame ProjectExplorerFrame;
+    private javax.swing.JCheckBoxMenuItem ProjectExplorerItem;
     private javax.swing.JMenuItem QuitItem;
     private javax.swing.JButton RedoEditButton;
     private javax.swing.JMenuItem RedoEditItem;
@@ -886,6 +1087,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JToolBar.Separator jSeparator16;
     private javax.swing.JToolBar.Separator jSeparator17;
     private javax.swing.JSeparator jSeparator18;
+    private javax.swing.JPopupMenu.Separator jSeparator19;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
