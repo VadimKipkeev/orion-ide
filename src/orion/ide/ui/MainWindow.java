@@ -79,6 +79,11 @@ public class MainWindow extends JFrame {
     public final FlatSVGIcon contentsHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/contents_help.svg", 16, 16);
     public final FlatSVGIcon samplesHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/samples_help.svg", 16, 16);
     public final FlatSVGIcon aboutHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/about_help.svg", 16, 16);
+    
+    // Output window icons
+    public final FlatSVGIcon showAllLogIcon = new FlatSVGIcon("resources/icons/commons/show_all_log.svg", 16, 16);
+    public final FlatSVGIcon showErrorsLogIcon = new FlatSVGIcon("resources/icons/commons/show_errors_log.svg", 16, 16);
+    public final FlatSVGIcon clearBuildLogIcon = new FlatSVGIcon("resources/icons/commons/clear_build_log.svg", 16, 16);
 
     /**
      * Creates new form MainWindow
@@ -158,6 +163,13 @@ public class MainWindow extends JFrame {
         OutputFrame = new javax.swing.JInternalFrame();
         OutputWindowTabs = new javax.swing.JTabbedPane();
         BuildLogPanel = new javax.swing.JPanel();
+        BuildLogToolbar = new javax.swing.JToolBar();
+        ShowAllMessageButton = new javax.swing.JButton();
+        ErrorsFilterButton = new javax.swing.JButton();
+        jSeparator20 = new javax.swing.JToolBar.Separator();
+        ClearBuildLogButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        BuildLogViewer = new javax.swing.JEditorPane();
         TerminalPanel = new javax.swing.JPanel();
         GitPanel = new javax.swing.JPanel();
         EditorMDIFrame = new javax.swing.JDesktopPane();
@@ -598,7 +610,6 @@ public class MainWindow extends JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Empty");
         StructureTreeList.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        StructureTreeList.setCellEditor(null);
         StructureTreeList.setCellRenderer(null);
         StructureTreeList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         StructureTreeList.setEditable(true);
@@ -688,15 +699,73 @@ public class MainWindow extends JFrame {
             }
         });
 
+        BuildLogToolbar.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        BuildLogToolbar.setRollover(true);
+        BuildLogToolbar.setAlignmentY(0.0F);
+        BuildLogToolbar.setMaximumSize(new java.awt.Dimension(26, 3000));
+        BuildLogToolbar.setMinimumSize(new java.awt.Dimension(26, 100));
+        BuildLogToolbar.setName(""); // NOI18N
+        BuildLogToolbar.setPreferredSize(new java.awt.Dimension(26, 100));
+
+        ShowAllMessageButton.setIcon(showAllLogIcon);
+        ShowAllMessageButton.setToolTipText("Show all build log messages");
+        ShowAllMessageButton.setAlignmentY(0.0F);
+        ShowAllMessageButton.setFocusable(false);
+        ShowAllMessageButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ShowAllMessageButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        ShowAllMessageButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        ShowAllMessageButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        ShowAllMessageButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BuildLogToolbar.add(ShowAllMessageButton);
+
+        ErrorsFilterButton.setIcon(showErrorsLogIcon);
+        ErrorsFilterButton.setToolTipText("Show only errors build log messages");
+        ErrorsFilterButton.setAlignmentY(0.0F);
+        ErrorsFilterButton.setFocusable(false);
+        ErrorsFilterButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ErrorsFilterButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        ErrorsFilterButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        ErrorsFilterButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        ErrorsFilterButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BuildLogToolbar.add(ErrorsFilterButton);
+        BuildLogToolbar.add(jSeparator20);
+
+        ClearBuildLogButton.setIcon(clearBuildLogIcon);
+        ClearBuildLogButton.setToolTipText("Clear build log data");
+        ClearBuildLogButton.setAlignmentY(0.0F);
+        ClearBuildLogButton.setFocusable(false);
+        ClearBuildLogButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ClearBuildLogButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        ClearBuildLogButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        ClearBuildLogButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        ClearBuildLogButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BuildLogToolbar.add(ClearBuildLogButton);
+
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4.setAlignmentX(0.0F);
+        jScrollPane4.setAlignmentY(0.0F);
+
+        BuildLogViewer.setEditable(false);
+        BuildLogViewer.setAlignmentX(0.0F);
+        BuildLogViewer.setAlignmentY(0.0F);
+        BuildLogViewer.setFocusable(false);
+        BuildLogViewer.setRequestFocusEnabled(false);
+        BuildLogViewer.setVerifyInputWhenFocusTarget(false);
+        jScrollPane4.setViewportView(BuildLogViewer);
+
         javax.swing.GroupLayout BuildLogPanelLayout = new javax.swing.GroupLayout(BuildLogPanel);
         BuildLogPanel.setLayout(BuildLogPanelLayout);
         BuildLogPanelLayout.setHorizontalGroup(
             BuildLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 822, Short.MAX_VALUE)
+            .addGroup(BuildLogPanelLayout.createSequentialGroup()
+                .addComponent(BuildLogToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4))
         );
         BuildLogPanelLayout.setVerticalGroup(
             BuildLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 129, Short.MAX_VALUE)
+            .addComponent(BuildLogToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+            .addComponent(jScrollPane4)
         );
 
         OutputWindowTabs.addTab("Build log", null, BuildLogPanel, "Build log");
@@ -705,11 +774,11 @@ public class MainWindow extends JFrame {
         TerminalPanel.setLayout(TerminalPanelLayout);
         TerminalPanelLayout.setHorizontalGroup(
             TerminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 822, Short.MAX_VALUE)
+            .addGap(0, 852, Short.MAX_VALUE)
         );
         TerminalPanelLayout.setVerticalGroup(
             TerminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 129, Short.MAX_VALUE)
+            .addGap(0, 226, Short.MAX_VALUE)
         );
 
         OutputWindowTabs.addTab("Terminal", null, TerminalPanel, "Terminal");
@@ -718,11 +787,11 @@ public class MainWindow extends JFrame {
         GitPanel.setLayout(GitPanelLayout);
         GitPanelLayout.setHorizontalGroup(
             GitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 822, Short.MAX_VALUE)
+            .addGap(0, 852, Short.MAX_VALUE)
         );
         GitPanelLayout.setVerticalGroup(
             GitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 129, Short.MAX_VALUE)
+            .addGap(0, 226, Short.MAX_VALUE)
         );
 
         OutputWindowTabs.addTab("Git", null, GitPanel, "Git repository control");
@@ -1092,10 +1161,13 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenu BookmarksMenu;
     private javax.swing.JButton BuildDebugButton;
     private javax.swing.JPanel BuildLogPanel;
+    private javax.swing.JToolBar BuildLogToolbar;
+    private javax.swing.JEditorPane BuildLogViewer;
     private javax.swing.JMenu BuildMenu;
     private javax.swing.JButton BuildReleaseButton;
     private javax.swing.JToolBar BuildToolbar;
     private javax.swing.JLabel CapsStatusLabel;
+    private javax.swing.JButton ClearBuildLogButton;
     private javax.swing.JToolBar CodeToolbar;
     private javax.swing.JToolBar CommonToolbar;
     private javax.swing.JMenuItem ConfigBuildItem;
@@ -1110,6 +1182,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JSplitPane EditorSplitPanel;
     private javax.swing.JLabel EncodeStatusLabel;
     private javax.swing.JMenuItem EnumInsertItem;
+    private javax.swing.JButton ErrorsFilterButton;
     private javax.swing.JMenu FileMenu;
     private javax.swing.JTree FilesTreeList;
     private javax.swing.JButton FindAndReplaceButton;
@@ -1162,6 +1235,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem SaveProjectItem;
     private javax.swing.JMenuItem SetDefViewItem;
     private javax.swing.JMenuItem SettingsItem;
+    private javax.swing.JButton ShowAllMessageButton;
     private javax.swing.JPanel StatusbarPanel;
     private javax.swing.JMenuItem StructInsertItem;
     private javax.swing.JTree StructureTreeList;
@@ -1180,6 +1254,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
@@ -1192,6 +1267,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JSeparator jSeparator18;
     private javax.swing.JPopupMenu.Separator jSeparator19;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator20;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
