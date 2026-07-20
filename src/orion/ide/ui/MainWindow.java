@@ -84,6 +84,11 @@ public class MainWindow extends JFrame {
     public final FlatSVGIcon showAllLogIcon = new FlatSVGIcon("resources/icons/commons/show_all_log.svg", 16, 16);
     public final FlatSVGIcon showErrorsLogIcon = new FlatSVGIcon("resources/icons/commons/show_errors_log.svg", 16, 16);
     public final FlatSVGIcon clearBuildLogIcon = new FlatSVGIcon("resources/icons/commons/clear_build_log.svg", 16, 16);
+    public final FlatSVGIcon gitCommitIcon = new FlatSVGIcon("resources/icons/commons/git_commit.svg", 16, 16);
+    public final FlatSVGIcon gitFetchIcon = new FlatSVGIcon("resources/icons/commons/git_fetch.svg", 16, 16);
+    public final FlatSVGIcon gitPullIcon = new FlatSVGIcon("resources/icons/commons/git_pull.svg", 16, 16);
+    public final FlatSVGIcon gitCheckoutIcon = new FlatSVGIcon("resources/icons/commons/git_checkout.svg", 16, 16);
+    public final FlatSVGIcon gitPushIcon = new FlatSVGIcon("resources/icons/commons/git_push.svg", 16, 16);
 
     /**
      * Creates new form MainWindow
@@ -171,7 +176,18 @@ public class MainWindow extends JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         BuildLogViewer = new javax.swing.JEditorPane();
         TerminalPanel = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TerminalViewer = new javax.swing.JEditorPane();
         GitPanel = new javax.swing.JPanel();
+        GitToolbar = new javax.swing.JToolBar();
+        GitCommitButton = new javax.swing.JButton();
+        jSeparator21 = new javax.swing.JToolBar.Separator();
+        GitFetchButton = new javax.swing.JButton();
+        GitPullButton = new javax.swing.JButton();
+        GitCheckoutButton = new javax.swing.JButton();
+        jSeparator22 = new javax.swing.JToolBar.Separator();
+        GitPushButton = new javax.swing.JButton();
+        GitOutputViewer = new java.awt.TextArea();
         EditorMDIFrame = new javax.swing.JDesktopPane();
         MainMenubar = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
@@ -227,11 +243,11 @@ public class MainWindow extends JFrame {
         InstallPkgBuildItem = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
         ConfigBuildItem = new javax.swing.JMenuItem();
-        ResManagerToolsItem = new javax.swing.JMenu();
+        ToolsMenu = new javax.swing.JMenu();
         GitToolsItem = new javax.swing.JMenuItem();
         TerminalToolsItem = new javax.swing.JMenuItem();
         DesignerToolsItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        ResManagerToolsItem = new javax.swing.JMenuItem();
         HelpMenu = new javax.swing.JMenu();
         ContentsHelpItem = new javax.swing.JMenuItem();
         SamplesHelpItem = new javax.swing.JMenuItem();
@@ -479,6 +495,7 @@ public class MainWindow extends JFrame {
         TerminalButton.setMinimumSize(new java.awt.Dimension(24, 24));
         TerminalButton.setPreferredSize(new java.awt.Dimension(24, 24));
         TerminalButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        TerminalButton.addActionListener(this::TerminalButtonActionPerformed);
         BuildToolbar.add(TerminalButton);
 
         MainToolbarsPanel.add(BuildToolbar);
@@ -701,14 +718,17 @@ public class MainWindow extends JFrame {
 
         BuildLogToolbar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         BuildLogToolbar.setRollover(true);
+        BuildLogToolbar.setAlignmentX(0.5F);
         BuildLogToolbar.setAlignmentY(0.0F);
-        BuildLogToolbar.setMaximumSize(new java.awt.Dimension(26, 3000));
-        BuildLogToolbar.setMinimumSize(new java.awt.Dimension(26, 100));
+        BuildLogToolbar.setAutoscrolls(true);
+        BuildLogToolbar.setMaximumSize(new java.awt.Dimension(32, 3000));
+        BuildLogToolbar.setMinimumSize(new java.awt.Dimension(32, 100));
         BuildLogToolbar.setName(""); // NOI18N
-        BuildLogToolbar.setPreferredSize(new java.awt.Dimension(26, 100));
+        BuildLogToolbar.setPreferredSize(new java.awt.Dimension(32, 100));
 
         ShowAllMessageButton.setIcon(showAllLogIcon);
         ShowAllMessageButton.setToolTipText("Show all build log messages");
+        ShowAllMessageButton.setAlignmentX(0.5F);
         ShowAllMessageButton.setAlignmentY(0.0F);
         ShowAllMessageButton.setFocusable(false);
         ShowAllMessageButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -720,6 +740,7 @@ public class MainWindow extends JFrame {
 
         ErrorsFilterButton.setIcon(showErrorsLogIcon);
         ErrorsFilterButton.setToolTipText("Show only errors build log messages");
+        ErrorsFilterButton.setAlignmentX(0.5F);
         ErrorsFilterButton.setAlignmentY(0.0F);
         ErrorsFilterButton.setFocusable(false);
         ErrorsFilterButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -728,10 +749,14 @@ public class MainWindow extends JFrame {
         ErrorsFilterButton.setPreferredSize(new java.awt.Dimension(24, 24));
         ErrorsFilterButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BuildLogToolbar.add(ErrorsFilterButton);
+
+        jSeparator20.setAlignmentX(0.5F);
+        jSeparator20.setAlignmentY(0.0F);
         BuildLogToolbar.add(jSeparator20);
 
         ClearBuildLogButton.setIcon(clearBuildLogIcon);
         ClearBuildLogButton.setToolTipText("Clear build log data");
+        ClearBuildLogButton.setAlignmentX(0.5F);
         ClearBuildLogButton.setAlignmentY(0.0F);
         ClearBuildLogButton.setFocusable(false);
         ClearBuildLogButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -758,40 +783,107 @@ public class MainWindow extends JFrame {
         BuildLogPanelLayout.setHorizontalGroup(
             BuildLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BuildLogPanelLayout.createSequentialGroup()
-                .addComponent(BuildLogToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BuildLogToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE))
         );
         BuildLogPanelLayout.setVerticalGroup(
             BuildLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BuildLogToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+            .addComponent(BuildLogToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane4)
         );
 
         OutputWindowTabs.addTab("Build log", null, BuildLogPanel, "Build log");
 
+        jScrollPane5.setViewportView(TerminalViewer);
+
         javax.swing.GroupLayout TerminalPanelLayout = new javax.swing.GroupLayout(TerminalPanel);
         TerminalPanel.setLayout(TerminalPanelLayout);
         TerminalPanelLayout.setHorizontalGroup(
             TerminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 852, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
         );
         TerminalPanelLayout.setVerticalGroup(
             TerminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
         );
 
         OutputWindowTabs.addTab("Terminal", null, TerminalPanel, "Terminal");
+
+        GitToolbar.setRollover(true);
+        GitToolbar.setAlignmentX(0.0F);
+        GitToolbar.setMaximumSize(new java.awt.Dimension(4, 26));
+        GitToolbar.setMinimumSize(new java.awt.Dimension(4, 26));
+        GitToolbar.setPreferredSize(new java.awt.Dimension(100, 26));
+
+        GitCommitButton.setIcon(gitCommitIcon);
+        GitCommitButton.setToolTipText("Commit changes");
+        GitCommitButton.setFocusable(false);
+        GitCommitButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        GitCommitButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        GitCommitButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        GitCommitButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        GitCommitButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        GitToolbar.add(GitCommitButton);
+        GitToolbar.add(jSeparator21);
+
+        GitFetchButton.setIcon(gitFetchIcon);
+        GitFetchButton.setToolTipText("Fetch from current branch");
+        GitFetchButton.setFocusable(false);
+        GitFetchButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        GitFetchButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        GitFetchButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        GitFetchButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        GitFetchButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        GitToolbar.add(GitFetchButton);
+
+        GitPullButton.setIcon(gitPullIcon);
+        GitPullButton.setToolTipText("Pull from current branch");
+        GitPullButton.setFocusable(false);
+        GitPullButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        GitPullButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        GitPullButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        GitPullButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        GitPullButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        GitToolbar.add(GitPullButton);
+
+        GitCheckoutButton.setIcon(gitCheckoutIcon);
+        GitCheckoutButton.setToolTipText("Checkout files");
+        GitCheckoutButton.setFocusable(false);
+        GitCheckoutButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        GitCheckoutButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        GitCheckoutButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        GitCheckoutButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        GitCheckoutButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        GitToolbar.add(GitCheckoutButton);
+        GitToolbar.add(jSeparator22);
+
+        GitPushButton.setIcon(gitPushIcon);
+        GitPushButton.setToolTipText("Push to current branch");
+        GitPushButton.setFocusable(false);
+        GitPushButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        GitPushButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        GitPushButton.setMinimumSize(new java.awt.Dimension(24, 24));
+        GitPushButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        GitPushButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        GitToolbar.add(GitPushButton);
+
+        GitOutputViewer.setEditable(false);
 
         javax.swing.GroupLayout GitPanelLayout = new javax.swing.GroupLayout(GitPanel);
         GitPanel.setLayout(GitPanelLayout);
         GitPanelLayout.setHorizontalGroup(
             GitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 852, Short.MAX_VALUE)
+            .addComponent(GitToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+            .addComponent(GitOutputViewer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         GitPanelLayout.setVerticalGroup(
             GitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
+            .addGroup(GitPanelLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(GitToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(GitOutputViewer, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
         );
 
         OutputWindowTabs.addTab("Git", null, GitPanel, "Git repository control");
@@ -1037,26 +1129,28 @@ public class MainWindow extends JFrame {
 
         MainMenubar.add(BuildMenu);
 
-        ResManagerToolsItem.setText("Tools");
+        ToolsMenu.setText("Tools");
 
         GitToolsItem.setIcon(gitToolsIcon);
         GitToolsItem.setText("Git");
-        ResManagerToolsItem.add(GitToolsItem);
+        GitToolsItem.addActionListener(this::GitToolsItemActionPerformed);
+        ToolsMenu.add(GitToolsItem);
 
         TerminalToolsItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         TerminalToolsItem.setIcon(terminalToolsIcon);
         TerminalToolsItem.setText("Terminal");
-        ResManagerToolsItem.add(TerminalToolsItem);
+        TerminalToolsItem.addActionListener(this::TerminalToolsItemActionPerformed);
+        ToolsMenu.add(TerminalToolsItem);
 
         DesignerToolsItem.setIcon(uiDesignerToolsIcon);
         DesignerToolsItem.setText("UI designer");
-        ResManagerToolsItem.add(DesignerToolsItem);
+        ToolsMenu.add(DesignerToolsItem);
 
-        jMenuItem1.setIcon(resourcesManagerIcon);
-        jMenuItem1.setText("Resources manager...");
-        ResManagerToolsItem.add(jMenuItem1);
+        ResManagerToolsItem.setIcon(resourcesManagerIcon);
+        ResManagerToolsItem.setText("Resources manager...");
+        ToolsMenu.add(ResManagerToolsItem);
 
-        MainMenubar.add(ResManagerToolsItem);
+        MainMenubar.add(ToolsMenu);
 
         HelpMenu.setText("Help");
 
@@ -1146,11 +1240,47 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_OutputWindowItemActionPerformed
 
+    // Same too function
     private void OutputFrameComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_OutputFrameComponentHidden
         OutputWindowItem.setSelected(false);
     }//GEN-LAST:event_OutputFrameComponentHidden
 
-   
+    // Switch output window to "Terminal" tab function
+    private void TerminalToolsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerminalToolsItemActionPerformed
+        if(OutputFrame.isShowing()) {
+            OutputWindowTabs.setSelectedComponent(TerminalPanel);
+        } else {
+            EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
+            OutputWindowItem.setSelected(true);
+            OutputWindowTabs.setSelectedComponent(TerminalPanel);
+            OutputFrame.show();
+        }
+    }//GEN-LAST:event_TerminalToolsItemActionPerformed
+
+    // Same too function
+    private void TerminalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerminalButtonActionPerformed
+        if(OutputFrame.isShowing()) {
+            OutputWindowTabs.setSelectedComponent(TerminalPanel);
+        } else {
+            EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
+            OutputWindowItem.setSelected(true);
+            OutputWindowTabs.setSelectedComponent(TerminalPanel);
+            OutputFrame.show();
+        }
+    }//GEN-LAST:event_TerminalButtonActionPerformed
+
+    // Switch output window to "Git" tab function
+    private void GitToolsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GitToolsItemActionPerformed
+        if(OutputFrame.isShowing()) {
+            OutputWindowTabs.setSelectedComponent(GitPanel);
+        } else {
+            EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
+            OutputWindowItem.setSelected(true);
+            OutputWindowTabs.setSelectedComponent(GitPanel);
+            OutputFrame.show();
+        }
+    }//GEN-LAST:event_GitToolsItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog AboutDialogWindow;
     private javax.swing.JMenuItem AboutHelpItem;
@@ -1189,7 +1319,14 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem FindEditItem;
     private javax.swing.JSplitPane FrameSplitPanel;
     private javax.swing.JMenuItem FunctInsertItem;
+    private javax.swing.JButton GitCheckoutButton;
+    private javax.swing.JButton GitCommitButton;
+    private javax.swing.JButton GitFetchButton;
+    private java.awt.TextArea GitOutputViewer;
     private javax.swing.JPanel GitPanel;
+    private javax.swing.JButton GitPullButton;
+    private javax.swing.JButton GitPushButton;
+    private javax.swing.JToolBar GitToolbar;
     private javax.swing.JMenuItem GitToolsItem;
     private javax.swing.JButton GoToViewButton;
     private javax.swing.JMenuItem GoToViewItem;
@@ -1226,7 +1363,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton RedoEditButton;
     private javax.swing.JMenuItem RedoEditItem;
     private javax.swing.JMenuItem ReleaseBuildItem;
-    private javax.swing.JMenu ResManagerToolsItem;
+    private javax.swing.JMenuItem ResManagerToolsItem;
     private javax.swing.JMenuItem SamplesHelpItem;
     private javax.swing.JMenuItem SaveAllItem;
     private javax.swing.JMenuItem SaveAsFileItem;
@@ -1243,18 +1380,20 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton TerminalButton;
     private javax.swing.JPanel TerminalPanel;
     private javax.swing.JMenuItem TerminalToolsItem;
+    private javax.swing.JEditorPane TerminalViewer;
+    private javax.swing.JMenu ToolsMenu;
     private javax.swing.JButton UndoEditButton;
     private javax.swing.JMenuItem UndoEditItem;
     private javax.swing.JMenu ViewMenu;
     private javax.swing.JMenuItem ZoomInViewItem;
     private javax.swing.JMenuItem ZoomOutViewItem;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
@@ -1268,6 +1407,8 @@ public class MainWindow extends JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator19;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator20;
+    private javax.swing.JToolBar.Separator jSeparator21;
+    private javax.swing.JToolBar.Separator jSeparator22;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
