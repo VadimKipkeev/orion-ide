@@ -27,14 +27,14 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="OkButton" min="-2" pref="108" max="-2" attributes="0"/>
+                          <Component id="AboutDialogOkButton" min="-2" pref="108" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="AppTitleLabel" max="32767" attributes="0"/>
                               <Component id="AppVersionLabel" max="32767" attributes="0"/>
-                              <Component id="jScrollPane1" alignment="0" pref="391" max="32767" attributes="0"/>
+                              <Component id="AppDescriptionScroller" alignment="0" pref="391" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -50,9 +50,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="AppVersionLabel" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                  <Component id="AppDescriptionScroller" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="OkButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="AboutDialogOkButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -76,7 +76,7 @@
             <Property name="text" type="java.lang.String" value="version 1.0.0 (Alnitak)"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="AppDescriptionScroller">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -96,12 +96,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="OkButton">
+        <Component class="javax.swing.JButton" name="AboutDialogOkButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="OK"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OkButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AboutDialogOkButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -157,7 +157,7 @@
                 <Property name="text" type="java.lang.String" value="Save as..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator1">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="NewProjectItem">
               <Properties>
@@ -200,7 +200,7 @@
                 <Property name="text" type="java.lang.String" value="Save all"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator2">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="PrintFileItem">
               <Properties>
@@ -221,7 +221,7 @@
                 <Property name="text" type="java.lang.String" value="Print setup..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator3">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="QuitItem">
               <Properties>
@@ -266,7 +266,7 @@
                 <Property name="text" type="java.lang.String" value="Redo"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator4">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator4">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="CutEditItem">
               <Properties>
@@ -301,7 +301,7 @@
                 <Property name="text" type="java.lang.String" value="Paste"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator5">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator5">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="FindEditItem">
               <Properties>
@@ -314,7 +314,7 @@
                 <Property name="text" type="java.lang.String" value="Find and replace..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator6">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator6">
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="BookmarksMenu">
               <Properties>
@@ -332,7 +332,7 @@
                     <Property name="text" type="java.lang.String" value="New"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator7">
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator8">
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="PrevBookmarkItem">
                   <Properties>
@@ -352,7 +352,7 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator10">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator7">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SettingsItem">
               <Properties>
@@ -402,7 +402,7 @@
                 <Property name="text" type="java.lang.String" value="Set default"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator8">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator9">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="GoToViewItem">
               <Properties>
@@ -412,7 +412,7 @@
                 <Property name="text" type="java.lang.String" value="Go to..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator19">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator10">
             </MenuItem>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="ProjectExplorerItem">
               <Properties>
@@ -472,7 +472,7 @@
                 <Property name="text" type="java.lang.String" value="Function"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator9">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator11">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="TemplateInsertItem">
               <Properties>
@@ -522,7 +522,7 @@
                 <Property name="text" type="java.lang.String" value="Install package"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator11">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator12">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ConfigBuildItem">
               <Properties>
@@ -606,7 +606,7 @@
                 <Property name="text" type="java.lang.String" value="Samples"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator12">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator13">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="AboutHelpItem">
               <Properties>
@@ -639,7 +639,7 @@
     </Property>
   </Properties>
   <AccessibilityProperties>
-    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="MainFrame"/>
     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
   </AccessibilityProperties>
   <SyntheticProperties>
@@ -758,7 +758,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JToolBar$Separator" name="jSeparator13">
+            <Component class="javax.swing.JToolBar$Separator" name="ToolbarSeparator1">
             </Component>
             <Component class="javax.swing.JButton" name="ContentsHelpButton">
               <Properties>
@@ -780,7 +780,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JToolBar$Separator" name="jSeparator14">
+            <Component class="javax.swing.JToolBar$Separator" name="ToolbarSeparator2">
             </Component>
             <Component class="javax.swing.JButton" name="UndoEditButton">
               <Properties>
@@ -822,7 +822,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JToolBar$Separator" name="jSeparator15">
+            <Component class="javax.swing.JToolBar$Separator" name="ToolbarSeparator3">
             </Component>
             <Component class="javax.swing.JButton" name="FindAndReplaceButton">
               <Properties>
@@ -884,7 +884,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JToolBar$Separator" name="jSeparator16">
+            <Component class="javax.swing.JToolBar$Separator" name="ToolbarSeparator4">
             </Component>
             <Component class="javax.swing.JButton" name="InsertStructureButton">
               <Properties>
@@ -1006,7 +1006,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JToolBar$Separator" name="jSeparator17">
+            <Component class="javax.swing.JToolBar$Separator" name="ToolbarSeparator5">
             </Component>
             <Component class="javax.swing.JButton" name="TerminalButton">
               <Properties>
@@ -1169,7 +1169,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="AppStatusPanel">
           <Properties>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1234,7 +1234,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="AppIndicationPanel">
           <Properties>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1283,7 +1283,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JSeparator" name="jSeparator18">
+            <Component class="javax.swing.JSeparator" name="ToolbarSeparator6">
               <Properties>
                 <Property name="orientation" type="int" value="1"/>
               </Properties>
@@ -1386,6 +1386,9 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JTabbedPane" name="ProjectExplorerTabs">
+              <Properties>
+                <Property name="tabLayoutPolicy" type="int" value="1"/>
+              </Properties>
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
               </AccessibilityProperties>
@@ -1405,17 +1408,17 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="0" pref="188" max="32767" attributes="0"/>
+                          <Component id="StructureTreeScroller" alignment="0" pref="188" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="0" pref="622" max="32767" attributes="0"/>
+                          <Component id="StructureTreeScroller" alignment="0" pref="622" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                    <Container class="javax.swing.JScrollPane" name="StructureTreeScroller">
                       <AuxValues>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
@@ -1453,17 +1456,17 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane3" alignment="0" pref="188" max="32767" attributes="0"/>
+                          <Component id="FilesTreeScroller" alignment="0" pref="188" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane3" alignment="0" pref="622" max="32767" attributes="0"/>
+                          <Component id="FilesTreeScroller" alignment="0" pref="622" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                    <Container class="javax.swing.JScrollPane" name="FilesTreeScroller">
                       <AuxValues>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
@@ -1537,17 +1540,17 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="OutputWindowTabs" alignment="0" max="32767" attributes="0"/>
+                      <Component id="OutputFrameTabs" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="OutputWindowTabs" alignment="0" max="32767" attributes="0"/>
+                      <Component id="OutputFrameTabs" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JTabbedPane" name="OutputWindowTabs">
+                <Container class="javax.swing.JTabbedPane" name="OutputFrameTabs">
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
                   </AccessibilityProperties>
@@ -1570,14 +1573,14 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="BuildLogToolbar" min="-2" pref="32" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" pref="769" max="32767" attributes="0"/>
+                                  <Component id="BuildLogScroller" pref="769" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="BuildLogToolbar" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="BuildLogScroller" alignment="0" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -1647,7 +1650,7 @@
                                 <Property name="verticalTextPosition" type="int" value="3"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JToolBar$Separator" name="jSeparator20">
+                            <Component class="javax.swing.JToolBar$Separator" name="ToolbarSeparator7">
                               <Properties>
                                 <Property name="alignmentX" type="float" value="0.5"/>
                                 <Property name="alignmentY" type="float" value="0.0"/>
@@ -1677,7 +1680,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+                        <Container class="javax.swing.JScrollPane" name="BuildLogScroller">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="alignmentX" type="float" value="0.0"/>
@@ -1716,17 +1719,20 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane5" alignment="0" pref="807" max="32767" attributes="0"/>
+                              <Component id="TerminalScroller" alignment="0" pref="807" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane5" alignment="0" pref="176" max="32767" attributes="0"/>
+                              <Component id="TerminalScroller" alignment="0" pref="176" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+                        <Container class="javax.swing.JScrollPane" name="TerminalScroller">
+                          <Properties>
+                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                          </Properties>
                           <AuxValues>
                             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                           </AuxValues>
@@ -1805,7 +1811,7 @@
                                 <Property name="verticalTextPosition" type="int" value="3"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JToolBar$Separator" name="jSeparator21">
+                            <Component class="javax.swing.JToolBar$Separator" name="ToolbarSeparator8">
                             </Component>
                             <Component class="javax.swing.JButton" name="GitFetchButton">
                               <Properties>
@@ -1867,7 +1873,7 @@
                                 <Property name="verticalTextPosition" type="int" value="3"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JToolBar$Separator" name="jSeparator22">
+                            <Component class="javax.swing.JToolBar$Separator" name="ToolbarSeparator9">
                             </Component>
                             <Component class="javax.swing.JButton" name="GitPushButton">
                               <Properties>

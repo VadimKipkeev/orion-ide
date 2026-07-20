@@ -122,70 +122,70 @@ public class MainWindow extends JFrame {
         AboutDialogWindow = new javax.swing.JDialog();
         AppTitleLabel = new javax.swing.JLabel();
         AppVersionLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        AppDescriptionScroller = new javax.swing.JScrollPane();
         AppDescriptionText = new javax.swing.JTextArea();
-        OkButton = new javax.swing.JButton();
+        AboutDialogOkButton = new javax.swing.JButton();
         MainToolbarsPanel = new javax.swing.JPanel();
         CommonToolbar = new javax.swing.JToolBar();
         NewFileButton = new javax.swing.JButton();
         OpenFileButton = new javax.swing.JButton();
         SaveFileButton = new javax.swing.JButton();
-        jSeparator13 = new javax.swing.JToolBar.Separator();
+        ToolbarSeparator1 = new javax.swing.JToolBar.Separator();
         ContentsHelpButton = new javax.swing.JButton();
-        jSeparator14 = new javax.swing.JToolBar.Separator();
+        ToolbarSeparator2 = new javax.swing.JToolBar.Separator();
         UndoEditButton = new javax.swing.JButton();
         RedoEditButton = new javax.swing.JButton();
-        jSeparator15 = new javax.swing.JToolBar.Separator();
+        ToolbarSeparator3 = new javax.swing.JToolBar.Separator();
         FindAndReplaceButton = new javax.swing.JButton();
         CodeToolbar = new javax.swing.JToolBar();
         GoToViewButton = new javax.swing.JButton();
-        jSeparator16 = new javax.swing.JToolBar.Separator();
+        ToolbarSeparator4 = new javax.swing.JToolBar.Separator();
         InsertStructureButton = new javax.swing.JButton();
         InsertEnumButton = new javax.swing.JButton();
         InsertFunctionButton = new javax.swing.JButton();
         BuildToolbar = new javax.swing.JToolBar();
         BuildReleaseButton = new javax.swing.JButton();
         BuildDebugButton = new javax.swing.JButton();
-        jSeparator17 = new javax.swing.JToolBar.Separator();
+        ToolbarSeparator5 = new javax.swing.JToolBar.Separator();
         TerminalButton = new javax.swing.JButton();
         StatusbarPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        AppStatusPanel = new javax.swing.JPanel();
         AppStatusLabel = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        AppIndicationPanel = new javax.swing.JPanel();
         CapsStatusLabel = new javax.swing.JLabel();
-        jSeparator18 = new javax.swing.JSeparator();
+        ToolbarSeparator6 = new javax.swing.JSeparator();
         EncodeStatusLabel = new javax.swing.JLabel();
         FrameSplitPanel = new javax.swing.JSplitPane();
         ProjectExplorerFrame = new javax.swing.JInternalFrame();
         ProjectExplorerTabs = new javax.swing.JTabbedPane();
         ProjectStructurePanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        StructureTreeScroller = new javax.swing.JScrollPane();
         StructureTreeList = new javax.swing.JTree();
         ProjectFilesPanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        FilesTreeScroller = new javax.swing.JScrollPane();
         FilesTreeList = new javax.swing.JTree();
         EditorSplitPanel = new javax.swing.JSplitPane();
         OutputFrame = new javax.swing.JInternalFrame();
-        OutputWindowTabs = new javax.swing.JTabbedPane();
+        OutputFrameTabs = new javax.swing.JTabbedPane();
         BuildLogPanel = new javax.swing.JPanel();
         BuildLogToolbar = new javax.swing.JToolBar();
         ShowAllMessageButton = new javax.swing.JButton();
         ErrorsFilterButton = new javax.swing.JButton();
-        jSeparator20 = new javax.swing.JToolBar.Separator();
+        ToolbarSeparator7 = new javax.swing.JToolBar.Separator();
         ClearBuildLogButton = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        BuildLogScroller = new javax.swing.JScrollPane();
         BuildLogViewer = new javax.swing.JEditorPane();
         TerminalPanel = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
+        TerminalScroller = new javax.swing.JScrollPane();
         TerminalViewer = new javax.swing.JEditorPane();
         GitPanel = new javax.swing.JPanel();
         GitToolbar = new javax.swing.JToolBar();
         GitCommitButton = new javax.swing.JButton();
-        jSeparator21 = new javax.swing.JToolBar.Separator();
+        ToolbarSeparator8 = new javax.swing.JToolBar.Separator();
         GitFetchButton = new javax.swing.JButton();
         GitPullButton = new javax.swing.JButton();
         GitCheckoutButton = new javax.swing.JButton();
-        jSeparator22 = new javax.swing.JToolBar.Separator();
+        ToolbarSeparator9 = new javax.swing.JToolBar.Separator();
         GitPushButton = new javax.swing.JButton();
         GitOutputViewer = new java.awt.TextArea();
         EditorMDIFrame = new javax.swing.JDesktopPane();
@@ -195,53 +195,53 @@ public class MainWindow extends JFrame {
         OpenFileItem = new javax.swing.JMenuItem();
         SaveFileItem = new javax.swing.JMenuItem();
         SaveAsFileItem = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator1 = new javax.swing.JPopupMenu.Separator();
         NewProjectItem = new javax.swing.JMenuItem();
         OpenProjectItem = new javax.swing.JMenuItem();
         SaveProjectItem = new javax.swing.JMenuItem();
         SaveAllItem = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator2 = new javax.swing.JPopupMenu.Separator();
         PrintFileItem = new javax.swing.JMenuItem();
         PrintSetupItem = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator3 = new javax.swing.JPopupMenu.Separator();
         QuitItem = new javax.swing.JMenuItem();
         EditMenu = new javax.swing.JMenu();
         UndoEditItem = new javax.swing.JMenuItem();
         RedoEditItem = new javax.swing.JMenuItem();
-        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator4 = new javax.swing.JPopupMenu.Separator();
         CutEditItem = new javax.swing.JMenuItem();
         CopyEditItem = new javax.swing.JMenuItem();
         PasteEditItem = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator5 = new javax.swing.JPopupMenu.Separator();
         FindEditItem = new javax.swing.JMenuItem();
-        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator6 = new javax.swing.JPopupMenu.Separator();
         BookmarksMenu = new javax.swing.JMenu();
         NewBookmarkItem = new javax.swing.JMenuItem();
-        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator8 = new javax.swing.JPopupMenu.Separator();
         PrevBookmarkItem = new javax.swing.JMenuItem();
         NextBookmarkItem = new javax.swing.JMenuItem();
-        jSeparator10 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator7 = new javax.swing.JPopupMenu.Separator();
         SettingsItem = new javax.swing.JMenuItem();
         ViewMenu = new javax.swing.JMenu();
         ZoomInViewItem = new javax.swing.JMenuItem();
         ZoomOutViewItem = new javax.swing.JMenuItem();
         SetDefViewItem = new javax.swing.JMenuItem();
-        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator9 = new javax.swing.JPopupMenu.Separator();
         GoToViewItem = new javax.swing.JMenuItem();
-        jSeparator19 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator10 = new javax.swing.JPopupMenu.Separator();
         ProjectExplorerItem = new javax.swing.JCheckBoxMenuItem();
         OutputWindowItem = new javax.swing.JCheckBoxMenuItem();
         InsertMenu = new javax.swing.JMenu();
         StructInsertItem = new javax.swing.JMenuItem();
         EnumInsertItem = new javax.swing.JMenuItem();
         FunctInsertItem = new javax.swing.JMenuItem();
-        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator11 = new javax.swing.JPopupMenu.Separator();
         TemplateInsertItem = new javax.swing.JMenuItem();
         BuildMenu = new javax.swing.JMenu();
         ReleaseBuildItem = new javax.swing.JMenuItem();
         DebugBuildItem = new javax.swing.JMenuItem();
         InstallPkgBuildItem = new javax.swing.JMenuItem();
-        jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator12 = new javax.swing.JPopupMenu.Separator();
         ConfigBuildItem = new javax.swing.JMenuItem();
         ToolsMenu = new javax.swing.JMenu();
         GitToolsItem = new javax.swing.JMenuItem();
@@ -251,7 +251,7 @@ public class MainWindow extends JFrame {
         HelpMenu = new javax.swing.JMenu();
         ContentsHelpItem = new javax.swing.JMenuItem();
         SamplesHelpItem = new javax.swing.JMenuItem();
-        jSeparator12 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator13 = new javax.swing.JPopupMenu.Separator();
         AboutHelpItem = new javax.swing.JMenuItem();
 
         AboutDialogWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -277,10 +277,10 @@ public class MainWindow extends JFrame {
         AppDescriptionText.setText("(c) 2026 CrayZor. All rights reserved.\nCode editor and IDE for development native Motorola Platform 2000 applications, know as ELFs.");
         AppDescriptionText.setEnabled(false);
         AppDescriptionText.setFocusable(false);
-        jScrollPane1.setViewportView(AppDescriptionText);
+        AppDescriptionScroller.setViewportView(AppDescriptionText);
 
-        OkButton.setText("OK");
-        OkButton.addActionListener(this::OkButtonActionPerformed);
+        AboutDialogOkButton.setText("OK");
+        AboutDialogOkButton.addActionListener(this::AboutDialogOkButtonActionPerformed);
 
         javax.swing.GroupLayout AboutDialogWindowLayout = new javax.swing.GroupLayout(AboutDialogWindow.getContentPane());
         AboutDialogWindow.getContentPane().setLayout(AboutDialogWindowLayout);
@@ -290,13 +290,13 @@ public class MainWindow extends JFrame {
                 .addGroup(AboutDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(AboutDialogWindowLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(OkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AboutDialogOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AboutDialogWindowLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(AboutDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(AppTitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(AppVersionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))))
+                            .addComponent(AppDescriptionScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         AboutDialogWindowLayout.setVerticalGroup(
@@ -307,9 +307,9 @@ public class MainWindow extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AppVersionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AppDescriptionScroller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OkButton)
+                .addComponent(AboutDialogOkButton)
                 .addContainerGap())
         );
 
@@ -363,7 +363,7 @@ public class MainWindow extends JFrame {
         SaveFileButton.setPreferredSize(new java.awt.Dimension(24, 24));
         SaveFileButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         CommonToolbar.add(SaveFileButton);
-        CommonToolbar.add(jSeparator13);
+        CommonToolbar.add(ToolbarSeparator1);
 
         ContentsHelpButton.setIcon(contentsHelpIcon);
         ContentsHelpButton.setToolTipText("Show help manual");
@@ -374,7 +374,7 @@ public class MainWindow extends JFrame {
         ContentsHelpButton.setPreferredSize(new java.awt.Dimension(24, 24));
         ContentsHelpButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         CommonToolbar.add(ContentsHelpButton);
-        CommonToolbar.add(jSeparator14);
+        CommonToolbar.add(ToolbarSeparator2);
 
         UndoEditButton.setIcon(undoEditIcon);
         UndoEditButton.setToolTipText("Undo");
@@ -395,7 +395,7 @@ public class MainWindow extends JFrame {
         RedoEditButton.setPreferredSize(new java.awt.Dimension(24, 24));
         RedoEditButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         CommonToolbar.add(RedoEditButton);
-        CommonToolbar.add(jSeparator15);
+        CommonToolbar.add(ToolbarSeparator3);
 
         FindAndReplaceButton.setIcon(findAndReplaceIcon);
         FindAndReplaceButton.setToolTipText("Find and replace text");
@@ -425,7 +425,7 @@ public class MainWindow extends JFrame {
         GoToViewButton.setPreferredSize(new java.awt.Dimension(24, 24));
         GoToViewButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         CodeToolbar.add(GoToViewButton);
-        CodeToolbar.add(jSeparator16);
+        CodeToolbar.add(ToolbarSeparator4);
 
         InsertStructureButton.setIcon(structureInsertIcon);
         InsertStructureButton.setToolTipText("Add new structure");
@@ -485,7 +485,7 @@ public class MainWindow extends JFrame {
         BuildDebugButton.setPreferredSize(new java.awt.Dimension(24, 24));
         BuildDebugButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BuildToolbar.add(BuildDebugButton);
-        BuildToolbar.add(jSeparator17);
+        BuildToolbar.add(ToolbarSeparator5);
 
         TerminalButton.setIcon(terminalToolsIcon);
         TerminalButton.setToolTipText("Show terminal window");
@@ -507,13 +507,13 @@ public class MainWindow extends JFrame {
         StatusbarPanel.setPreferredSize(new java.awt.Dimension(1024, 26));
         StatusbarPanel.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setFocusable(false);
-        jPanel1.setMaximumSize(new java.awt.Dimension(100, 26));
-        jPanel1.setMinimumSize(new java.awt.Dimension(100, 26));
-        jPanel1.setName(""); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(100, 26));
-        jPanel1.setRequestFocusEnabled(false);
-        jPanel1.setVerifyInputWhenFocusTarget(false);
+        AppStatusPanel.setFocusable(false);
+        AppStatusPanel.setMaximumSize(new java.awt.Dimension(100, 26));
+        AppStatusPanel.setMinimumSize(new java.awt.Dimension(100, 26));
+        AppStatusPanel.setName(""); // NOI18N
+        AppStatusPanel.setPreferredSize(new java.awt.Dimension(100, 26));
+        AppStatusPanel.setRequestFocusEnabled(false);
+        AppStatusPanel.setVerifyInputWhenFocusTarget(false);
 
         AppStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         AppStatusLabel.setText("Ready");
@@ -527,31 +527,31 @@ public class MainWindow extends JFrame {
         AppStatusLabel.setRequestFocusEnabled(false);
         AppStatusLabel.setVerifyInputWhenFocusTarget(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout AppStatusPanelLayout = new javax.swing.GroupLayout(AppStatusPanel);
+        AppStatusPanel.setLayout(AppStatusPanelLayout);
+        AppStatusPanelLayout.setHorizontalGroup(
+            AppStatusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AppStatusPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(AppStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        AppStatusPanelLayout.setVerticalGroup(
+            AppStatusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AppStatusPanelLayout.createSequentialGroup()
                 .addComponent(AppStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        StatusbarPanel.add(jPanel1, java.awt.BorderLayout.WEST);
+        StatusbarPanel.add(AppStatusPanel, java.awt.BorderLayout.WEST);
 
-        jPanel2.setFocusable(false);
-        jPanel2.setMaximumSize(new java.awt.Dimension(100, 26));
-        jPanel2.setMinimumSize(new java.awt.Dimension(100, 26));
-        jPanel2.setPreferredSize(new java.awt.Dimension(100, 26));
-        jPanel2.setRequestFocusEnabled(false);
-        jPanel2.setVerifyInputWhenFocusTarget(false);
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        AppIndicationPanel.setFocusable(false);
+        AppIndicationPanel.setMaximumSize(new java.awt.Dimension(100, 26));
+        AppIndicationPanel.setMinimumSize(new java.awt.Dimension(100, 26));
+        AppIndicationPanel.setPreferredSize(new java.awt.Dimension(100, 26));
+        AppIndicationPanel.setRequestFocusEnabled(false);
+        AppIndicationPanel.setVerifyInputWhenFocusTarget(false);
+        AppIndicationPanel.setLayout(new java.awt.BorderLayout());
 
         CapsStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CapsStatusLabel.setText("OFF");
@@ -564,10 +564,10 @@ public class MainWindow extends JFrame {
         CapsStatusLabel.setPreferredSize(new java.awt.Dimension(48, 26));
         CapsStatusLabel.setRequestFocusEnabled(false);
         CapsStatusLabel.setVerifyInputWhenFocusTarget(false);
-        jPanel2.add(CapsStatusLabel, java.awt.BorderLayout.WEST);
+        AppIndicationPanel.add(CapsStatusLabel, java.awt.BorderLayout.WEST);
 
-        jSeparator18.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel2.add(jSeparator18, java.awt.BorderLayout.CENTER);
+        ToolbarSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        AppIndicationPanel.add(ToolbarSeparator6, java.awt.BorderLayout.CENTER);
 
         EncodeStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         EncodeStatusLabel.setText("NOT");
@@ -580,9 +580,9 @@ public class MainWindow extends JFrame {
         EncodeStatusLabel.setPreferredSize(new java.awt.Dimension(48, 26));
         EncodeStatusLabel.setRequestFocusEnabled(false);
         EncodeStatusLabel.setVerifyInputWhenFocusTarget(false);
-        jPanel2.add(EncodeStatusLabel, java.awt.BorderLayout.EAST);
+        AppIndicationPanel.add(EncodeStatusLabel, java.awt.BorderLayout.EAST);
 
-        StatusbarPanel.add(jPanel2, java.awt.BorderLayout.EAST);
+        StatusbarPanel.add(AppIndicationPanel, java.awt.BorderLayout.EAST);
 
         getContentPane().add(StatusbarPanel, java.awt.BorderLayout.SOUTH);
 
@@ -625,39 +625,41 @@ public class MainWindow extends JFrame {
             }
         });
 
+        ProjectExplorerTabs.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Empty");
         StructureTreeList.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         StructureTreeList.setCellRenderer(null);
         StructureTreeList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         StructureTreeList.setEditable(true);
-        jScrollPane2.setViewportView(StructureTreeList);
+        StructureTreeScroller.setViewportView(StructureTreeList);
 
         javax.swing.GroupLayout ProjectStructurePanelLayout = new javax.swing.GroupLayout(ProjectStructurePanel);
         ProjectStructurePanel.setLayout(ProjectStructurePanelLayout);
         ProjectStructurePanelLayout.setHorizontalGroup(
             ProjectStructurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+            .addComponent(StructureTreeScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
         );
         ProjectStructurePanelLayout.setVerticalGroup(
             ProjectStructurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+            .addComponent(StructureTreeScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
         );
 
         ProjectExplorerTabs.addTab("Structure", null, ProjectStructurePanel, "Project structure");
 
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Empty");
         FilesTreeList.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane3.setViewportView(FilesTreeList);
+        FilesTreeScroller.setViewportView(FilesTreeList);
 
         javax.swing.GroupLayout ProjectFilesPanelLayout = new javax.swing.GroupLayout(ProjectFilesPanel);
         ProjectFilesPanel.setLayout(ProjectFilesPanelLayout);
         ProjectFilesPanelLayout.setHorizontalGroup(
             ProjectFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+            .addComponent(FilesTreeScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
         );
         ProjectFilesPanelLayout.setVerticalGroup(
             ProjectFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+            .addComponent(FilesTreeScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
         );
 
         ProjectExplorerTabs.addTab("Files", null, ProjectFilesPanel, "Project files");
@@ -750,9 +752,9 @@ public class MainWindow extends JFrame {
         ErrorsFilterButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BuildLogToolbar.add(ErrorsFilterButton);
 
-        jSeparator20.setAlignmentX(0.5F);
-        jSeparator20.setAlignmentY(0.0F);
-        BuildLogToolbar.add(jSeparator20);
+        ToolbarSeparator7.setAlignmentX(0.5F);
+        ToolbarSeparator7.setAlignmentY(0.0F);
+        BuildLogToolbar.add(ToolbarSeparator7);
 
         ClearBuildLogButton.setIcon(clearBuildLogIcon);
         ClearBuildLogButton.setToolTipText("Clear build log data");
@@ -766,9 +768,9 @@ public class MainWindow extends JFrame {
         ClearBuildLogButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BuildLogToolbar.add(ClearBuildLogButton);
 
-        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane4.setAlignmentX(0.0F);
-        jScrollPane4.setAlignmentY(0.0F);
+        BuildLogScroller.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        BuildLogScroller.setAlignmentX(0.0F);
+        BuildLogScroller.setAlignmentY(0.0F);
 
         BuildLogViewer.setEditable(false);
         BuildLogViewer.setAlignmentX(0.0F);
@@ -776,7 +778,7 @@ public class MainWindow extends JFrame {
         BuildLogViewer.setFocusable(false);
         BuildLogViewer.setRequestFocusEnabled(false);
         BuildLogViewer.setVerifyInputWhenFocusTarget(false);
-        jScrollPane4.setViewportView(BuildLogViewer);
+        BuildLogScroller.setViewportView(BuildLogViewer);
 
         javax.swing.GroupLayout BuildLogPanelLayout = new javax.swing.GroupLayout(BuildLogPanel);
         BuildLogPanel.setLayout(BuildLogPanelLayout);
@@ -785,30 +787,31 @@ public class MainWindow extends JFrame {
             .addGroup(BuildLogPanelLayout.createSequentialGroup()
                 .addComponent(BuildLogToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE))
+                .addComponent(BuildLogScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE))
         );
         BuildLogPanelLayout.setVerticalGroup(
             BuildLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(BuildLogToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane4)
+            .addComponent(BuildLogScroller)
         );
 
-        OutputWindowTabs.addTab("Build log", null, BuildLogPanel, "Build log");
+        OutputFrameTabs.addTab("Build log", null, BuildLogPanel, "Build log");
 
-        jScrollPane5.setViewportView(TerminalViewer);
+        TerminalScroller.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        TerminalScroller.setViewportView(TerminalViewer);
 
         javax.swing.GroupLayout TerminalPanelLayout = new javax.swing.GroupLayout(TerminalPanel);
         TerminalPanel.setLayout(TerminalPanelLayout);
         TerminalPanelLayout.setHorizontalGroup(
             TerminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+            .addComponent(TerminalScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
         );
         TerminalPanelLayout.setVerticalGroup(
             TerminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+            .addComponent(TerminalScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
         );
 
-        OutputWindowTabs.addTab("Terminal", null, TerminalPanel, "Terminal");
+        OutputFrameTabs.addTab("Terminal", null, TerminalPanel, "Terminal");
 
         GitToolbar.setRollover(true);
         GitToolbar.setAlignmentX(0.0F);
@@ -825,7 +828,7 @@ public class MainWindow extends JFrame {
         GitCommitButton.setPreferredSize(new java.awt.Dimension(24, 24));
         GitCommitButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         GitToolbar.add(GitCommitButton);
-        GitToolbar.add(jSeparator21);
+        GitToolbar.add(ToolbarSeparator8);
 
         GitFetchButton.setIcon(gitFetchIcon);
         GitFetchButton.setToolTipText("Fetch from current branch");
@@ -856,7 +859,7 @@ public class MainWindow extends JFrame {
         GitCheckoutButton.setPreferredSize(new java.awt.Dimension(24, 24));
         GitCheckoutButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         GitToolbar.add(GitCheckoutButton);
-        GitToolbar.add(jSeparator22);
+        GitToolbar.add(ToolbarSeparator9);
 
         GitPushButton.setIcon(gitPushIcon);
         GitPushButton.setToolTipText("Push to current branch");
@@ -886,20 +889,20 @@ public class MainWindow extends JFrame {
                 .addComponent(GitOutputViewer, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
         );
 
-        OutputWindowTabs.addTab("Git", null, GitPanel, "Git repository control");
+        OutputFrameTabs.addTab("Git", null, GitPanel, "Git repository control");
 
         javax.swing.GroupLayout OutputFrameLayout = new javax.swing.GroupLayout(OutputFrame.getContentPane());
         OutputFrame.getContentPane().setLayout(OutputFrameLayout);
         OutputFrameLayout.setHorizontalGroup(
             OutputFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(OutputWindowTabs)
+            .addComponent(OutputFrameTabs)
         );
         OutputFrameLayout.setVerticalGroup(
             OutputFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(OutputWindowTabs)
+            .addComponent(OutputFrameTabs)
         );
 
-        OutputWindowTabs.getAccessibleContext().setAccessibleName("");
+        OutputFrameTabs.getAccessibleContext().setAccessibleName("");
 
         EditorSplitPanel.setBottomComponent(OutputFrame);
 
@@ -946,7 +949,7 @@ public class MainWindow extends JFrame {
         SaveAsFileItem.setIcon(saveAsIcon);
         SaveAsFileItem.setText("Save as...");
         FileMenu.add(SaveAsFileItem);
-        FileMenu.add(jSeparator1);
+        FileMenu.add(MenuSeparator1);
 
         NewProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         NewProjectItem.setIcon(newProjectIcon);
@@ -966,7 +969,7 @@ public class MainWindow extends JFrame {
         SaveAllItem.setIcon(saveAllIcon);
         SaveAllItem.setText("Save all");
         FileMenu.add(SaveAllItem);
-        FileMenu.add(jSeparator2);
+        FileMenu.add(MenuSeparator2);
 
         PrintFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         PrintFileItem.setIcon(printFileIcon);
@@ -976,7 +979,7 @@ public class MainWindow extends JFrame {
         PrintSetupItem.setIcon(printSetupIcon);
         PrintSetupItem.setText("Print setup...");
         FileMenu.add(PrintSetupItem);
-        FileMenu.add(jSeparator3);
+        FileMenu.add(MenuSeparator3);
 
         QuitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
         QuitItem.setIcon(quitAppIcon);
@@ -997,7 +1000,7 @@ public class MainWindow extends JFrame {
         RedoEditItem.setIcon(redoEditIcon);
         RedoEditItem.setText("Redo");
         EditMenu.add(RedoEditItem);
-        EditMenu.add(jSeparator4);
+        EditMenu.add(MenuSeparator4);
 
         CutEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         CutEditItem.setIcon(cutEditIcon);
@@ -1013,13 +1016,13 @@ public class MainWindow extends JFrame {
         PasteEditItem.setIcon(pasteEditIcon);
         PasteEditItem.setText("Paste");
         EditMenu.add(PasteEditItem);
-        EditMenu.add(jSeparator5);
+        EditMenu.add(MenuSeparator5);
 
         FindEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         FindEditItem.setIcon(findAndReplaceIcon);
         FindEditItem.setText("Find and replace...");
         EditMenu.add(FindEditItem);
-        EditMenu.add(jSeparator6);
+        EditMenu.add(MenuSeparator6);
 
         BookmarksMenu.setText("Bookmarks");
 
@@ -1027,7 +1030,7 @@ public class MainWindow extends JFrame {
         NewBookmarkItem.setIcon(newBookmarkIcon);
         NewBookmarkItem.setText("New");
         BookmarksMenu.add(NewBookmarkItem);
-        BookmarksMenu.add(jSeparator7);
+        BookmarksMenu.add(MenuSeparator8);
 
         PrevBookmarkItem.setIcon(prevBookmarkIcon);
         PrevBookmarkItem.setText("Preview");
@@ -1038,7 +1041,7 @@ public class MainWindow extends JFrame {
         BookmarksMenu.add(NextBookmarkItem);
 
         EditMenu.add(BookmarksMenu);
-        EditMenu.add(jSeparator10);
+        EditMenu.add(MenuSeparator7);
 
         SettingsItem.setIcon(settingsAppIcon);
         SettingsItem.setText("Settings...");
@@ -1062,12 +1065,12 @@ public class MainWindow extends JFrame {
         SetDefViewItem.setIcon(setDefaultViewIcon);
         SetDefViewItem.setText("Set default");
         ViewMenu.add(SetDefViewItem);
-        ViewMenu.add(jSeparator8);
+        ViewMenu.add(MenuSeparator9);
 
         GoToViewItem.setIcon(goToViewIcon);
         GoToViewItem.setText("Go to...");
         ViewMenu.add(GoToViewItem);
-        ViewMenu.add(jSeparator19);
+        ViewMenu.add(MenuSeparator10);
 
         ProjectExplorerItem.setSelected(true);
         ProjectExplorerItem.setText("Project explorer");
@@ -1097,7 +1100,7 @@ public class MainWindow extends JFrame {
         FunctInsertItem.setIcon(functionInsertIcon);
         FunctInsertItem.setText("Function");
         InsertMenu.add(FunctInsertItem);
-        InsertMenu.add(jSeparator9);
+        InsertMenu.add(MenuSeparator11);
 
         TemplateInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK));
         TemplateInsertItem.setIcon(templateInsertIcon);
@@ -1121,7 +1124,7 @@ public class MainWindow extends JFrame {
         InstallPkgBuildItem.setIcon(installPackageBuildIcon);
         InstallPkgBuildItem.setText("Install package");
         BuildMenu.add(InstallPkgBuildItem);
-        BuildMenu.add(jSeparator11);
+        BuildMenu.add(MenuSeparator12);
 
         ConfigBuildItem.setIcon(configBuildIcon);
         ConfigBuildItem.setText("Configure...");
@@ -1162,7 +1165,7 @@ public class MainWindow extends JFrame {
         SamplesHelpItem.setIcon(samplesHelpIcon);
         SamplesHelpItem.setText("Samples");
         HelpMenu.add(SamplesHelpItem);
-        HelpMenu.add(jSeparator12);
+        HelpMenu.add(MenuSeparator13);
 
         AboutHelpItem.setIcon(aboutHelpIcon);
         AboutHelpItem.setText("About...");
@@ -1173,7 +1176,7 @@ public class MainWindow extends JFrame {
 
         setJMenuBar(MainMenubar);
 
-        getAccessibleContext().setAccessibleName("");
+        getAccessibleContext().setAccessibleName("MainFrame");
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
@@ -1187,9 +1190,9 @@ public class MainWindow extends JFrame {
     }//GEN-LAST:event_AboutHelpItemActionPerformed
 
     // Close about application dialog window by OK button click function
-    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
+    private void AboutDialogOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutDialogOkButtonActionPerformed
         AboutDialogWindow.dispose();
-    }//GEN-LAST:event_OkButtonActionPerformed
+    }//GEN-LAST:event_AboutDialogOkButtonActionPerformed
     
     // Close main window and exit from application function
     private void QuitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitItemActionPerformed
@@ -1248,11 +1251,11 @@ public class MainWindow extends JFrame {
     // Switch output window to "Terminal" tab function
     private void TerminalToolsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerminalToolsItemActionPerformed
         if(OutputFrame.isShowing()) {
-            OutputWindowTabs.setSelectedComponent(TerminalPanel);
+            OutputFrameTabs.setSelectedComponent(TerminalPanel);
         } else {
             EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
             OutputWindowItem.setSelected(true);
-            OutputWindowTabs.setSelectedComponent(TerminalPanel);
+            OutputFrameTabs.setSelectedComponent(TerminalPanel);
             OutputFrame.show();
         }
     }//GEN-LAST:event_TerminalToolsItemActionPerformed
@@ -1260,11 +1263,11 @@ public class MainWindow extends JFrame {
     // Same too function
     private void TerminalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerminalButtonActionPerformed
         if(OutputFrame.isShowing()) {
-            OutputWindowTabs.setSelectedComponent(TerminalPanel);
+            OutputFrameTabs.setSelectedComponent(TerminalPanel);
         } else {
             EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
             OutputWindowItem.setSelected(true);
-            OutputWindowTabs.setSelectedComponent(TerminalPanel);
+            OutputFrameTabs.setSelectedComponent(TerminalPanel);
             OutputFrame.show();
         }
     }//GEN-LAST:event_TerminalButtonActionPerformed
@@ -1272,25 +1275,30 @@ public class MainWindow extends JFrame {
     // Switch output window to "Git" tab function
     private void GitToolsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GitToolsItemActionPerformed
         if(OutputFrame.isShowing()) {
-            OutputWindowTabs.setSelectedComponent(GitPanel);
+            OutputFrameTabs.setSelectedComponent(GitPanel);
         } else {
             EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
             OutputWindowItem.setSelected(true);
-            OutputWindowTabs.setSelectedComponent(GitPanel);
+            OutputFrameTabs.setSelectedComponent(GitPanel);
             OutputFrame.show();
         }
     }//GEN-LAST:event_GitToolsItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AboutDialogOkButton;
     private javax.swing.JDialog AboutDialogWindow;
     private javax.swing.JMenuItem AboutHelpItem;
+    private javax.swing.JScrollPane AppDescriptionScroller;
     private javax.swing.JTextArea AppDescriptionText;
+    private javax.swing.JPanel AppIndicationPanel;
     private javax.swing.JLabel AppStatusLabel;
+    private javax.swing.JPanel AppStatusPanel;
     private javax.swing.JLabel AppTitleLabel;
     private javax.swing.JLabel AppVersionLabel;
     private javax.swing.JMenu BookmarksMenu;
     private javax.swing.JButton BuildDebugButton;
     private javax.swing.JPanel BuildLogPanel;
+    private javax.swing.JScrollPane BuildLogScroller;
     private javax.swing.JToolBar BuildLogToolbar;
     private javax.swing.JEditorPane BuildLogViewer;
     private javax.swing.JMenu BuildMenu;
@@ -1315,6 +1323,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton ErrorsFilterButton;
     private javax.swing.JMenu FileMenu;
     private javax.swing.JTree FilesTreeList;
+    private javax.swing.JScrollPane FilesTreeScroller;
     private javax.swing.JButton FindAndReplaceButton;
     private javax.swing.JMenuItem FindEditItem;
     private javax.swing.JSplitPane FrameSplitPanel;
@@ -1338,18 +1347,30 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem InstallPkgBuildItem;
     private javax.swing.JMenuBar MainMenubar;
     private javax.swing.JPanel MainToolbarsPanel;
+    private javax.swing.JPopupMenu.Separator MenuSeparator1;
+    private javax.swing.JPopupMenu.Separator MenuSeparator10;
+    private javax.swing.JPopupMenu.Separator MenuSeparator11;
+    private javax.swing.JPopupMenu.Separator MenuSeparator12;
+    private javax.swing.JPopupMenu.Separator MenuSeparator13;
+    private javax.swing.JPopupMenu.Separator MenuSeparator2;
+    private javax.swing.JPopupMenu.Separator MenuSeparator3;
+    private javax.swing.JPopupMenu.Separator MenuSeparator4;
+    private javax.swing.JPopupMenu.Separator MenuSeparator5;
+    private javax.swing.JPopupMenu.Separator MenuSeparator6;
+    private javax.swing.JPopupMenu.Separator MenuSeparator7;
+    private javax.swing.JPopupMenu.Separator MenuSeparator8;
+    private javax.swing.JPopupMenu.Separator MenuSeparator9;
     private javax.swing.JMenuItem NewBookmarkItem;
     private javax.swing.JButton NewFileButton;
     private javax.swing.JMenuItem NewFileItem;
     private javax.swing.JMenuItem NewProjectItem;
     private javax.swing.JMenuItem NextBookmarkItem;
-    private javax.swing.JButton OkButton;
     private javax.swing.JButton OpenFileButton;
     private javax.swing.JMenuItem OpenFileItem;
     private javax.swing.JMenuItem OpenProjectItem;
     private javax.swing.JInternalFrame OutputFrame;
+    private javax.swing.JTabbedPane OutputFrameTabs;
     private javax.swing.JCheckBoxMenuItem OutputWindowItem;
-    private javax.swing.JTabbedPane OutputWindowTabs;
     private javax.swing.JMenuItem PasteEditItem;
     private javax.swing.JMenuItem PrevBookmarkItem;
     private javax.swing.JMenuItem PrintFileItem;
@@ -1376,45 +1397,27 @@ public class MainWindow extends JFrame {
     private javax.swing.JPanel StatusbarPanel;
     private javax.swing.JMenuItem StructInsertItem;
     private javax.swing.JTree StructureTreeList;
+    private javax.swing.JScrollPane StructureTreeScroller;
     private javax.swing.JMenuItem TemplateInsertItem;
     private javax.swing.JButton TerminalButton;
     private javax.swing.JPanel TerminalPanel;
+    private javax.swing.JScrollPane TerminalScroller;
     private javax.swing.JMenuItem TerminalToolsItem;
     private javax.swing.JEditorPane TerminalViewer;
+    private javax.swing.JToolBar.Separator ToolbarSeparator1;
+    private javax.swing.JToolBar.Separator ToolbarSeparator2;
+    private javax.swing.JToolBar.Separator ToolbarSeparator3;
+    private javax.swing.JToolBar.Separator ToolbarSeparator4;
+    private javax.swing.JToolBar.Separator ToolbarSeparator5;
+    private javax.swing.JSeparator ToolbarSeparator6;
+    private javax.swing.JToolBar.Separator ToolbarSeparator7;
+    private javax.swing.JToolBar.Separator ToolbarSeparator8;
+    private javax.swing.JToolBar.Separator ToolbarSeparator9;
     private javax.swing.JMenu ToolsMenu;
     private javax.swing.JButton UndoEditButton;
     private javax.swing.JMenuItem UndoEditItem;
     private javax.swing.JMenu ViewMenu;
     private javax.swing.JMenuItem ZoomInViewItem;
     private javax.swing.JMenuItem ZoomOutViewItem;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator10;
-    private javax.swing.JPopupMenu.Separator jSeparator11;
-    private javax.swing.JPopupMenu.Separator jSeparator12;
-    private javax.swing.JToolBar.Separator jSeparator13;
-    private javax.swing.JToolBar.Separator jSeparator14;
-    private javax.swing.JToolBar.Separator jSeparator15;
-    private javax.swing.JToolBar.Separator jSeparator16;
-    private javax.swing.JToolBar.Separator jSeparator17;
-    private javax.swing.JSeparator jSeparator18;
-    private javax.swing.JPopupMenu.Separator jSeparator19;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator20;
-    private javax.swing.JToolBar.Separator jSeparator21;
-    private javax.swing.JToolBar.Separator jSeparator22;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JPopupMenu.Separator jSeparator4;
-    private javax.swing.JPopupMenu.Separator jSeparator5;
-    private javax.swing.JPopupMenu.Separator jSeparator6;
-    private javax.swing.JPopupMenu.Separator jSeparator7;
-    private javax.swing.JPopupMenu.Separator jSeparator8;
-    private javax.swing.JPopupMenu.Separator jSeparator9;
     // End of variables declaration//GEN-END:variables
 }
