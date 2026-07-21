@@ -18,8 +18,12 @@ package orion.ide.ui;
 import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.beans.PropertyVetoException;
+import orion.ide.core.SettingsManager;
 
 public class MainWindow extends JFrame {
+    
+    // Settings control object
+    private final SettingsManager settings = new SettingsManager();
     
     /**
      * Set FlatLaf SVG icons
@@ -95,6 +99,7 @@ public class MainWindow extends JFrame {
      */
     public MainWindow() {
         initComponents();
+        settings.init();
     }
     
     // Get icons folder name by current theme type function
@@ -125,6 +130,15 @@ public class MainWindow extends JFrame {
         AppDescriptionScroller = new javax.swing.JScrollPane();
         AppDescriptionText = new javax.swing.JTextArea();
         AboutDialogOkButton = new javax.swing.JButton();
+        SettingsWindow = new javax.swing.JDialog();
+        SettingsTabs = new javax.swing.JTabbedPane();
+        GeneralSettingsPanel = new javax.swing.JPanel();
+        AppearanceLabel = new javax.swing.JLabel();
+        WindowThemeListButton = new javax.swing.JComboBox<>();
+        WindowThemeLabel = new javax.swing.JLabel();
+        ThemeNotificationLabel = new javax.swing.JLabel();
+        SaveSettingsButton = new javax.swing.JButton();
+        CancelSettingsButton = new javax.swing.JButton();
         MainToolbarsPanel = new javax.swing.JPanel();
         CommonToolbar = new javax.swing.JToolBar();
         NewFileButton = new javax.swing.JButton();
@@ -310,6 +324,93 @@ public class MainWindow extends JFrame {
                 .addComponent(AppDescriptionScroller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AboutDialogOkButton)
+                .addContainerGap())
+        );
+
+        SettingsWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        SettingsWindow.setTitle("Settings");
+        SettingsWindow.setMinimumSize(new java.awt.Dimension(800, 600));
+        SettingsWindow.setModal(true);
+        SettingsWindow.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        SettingsWindow.setName("SettingsWindow"); // NOI18N
+        SettingsWindow.setSize(new java.awt.Dimension(800, 600));
+        SettingsWindow.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                SettingsWindowWindowOpened(evt);
+            }
+        });
+
+        AppearanceLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        AppearanceLabel.setText("Appearance:");
+
+        WindowThemeListButton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VS Light theme", "VS Dark theme" }));
+
+        WindowThemeLabel.setLabelFor(WindowThemeListButton);
+        WindowThemeLabel.setText("Window theme:");
+
+        ThemeNotificationLabel.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Red"));
+        ThemeNotificationLabel.setText("Need to application restart");
+        ThemeNotificationLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        ThemeNotificationLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout GeneralSettingsPanelLayout = new javax.swing.GroupLayout(GeneralSettingsPanel);
+        GeneralSettingsPanel.setLayout(GeneralSettingsPanelLayout);
+        GeneralSettingsPanelLayout.setHorizontalGroup(
+            GeneralSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GeneralSettingsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(GeneralSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(AppearanceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(GeneralSettingsPanelLayout.createSequentialGroup()
+                        .addComponent(WindowThemeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(GeneralSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ThemeNotificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(WindowThemeListButton, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(494, Short.MAX_VALUE))
+        );
+        GeneralSettingsPanelLayout.setVerticalGroup(
+            GeneralSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GeneralSettingsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(AppearanceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(GeneralSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(WindowThemeListButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WindowThemeLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ThemeNotificationLabel)
+                .addContainerGap(365, Short.MAX_VALUE))
+        );
+
+        SettingsTabs.addTab("General", null, GeneralSettingsPanel, "General settings");
+
+        SaveSettingsButton.setText("Save");
+        SaveSettingsButton.addActionListener(this::SaveSettingsButtonActionPerformed);
+
+        CancelSettingsButton.setText("Cancel");
+        CancelSettingsButton.addActionListener(this::CancelSettingsButtonActionPerformed);
+
+        javax.swing.GroupLayout SettingsWindowLayout = new javax.swing.GroupLayout(SettingsWindow.getContentPane());
+        SettingsWindow.getContentPane().setLayout(SettingsWindowLayout);
+        SettingsWindowLayout.setHorizontalGroup(
+            SettingsWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(SettingsTabs)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SettingsWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CancelSettingsButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SaveSettingsButton)
+                .addContainerGap())
+        );
+        SettingsWindowLayout.setVerticalGroup(
+            SettingsWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SettingsWindowLayout.createSequentialGroup()
+                .addComponent(SettingsTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addGroup(SettingsWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaveSettingsButton)
+                    .addComponent(CancelSettingsButton))
                 .addContainerGap())
         );
 
@@ -1045,6 +1146,7 @@ public class MainWindow extends JFrame {
 
         SettingsItem.setIcon(settingsAppIcon);
         SettingsItem.setText("Settings...");
+        SettingsItem.addActionListener(this::SettingsItemActionPerformed);
         EditMenu.add(SettingsItem);
 
         MainMenubar.add(EditMenu);
@@ -1284,6 +1386,35 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_GitToolsItemActionPerformed
 
+    // Show settings window function
+    private void SettingsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsItemActionPerformed
+        
+        // Read settings params from file
+        WindowThemeListButton.setSelectedIndex(Integer.parseInt(settings.getParam("Appearance", "currentTheme"))); // Current theme value
+        
+        SettingsWindow.setLocationRelativeTo(null);
+        SettingsWindow.setVisible(true);
+    }//GEN-LAST:event_SettingsItemActionPerformed
+
+    // Save and close settings window function
+    private void SaveSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveSettingsButtonActionPerformed
+        
+        // Save settings to file
+        settings.storeParam("Appearance", "currentTheme", Integer.toString(WindowThemeListButton.getSelectedIndex()));
+        SettingsWindow.dispose();
+    }//GEN-LAST:event_SaveSettingsButtonActionPerformed
+
+    // Close settings window without saving configuration
+    private void CancelSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelSettingsButtonActionPerformed
+        SettingsWindow.dispose();
+    }//GEN-LAST:event_CancelSettingsButtonActionPerformed
+
+    private void SettingsWindowWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_SettingsWindowWindowOpened
+        
+        // Read settings params from file
+        WindowThemeListButton.setSelectedIndex(Integer.parseInt(settings.getParam("Appearance", "currentTheme"))); // Current theme value
+    }//GEN-LAST:event_SettingsWindowWindowOpened
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AboutDialogOkButton;
     private javax.swing.JDialog AboutDialogWindow;
@@ -1295,6 +1426,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JPanel AppStatusPanel;
     private javax.swing.JLabel AppTitleLabel;
     private javax.swing.JLabel AppVersionLabel;
+    private javax.swing.JLabel AppearanceLabel;
     private javax.swing.JMenu BookmarksMenu;
     private javax.swing.JButton BuildDebugButton;
     private javax.swing.JPanel BuildLogPanel;
@@ -1304,6 +1436,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenu BuildMenu;
     private javax.swing.JButton BuildReleaseButton;
     private javax.swing.JToolBar BuildToolbar;
+    private javax.swing.JButton CancelSettingsButton;
     private javax.swing.JLabel CapsStatusLabel;
     private javax.swing.JButton ClearBuildLogButton;
     private javax.swing.JToolBar CodeToolbar;
@@ -1328,6 +1461,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem FindEditItem;
     private javax.swing.JSplitPane FrameSplitPanel;
     private javax.swing.JMenuItem FunctInsertItem;
+    private javax.swing.JPanel GeneralSettingsPanel;
     private javax.swing.JButton GitCheckoutButton;
     private javax.swing.JButton GitCommitButton;
     private javax.swing.JButton GitFetchButton;
@@ -1391,8 +1525,11 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton SaveFileButton;
     private javax.swing.JMenuItem SaveFileItem;
     private javax.swing.JMenuItem SaveProjectItem;
+    private javax.swing.JButton SaveSettingsButton;
     private javax.swing.JMenuItem SetDefViewItem;
     private javax.swing.JMenuItem SettingsItem;
+    private javax.swing.JTabbedPane SettingsTabs;
+    private javax.swing.JDialog SettingsWindow;
     private javax.swing.JButton ShowAllMessageButton;
     private javax.swing.JPanel StatusbarPanel;
     private javax.swing.JMenuItem StructInsertItem;
@@ -1404,6 +1541,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JScrollPane TerminalScroller;
     private javax.swing.JMenuItem TerminalToolsItem;
     private javax.swing.JEditorPane TerminalViewer;
+    private javax.swing.JLabel ThemeNotificationLabel;
     private javax.swing.JToolBar.Separator ToolbarSeparator1;
     private javax.swing.JToolBar.Separator ToolbarSeparator2;
     private javax.swing.JToolBar.Separator ToolbarSeparator3;
@@ -1417,6 +1555,8 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton UndoEditButton;
     private javax.swing.JMenuItem UndoEditItem;
     private javax.swing.JMenu ViewMenu;
+    private javax.swing.JLabel WindowThemeLabel;
+    private javax.swing.JComboBox<String> WindowThemeListButton;
     private javax.swing.JMenuItem ZoomInViewItem;
     private javax.swing.JMenuItem ZoomOutViewItem;
     // End of variables declaration//GEN-END:variables

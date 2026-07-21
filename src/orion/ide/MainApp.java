@@ -18,16 +18,22 @@ package orion.ide;
 import orion.ide.ui.MainWindow;
 import orion.ide.ui.PreloaderWindow;
 import orion.ide.ui.ThemeManager;
+import orion.ide.core.SettingsManager;
 import javax.swing.*;
 
 public class MainApp {
+    
+    private static final SettingsManager settings = new SettingsManager();
     
     // Entry point method in application
     public static void main(String[] args) {
         
         // Init FlatLaf theme at application start
+        settings.init();
+        int currentThemeID = Integer.parseInt(settings.getParam("Appearance", "currentTheme"));
+        
         ThemeManager uiThemeManager = new ThemeManager();
-        uiThemeManager.init(0); // Light theme by default, later read from configuration file
+        uiThemeManager.init(currentThemeID);
         
         // Run code by timer
         javax.swing.SwingUtilities.invokeLater(() -> {
