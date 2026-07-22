@@ -110,21 +110,19 @@
       <Properties>
         <Property name="defaultCloseOperation" type="int" value="2"/>
         <Property name="title" type="java.lang.String" value="Settings"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[800, 600]"/>
+        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[800, 600]"/>
         </Property>
         <Property name="modal" type="boolean" value="true"/>
-        <Property name="modalExclusionType" type="java.awt.Dialog$ModalExclusionType" editor="org.netbeans.modules.form.editors.EnumEditor">
-          <Value id="APPLICATION_EXCLUDE"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="SettingsWindow" noResource="true"/>
+        <Property name="resizable" type="boolean" value="false"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[800, 600]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="SettingsWindowWindowOpened"/>
-      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -135,7 +133,7 @@
                   <Component id="CancelSettingsButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="SaveSettingsButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -158,12 +156,15 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="GeneralSettingsPanel">
+            <Container class="javax.swing.JPanel" name="AppearanceSettingsPanel">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="General" toolTip="General settings">
-                    <Property name="tabTitle" type="java.lang.String" value="General"/>
-                    <Property name="tabToolTip" type="java.lang.String" value="General settings"/>
+                  <JTabbedPaneConstraints tabName="" toolTip="Appearance settings">
+                    <Property name="tabTitle" type="java.lang.String" value=""/>
+                    <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="appearSettingsIcon" type="code"/>
+                    </Property>
+                    <Property name="tabToolTip" type="java.lang.String" value="Appearance settings"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -173,14 +174,22 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="AppearanceLabel" min="-2" pref="300" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="WindowThemeLabel" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="WindowThemeLabel" min="-2" pref="92" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="WindowThemeListButton" min="-2" pref="190" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="EditorStyleLabel" max="32767" attributes="0"/>
+                                      <Component id="EditorFontSizeLabel" pref="92" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="ThemeNotificationLabel" pref="190" max="32767" attributes="0"/>
-                                      <Component id="WindowThemeListButton" max="32767" attributes="0"/>
+                                      <Component id="EditorStyleListButton" max="32767" attributes="0"/>
+                                      <Component id="EditorFontSizeSpinner" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -192,28 +201,28 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="AppearanceLabel" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="WindowThemeListButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="WindowThemeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="ThemeNotificationLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="365" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="EditorStyleListButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="EditorStyleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="EditorFontSizeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="EditorFontSizeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="333" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="AppearanceLabel">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="24" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Appearance:"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JComboBox" name="WindowThemeListButton">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -248,6 +257,239 @@
                     </Property>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="EditorStyleListButton">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="6">
+                        <StringItem index="0" value="Light theme"/>
+                        <StringItem index="1" value="Dark theme"/>
+                        <StringItem index="2" value="Solarized Light theme"/>
+                        <StringItem index="3" value="Solarized Dark theme"/>
+                        <StringItem index="4" value="Nord theme"/>
+                        <StringItem index="5" value="Midnight theme"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JLabel" name="EditorStyleLabel">
+                  <Properties>
+                    <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="EditorStyleListButton"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Editor style:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JSpinner" name="EditorFontSizeSpinner">
+                </Component>
+                <Component class="javax.swing.JLabel" name="EditorFontSizeLabel">
+                  <Properties>
+                    <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="EditorFontSizeSpinner"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Editor font size:"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="GitSettingsPanel">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="" toolTip="Git module settings">
+                    <Property name="tabTitle" type="java.lang.String" value=""/>
+                    <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="gitSettingsIcon" type="code"/>
+                    </Property>
+                    <Property name="tabToolTip" type="java.lang.String" value="Git module settings"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="GitLoginLabel" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="GitLoginTextInput" min="-2" pref="642" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="GitPasswordLabel" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="GitPasswordTextInput" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="GitTokenLabel" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="GitTokenTextInput" min="-2" pref="642" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="GitLoginTextInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="GitLoginLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="GitPasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="GitPasswordTextInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="GitTokenTextInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="GitTokenLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="357" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JTextField" name="GitLoginTextInput">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Git login"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="GitLoginLabel">
+                  <Properties>
+                    <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="GitLoginTextInput"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Git login:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="GitPasswordLabel">
+                  <Properties>
+                    <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="GitPasswordTextInput"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Git password:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="GitTokenLabel">
+                  <Properties>
+                    <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="GitLoginTextInput"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Git token:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="GitTokenTextInput">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Git token"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JPasswordField" name="GitPasswordTextInput">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="Git password"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="BuildSettingsPanel">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="" toolTip="Build settings">
+                    <Property name="tabTitle" type="java.lang.String" value=""/>
+                    <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="buildSettingsIcon" type="code"/>
+                    </Property>
+                    <Property name="tabToolTip" type="java.lang.String" value="Build settings"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="NeptuneSDKPathLabel" min="-2" pref="123" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="NeptuneSDKPathTextInput" min="-2" pref="505" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="NeptuneSDKPathButton" min="-2" pref="40" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="MCORESDKPathLabel" min="-2" pref="123" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="MCORESDKPathTextInput" min="-2" pref="505" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="MCORESDKPathButton" min="-2" pref="40" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="102" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="NeptuneSDKPathTextInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="NeptuneSDKPathLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="NeptuneSDKPathButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="MCORESDKPathTextInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="MCORESDKPathLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="MCORESDKPathButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="395" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JTextField" name="NeptuneSDKPathTextInput">
+                </Component>
+                <Component class="javax.swing.JLabel" name="NeptuneSDKPathLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Neptune LTE SDK path:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="NeptuneSDKPathButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="..."/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NeptuneSDKPathButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="MCORESDKPathLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="M-CORE SDK path:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="MCORESDKPathTextInput">
+                </Component>
+                <Component class="javax.swing.JButton" name="MCORESDKPathButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="..."/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MCORESDKPathButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1927,7 +2169,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="GitToolbar" pref="807" max="32767" attributes="0"/>
-                              <Component id="GitOutputViewer" alignment="0" max="32767" attributes="0"/>
+                              <Component id="GitOutputScroller" alignment="0" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -1935,8 +2177,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                   <Component id="GitToolbar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                  <Component id="GitOutputViewer" pref="140" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="GitOutputScroller" pref="136" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2065,11 +2307,20 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="java.awt.TextArea" name="GitOutputViewer">
-                          <Properties>
-                            <Property name="editable" type="boolean" value="false"/>
-                          </Properties>
-                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="GitOutputScroller">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JEditorPane" name="GitOutputViewer">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
