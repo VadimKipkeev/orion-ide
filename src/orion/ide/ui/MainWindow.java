@@ -19,6 +19,7 @@ import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.beans.PropertyVetoException;
 import orion.ide.core.SettingsManager;
+import JIconicTable.*;
 
 public class MainWindow extends JFrame {
     
@@ -161,6 +162,13 @@ public class MainWindow extends JFrame {
         MCORESDKPathButton = new javax.swing.JButton();
         SaveSettingsButton = new javax.swing.JButton();
         CancelSettingsButton = new javax.swing.JButton();
+        NewFileWindow = new javax.swing.JDialog();
+        NewFileWindowTitleLabel = new javax.swing.JLabel();
+        FileTypesScroller = new javax.swing.JScrollPane();
+        FileTypesList = new javax.swing.JList<>();
+        NewFileSetupPanel = new javax.swing.JPanel();
+        NewFileNameTextInput = new javax.swing.JTextField();
+        NewFileNameLabel = new javax.swing.JLabel();
         MainToolbarsPanel = new javax.swing.JPanel();
         CommonToolbar = new javax.swing.JToolBar();
         NewFileButton = new javax.swing.JButton();
@@ -352,7 +360,6 @@ public class MainWindow extends JFrame {
 
         SettingsWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         SettingsWindow.setTitle("Settings");
-        SettingsWindow.setMaximumSize(new java.awt.Dimension(800, 600));
         SettingsWindow.setMinimumSize(new java.awt.Dimension(800, 600));
         SettingsWindow.setModal(true);
         SettingsWindow.setName("SettingsWindow"); // NOI18N
@@ -557,6 +564,57 @@ public class MainWindow extends JFrame {
                     .addComponent(CancelSettingsButton))
                 .addContainerGap())
         );
+
+        NewFileWindow.setTitle("Create new file");
+        NewFileWindow.setMinimumSize(new java.awt.Dimension(800, 600));
+        NewFileWindow.setModal(true);
+        NewFileWindow.setName("NewFileWindow"); // NOI18N
+        NewFileWindow.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        NewFileWindowTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        NewFileWindowTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        NewFileWindowTitleLabel.setText("Choose file type:");
+        NewFileWindowTitleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        NewFileWindow.getContentPane().add(NewFileWindowTitleLabel, java.awt.BorderLayout.PAGE_START);
+
+        FileTypesList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "C/C++", "Library", "Resource" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        FileTypesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        FileTypesList.setMaximumSize(new java.awt.Dimension(250, 90));
+        FileTypesList.setMinimumSize(new java.awt.Dimension(250, 90));
+        FileTypesList.setPreferredSize(new java.awt.Dimension(250, 90));
+        FileTypesScroller.setViewportView(FileTypesList);
+
+        NewFileWindow.getContentPane().add(FileTypesScroller, java.awt.BorderLayout.LINE_START);
+
+        NewFileNameLabel.setLabelFor(NewFileNameTextInput);
+        NewFileNameLabel.setText("Enter file name:");
+
+        javax.swing.GroupLayout NewFileSetupPanelLayout = new javax.swing.GroupLayout(NewFileSetupPanel);
+        NewFileSetupPanel.setLayout(NewFileSetupPanelLayout);
+        NewFileSetupPanelLayout.setHorizontalGroup(
+            NewFileSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NewFileSetupPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NewFileSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(NewFileNameTextInput)
+                    .addComponent(NewFileNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        NewFileSetupPanelLayout.setVerticalGroup(
+            NewFileSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NewFileSetupPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(NewFileNameLabel)
+                .addGap(2, 2, 2)
+                .addComponent(NewFileNameTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(534, Short.MAX_VALUE))
+        );
+
+        NewFileWindow.getContentPane().add(NewFileSetupPanel, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Orion IDE");
@@ -1662,6 +1720,8 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem EnumInsertItem;
     private javax.swing.JButton ErrorsFilterButton;
     private javax.swing.JMenu FileMenu;
+    private javax.swing.JList<String> FileTypesList;
+    private javax.swing.JScrollPane FileTypesScroller;
     private javax.swing.JTree FilesTreeList;
     private javax.swing.JScrollPane FilesTreeScroller;
     private javax.swing.JButton FindAndReplaceButton;
@@ -1717,6 +1777,11 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem NewBookmarkItem;
     private javax.swing.JButton NewFileButton;
     private javax.swing.JMenuItem NewFileItem;
+    private javax.swing.JLabel NewFileNameLabel;
+    private javax.swing.JTextField NewFileNameTextInput;
+    private javax.swing.JPanel NewFileSetupPanel;
+    private javax.swing.JDialog NewFileWindow;
+    private javax.swing.JLabel NewFileWindowTitleLabel;
     private javax.swing.JMenuItem NewProjectItem;
     private javax.swing.JMenuItem NextBookmarkItem;
     private javax.swing.JButton OpenFileButton;
@@ -1780,4 +1845,12 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem ZoomInViewItem;
     private javax.swing.JMenuItem ZoomOutViewItem;
     // End of variables declaration//GEN-END:variables
+
+    // Add new file type iconic table UI control to new file window
+    private static void createCFileTypesIconicTable(){
+        DefaultListModel<GridItem> listModel = new DefaultListModel<>();
+        listModel.addElement(new GridItem("C/C++ header", "resources/icons/commons/header_file.svg"));
+        listModel.addElement(new GridItem("C source", "resources/icons/commons/c_source_file.svg"));
+        listModel.addElement(new GridItem("C++ source", "resources/icons/commons/header_file.svg"));
+    }
 }
