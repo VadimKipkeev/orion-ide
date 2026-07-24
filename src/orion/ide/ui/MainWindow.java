@@ -19,12 +19,14 @@ import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.beans.PropertyVetoException;
 import orion.ide.core.SettingsManager;
-import JIconicTable.*;
 
 public class MainWindow extends JFrame {
     
     // Settings control object
     private final SettingsManager settings = new SettingsManager();
+    
+    // File types button click event listener ID
+    private static int fileTypeID = 0;
     
     /**
      * Set FlatLaf SVG icons
@@ -100,6 +102,12 @@ public class MainWindow extends JFrame {
     public final FlatSVGIcon gitSettingsIcon = new FlatSVGIcon("resources/icons/commons/git_settings.svg", 24, 24);
     public final FlatSVGIcon buildSettingsIcon = new FlatSVGIcon("resources/icons/commons/build_settings.svg", 24, 24);
 
+    // File types icons
+    public final FlatSVGIcon cHeaderFileTypeIcon = new FlatSVGIcon("resources/icons/commons/c_header_file.svg", 32, 32);
+    public final FlatSVGIcon cSourceFileTypeIcon = new FlatSVGIcon("resources/icons/commons/c_source_file.svg", 32, 32);
+    public final FlatSVGIcon cppClassFileTypeIcon = new FlatSVGIcon("resources/icons/commons/cpp_class_file.svg", 32, 32);
+    public final FlatSVGIcon uiFormFileTypeIcon = new FlatSVGIcon("resources/icons/commons/form_design_file.svg", 32, 32);
+    public final FlatSVGIcon iniFileTypeIcon = new FlatSVGIcon("resources/icons/commons/ini_file.svg", 32, 32);
     /**
      * Creates new form MainWindow
      */
@@ -164,11 +172,16 @@ public class MainWindow extends JFrame {
         CancelSettingsButton = new javax.swing.JButton();
         NewFileWindow = new javax.swing.JDialog();
         NewFileWindowTitleLabel = new javax.swing.JLabel();
-        FileTypesScroller = new javax.swing.JScrollPane();
-        FileTypesList = new javax.swing.JList<>();
         NewFileSetupPanel = new javax.swing.JPanel();
         NewFileNameTextInput = new javax.swing.JTextField();
         NewFileNameLabel = new javax.swing.JLabel();
+        CHeaderFileTypeButton = new javax.swing.JButton();
+        CSourceFileTypeButton = new javax.swing.JButton();
+        CPPClassFileTypeButton = new javax.swing.JButton();
+        FormDesignFileTypeButton = new javax.swing.JButton();
+        INIConfigFileTypeButton = new javax.swing.JButton();
+        CreateFileButton = new javax.swing.JButton();
+        CloseNewFileWindowButton = new javax.swing.JButton();
         MainToolbarsPanel = new javax.swing.JPanel();
         CommonToolbar = new javax.swing.JToolBar();
         NewFileButton = new javax.swing.JButton();
@@ -566,32 +579,93 @@ public class MainWindow extends JFrame {
         );
 
         NewFileWindow.setTitle("Create new file");
-        NewFileWindow.setMinimumSize(new java.awt.Dimension(800, 600));
+        NewFileWindow.setMaximumSize(new java.awt.Dimension(364, 400));
+        NewFileWindow.setMinimumSize(new java.awt.Dimension(364, 400));
         NewFileWindow.setModal(true);
         NewFileWindow.setName("NewFileWindow"); // NOI18N
-        NewFileWindow.setPreferredSize(new java.awt.Dimension(800, 600));
+        NewFileWindow.setPreferredSize(new java.awt.Dimension(364, 400));
+        NewFileWindow.setResizable(false);
+        NewFileWindow.setSize(new java.awt.Dimension(364, 400));
+        NewFileWindow.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                NewFileWindowComponentShown(evt);
+            }
+        });
 
         NewFileWindowTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         NewFileWindowTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        NewFileWindowTitleLabel.setText("Choose file type:");
+        NewFileWindowTitleLabel.setText(" Choose file type:");
         NewFileWindowTitleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         NewFileWindow.getContentPane().add(NewFileWindowTitleLabel, java.awt.BorderLayout.PAGE_START);
 
-        FileTypesList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "C/C++", "Library", "Resource" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        FileTypesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        FileTypesList.setMaximumSize(new java.awt.Dimension(250, 90));
-        FileTypesList.setMinimumSize(new java.awt.Dimension(250, 90));
-        FileTypesList.setPreferredSize(new java.awt.Dimension(250, 90));
-        FileTypesScroller.setViewportView(FileTypesList);
-
-        NewFileWindow.getContentPane().add(FileTypesScroller, java.awt.BorderLayout.LINE_START);
-
         NewFileNameLabel.setLabelFor(NewFileNameTextInput);
         NewFileNameLabel.setText("Enter file name:");
+
+        CHeaderFileTypeButton.setIcon(cHeaderFileTypeIcon);
+        CHeaderFileTypeButton.setText("C/C++ header");
+        CHeaderFileTypeButton.setToolTipText("C/C++ header file");
+        CHeaderFileTypeButton.setBorder(null);
+        CHeaderFileTypeButton.setFocusCycleRoot(true);
+        CHeaderFileTypeButton.setFocusTraversalPolicyProvider(true);
+        CHeaderFileTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CHeaderFileTypeButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        CHeaderFileTypeButton.setMinimumSize(new java.awt.Dimension(100, 100));
+        CHeaderFileTypeButton.setPreferredSize(new java.awt.Dimension(100, 100));
+        CHeaderFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CHeaderFileTypeButton.addActionListener(this::CHeaderFileTypeButtonActionPerformed);
+
+        CSourceFileTypeButton.setIcon(cSourceFileTypeIcon);
+        CSourceFileTypeButton.setText("C source");
+        CSourceFileTypeButton.setToolTipText("C source file");
+        CSourceFileTypeButton.setBorder(null);
+        CSourceFileTypeButton.setFocusCycleRoot(true);
+        CSourceFileTypeButton.setFocusTraversalPolicyProvider(true);
+        CSourceFileTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CSourceFileTypeButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        CSourceFileTypeButton.setMinimumSize(new java.awt.Dimension(100, 100));
+        CSourceFileTypeButton.setPreferredSize(new java.awt.Dimension(100, 100));
+        CSourceFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CSourceFileTypeButton.addActionListener(this::CSourceFileTypeButtonActionPerformed);
+
+        CPPClassFileTypeButton.setIcon(cppClassFileTypeIcon);
+        CPPClassFileTypeButton.setText("C++ class");
+        CPPClassFileTypeButton.setToolTipText("C++ class file");
+        CPPClassFileTypeButton.setBorder(null);
+        CPPClassFileTypeButton.setFocusCycleRoot(true);
+        CPPClassFileTypeButton.setFocusTraversalPolicyProvider(true);
+        CPPClassFileTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CPPClassFileTypeButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        CPPClassFileTypeButton.setMinimumSize(new java.awt.Dimension(100, 100));
+        CPPClassFileTypeButton.setPreferredSize(new java.awt.Dimension(100, 100));
+        CPPClassFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        FormDesignFileTypeButton.setIcon(uiFormFileTypeIcon);
+        FormDesignFileTypeButton.setText("Form design");
+        FormDesignFileTypeButton.setToolTipText("Form design file");
+        FormDesignFileTypeButton.setBorder(null);
+        FormDesignFileTypeButton.setFocusCycleRoot(true);
+        FormDesignFileTypeButton.setFocusTraversalPolicyProvider(true);
+        FormDesignFileTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        FormDesignFileTypeButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        FormDesignFileTypeButton.setMinimumSize(new java.awt.Dimension(100, 100));
+        FormDesignFileTypeButton.setPreferredSize(new java.awt.Dimension(100, 100));
+        FormDesignFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        INIConfigFileTypeButton.setIcon(iniFileTypeIcon);
+        INIConfigFileTypeButton.setText("INI config");
+        INIConfigFileTypeButton.setToolTipText("INI config file");
+        INIConfigFileTypeButton.setBorder(null);
+        INIConfigFileTypeButton.setFocusCycleRoot(true);
+        INIConfigFileTypeButton.setFocusTraversalPolicyProvider(true);
+        INIConfigFileTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        INIConfigFileTypeButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        INIConfigFileTypeButton.setMinimumSize(new java.awt.Dimension(100, 100));
+        INIConfigFileTypeButton.setPreferredSize(new java.awt.Dimension(100, 100));
+        INIConfigFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        CreateFileButton.setText("Create");
+
+        CloseNewFileWindowButton.setText("Cancel");
 
         javax.swing.GroupLayout NewFileSetupPanelLayout = new javax.swing.GroupLayout(NewFileSetupPanel);
         NewFileSetupPanel.setLayout(NewFileSetupPanelLayout);
@@ -601,7 +675,25 @@ public class MainWindow extends JFrame {
                 .addContainerGap()
                 .addGroup(NewFileSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(NewFileNameTextInput)
-                    .addComponent(NewFileNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
+                    .addComponent(NewFileNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                    .addGroup(NewFileSetupPanelLayout.createSequentialGroup()
+                        .addGroup(NewFileSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(NewFileSetupPanelLayout.createSequentialGroup()
+                                .addComponent(CHeaderFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(CSourceFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(CPPClassFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(NewFileSetupPanelLayout.createSequentialGroup()
+                                .addComponent(FormDesignFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(INIConfigFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NewFileSetupPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(CloseNewFileWindowButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CreateFileButton)))
                 .addContainerGap())
         );
         NewFileSetupPanelLayout.setVerticalGroup(
@@ -611,7 +703,20 @@ public class MainWindow extends JFrame {
                 .addComponent(NewFileNameLabel)
                 .addGap(2, 2, 2)
                 .addComponent(NewFileNameTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(NewFileSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CHeaderFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CSourceFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CPPClassFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(NewFileSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FormDesignFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(INIConfigFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(NewFileSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CreateFileButton)
+                    .addComponent(CloseNewFileWindowButton))
+                .addContainerGap())
         );
 
         NewFileWindow.getContentPane().add(NewFileSetupPanel, java.awt.BorderLayout.CENTER);
@@ -645,6 +750,7 @@ public class MainWindow extends JFrame {
         NewFileButton.setMinimumSize(new java.awt.Dimension(24, 24));
         NewFileButton.setPreferredSize(new java.awt.Dimension(24, 24));
         NewFileButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        NewFileButton.addActionListener(this::NewFileButtonActionPerformed);
         CommonToolbar.add(NewFileButton);
 
         OpenFileButton.setIcon(openFileIcon);
@@ -1237,6 +1343,7 @@ public class MainWindow extends JFrame {
         NewFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         NewFileItem.setIcon(newFileIcon);
         NewFileItem.setText("New...");
+        NewFileItem.addActionListener(this::NewFileItemActionPerformed);
         FileMenu.add(NewFileItem);
 
         OpenFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -1675,6 +1782,64 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_MCORESDKPathButtonActionPerformed
 
+    // Show new file window function
+    private void NewFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFileItemActionPerformed
+        NewFileWindow.setLocationRelativeTo(null);
+        NewFileWindow.setVisible(true);
+    }//GEN-LAST:event_NewFileItemActionPerformed
+
+    // Same too function
+    private void NewFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFileButtonActionPerformed
+        NewFileWindow.setLocationRelativeTo(null);
+        NewFileWindow.setVisible(true);
+    }//GEN-LAST:event_NewFileButtonActionPerformed
+
+    // Set new file extension by selected type function
+    private void NewFileWindowComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_NewFileWindowComponentShown
+        
+        // Compare file type ID
+        switch(fileTypeID) {
+            case 0 -> {
+                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".h");
+                break;
+            }
+            
+            case 1 -> {
+                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".c");
+                break;
+            }
+            
+            case 2 -> {
+                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".cpp");
+                break;
+            }
+            
+            case 3 -> {
+                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".uis");
+                break;
+            }
+            
+            case 4 -> {
+                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".ini");
+                break;
+            }
+            
+            default -> {
+                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".h");
+                break;
+            }
+        }
+    }//GEN-LAST:event_NewFileWindowComponentShown
+
+    // Set .h file extension function
+    private void CHeaderFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CHeaderFileTypeButtonActionPerformed
+        fileTypeID = 0;
+    }//GEN-LAST:event_CHeaderFileTypeButtonActionPerformed
+
+    private void CSourceFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CSourceFileTypeButtonActionPerformed
+        fileTypeID = 1;
+    }//GEN-LAST:event_CSourceFileTypeButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AboutDialogOkButton;
     private javax.swing.JDialog AboutDialogWindow;
@@ -1697,15 +1862,20 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton BuildReleaseButton;
     private javax.swing.JPanel BuildSettingsPanel;
     private javax.swing.JToolBar BuildToolbar;
+    private javax.swing.JButton CHeaderFileTypeButton;
+    private javax.swing.JButton CPPClassFileTypeButton;
+    private javax.swing.JButton CSourceFileTypeButton;
     private javax.swing.JButton CancelSettingsButton;
     private javax.swing.JLabel CapsStatusLabel;
     private javax.swing.JButton ClearBuildLogButton;
+    private javax.swing.JButton CloseNewFileWindowButton;
     private javax.swing.JToolBar CodeToolbar;
     private javax.swing.JToolBar CommonToolbar;
     private javax.swing.JMenuItem ConfigBuildItem;
     private javax.swing.JButton ContentsHelpButton;
     private javax.swing.JMenuItem ContentsHelpItem;
     private javax.swing.JMenuItem CopyEditItem;
+    private javax.swing.JButton CreateFileButton;
     private javax.swing.JMenuItem CutEditItem;
     private javax.swing.JMenuItem DebugBuildItem;
     private javax.swing.JMenuItem DesignerToolsItem;
@@ -1720,12 +1890,11 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem EnumInsertItem;
     private javax.swing.JButton ErrorsFilterButton;
     private javax.swing.JMenu FileMenu;
-    private javax.swing.JList<String> FileTypesList;
-    private javax.swing.JScrollPane FileTypesScroller;
     private javax.swing.JTree FilesTreeList;
     private javax.swing.JScrollPane FilesTreeScroller;
     private javax.swing.JButton FindAndReplaceButton;
     private javax.swing.JMenuItem FindEditItem;
+    private javax.swing.JButton FormDesignFileTypeButton;
     private javax.swing.JSplitPane FrameSplitPanel;
     private javax.swing.JMenuItem FunctInsertItem;
     private javax.swing.JButton GitCheckoutButton;
@@ -1748,6 +1917,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton GoToViewButton;
     private javax.swing.JMenuItem GoToViewItem;
     private javax.swing.JMenu HelpMenu;
+    private javax.swing.JButton INIConfigFileTypeButton;
     private javax.swing.JButton InsertEnumButton;
     private javax.swing.JButton InsertFunctionButton;
     private javax.swing.JMenu InsertMenu;
@@ -1845,12 +2015,4 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem ZoomInViewItem;
     private javax.swing.JMenuItem ZoomOutViewItem;
     // End of variables declaration//GEN-END:variables
-
-    // Add new file type iconic table UI control to new file window
-    private static void createCFileTypesIconicTable(){
-        DefaultListModel<GridItem> listModel = new DefaultListModel<>();
-        listModel.addElement(new GridItem("C/C++ header", "resources/icons/commons/header_file.svg"));
-        listModel.addElement(new GridItem("C source", "resources/icons/commons/c_source_file.svg"));
-        listModel.addElement(new GridItem("C++ source", "resources/icons/commons/header_file.svg"));
-    }
 }
