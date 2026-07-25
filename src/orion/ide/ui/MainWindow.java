@@ -25,13 +25,17 @@ public class MainWindow extends JFrame {
     // Settings control object
     private final SettingsManager settings = new SettingsManager();
     
-    // File types button click event listener ID
-    private static int fileTypeID = 0;
+    // New file name string
+    private static String newFileFullName = new String();
+    
+    // New file extension string
+    private static String newFileExtension = new String();
     
     /**
      * Set FlatLaf SVG icons
      */
-    private final String iconsFolder = getIconsFolder(); // Icons folder by current theme type
+    public static String iconsFolder = getIconsFolder(); // Icons folder by current theme type
+    
     
     // File menu icons
     public final FlatSVGIcon newFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_file.svg", 16, 16);
@@ -180,7 +184,7 @@ public class MainWindow extends JFrame {
         CPPClassFileTypeButton = new javax.swing.JButton();
         FormDesignFileTypeButton = new javax.swing.JButton();
         INIConfigFileTypeButton = new javax.swing.JButton();
-        CreateFileButton = new javax.swing.JButton();
+        CreateNewFileButton = new javax.swing.JButton();
         CloseNewFileWindowButton = new javax.swing.JButton();
         MainToolbarsPanel = new javax.swing.JPanel();
         CommonToolbar = new javax.swing.JToolBar();
@@ -194,12 +198,6 @@ public class MainWindow extends JFrame {
         RedoEditButton = new javax.swing.JButton();
         ToolbarSeparator3 = new javax.swing.JToolBar.Separator();
         FindAndReplaceButton = new javax.swing.JButton();
-        CodeToolbar = new javax.swing.JToolBar();
-        GoToViewButton = new javax.swing.JButton();
-        ToolbarSeparator4 = new javax.swing.JToolBar.Separator();
-        InsertStructureButton = new javax.swing.JButton();
-        InsertEnumButton = new javax.swing.JButton();
-        InsertFunctionButton = new javax.swing.JButton();
         BuildToolbar = new javax.swing.JToolBar();
         BuildReleaseButton = new javax.swing.JButton();
         BuildDebugButton = new javax.swing.JButton();
@@ -638,6 +636,7 @@ public class MainWindow extends JFrame {
         CPPClassFileTypeButton.setMinimumSize(new java.awt.Dimension(100, 100));
         CPPClassFileTypeButton.setPreferredSize(new java.awt.Dimension(100, 100));
         CPPClassFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        CPPClassFileTypeButton.addActionListener(this::CPPClassFileTypeButtonActionPerformed);
 
         FormDesignFileTypeButton.setIcon(uiFormFileTypeIcon);
         FormDesignFileTypeButton.setText("Form design");
@@ -650,6 +649,7 @@ public class MainWindow extends JFrame {
         FormDesignFileTypeButton.setMinimumSize(new java.awt.Dimension(100, 100));
         FormDesignFileTypeButton.setPreferredSize(new java.awt.Dimension(100, 100));
         FormDesignFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        FormDesignFileTypeButton.addActionListener(this::FormDesignFileTypeButtonActionPerformed);
 
         INIConfigFileTypeButton.setIcon(iniFileTypeIcon);
         INIConfigFileTypeButton.setText("INI config");
@@ -662,8 +662,10 @@ public class MainWindow extends JFrame {
         INIConfigFileTypeButton.setMinimumSize(new java.awt.Dimension(100, 100));
         INIConfigFileTypeButton.setPreferredSize(new java.awt.Dimension(100, 100));
         INIConfigFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        INIConfigFileTypeButton.addActionListener(this::INIConfigFileTypeButtonActionPerformed);
 
-        CreateFileButton.setText("Create");
+        CreateNewFileButton.setText("Create");
+        CreateNewFileButton.addActionListener(this::CreateNewFileButtonActionPerformed);
 
         CloseNewFileWindowButton.setText("Cancel");
 
@@ -693,7 +695,7 @@ public class MainWindow extends JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(CloseNewFileWindowButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CreateFileButton)))
+                        .addComponent(CreateNewFileButton)))
                 .addContainerGap())
         );
         NewFileSetupPanelLayout.setVerticalGroup(
@@ -714,7 +716,7 @@ public class MainWindow extends JFrame {
                     .addComponent(INIConfigFileTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(NewFileSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CreateFileButton)
+                    .addComponent(CreateNewFileButton)
                     .addComponent(CloseNewFileWindowButton))
                 .addContainerGap())
         );
@@ -817,56 +819,6 @@ public class MainWindow extends JFrame {
         CommonToolbar.add(FindAndReplaceButton);
 
         MainToolbarsPanel.add(CommonToolbar);
-
-        CodeToolbar.setFloatable(true);
-        CodeToolbar.setRollover(true);
-        CodeToolbar.setMaximumSize(new java.awt.Dimension(115, 26));
-        CodeToolbar.setMinimumSize(new java.awt.Dimension(115, 26));
-        CodeToolbar.setName(""); // NOI18N
-        CodeToolbar.setPreferredSize(new java.awt.Dimension(115, 26));
-
-        GoToViewButton.setIcon(goToViewIcon);
-        GoToViewButton.setToolTipText("Go to line");
-        GoToViewButton.setFocusable(false);
-        GoToViewButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        GoToViewButton.setMaximumSize(new java.awt.Dimension(24, 24));
-        GoToViewButton.setMinimumSize(new java.awt.Dimension(24, 24));
-        GoToViewButton.setPreferredSize(new java.awt.Dimension(24, 24));
-        GoToViewButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        CodeToolbar.add(GoToViewButton);
-        CodeToolbar.add(ToolbarSeparator4);
-
-        InsertStructureButton.setIcon(structureInsertIcon);
-        InsertStructureButton.setToolTipText("Add new structure");
-        InsertStructureButton.setFocusable(false);
-        InsertStructureButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        InsertStructureButton.setMaximumSize(new java.awt.Dimension(24, 24));
-        InsertStructureButton.setMinimumSize(new java.awt.Dimension(24, 24));
-        InsertStructureButton.setPreferredSize(new java.awt.Dimension(24, 24));
-        InsertStructureButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        CodeToolbar.add(InsertStructureButton);
-
-        InsertEnumButton.setIcon(enumerationInsertIcon);
-        InsertEnumButton.setToolTipText("Add new enumeration");
-        InsertEnumButton.setFocusable(false);
-        InsertEnumButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        InsertEnumButton.setMaximumSize(new java.awt.Dimension(24, 24));
-        InsertEnumButton.setMinimumSize(new java.awt.Dimension(24, 24));
-        InsertEnumButton.setPreferredSize(new java.awt.Dimension(24, 24));
-        InsertEnumButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        CodeToolbar.add(InsertEnumButton);
-
-        InsertFunctionButton.setIcon(functionInsertIcon);
-        InsertFunctionButton.setToolTipText("Add new function");
-        InsertFunctionButton.setFocusable(false);
-        InsertFunctionButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        InsertFunctionButton.setMaximumSize(new java.awt.Dimension(24, 24));
-        InsertFunctionButton.setMinimumSize(new java.awt.Dimension(24, 24));
-        InsertFunctionButton.setPreferredSize(new java.awt.Dimension(24, 24));
-        InsertFunctionButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        CodeToolbar.add(InsertFunctionButton);
-
-        MainToolbarsPanel.add(CodeToolbar);
 
         BuildToolbar.setFloatable(true);
         BuildToolbar.setRollover(true);
@@ -1325,7 +1277,7 @@ public class MainWindow extends JFrame {
         EditorMDIFrame.setLayout(EditorMDIFrameLayout);
         EditorMDIFrameLayout.setHorizontalGroup(
             EditorMDIFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
+            .addGap(0, 819, Short.MAX_VALUE)
         );
         EditorMDIFrameLayout.setVerticalGroup(
             EditorMDIFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1594,13 +1546,17 @@ public class MainWindow extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    // Show about application dialog window function
     private void AboutHelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutHelpItemActionPerformed
+        showAboutDialogWindow();
+    }//GEN-LAST:event_AboutHelpItemActionPerformed
+
+    // Show about application dialog window function
+    private void showAboutDialogWindow() {
         AboutDialogWindow.setSize(455, 250); // Set window size
         AboutDialogWindow.setLocationRelativeTo(null); // Set window position to center of screen
         AboutDialogWindow.setVisible(true);
-    }//GEN-LAST:event_AboutHelpItemActionPerformed
-
+    }
+    
     // Close about application dialog window by OK button click function
     private void AboutDialogOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutDialogOkButtonActionPerformed
         AboutDialogWindow.dispose();
@@ -1660,32 +1616,32 @@ public class MainWindow extends JFrame {
         OutputWindowItem.setSelected(false);
     }//GEN-LAST:event_OutputFrameComponentHidden
 
-    // Switch output window to "Terminal" tab function
     private void TerminalToolsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerminalToolsItemActionPerformed
-        if(OutputFrame.isShowing()) {
-            OutputFrameTabs.setSelectedComponent(TerminalPanel);
-        } else {
-            EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
-            OutputWindowItem.setSelected(true);
-            OutputFrameTabs.setSelectedComponent(TerminalPanel);
-            OutputFrame.show();
-        }
+        showTerminalTab();
     }//GEN-LAST:event_TerminalToolsItemActionPerformed
 
-    // Same too function
     private void TerminalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerminalButtonActionPerformed
-        if(OutputFrame.isShowing()) {
-            OutputFrameTabs.setSelectedComponent(TerminalPanel);
-        } else {
-            EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
-            OutputWindowItem.setSelected(true);
-            OutputFrameTabs.setSelectedComponent(TerminalPanel);
-            OutputFrame.show();
-        }
+        showTerminalTab();
     }//GEN-LAST:event_TerminalButtonActionPerformed
 
-    // Switch output window to "Git" tab function
+    // Switch output window to "Terminal" tab function
+    private void showTerminalTab() {
+        if(OutputFrame.isShowing()) {
+            OutputFrameTabs.setSelectedComponent(TerminalPanel);
+        } else {
+            EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
+            OutputWindowItem.setSelected(true);
+            OutputFrameTabs.setSelectedComponent(TerminalPanel);
+            OutputFrame.show();
+        }
+    }
+    
     private void GitToolsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GitToolsItemActionPerformed
+        showGitTab();
+    }//GEN-LAST:event_GitToolsItemActionPerformed
+
+    // Switch output window to "Git" tab function
+    private void showGitTab() {
         if(OutputFrame.isShowing()) {
             OutputFrameTabs.setSelectedComponent(GitPanel);
         } else {
@@ -1694,18 +1650,22 @@ public class MainWindow extends JFrame {
             OutputFrameTabs.setSelectedComponent(GitPanel);
             OutputFrame.show();
         }
-    }//GEN-LAST:event_GitToolsItemActionPerformed
+    }
+
+    private void SettingsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsItemActionPerformed
+        showSettingsWindow();
+    }//GEN-LAST:event_SettingsItemActionPerformed
 
     // Show settings window function
-    private void SettingsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsItemActionPerformed
+    private void showSettingsWindow() {
         
         // Read settings params
         readSettingsParams();
         
         SettingsWindow.setLocationRelativeTo(null);
         SettingsWindow.setVisible(true);
-    }//GEN-LAST:event_SettingsItemActionPerformed
-
+    }
+    
     // Read settings window UI controls params from file function
     private void readSettingsParams() {
         WindowThemeListButton.setSelectedIndex(Integer.parseInt(settings.getParam("Appearance", "currentTheme")));
@@ -1782,63 +1742,76 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_MCORESDKPathButtonActionPerformed
 
-    // Show new file window function
     private void NewFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFileItemActionPerformed
-        NewFileWindow.setLocationRelativeTo(null);
-        NewFileWindow.setVisible(true);
+        showNewFileWindow();
     }//GEN-LAST:event_NewFileItemActionPerformed
 
-    // Same too function
     private void NewFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFileButtonActionPerformed
-        NewFileWindow.setLocationRelativeTo(null);
-        NewFileWindow.setVisible(true);
+        showNewFileWindow();
     }//GEN-LAST:event_NewFileButtonActionPerformed
 
-    // Set new file extension by selected type function
+    // Show new file window function
+    private void showNewFileWindow() {
+        NewFileWindow.setLocationRelativeTo(null);
+        NewFileWindow.setVisible(true);
+    }
+
+    // Set file name input to empty function
     private void NewFileWindowComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_NewFileWindowComponentShown
-        
-        // Compare file type ID
-        switch(fileTypeID) {
-            case 0 -> {
-                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".h");
-                break;
-            }
-            
-            case 1 -> {
-                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".c");
-                break;
-            }
-            
-            case 2 -> {
-                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".cpp");
-                break;
-            }
-            
-            case 3 -> {
-                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".uis");
-                break;
-            }
-            
-            case 4 -> {
-                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".ini");
-                break;
-            }
-            
-            default -> {
-                NewFileNameTextInput.setText(NewFileNameTextInput.getText() + ".h");
-                break;
-            }
-        }
+        NewFileNameTextInput.setText("");
     }//GEN-LAST:event_NewFileWindowComponentShown
 
     // Set .h file extension function
     private void CHeaderFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CHeaderFileTypeButtonActionPerformed
-        fileTypeID = 0;
+        newFileExtension = ".h";
     }//GEN-LAST:event_CHeaderFileTypeButtonActionPerformed
 
+    // Set .c file extension function
     private void CSourceFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CSourceFileTypeButtonActionPerformed
-        fileTypeID = 1;
+        newFileExtension = ".c";
     }//GEN-LAST:event_CSourceFileTypeButtonActionPerformed
+
+    // Set .cpp file extension function
+    private void CPPClassFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPPClassFileTypeButtonActionPerformed
+        newFileExtension = ".cpp";
+    }//GEN-LAST:event_CPPClassFileTypeButtonActionPerformed
+
+    // Set .ui file extension function
+    private void FormDesignFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FormDesignFileTypeButtonActionPerformed
+        newFileExtension = ".ui";
+    }//GEN-LAST:event_FormDesignFileTypeButtonActionPerformed
+
+    // Set .ini file extension function
+    private void INIConfigFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INIConfigFileTypeButtonActionPerformed
+        newFileExtension = ".ini";
+    }//GEN-LAST:event_INIConfigFileTypeButtonActionPerformed
+
+    // Create new file function
+    private void CreateNewFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateNewFileButtonActionPerformed
+        
+        // Set new file name
+        newFileFullName = NewFileNameTextInput.getText() + newFileExtension;
+        
+        // Close new file window
+        NewFileWindow.dispose();
+        
+        // Create new MDI window
+        JInternalFrame editorWindow = new JInternalFrame("New file", true, true, true, true);
+        CodeEditorPanel editorPanel = new CodeEditorPanel();
+        editorWindow.setSize(600, 400);
+        editorWindow.add(editorPanel);
+        editorWindow.setVisible(true);
+        
+        EditorMDIFrame.add(editorWindow);
+        
+        editorWindow.toFront();
+        
+        try {
+            editorWindow.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_CreateNewFileButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AboutDialogOkButton;
@@ -1869,13 +1842,12 @@ public class MainWindow extends JFrame {
     private javax.swing.JLabel CapsStatusLabel;
     private javax.swing.JButton ClearBuildLogButton;
     private javax.swing.JButton CloseNewFileWindowButton;
-    private javax.swing.JToolBar CodeToolbar;
     private javax.swing.JToolBar CommonToolbar;
     private javax.swing.JMenuItem ConfigBuildItem;
     private javax.swing.JButton ContentsHelpButton;
     private javax.swing.JMenuItem ContentsHelpItem;
     private javax.swing.JMenuItem CopyEditItem;
-    private javax.swing.JButton CreateFileButton;
+    private javax.swing.JButton CreateNewFileButton;
     private javax.swing.JMenuItem CutEditItem;
     private javax.swing.JMenuItem DebugBuildItem;
     private javax.swing.JMenuItem DesignerToolsItem;
@@ -1914,14 +1886,10 @@ public class MainWindow extends JFrame {
     private javax.swing.JTextField GitTokenTextInput;
     private javax.swing.JToolBar GitToolbar;
     private javax.swing.JMenuItem GitToolsItem;
-    private javax.swing.JButton GoToViewButton;
     private javax.swing.JMenuItem GoToViewItem;
     private javax.swing.JMenu HelpMenu;
     private javax.swing.JButton INIConfigFileTypeButton;
-    private javax.swing.JButton InsertEnumButton;
-    private javax.swing.JButton InsertFunctionButton;
     private javax.swing.JMenu InsertMenu;
-    private javax.swing.JButton InsertStructureButton;
     private javax.swing.JMenuItem InstallPkgBuildItem;
     private javax.swing.JButton MCORESDKPathButton;
     private javax.swing.JLabel MCORESDKPathLabel;
@@ -2000,7 +1968,6 @@ public class MainWindow extends JFrame {
     private javax.swing.JToolBar.Separator ToolbarSeparator1;
     private javax.swing.JToolBar.Separator ToolbarSeparator2;
     private javax.swing.JToolBar.Separator ToolbarSeparator3;
-    private javax.swing.JToolBar.Separator ToolbarSeparator4;
     private javax.swing.JToolBar.Separator ToolbarSeparator5;
     private javax.swing.JSeparator ToolbarSeparator6;
     private javax.swing.JToolBar.Separator ToolbarSeparator7;
