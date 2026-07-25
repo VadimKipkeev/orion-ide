@@ -19,17 +19,20 @@ import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.beans.PropertyVetoException;
 import orion.ide.core.SettingsManager;
+import orion.ide.core.TreeListModel;
 
 public class MainWindow extends JFrame {
     
     // Settings control object
     private final SettingsManager settings = new SettingsManager();
+    // Set project structure tree list model
+    public TreeListModel structureTreeListModel;
     
     // New file name string
-    private static String newFileFullName = new String();
+    public static String newFileFullName;
     
     // New file extension string
-    private static String newFileExtension = new String();
+    public static String newFileExtension;
     
     /**
      * Set FlatLaf SVG icons
@@ -117,20 +120,21 @@ public class MainWindow extends JFrame {
      */
     public MainWindow() {
         initComponents();
-        settings.init();
+        this.structureTreeListModel = new TreeListModel(StructureTreeList, "");
+        this.settings.init();
     }
     
     // Get icons folder name by current theme type function
     private static String getIconsFolder() {
-        String iconsFolder;
+        String folder;
         
         if(!ThemeManager.getCurrentThemeType()) {
-            iconsFolder = "light";
+            folder = "light";
         } else {
-            iconsFolder = "dark";
+            folder = "dark";
         }
         
-        return iconsFolder;
+        return folder;
     }
 
     /**
@@ -642,6 +646,7 @@ public class MainWindow extends JFrame {
         FormDesignFileTypeButton.setText("Form design");
         FormDesignFileTypeButton.setToolTipText("Form design file");
         FormDesignFileTypeButton.setBorder(null);
+        FormDesignFileTypeButton.setEnabled(false);
         FormDesignFileTypeButton.setFocusCycleRoot(true);
         FormDesignFileTypeButton.setFocusTraversalPolicyProvider(true);
         FormDesignFileTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -988,8 +993,6 @@ public class MainWindow extends JFrame {
 
         ProjectExplorerTabs.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Empty");
-        StructureTreeList.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         StructureTreeList.setCellRenderer(null);
         StructureTreeList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         StructureTreeList.setEditable(true);
@@ -1008,7 +1011,7 @@ public class MainWindow extends JFrame {
 
         ProjectExplorerTabs.addTab("Structure", null, ProjectStructurePanel, "Project structure");
 
-        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Empty");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Empty");
         FilesTreeList.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         FilesTreeScroller.setViewportView(FilesTreeList);
 
@@ -1752,6 +1755,9 @@ public class MainWindow extends JFrame {
 
     // Show new file window function
     private void showNewFileWindow() {
+        newFileFullName = "";
+        newFileExtension = "";
+        
         NewFileWindow.setLocationRelativeTo(null);
         NewFileWindow.setVisible(true);
     }
@@ -1788,28 +1794,41 @@ public class MainWindow extends JFrame {
 
     // Create new file function
     private void CreateNewFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateNewFileButtonActionPerformed
-        
+
         // Set new file name
         newFileFullName = NewFileNameTextInput.getText() + newFileExtension;
         
-        // Close new file window
-        NewFileWindow.dispose();
+        if(!"".equals(NewFileNameTextInput.getText()) && !"".equals(newFileExtension)) {
+            // Close new file window
+            NewFileWindow.dispose();
         
-        // Create new MDI window
-        JInternalFrame editorWindow = new JInternalFrame("New file", true, true, true, true);
-        CodeEditorPanel editorPanel = new CodeEditorPanel();
-        editorWindow.setSize(600, 400);
-        editorWindow.add(editorPanel);
-        editorWindow.setVisible(true);
+            // Create new code editor MDI window
+            if(".h".equals(newFileExtension) || ".c".equals(newFileExtension)
+                || ".cpp".equals(newFileExtension) || ".ini".equals(newFileExtension)) {
+                JInternalFrame editorWindow = new JInternalFrame(newFileFullName, true, true, true, true);
+                CodeEditorPanel editorPanel = new CodeEditorPanel();
+                
+                // Add new file to project structure tree list
+                if(structureTreeListModel.getChildCount(structureTreeListModel.getRoot()) > 0) {
+                    structureTreeListModel.addToSelected(newFileFullName, false);
+                } else {
+                    structureTreeListModel.addFileToRoot(newFileFullName);
+                }
+                
+                editorWindow.setSize(600, 400);
+                editorWindow.add(editorPanel);
+                editorWindow.setVisible(true);
         
-        EditorMDIFrame.add(editorWindow);
+                EditorMDIFrame.add(editorWindow);
         
-        editorWindow.toFront();
-        
-        try {
-            editorWindow.setSelected(true);
-        } catch (PropertyVetoException ex) {
-            System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                editorWindow.toFront();
+                
+                try {
+                    editorWindow.setSelected(true);
+                } catch (PropertyVetoException ex) {
+                    System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
+            }
         }
     }//GEN-LAST:event_CreateNewFileButtonActionPerformed
 

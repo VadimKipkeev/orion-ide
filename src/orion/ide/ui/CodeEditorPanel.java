@@ -16,10 +16,13 @@
 package orion.ide.ui;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import org.fife.ui.rsyntaxtextarea.*;
+import org.fife.ui.rtextarea.*;
 
 public class CodeEditorPanel extends javax.swing.JPanel {
     
     private final String iconsFolder = MainWindow.iconsFolder;
+    private final String fileExtension = MainWindow.newFileExtension;
 
     // Set toolbar buttons icons
     public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/go_to_view.svg", 16, 16);
@@ -29,11 +32,48 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     public final FlatSVGIcon newBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_bookmark.svg", 16, 16);
     public final FlatSVGIcon nextBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/next_bookmark.svg", 16, 16);
     public final FlatSVGIcon prevBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/prev_bookmark.svg", 16, 16);
+    
+    // Code editor view
+    public RSyntaxTextArea editorTextArea = new RSyntaxTextArea();
+    public RTextScrollPane editorTextAreaScroller = new RTextScrollPane(editorTextArea);
+    
     /**
      * Creates new form CodeEditorPanel
      */
     public CodeEditorPanel() {
         initComponents();
+        
+        switch(fileExtension) {
+            case ".h" -> {
+                editorTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
+                editorTextArea.setCodeFoldingEnabled(true);
+                break;
+            }
+            
+            case ".c" -> {
+                editorTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
+                editorTextArea.setCodeFoldingEnabled(true);
+                break;
+            }
+            
+            case ".cpp" -> {
+                editorTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
+                editorTextArea.setCodeFoldingEnabled(true);
+                break;
+            }
+            
+            case ".ini" -> {
+                editorTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_INI);
+                editorTextArea.setCodeFoldingEnabled(true);
+                break;
+            }
+            
+            default -> {
+                break;
+            }
+        }
+
+        this.add(editorTextAreaScroller);
     }
 
     /**
