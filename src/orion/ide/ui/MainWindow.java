@@ -19,6 +19,7 @@ import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.beans.PropertyVetoException;
 import orion.ide.core.SettingsManager;
+import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;
 
 public class MainWindow extends JFrame {
@@ -121,6 +122,7 @@ public class MainWindow extends JFrame {
     public MainWindow() {
         initComponents();
         this.structureTreeListModel = new TreeListModel(StructureTreeList, "");
+        StructureTreeList.setCellRenderer(new TreeListIconRenderer());
         this.settings.init();
     }
     
@@ -1810,7 +1812,7 @@ public class MainWindow extends JFrame {
                 
                 // Add new file to project structure tree list
                 if(structureTreeListModel.getChildCount(structureTreeListModel.getRoot()) > 0) {
-                    structureTreeListModel.addToSelected(newFileFullName, false);
+                    structureTreeListModel.addNodeByType(newFileFullName, false);
                 } else {
                     structureTreeListModel.addFileToRoot(newFileFullName);
                 }

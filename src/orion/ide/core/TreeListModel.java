@@ -52,7 +52,7 @@ public class TreeListModel extends DefaultTreeModel {
     }
     
     // Add new folder to root method
-    public DefaultMutableTreeNode addToRoot(String nodeName) {
+    public DefaultMutableTreeNode addFolderToRoot(String nodeName) {
         return addNode((DefaultMutableTreeNode) getRoot(), nodeName, true);
     }
     
@@ -79,7 +79,29 @@ public class TreeListModel extends DefaultTreeModel {
         return addNode(selected, nodeName, isFolder);
     }
     
-    // Add new node method
+    // Add new node by type method
+    public DefaultMutableTreeNode addNodeByType(String nodeName, boolean isFolder) {
+        TreePath path = treeList.getSelectionPath();
+        
+        if(path == null) {
+            return null;
+        }
+        
+        DefaultMutableTreeNode selected = (DefaultMutableTreeNode) path.getLastPathComponent();
+        
+        // Compare selected node to folder and insert new node to folder
+        if(isFolder(selected)) {
+            return addNode(selected, nodeName, isFolder);
+        }
+        
+        // New file insert to parent folder
+        DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) selected.getParent();
+        
+        // Parent node always is folder
+        return addNode(parentNode, nodeName, isFolder);
+    }
+    
+    // Add new node function
     private DefaultMutableTreeNode addNode(DefaultMutableTreeNode parentNode, String nodeName, boolean isFolder) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(new NodeData(nodeName, isFolder));
         insertNodeInto(node, parentNode, parentNode.getChildCount());
@@ -126,6 +148,18 @@ public class TreeListModel extends DefaultTreeModel {
         }
         
         return arrayList;
+    }
+    
+    // Get selercted node method
+    public DefaultMutableTreeNode getSelectedNode() {
+        TreePath path = treeList.getSelectionPath();
+        
+        if(path == null) {
+            return null;
+        }
+        
+        DefaultMutableTreeNode selected = (DefaultMutableTreeNode) path.getLastPathComponent();
+        return selected;
     }
     
     // Expand folder function
