@@ -18,6 +18,7 @@ package orion.ide.ui;
 import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.beans.PropertyVetoException;
+import javax.swing.tree.DefaultMutableTreeNode;
 import orion.ide.core.SettingsManager;
 import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;
@@ -26,6 +27,10 @@ public class MainWindow extends JFrame {
     
     // Settings control object
     private final SettingsManager settings = new SettingsManager();
+    
+    // Editor MDI window
+    private final JInternalFrame editorWindow = new JInternalFrame(newFileFullName, true, true, true, true);
+    
     // Set project structure tree list model
     public TreeListModel structureTreeListModel;
     
@@ -34,6 +39,9 @@ public class MainWindow extends JFrame {
     
     // New file extension string
     public static String newFileExtension;
+    
+    // Project file path string
+    public static String projectFilePath;
     
     /**
      * Set FlatLaf SVG icons
@@ -583,11 +591,9 @@ public class MainWindow extends JFrame {
         );
 
         NewFileWindow.setTitle("Create new file");
-        NewFileWindow.setMaximumSize(new java.awt.Dimension(364, 400));
         NewFileWindow.setMinimumSize(new java.awt.Dimension(364, 400));
         NewFileWindow.setModal(true);
         NewFileWindow.setName("NewFileWindow"); // NOI18N
-        NewFileWindow.setPreferredSize(new java.awt.Dimension(364, 400));
         NewFileWindow.setResizable(false);
         NewFileWindow.setSize(new java.awt.Dimension(364, 400));
         NewFileWindow.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -1807,14 +1813,18 @@ public class MainWindow extends JFrame {
             // Create new code editor MDI window
             if(".h".equals(newFileExtension) || ".c".equals(newFileExtension)
                 || ".cpp".equals(newFileExtension) || ".ini".equals(newFileExtension)) {
-                JInternalFrame editorWindow = new JInternalFrame(newFileFullName, true, true, true, true);
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
                 
                 // Add new file to project structure tree list
-                if(structureTreeListModel.getChildCount(structureTreeListModel.getRoot()) > 0) {
-                    structureTreeListModel.addNodeByType(newFileFullName, false);
-                } else {
+                if(projectFilePath == null && structureTreeListModel.isLeaf(structureTreeListModel.getRoot())) {
                     structureTreeListModel.addFileToRoot(newFileFullName);
+                } else {
+                    
+                    if(structureTreeListModel.getSelectedNode() == null) {
+                        structureTreeListModel.addFileToRoot(newFileFullName);
+                    } else {
+                        structureTreeListModel.addNodeByType(newFileFullName, false);
+                    }
                 }
                 
                 editorWindow.setSize(600, 400);

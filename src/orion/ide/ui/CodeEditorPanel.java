@@ -16,6 +16,9 @@
 package orion.ide.ui;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import javax.swing.JFileChooser;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
 
@@ -23,7 +26,9 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     
     private final String iconsFolder = MainWindow.iconsFolder;
     private final String fileExtension = MainWindow.newFileExtension;
-
+    private boolean isFileSaved;
+    private boolean isFileModfield;
+    
     // Set toolbar buttons icons
     public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/go_to_view.svg", 16, 16);
     public final FlatSVGIcon structureInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_structure.svg", 16, 16);
@@ -42,6 +47,9 @@ public class CodeEditorPanel extends javax.swing.JPanel {
      */
     public CodeEditorPanel() {
         initComponents();
+        
+        isFileSaved = false;
+        isFileModfield = false;
         
         switch(fileExtension) {
             case ".h" -> {
@@ -74,6 +82,40 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         }
 
         this.add(editorTextAreaScroller);
+        editorTextArea.getDocument().addDocumentListener(new DocumentListener() {
+            
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                onFileModfield();
+            }
+            
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                onFileModfield();
+            }
+            
+            private boolean onFileModfield() {
+                isFileModfield = true;
+                return isFileModfield;
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
+    }
+    
+    // Save current file function
+    private void saveFile() {
+        if(!isFileSaved) {
+            
+            // Show save file window
+            JFileChooser selectFilePathWindow = new javax.swing.JFileChooser();
+            selectFilePathWindow.setDialogTitle("Save file");
+            selectFilePathWindow.setDialogType(JFileChooser.SAVE_DIALOG);
+            selectFilePathWindow.showDialog(null, "Save");
+        }
     }
 
     /**
