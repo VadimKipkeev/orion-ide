@@ -18,7 +18,12 @@ package orion.ide.ui;
 import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.beans.PropertyVetoException;
-import javax.swing.tree.DefaultMutableTreeNode;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import orion.ide.core.SettingsManager;
 import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;
@@ -28,11 +33,8 @@ public class MainWindow extends JFrame {
     // Settings control object
     private final SettingsManager settings = new SettingsManager();
     
-    // Editor MDI window
-    private final JInternalFrame editorWindow = new JInternalFrame(newFileFullName, true, true, true, true);
-    
     // Set project structure tree list model
-    public TreeListModel structureTreeListModel;
+    public final TreeListModel structureTreeListModel;
     
     // New file name string
     public static String newFileFullName;
@@ -776,6 +778,7 @@ public class MainWindow extends JFrame {
         OpenFileButton.setMinimumSize(new java.awt.Dimension(24, 24));
         OpenFileButton.setPreferredSize(new java.awt.Dimension(24, 24));
         OpenFileButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        OpenFileButton.addActionListener(this::OpenFileButtonActionPerformed);
         CommonToolbar.add(OpenFileButton);
 
         SaveFileButton.setIcon(saveFileIcon);
@@ -786,6 +789,7 @@ public class MainWindow extends JFrame {
         SaveFileButton.setMinimumSize(new java.awt.Dimension(24, 24));
         SaveFileButton.setPreferredSize(new java.awt.Dimension(24, 24));
         SaveFileButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        SaveFileButton.addActionListener(this::SaveFileButtonActionPerformed);
         CommonToolbar.add(SaveFileButton);
         CommonToolbar.add(ToolbarSeparator1);
 
@@ -1312,16 +1316,19 @@ public class MainWindow extends JFrame {
         OpenFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         OpenFileItem.setIcon(openFileIcon);
         OpenFileItem.setText("Open...");
+        OpenFileItem.addActionListener(this::OpenFileItemActionPerformed);
         FileMenu.add(OpenFileItem);
 
         SaveFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         SaveFileItem.setIcon(saveFileIcon);
         SaveFileItem.setText("Save");
+        SaveFileItem.addActionListener(this::SaveFileItemActionPerformed);
         FileMenu.add(SaveFileItem);
 
         SaveAsFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         SaveAsFileItem.setIcon(saveAsIcon);
         SaveAsFileItem.setText("Save as...");
+        SaveAsFileItem.addActionListener(this::SaveAsFileItemActionPerformed);
         FileMenu.add(SaveAsFileItem);
         FileMenu.add(MenuSeparator1);
 
@@ -1813,23 +1820,16 @@ public class MainWindow extends JFrame {
             // Create new code editor MDI window
             if(".h".equals(newFileExtension) || ".c".equals(newFileExtension)
                 || ".cpp".equals(newFileExtension) || ".ini".equals(newFileExtension)) {
-                CodeEditorPanel editorPanel = new CodeEditorPanel();
                 
-                // Add new file to project structure tree list
-                if(projectFilePath == null && structureTreeListModel.isLeaf(structureTreeListModel.getRoot())) {
-                    structureTreeListModel.addFileToRoot(newFileFullName);
-                } else {
-                    
-                    if(structureTreeListModel.getSelectedNode() == null) {
-                        structureTreeListModel.addFileToRoot(newFileFullName);
-                    } else {
-                        structureTreeListModel.addNodeByType(newFileFullName, false);
-                    }
-                }
+                // Create new editor MDI window
+                JInternalFrame editorWindow = new JInternalFrame(newFileFullName, true, true, true, true);
+                
+                CodeEditorPanel editorPanel = new CodeEditorPanel();
                 
                 editorWindow.setSize(600, 400);
                 editorWindow.add(editorPanel);
                 editorWindow.setVisible(true);
+                editorWindow.putClientProperty("file", null);
         
                 EditorMDIFrame.add(editorWindow);
         
@@ -1844,6 +1844,183 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_CreateNewFileButtonActionPerformed
 
+    // Save file by click main menu item function
+    private void SaveFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileItemActionPerformed
+        try {
+            saveTextFile();
+        } catch (IOException ex) {
+            System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_SaveFileItemActionPerformed
+
+    // Save file by click toolbar button function
+    private void SaveFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileButtonActionPerformed
+        try {
+            saveTextFile();
+        } catch (IOException ex) {
+            System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_SaveFileButtonActionPerformed
+
+    // Save as file by click main menu item function
+    private void SaveAsFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAsFileItemActionPerformed
+        
+        // Get current MDI window in focus
+        JInternalFrame currentActiveWindow = EditorMDIFrame.getSelectedFrame();
+        
+        try {
+            saveAsTextFile(currentActiveWindow);
+        } catch (IOException ex) {
+            System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_SaveAsFileItemActionPerformed
+
+    // Open file by click main menu item function
+    private void OpenFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenFileItemActionPerformed
+        try {
+            openTextFile();
+        } catch (IOException ex) {
+            System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_OpenFileItemActionPerformed
+
+    // Open file by click toolbar button function
+    private void OpenFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenFileButtonActionPerformed
+        try {
+            openTextFile();
+        } catch (IOException ex) {
+            System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_OpenFileButtonActionPerformed
+    
+    // Save current source code file function
+    private boolean saveTextFile() throws IOException {
+        
+        // Get current MDI window in focus
+        JInternalFrame currentActiveWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentActiveWindow == null)
+            return false;
+        
+        // Get file path from current MDI window property
+        File currentFile = (File) currentActiveWindow.getClientProperty("file");
+        
+        // Check file to saved satatus, new file call save as function
+        if(currentFile == null) {
+            saveAsTextFile(currentActiveWindow);
+            return true;
+        }
+        
+        // Get code editor panel component
+        CodeEditorPanel editorPanel = (CodeEditorPanel) currentActiveWindow.getContentPane().getComponent(0);
+        
+        // Get source code text from code editor panel component
+        String sourceText = editorPanel.getSourceText();
+        
+        // Save source code text to file
+        try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
+            fileWriter.write(sourceText);
+            currentActiveWindow.putClientProperty("file", currentFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        return true;
+    }
+    
+    // Save as for source code file function
+    private boolean saveAsTextFile(JInternalFrame window) throws IOException {
+        
+        // Get code editor panel component
+        CodeEditorPanel editorPanel = (CodeEditorPanel) window.getContentPane().getComponent(0);
+        
+        // Get source code text from code editor panel component
+        String sourceText = editorPanel.getSourceText();
+        
+        // Set current file name
+        String fileName = window.getTitle();
+        
+        // Create save as dialog window
+        JFileChooser fileChooserWindow = new JFileChooser();
+        fileChooserWindow.setDialogTitle("Save as");
+        fileChooserWindow.setSelectedFile(new File(fileName));
+        fileChooserWindow.setApproveButtonText("Save");
+        
+        // Save selected file path from save as dialog window by "Save" button click
+        if(fileChooserWindow.showSaveDialog(window) == JFileChooser.APPROVE_OPTION) {
+            File currentFile = fileChooserWindow.getSelectedFile();
+            
+            // Save source code text to file
+            try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
+                fileWriter.write(sourceText);
+                window.putClientProperty("file", currentFile);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            
+            // Add new file to project structure tree list
+            if(projectFilePath == null && structureTreeListModel.isLeaf(structureTreeListModel.getRoot())) {
+                structureTreeListModel.addFileToRoot(currentFile.getName());
+            } else {
+                    
+                if(structureTreeListModel.getSelectedNode() == null) {
+                    structureTreeListModel.addFileToRoot(currentFile.getName());
+                } else {
+                        structureTreeListModel.addNodeByType(currentFile.getName(), false);
+                }
+            }
+            
+            // Update current MDI window title
+            window.setTitle(currentFile.getName());
+        } else {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    // Open text file function
+    private boolean openTextFile() throws IOException {
+        
+        // Create open file dialog window
+        JFileChooser fileChooserWindow = new JFileChooser();
+        fileChooserWindow.setDialogTitle("Open");
+        fileChooserWindow.setApproveButtonText("Open");
+        
+        // Open selected file from open file dialog window by "Open" button click
+        if(fileChooserWindow.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File currentFile = fileChooserWindow.getSelectedFile();
+            
+                // Create new editor MDI window
+                JInternalFrame editorWindow = new JInternalFrame(currentFile.getName(), true, true, true, true);
+                
+                CodeEditorPanel editorPanel = new CodeEditorPanel();
+                
+                editorWindow.setSize(600, 400);
+                editorWindow.add(editorPanel);
+                editorWindow.setVisible(true);
+                editorWindow.putClientProperty("file", currentFile);
+                
+                String fileSourceText = Files.readString(Path.of(currentFile.getAbsolutePath()));
+                editorPanel.editorTextArea.setText(fileSourceText);
+        
+                EditorMDIFrame.add(editorWindow);
+        
+                editorWindow.toFront();
+                
+                try {
+                    editorWindow.setSelected(true);
+                } catch (PropertyVetoException ex) {
+                    System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
+            
+        } else {
+            return false;
+        }
+        
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AboutDialogOkButton;
     private javax.swing.JDialog AboutDialogWindow;
