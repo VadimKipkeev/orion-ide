@@ -46,7 +46,7 @@ public class SettingsManager {
      * -------------------------------------------------------------------------
      */
     
-    // Init class method
+    // Init class : method
     public void init() {
         
         // Check settings file to exists

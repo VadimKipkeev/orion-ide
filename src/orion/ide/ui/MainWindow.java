@@ -1,9 +1,9 @@
 /*
- * -----------------------------------------------------------------------------
+ * =============================================================================
  * Orion IDE Project
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
- * -----------------------------------------------------------------------------
+ * =============================================================================
  */
 
 /*
@@ -15,6 +15,11 @@
  */
 package orion.ide.ui;
 
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION BEGIN
+ * -----------------------------------------------------------------------------
+ */
 import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.beans.PropertyVetoException;
@@ -27,9 +32,19 @@ import java.nio.file.Path;
 import orion.ide.core.SettingsManager;
 import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION END
+ * -----------------------------------------------------------------------------
+ */
 
 public class MainWindow extends JFrame {
     
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION BEGIN
+     * -------------------------------------------------------------------------
+     */
     // Settings control object
     private final SettingsManager settings = new SettingsManager();
     
@@ -44,12 +59,9 @@ public class MainWindow extends JFrame {
     
     // Project file path string
     public static String projectFilePath;
-    
-    /**
-     * Set FlatLaf SVG icons
-     */
+
+    // Set FlatLaf SVG icons
     public static String iconsFolder = getIconsFolder(); // Icons folder by current theme type
-    
     
     // File menu icons
     public final FlatSVGIcon newFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_file.svg", 16, 16);
@@ -126,9 +138,13 @@ public class MainWindow extends JFrame {
     public final FlatSVGIcon cppClassFileTypeIcon = new FlatSVGIcon("resources/icons/commons/cpp_class_file.svg", 32, 32);
     public final FlatSVGIcon uiFormFileTypeIcon = new FlatSVGIcon("resources/icons/commons/form_design_file.svg", 32, 32);
     public final FlatSVGIcon iniFileTypeIcon = new FlatSVGIcon("resources/icons/commons/ini_file.svg", 32, 32);
-    /**
-     * Creates new form MainWindow
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION END
+     * -------------------------------------------------------------------------
      */
+    
+    // Constructor
     public MainWindow() {
         initComponents();
         this.structureTreeListModel = new TreeListModel(StructureTreeList, "");

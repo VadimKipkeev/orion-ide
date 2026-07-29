@@ -1,9 +1,9 @@
 /*
- * -----------------------------------------------------------------------------
+ * =============================================================================
  * Orion IDE Project
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
- * -----------------------------------------------------------------------------
+ * =============================================================================
  */
 
 /*
@@ -15,13 +15,27 @@
  */
 package orion.ide.ui;
 
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION BEGIN
+ * -----------------------------------------------------------------------------
+ */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import java.io.File;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION END
+ * -----------------------------------------------------------------------------
+ */
 
 public class CodeEditorPanel extends javax.swing.JPanel {
     
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION BEGIN
+     * -------------------------------------------------------------------------
+     */
     private final String iconsFolder = MainWindow.iconsFolder;
     private static String fileExtension = MainWindow.newFileExtension;
     
@@ -39,10 +53,13 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     // Code editor view
     public RSyntaxTextArea editorTextArea = new RSyntaxTextArea();
     public RTextScrollPane editorTextAreaScroller = new RTextScrollPane(editorTextArea);
-    
-    /**
-     * Creates new form CodeEditorPanel
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION END
+     * -------------------------------------------------------------------------
      */
+
+    // Constructor
     public CodeEditorPanel() {
         initComponents();
         
@@ -81,7 +98,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         this.add(editorTextAreaScroller);
     }
     
-    // Get source code text method
+    // Get source code text : method
     public String getSourceText() {
         String sourceText = editorTextArea.getText();
         return sourceText;

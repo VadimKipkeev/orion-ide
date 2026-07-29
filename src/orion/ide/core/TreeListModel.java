@@ -1,9 +1,9 @@
 /*
- * -----------------------------------------------------------------------------
+ * =============================================================================
  * Orion IDE Project
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
- * -----------------------------------------------------------------------------
+ * =============================================================================
  */
 
 /*
@@ -15,13 +15,34 @@
  */
 package orion.ide.core;
 
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION BEGIN
+ * -----------------------------------------------------------------------------
+ */
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.tree.*;
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION END
+ * -----------------------------------------------------------------------------
+ */
 
 public class TreeListModel extends DefaultTreeModel {
+    
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION BEGIN
+     * -------------------------------------------------------------------------
+     */
     private final JTree treeList;
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION END
+     * -------------------------------------------------------------------------
+     */
     
     /*
      ***************************************************************************
@@ -29,8 +50,19 @@ public class TreeListModel extends DefaultTreeModel {
      ***************************************************************************
      */
     public static class NodeData {
+        
+        /*
+         * ---------------------------------------------------------------------
+         * INTERNAL CLASS FIELDS SECTION BEGIN
+         * ---------------------------------------------------------------------
+         */
         public String nodeName;
         public boolean isFolder;
+        /*
+         * ---------------------------------------------------------------------
+         * INTERNAL CLASS FIELDS SECTION END
+         * ---------------------------------------------------------------------
+         */
         
         // Internal class constructor
         public NodeData(String nodeName, boolean isFolder) {
@@ -51,17 +83,17 @@ public class TreeListModel extends DefaultTreeModel {
         treeList.setModel(this);
     }
     
-    // Add new folder to root method
+    // Add new folder to root : method
     public DefaultMutableTreeNode addFolderToRoot(String nodeName) {
         return addNode((DefaultMutableTreeNode) getRoot(), nodeName, true);
     }
     
-    // Add new file to root method
+    // Add new file to root : method
     public DefaultMutableTreeNode addFileToRoot(String nodeName) {
         return addNode((DefaultMutableTreeNode) getRoot(), nodeName, false);
     }
     
-    // Add new node to selected folder method
+    // Add new node to selected folder : method
     public DefaultMutableTreeNode addToSelected(String nodeName, boolean isFolder) {
         TreePath path = treeList.getSelectionPath();
         
@@ -79,7 +111,7 @@ public class TreeListModel extends DefaultTreeModel {
         return addNode(selected, nodeName, isFolder);
     }
     
-    // Add new node by type method
+    // Add new node by type : method
     public DefaultMutableTreeNode addNodeByType(String nodeName, boolean isFolder) {
         TreePath path = treeList.getSelectionPath();
         
@@ -101,7 +133,7 @@ public class TreeListModel extends DefaultTreeModel {
         return addNode(parentNode, nodeName, isFolder);
     }
     
-    // Add new node function
+    // Add new node : function
     private DefaultMutableTreeNode addNode(DefaultMutableTreeNode parentNode, String nodeName, boolean isFolder) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(new NodeData(nodeName, isFolder));
         insertNodeInto(node, parentNode, parentNode.getChildCount());
@@ -109,37 +141,37 @@ public class TreeListModel extends DefaultTreeModel {
         return node;
     }
     
-    // Check node type to folder method
+    // Check node type to folder : method
     public boolean isFolder(DefaultMutableTreeNode node) {
         NodeData data = (NodeData) node.getUserObject();
         return data.isFolder;
     }
     
-    // Check node type to file method
+    // Check node type to file : method
     public boolean isFile(DefaultMutableTreeNode node) {
         NodeData data = (NodeData) node.getUserObject();
         return !data.isFolder;
     }
     
-    // Rename selected node method
+    // Rename selected node : method
     public void renameNode(DefaultMutableTreeNode node, String nodeName) {
         NodeData data = (NodeData) node.getUserObject();
         data.nodeName = nodeName;
         nodeChanged(node);
     }
     
-    // Delete selected node method
+    // Delete selected node : method
     public void deleteNode(DefaultMutableTreeNode node) {
         removeNodeFromParent(node);
     }
     
-    // Get child elements count method
+    // Get child elements count : method
     public int getChildCount(DefaultMutableTreeNode parentNode) {
         int nodeCount = parentNode.getChildCount();
         return nodeCount;
     }
     
-    // Get child list method
+    // Get child list : method
     public List<DefaultMutableTreeNode> getChildNodes(DefaultMutableTreeNode parentNode) {
         List<DefaultMutableTreeNode> arrayList = new ArrayList<>();
         
@@ -150,7 +182,7 @@ public class TreeListModel extends DefaultTreeModel {
         return arrayList;
     }
     
-    // Get selercted node method
+    // Get selercted node : method
     public DefaultMutableTreeNode getSelectedNode() {
         TreePath path = treeList.getSelectionPath();
         
@@ -162,7 +194,7 @@ public class TreeListModel extends DefaultTreeModel {
         return selected;
     }
     
-    // Expand folder function
+    // Expand folder : function
     private void expandList(DefaultMutableTreeNode node) {
         TreePath path = new TreePath(node.getPath());
         treeList.expandPath(path);

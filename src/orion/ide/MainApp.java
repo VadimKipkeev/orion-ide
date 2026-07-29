@@ -46,7 +46,7 @@ public class MainApp {
      * -------------------------------------------------------------------------
      */
 
-    // Entry point method in application
+    // Entry point in application : method
     public static void main(String[] args) {
         
         // Init FlatLaf theme at application start

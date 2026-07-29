@@ -46,7 +46,7 @@ public class ThemeManager {
      * -------------------------------------------------------------------------
      */
     
-    // FlatLaf theme init method
+    // FlatLaf theme init : method
     public final boolean init(int themeID) {
         
         // Set FlatLaf theme by ID
