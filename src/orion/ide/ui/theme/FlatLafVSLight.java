@@ -1,9 +1,9 @@
 /*
- * -----------------------------------------------------------------------------
+ * =============================================================================
  * Orion IDE Project
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
- * -----------------------------------------------------------------------------
+ * =============================================================================
  */
 
 /*
@@ -15,15 +15,35 @@
  */
 package orion.ide.ui.theme;
 
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION BEGIN
+ * -----------------------------------------------------------------------------
+ */
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION END
+ * -----------------------------------------------------------------------------
+ */
 
 public class FlatLafVSLight extends FlatLightLaf {
     
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION BEGIN
+     * -------------------------------------------------------------------------
+     */
     // Set FlatLaf theme name
     public static final String THEME_NAME = "FlatLafVSLight"; // Constant value
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION END
+     * -------------------------------------------------------------------------
+     */
     
-    // Register FlatLaf theme method
+    // Register FlatLaf theme : method
     public static boolean setup() {
         try {
             FlatLaf.registerCustomDefaultsSource("resources/themes");
@@ -40,7 +60,7 @@ public class FlatLafVSLight extends FlatLightLaf {
         }
     }
     
-    // Get theme name method
+    // Get theme name : method
     @Override
     public String getName() {
         return THEME_NAME;

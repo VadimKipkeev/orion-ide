@@ -1,9 +1,9 @@
 /*
- * -----------------------------------------------------------------------------
+ * =============================================================================
  * Orion IDE Project
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
- * -----------------------------------------------------------------------------
+ * =============================================================================
  */
 
 /*
@@ -15,15 +15,36 @@
  */
 package orion.ide.core;
 
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION BEGIN
+ * -----------------------------------------------------------------------------
+ */
 import java.io.File;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.ini4j.Wini;
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION END
+ * -----------------------------------------------------------------------------
+ */
 
 public class SettingsManager {
+    
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION BEGIN
+     * -------------------------------------------------------------------------
+     */
     private static final String CFG_FILE_NAME = "settings.ini"; // File name constant
-    private static Wini ini; // INI control object
+    private static Wini iniParser; // INI parser object
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION END
+     * -------------------------------------------------------------------------
+     */
     
     // Init class method
     public void init() {
@@ -39,36 +60,36 @@ public class SettingsManager {
                 settingsFile.createNewFile(); // Create empty settings file
                 writeSettingsByTemplate(); // Write template data to new settings file
                 
-                ini = new Wini(settingsFile); // Create INI control object
+                iniParser = new Wini(settingsFile); // Create INI parser object
             } catch (IOException ex) {
                 System.getLogger(SettingsManager.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         } else {
             try {
-                ini = new Wini(settingsFile); // Create INI control object
+                iniParser = new Wini(settingsFile); // Create INI parser object
             } catch (IOException ex) {
                 System.getLogger(SettingsManager.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         }
     }
     
-    // Read param from settings file method
+    // Read param from settings file : method
     public String getParam(String paramsGroup, String paramName) {
-        String result = ini.get(paramsGroup, paramName);
+        String result = iniParser.get(paramsGroup, paramName);
         return result;
     }
     
-    // Store param to settings file method
+    // Store param to settings file : method
     public void storeParam(String paramsGroup, String param, String value) {
         try {
-            ini.put(paramsGroup, param, value);
-            ini.store();
+            iniParser.put(paramsGroup, param, value);
+            iniParser.store();
         } catch (IOException ex) {
             System.getLogger(SettingsManager.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
     
-    // Write new settings file by template function
+    // Write new settings file by template : function
     private static void writeSettingsByTemplate() {
         
         /* Settings file template:

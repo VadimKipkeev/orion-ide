@@ -1,9 +1,9 @@
 /*
- * -----------------------------------------------------------------------------
+ * =============================================================================
  * Orion IDE Project
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
- * -----------------------------------------------------------------------------
+ * =============================================================================
  */
 
 /*
@@ -15,22 +15,43 @@
  */
 package orion.ide;
 
+/* 
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION BEGIN
+ * -----------------------------------------------------------------------------
+ */
 import orion.ide.ui.MainWindow;
 import orion.ide.ui.PreloaderWindow;
 import orion.ide.ui.ThemeManager;
 import orion.ide.core.SettingsManager;
 import javax.swing.*;
+/*
+ *------------------------------------------------------------------------------
+ * IMPORTS SECTION END
+ * -----------------------------------------------------------------------------
+ */
 
 public class MainApp {
     
-    private static final SettingsManager settings = new SettingsManager();
-    
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION BEGIN
+     * -------------------------------------------------------------------------
+     */
+    // Create settings manager object
+    private static final SettingsManager settingsManager = new SettingsManager();
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION END
+     * -------------------------------------------------------------------------
+     */
+
     // Entry point method in application
     public static void main(String[] args) {
         
         // Init FlatLaf theme at application start
-        settings.init();
-        int currentThemeID = Integer.parseInt(settings.getParam("Appearance", "currentTheme"));
+        settingsManager.init();
+        int currentThemeID = Integer.parseInt(settingsManager.getParam("Appearance", "currentTheme"));
         
         ThemeManager uiThemeManager = new ThemeManager();
         uiThemeManager.init(currentThemeID);
@@ -39,8 +60,8 @@ public class MainApp {
         javax.swing.SwingUtilities.invokeLater(() -> {
             
             // First show preloader window
-            PreloaderWindow preloader = new PreloaderWindow();
-            preloader.show(true);
+            PreloaderWindow preloaderWindow = new PreloaderWindow();
+            preloaderWindow.show(true);
             
             // Set preloader timer to 5 seconds
             final int delay = 5000;
@@ -48,8 +69,8 @@ public class MainApp {
             timer = new Timer(delay, e -> {
                 
                 // Close preloader window
-                preloader.show(false);
-                preloader.close();
+                preloaderWindow.show(false);
+                preloaderWindow.close();
                 
                 // Show application main window
                 MainWindow mainWindow = new MainWindow();

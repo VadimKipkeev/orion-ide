@@ -1,9 +1,9 @@
 /*
- * -----------------------------------------------------------------------------
+ * =============================================================================
  * Orion IDE Project
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
- * -----------------------------------------------------------------------------
+ * =============================================================================
  */
 
 /*
@@ -14,15 +14,35 @@
  *******************************************************************************
  */
 package orion.ide.ui;
-
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION BEGIN
+ * -----------------------------------------------------------------------------
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION END
+ * -----------------------------------------------------------------------------
+ */
 
 public class PreloaderWindow {
     
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION BEGIN
+     * -------------------------------------------------------------------------
+     */
+    
     // Preloader window
-    private final JWindow window = new JWindow();
+    private final JWindow preloaderWindow = new JWindow();
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION END
+     * -------------------------------------------------------------------------
+     */
     
     // Constructor
     public PreloaderWindow() {
@@ -31,7 +51,7 @@ public class PreloaderWindow {
         final URL imageURL;
         imageURL = getClass().getResource("/resources/images/preloader.png");
         
-        // Check preloader background image to exist
+        // Check preloader background image to exists
         if(imageURL == null) {
             System.err.println("Preloader image is not exists!");
         }
@@ -59,25 +79,25 @@ public class PreloaderWindow {
             }
         };
         
-        window.getContentPane().add(label, BorderLayout.CENTER);
+        preloaderWindow.getContentPane().add(label, BorderLayout.CENTER);
         
         // Set preloader window size by background image dimensions
-        window.pack();
+        preloaderWindow.pack();
         
         // Set preloader window location by center of screen
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenX = (screenSize.width - window.getWidth()) / 2;
-        int screenY = (screenSize.height - window.getHeight()) / 2;
-        window.setLocation(screenX, screenY);
+        int screenX = (screenSize.width - preloaderWindow.getWidth()) / 2;
+        int screenY = (screenSize.height - preloaderWindow.getHeight()) / 2;
+        preloaderWindow.setLocation(screenX, screenY);
     }
     
-    // Show preloader window method
+    // Show preloader window : method
     public void show(boolean flag) {
-        window.setVisible(flag);
+        preloaderWindow.setVisible(flag);
     }
     
-    // Close preloader window method
+    // Close preloader window : method
     public void close() {
-        window.dispose();
+        preloaderWindow.dispose();
     }
 }

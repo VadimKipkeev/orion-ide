@@ -1,28 +1,41 @@
 /*
- * -----------------------------------------------------------------------------
+ * =============================================================================
  * Orion IDE Project
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
- * -----------------------------------------------------------------------------
+ * =============================================================================
  */
 
 /*
  *******************************************************************************
  * Tree list icon renderer class
  *******************************************************************************
- * Set SVG icons to elements by node type
+ * Set SVG icons to elements tree list by node type
  *******************************************************************************
  */
 package orion.ide.core;
 
+/* -----------------------------------------------------------------------------
+ * IMPORTS SECTION BEGIN
+ * -----------------------------------------------------------------------------
+ */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Component;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION END
+ * -----------------------------------------------------------------------------
+ */
 
 public class TreeListIconRenderer extends DefaultTreeCellRenderer {
     
+    /* -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION BEGIN
+     * -------------------------------------------------------------------------
+     */
     // Set node types icons
     public final FlatSVGIcon folderTreeIcon;
     public final FlatSVGIcon hFileTreeIcon;
@@ -31,6 +44,11 @@ public class TreeListIconRenderer extends DefaultTreeCellRenderer {
     public final FlatSVGIcon imageFileTreeIcon;
     public final FlatSVGIcon uiFileTreeIcon;
     public final FlatSVGIcon iniFileTreeIcon;
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION END
+     * -------------------------------------------------------------------------
+     */
     
     // Constructor
     public TreeListIconRenderer() {
@@ -43,6 +61,7 @@ public class TreeListIconRenderer extends DefaultTreeCellRenderer {
         iniFileTreeIcon = new FlatSVGIcon("resources/icons/commons/ini_file.svg", 16, 16);
     }
     
+    // Renderer tree list cell : method
     @Override
     public Component getTreeCellRendererComponent(JTree treeList, Object value, boolean sel,
                                                   boolean expanded, boolean leaf, int row, boolean hasFocus) {
@@ -75,6 +94,6 @@ public class TreeListIconRenderer extends DefaultTreeCellRenderer {
             }
         }
         
-        return this;
+        return this; // => Component
     }
 }

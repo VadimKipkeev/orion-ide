@@ -1,9 +1,9 @@
 /*
- * -----------------------------------------------------------------------------
+ * =============================================================================
  * Orion IDE Project
  * -----------------------------------------------------------------------------
  * (c) 2026 CrayZor. All rights reserved
- * -----------------------------------------------------------------------------
+ * =============================================================================
  */
 
 /*
@@ -15,16 +15,36 @@
  */
 package orion.ide.ui;
 
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION BEGIN
+ * -----------------------------------------------------------------------------
+ */
 import javax.swing.UIManager;
 import javax.swing.LookAndFeel;
 import com.formdev.flatlaf.FlatLaf;
 import orion.ide.ui.theme.FlatLafVSLight;
 import orion.ide.ui.theme.FlatLafVSDark;
+/*
+ * -----------------------------------------------------------------------------
+ * IMPORTS SECTION END
+ * -----------------------------------------------------------------------------
+ */
 
 public class ThemeManager {
     
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION BEGIN
+     * -------------------------------------------------------------------------
+     */
     // Current theme name
     public static String currentThemeName;
+    /*
+     * -------------------------------------------------------------------------
+     * CLASS FIELDS SECTION END
+     * -------------------------------------------------------------------------
+     */
     
     // FlatLaf theme init method
     public final boolean init(int themeID) {
@@ -48,7 +68,7 @@ public class ThemeManager {
         }
     }
     
-    // Get FlatLaf theme name method
+    // Get FlatLaf theme name : method
     public static String getCurrentThemeName() {
         final String themeName;
         final LookAndFeel currentTheme = UIManager.getLookAndFeel();
@@ -62,7 +82,7 @@ public class ThemeManager {
         }
     }
     
-    // Get FlatLaf theme type method
+    // Get FlatLaf theme type : method
     public static boolean getCurrentThemeType() {
         boolean isDarkTheme = FlatLaf.isLafDark();
         
