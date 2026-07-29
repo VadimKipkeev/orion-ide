@@ -54,7 +54,7 @@ public class MainWindow extends JFrame {
     // New file name string
     public static String newFileFullName;
     
-    // New file extension string
+    // New file extension
     public static String newFileExtension;
     
     // Project file path string
@@ -152,7 +152,7 @@ public class MainWindow extends JFrame {
         this.settings.init();
     }
     
-    // Get icons folder name by current theme type function
+    // Get icons folder name by current theme type : function
     private static String getIconsFolder() {
         String folder;
         
@@ -699,6 +699,7 @@ public class MainWindow extends JFrame {
         CreateNewFileButton.addActionListener(this::CreateNewFileButtonActionPerformed);
 
         CloseNewFileWindowButton.setText("Cancel");
+        CloseNewFileWindowButton.addActionListener(this::CloseNewFileWindowButtonActionPerformed);
 
         javax.swing.GroupLayout NewFileSetupPanelLayout = new javax.swing.GroupLayout(NewFileSetupPanel);
         NewFileSetupPanel.setLayout(NewFileSetupPanelLayout);
@@ -1580,29 +1581,30 @@ public class MainWindow extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    // Show about application dialog window by main menu item click : event
     private void AboutHelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutHelpItemActionPerformed
         showAboutDialogWindow();
     }//GEN-LAST:event_AboutHelpItemActionPerformed
 
-    // Show about application dialog window function
+    // Show about application dialog window : function
     private void showAboutDialogWindow() {
         AboutDialogWindow.setSize(455, 250); // Set window size
         AboutDialogWindow.setLocationRelativeTo(null); // Set window position to center of screen
         AboutDialogWindow.setVisible(true);
     }
     
-    // Close about application dialog window by OK button click function
+    // Close about application dialog window by "OK" button click : event
     private void AboutDialogOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutDialogOkButtonActionPerformed
         AboutDialogWindow.dispose();
     }//GEN-LAST:event_AboutDialogOkButtonActionPerformed
     
-    // Close main window and exit from application function
+    // Close main window and exit from application : event
     private void QuitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitItemActionPerformed
         this.dispose();
         System.exit(0); // Exist from application process
     }//GEN-LAST:event_QuitItemActionPerformed
 
-    // Set focus on project explorer frame function 
+    // Set focus on project explorer frame : event 
     private void ProjectExplorerFrameInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_ProjectExplorerFrameInternalFrameActivated
         try {
             OutputFrame.setSelected(false); // Switch focus from output frame
@@ -1611,7 +1613,7 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_ProjectExplorerFrameInternalFrameActivated
 
-    // Set focus on output frame function
+    // Set focus on output frame : event
     private void OutputFrameInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_OutputFrameInternalFrameActivated
         try {
             ProjectExplorerFrame.setSelected(false); // Switch focus from project explorer frame
@@ -1620,7 +1622,7 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_OutputFrameInternalFrameActivated
 
-    // Switch project explorer frame view state function
+    // Switch project explorer frame view state : event
     private void ProjectExplorerItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProjectExplorerItemActionPerformed
         if(ProjectExplorerItem.isSelected()) {
             FrameSplitPanel.setDividerLocation(ProjectExplorerFrame.getWidth()); // Set left side of split panel
@@ -1630,12 +1632,11 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_ProjectExplorerItemActionPerformed
 
-    // Same too function
     private void ProjectExplorerFrameComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ProjectExplorerFrameComponentHidden
         ProjectExplorerItem.setSelected(false);
     }//GEN-LAST:event_ProjectExplorerFrameComponentHidden
 
-    // Switch output frame view state function
+    // Switch output frame view state : event
     private void OutputWindowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OutputWindowItemActionPerformed
         if(OutputWindowItem.isSelected()) {
             EditorSplitPanel.setDividerLocation(EditorMDIFrame.getHeight() - OutputFrame.getHeight());
@@ -1645,20 +1646,21 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_OutputWindowItemActionPerformed
 
-    // Same too function
     private void OutputFrameComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_OutputFrameComponentHidden
         OutputWindowItem.setSelected(false);
     }//GEN-LAST:event_OutputFrameComponentHidden
 
+    // Switch output window to "Terminal" tab by main menu item click : event
     private void TerminalToolsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerminalToolsItemActionPerformed
         showTerminalTab();
     }//GEN-LAST:event_TerminalToolsItemActionPerformed
 
+    // Switch output window to "Terminal" tab by toolbar button click : event
     private void TerminalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerminalButtonActionPerformed
         showTerminalTab();
     }//GEN-LAST:event_TerminalButtonActionPerformed
 
-    // Switch output window to "Terminal" tab function
+    // Switch output window to "Terminal" tab : function
     private void showTerminalTab() {
         if(OutputFrame.isShowing()) {
             OutputFrameTabs.setSelectedComponent(TerminalPanel);
@@ -1670,11 +1672,12 @@ public class MainWindow extends JFrame {
         }
     }
     
+    // Switch output window to "Git" tab by main menu item click : event
     private void GitToolsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GitToolsItemActionPerformed
         showGitTab();
     }//GEN-LAST:event_GitToolsItemActionPerformed
 
-    // Switch output window to "Git" tab function
+    // Switch output window to "Git" tab : function
     private void showGitTab() {
         if(OutputFrame.isShowing()) {
             OutputFrameTabs.setSelectedComponent(GitPanel);
@@ -1686,11 +1689,12 @@ public class MainWindow extends JFrame {
         }
     }
 
+    // Show settings window by main menu item click : event
     private void SettingsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsItemActionPerformed
         showSettingsWindow();
     }//GEN-LAST:event_SettingsItemActionPerformed
 
-    // Show settings window function
+    // Show settings window : function
     private void showSettingsWindow() {
         
         // Read settings params
@@ -1700,7 +1704,7 @@ public class MainWindow extends JFrame {
         SettingsWindow.setVisible(true);
     }
     
-    // Read settings window UI controls params from file function
+    // Read settings window UI controls params from file : function
     private void readSettingsParams() {
         WindowThemeListButton.setSelectedIndex(Integer.parseInt(settings.getParam("Appearance", "currentTheme")));
         EditorStyleListButton.setSelectedIndex(Integer.parseInt(settings.getParam("Appearance", "currentEditorStyle")));
@@ -1714,7 +1718,7 @@ public class MainWindow extends JFrame {
         MCORESDKPathTextInput.setText(settings.getParam("Build", "m-coreSDKPath"));
     }
     
-    // Save and close settings window function
+    // Save and close settings window by "Save" button click : event
     private void SaveSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveSettingsButtonActionPerformed
         
         // Save settings params
@@ -1723,7 +1727,7 @@ public class MainWindow extends JFrame {
         SettingsWindow.dispose();
     }//GEN-LAST:event_SaveSettingsButtonActionPerformed
 
-    // Save settings params to file function
+    // Save settings params to file : function
     private void saveSettingsParams() {
         settings.storeParam("Appearance", "currentTheme", Integer.toString(WindowThemeListButton.getSelectedIndex()));
         settings.storeParam("Appearance", "currentEditorStyle", Integer.toString(EditorStyleListButton.getSelectedIndex()));
@@ -1737,14 +1741,13 @@ public class MainWindow extends JFrame {
         settings.storeParam("Build", "m-coreSDKPath", MCORESDKPathTextInput.getText());
     }
     
-    // Close settings window without saving configuration function
+    // Close settings window without saving configuration by "Cancel" button click : event
     private void CancelSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelSettingsButtonActionPerformed
         SettingsWindow.dispose();
     }//GEN-LAST:event_CancelSettingsButtonActionPerformed
 
-    // Show Neptune LTE SDK folder change dialog window function
+    // Show Neptune LTE SDK folder change dialog window : event
     private void NeptuneSDKPathButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NeptuneSDKPathButtonActionPerformed
-        
         javax.swing.JFileChooser selectFolderDialogWindow = new javax.swing.JFileChooser();
         selectFolderDialogWindow.setDialogTitle("Choose SDK folder");
         selectFolderDialogWindow.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
@@ -1759,9 +1762,8 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_NeptuneSDKPathButtonActionPerformed
 
-    // Show M-CORE SDK folder change dialog window function
+    // Show M-CORE SDK folder change dialog window : event
     private void MCORESDKPathButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MCORESDKPathButtonActionPerformed
-        
         javax.swing.JFileChooser selectFolderDialogWindow = new javax.swing.JFileChooser();
         selectFolderDialogWindow.setDialogTitle("Choose SDK folder");
         selectFolderDialogWindow.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
@@ -1776,15 +1778,17 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_MCORESDKPathButtonActionPerformed
 
+    // Show new file window by main menu item click : event
     private void NewFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFileItemActionPerformed
         showNewFileWindow();
     }//GEN-LAST:event_NewFileItemActionPerformed
 
+    // Show new file window by toolbar button click : event
     private void NewFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFileButtonActionPerformed
         showNewFileWindow();
     }//GEN-LAST:event_NewFileButtonActionPerformed
 
-    // Show new file window function
+    // Show new file window : function
     private void showNewFileWindow() {
         newFileFullName = "";
         newFileExtension = "";
@@ -1793,37 +1797,37 @@ public class MainWindow extends JFrame {
         NewFileWindow.setVisible(true);
     }
 
-    // Set file name input to empty function
+    // When new file window is shown, set file name input to empty : event
     private void NewFileWindowComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_NewFileWindowComponentShown
         NewFileNameTextInput.setText("");
     }//GEN-LAST:event_NewFileWindowComponentShown
 
-    // Set .h file extension function
+    // Set .h file extension by button click : event
     private void CHeaderFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CHeaderFileTypeButtonActionPerformed
         newFileExtension = ".h";
     }//GEN-LAST:event_CHeaderFileTypeButtonActionPerformed
 
-    // Set .c file extension function
+    // Set .c file extension by button click : event
     private void CSourceFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CSourceFileTypeButtonActionPerformed
         newFileExtension = ".c";
     }//GEN-LAST:event_CSourceFileTypeButtonActionPerformed
 
-    // Set .cpp file extension function
+    // Set .cpp file extension by button click : event
     private void CPPClassFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPPClassFileTypeButtonActionPerformed
         newFileExtension = ".cpp";
     }//GEN-LAST:event_CPPClassFileTypeButtonActionPerformed
 
-    // Set .ui file extension function
+    // Set .ui file extension by button click : event
     private void FormDesignFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FormDesignFileTypeButtonActionPerformed
         newFileExtension = ".ui";
     }//GEN-LAST:event_FormDesignFileTypeButtonActionPerformed
 
-    // Set .ini file extension function
+    // Set .ini file extension by button click : event
     private void INIConfigFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INIConfigFileTypeButtonActionPerformed
         newFileExtension = ".ini";
     }//GEN-LAST:event_INIConfigFileTypeButtonActionPerformed
 
-    // Create new file function
+    // Create new file by "Create" button click : event
     private void CreateNewFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateNewFileButtonActionPerformed
 
         // Set new file name
@@ -1841,6 +1845,7 @@ public class MainWindow extends JFrame {
                 JInternalFrame editorWindow = new JInternalFrame(newFileFullName, true, true, true, true);
                 
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
+                editorPanel.setEditorSourceText("");
                 
                 editorWindow.setSize(600, 400);
                 editorWindow.add(editorPanel);
@@ -1860,7 +1865,7 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_CreateNewFileButtonActionPerformed
 
-    // Save file by click main menu item function
+    // Save file by main menu item click : event
     private void SaveFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileItemActionPerformed
         try {
             saveTextFile();
@@ -1869,7 +1874,7 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_SaveFileItemActionPerformed
 
-    // Save file by click toolbar button function
+    // Save file by toolbar button click : event
     private void SaveFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileButtonActionPerformed
         try {
             saveTextFile();
@@ -1878,7 +1883,7 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_SaveFileButtonActionPerformed
 
-    // Save as file by click main menu item function
+    // Save as file by main menu item click : event
     private void SaveAsFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAsFileItemActionPerformed
         
         // Get current MDI window in focus
@@ -1891,7 +1896,7 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_SaveAsFileItemActionPerformed
 
-    // Open file by click main menu item function
+    // Open file by main menu item click : event
     private void OpenFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenFileItemActionPerformed
         try {
             openTextFile();
@@ -1900,7 +1905,7 @@ public class MainWindow extends JFrame {
         }
     }//GEN-LAST:event_OpenFileItemActionPerformed
 
-    // Open file by click toolbar button function
+    // Open file by toolbar button click : event
     private void OpenFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenFileButtonActionPerformed
         try {
             openTextFile();
@@ -1908,8 +1913,13 @@ public class MainWindow extends JFrame {
             System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_OpenFileButtonActionPerformed
+
+    // Close new file window by "Cancel" button click : event
+    private void CloseNewFileWindowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseNewFileWindowButtonActionPerformed
+        NewFileWindow.dispose();
+    }//GEN-LAST:event_CloseNewFileWindowButtonActionPerformed
     
-    // Save current source code file function
+    // Save current source code file : function
     private boolean saveTextFile() throws IOException {
         
         // Get current MDI window in focus
@@ -1944,7 +1954,7 @@ public class MainWindow extends JFrame {
         return true;
     }
     
-    // Save as for source code file function
+    // Save as for source code file : function
     private boolean saveAsTextFile(JInternalFrame window) throws IOException {
         
         // Get code editor panel component
@@ -1976,13 +1986,13 @@ public class MainWindow extends JFrame {
             
             // Add new file to project structure tree list
             if(projectFilePath == null && structureTreeListModel.isLeaf(structureTreeListModel.getRoot())) {
-                structureTreeListModel.addFileToRoot(currentFile.getName());
+                structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
             } else {
                     
                 if(structureTreeListModel.getSelectedNode() == null) {
-                    structureTreeListModel.addFileToRoot(currentFile.getName());
+                    structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
                 } else {
-                        structureTreeListModel.addNodeByType(currentFile.getName(), false);
+                        structureTreeListModel.addNodeByType(currentFile.getName(), false, currentFile);
                 }
             }
             
@@ -1995,7 +2005,7 @@ public class MainWindow extends JFrame {
         return true;
     }
     
-    // Open text file function
+    // Open text file : function
     private boolean openTextFile() throws IOException {
         
         // Create open file dialog window
@@ -2007,18 +2017,25 @@ public class MainWindow extends JFrame {
         if(fileChooserWindow.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             File currentFile = fileChooserWindow.getSelectedFile();
             
+            if(currentFile.getName().endsWith(".h"))
+                newFileExtension = ".h";
+            else if(currentFile.getName().endsWith(".c"))
+                newFileExtension = ".c";
+            else if(currentFile.getName().endsWith(".cpp"))
+                newFileExtension = ".cpp";
+            else if(currentFile.getName().endsWith(".ini"))
+                newFileExtension = ".ini";
+            
                 // Create new editor MDI window
                 JInternalFrame editorWindow = new JInternalFrame(currentFile.getName(), true, true, true, true);
                 
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
+                editorPanel.setEditorSourceText(Files.readString(Path.of(currentFile.getPath())));
                 
                 editorWindow.setSize(600, 400);
                 editorWindow.add(editorPanel);
                 editorWindow.setVisible(true);
                 editorWindow.putClientProperty("file", currentFile);
-                
-                String fileSourceText = Files.readString(Path.of(currentFile.getAbsolutePath()));
-                editorPanel.editorTextArea.setText(fileSourceText);
         
                 EditorMDIFrame.add(editorWindow);
         

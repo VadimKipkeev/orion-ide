@@ -37,9 +37,9 @@ public class CodeEditorPanel extends javax.swing.JPanel {
      * -------------------------------------------------------------------------
      */
     private final String iconsFolder = MainWindow.iconsFolder;
-    private static String fileExtension = MainWindow.newFileExtension;
+    private final String fileExtension = MainWindow.newFileExtension;
     
-    public static boolean isFileModfield;
+    public boolean isFileModfield;
     
     // Set toolbar buttons icons
     public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/go_to_view.svg", 16, 16);
@@ -62,8 +62,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     // Constructor
     public CodeEditorPanel() {
         initComponents();
-        
-        isFileModfield = false;
+        this.isFileModfield = false;
         
         switch(fileExtension) {
             case ".h" -> {
@@ -96,6 +95,13 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         }
 
         this.add(editorTextAreaScroller);
+    }
+    
+    // Set editor text area source text : method
+    public void setEditorSourceText(String sourceText) {
+        if(!sourceText.equals("")) {
+            editorTextArea.setText(sourceText);
+        }
     }
     
     // Get source code text : method
@@ -211,7 +217,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
 
         add(CodeEditorToolbar, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar CodeEditorToolbar;
