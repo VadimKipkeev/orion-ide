@@ -1985,14 +1985,16 @@ public class MainWindow extends JFrame {
             }
             
             // Add new file to project structure tree list
-            if(projectFilePath == null && structureTreeListModel.isLeaf(structureTreeListModel.getRoot())) {
-                structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
-            } else {
-                    
-                if(structureTreeListModel.getSelectedNode() == null) {
+            if(projectFilePath != null || !("").equals(projectFilePath)) {
+                if(structureTreeListModel.isLeaf(structureTreeListModel.getRoot())) {
                     structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
                 } else {
+                    
+                    if(structureTreeListModel.getSelectedNode() == null) {
+                        structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
+                    } else {
                         structureTreeListModel.addNodeByType(currentFile.getName(), false, currentFile);
+                    }
                 }
             }
             
