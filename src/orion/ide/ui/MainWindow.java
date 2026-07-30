@@ -58,7 +58,7 @@ public class MainWindow extends JFrame {
     public static String newFileExtension;
     
     // Project file path string
-    public static String projectFilePath;
+    public static String projectFilePath = "";
 
     // Set FlatLaf SVG icons
     public static String iconsFolder = getIconsFolder(); // Icons folder by current theme type
@@ -1985,11 +1985,10 @@ public class MainWindow extends JFrame {
             }
             
             // Add new file to project structure tree list
-            if(projectFilePath != null || !("").equals(projectFilePath)) {
+            if(projectFilePath != null && !("").equals(projectFilePath)) {
                 if(structureTreeListModel.isLeaf(structureTreeListModel.getRoot())) {
                     structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
                 } else {
-                    
                     if(structureTreeListModel.getSelectedNode() == null) {
                         structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
                     } else {
