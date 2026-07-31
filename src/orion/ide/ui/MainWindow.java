@@ -29,6 +29,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import orion.ide.core.SettingsManager;
 import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;
@@ -1367,6 +1368,7 @@ public class MainWindow extends JFrame {
 
         SaveAllItem.setIcon(saveAllIcon);
         SaveAllItem.setText("Save all");
+        SaveAllItem.addActionListener(this::SaveAllItemActionPerformed);
         FileMenu.add(SaveAllItem);
         FileMenu.add(MenuSeparator2);
 
@@ -1919,6 +1921,11 @@ public class MainWindow extends JFrame {
     private void CloseNewFileWindowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseNewFileWindowButtonActionPerformed
         NewFileWindow.dispose();
     }//GEN-LAST:event_CloseNewFileWindowButtonActionPerformed
+
+    // Save all files by main menu item click : event
+    private void SaveAllItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAllItemActionPerformed
+        saveAllFiles();
+    }//GEN-LAST:event_SaveAllItemActionPerformed
     
     // Save current source code file : function
     private boolean saveTextFile() throws IOException {
@@ -2007,6 +2014,36 @@ public class MainWindow extends JFrame {
             window.setTitle(currentFile.getName());
         } else {
             return false;
+        }
+        
+        return true;
+    }
+    
+    // Save all opened files : function
+    private boolean saveAllFiles() {
+        
+        // Get all editor MDI windows
+        JInternalFrame[] editorWindows = EditorMDIFrame.getAllFrames();
+        
+        for(int i = 0; i > editorWindows.length; i++) {
+            if(editorWindows[i].getComponent(0) instanceof CodeEditorPanel) {
+                CodeEditorPanel editorPanel = (CodeEditorPanel) editorWindows[i].getComponent(0);
+                File currentFile = (File) editorWindows[i].getClientProperty("file");
+                RSyntaxTextArea editorTextArea = editorPanel.editorTextArea;
+                
+                // Check file to exists, save with full rewrite file
+                if(currentFile != null) {
+                    try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
+                        fileWriter.write(editorTextArea.getText());
+                        System.out.println("File " + (String) currentFile.getName() + " is saved!");
+                    } catch(IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    System.out.println("No save, the file is empty.");
+                    i++;
+                }
+            }
         }
         
         return true;
