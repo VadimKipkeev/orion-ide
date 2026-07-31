@@ -32,6 +32,7 @@ import java.nio.file.Path;
 import orion.ide.core.SettingsManager;
 import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;
+import orion.ide.core.SourceFileFilter;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -1966,10 +1967,15 @@ public class MainWindow extends JFrame {
         // Set current file name
         String fileName = window.getTitle();
         
+        // Set source files extensions filter
+        SourceFileFilter fileFilter = new SourceFileFilter("Source files: (*.h, *.c, *.cpp, *.ui, *.ini)",
+                                                           new String[] {"h", "c", "cpp", "ui", "ini"});
+        
         // Create save as dialog window
         JFileChooser fileChooserWindow = new JFileChooser();
         fileChooserWindow.setDialogTitle("Save as");
         fileChooserWindow.setSelectedFile(new File(fileName));
+        fileChooserWindow.setFileFilter(fileFilter);
         fileChooserWindow.setApproveButtonText("Save");
         
         // Save selected file path from save as dialog window by "Save" button click
@@ -2009,9 +2015,14 @@ public class MainWindow extends JFrame {
     // Open text file : function
     private boolean openTextFile() throws IOException {
         
+        // Set source files extensions filter
+        SourceFileFilter fileFilter = new SourceFileFilter("Source files: (*.h, *.c, *.cpp, *.ui, *.ini)",
+                                                           new String[] {"h", "c", "cpp", "ui", "ini"});
+        
         // Create open file dialog window
         JFileChooser fileChooserWindow = new JFileChooser();
         fileChooserWindow.setDialogTitle("Open");
+        fileChooserWindow.setFileFilter(fileFilter);
         fileChooserWindow.setApproveButtonText("Open");
         
         // Open selected file from open file dialog window by "Open" button click
