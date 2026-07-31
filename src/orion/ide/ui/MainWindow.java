@@ -1924,7 +1924,11 @@ public class MainWindow extends JFrame {
 
     // Save all files by main menu item click : event
     private void SaveAllItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAllItemActionPerformed
-        saveAllFiles();
+        
+        // Using EDT for treads savety
+        SwingUtilities.invokeLater(() -> {
+            saveAllFiles();
+        });
     }//GEN-LAST:event_SaveAllItemActionPerformed
     
     // Save current source code file : function
@@ -2021,27 +2025,24 @@ public class MainWindow extends JFrame {
     
     // Save all opened files : function
     private boolean saveAllFiles() {
+        for(JInternalFrame editorWindows : EditorMDIFrame.getAllFrames()) {
         
-        // Get all editor MDI windows
-        JInternalFrame[] editorWindows = EditorMDIFrame.getAllFrames();
+            // Get code editor panel component
+            CodeEditorPanel editorPanel = (CodeEditorPanel) editorWindows.getContentPane().getComponent(0);
         
-        for(int i = 0; i > editorWindows.length; i++) {
-            if(editorWindows[i].getComponent(0) instanceof CodeEditorPanel) {
-                CodeEditorPanel editorPanel = (CodeEditorPanel) editorWindows[i].getComponent(0);
-                File currentFile = (File) editorWindows[i].getClientProperty("file");
-                RSyntaxTextArea editorTextArea = editorPanel.editorTextArea;
-                
-                // Check file to exists, save with full rewrite file
-                if(currentFile != null) {
-                    try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
-                        fileWriter.write(editorTextArea.getText());
-                        System.out.println("File " + (String) currentFile.getName() + " is saved!");
-                    } catch(IOException ex) {
-                        ex.printStackTrace();
-                    }
-                } else {
-                    System.out.println("No save, the file is empty.");
-                    i++;
+            // Get source code text from code editor panel component
+            String sourceText = editorPanel.getSourceText();
+            
+            // Get current file
+            File currentFile = (File) editorWindows.getClientProperty("file");
+            
+            if(currentFile != null) {
+            
+                // Save source code text to file
+                try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
+                    fileWriter.write(sourceText);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
             }
         }
