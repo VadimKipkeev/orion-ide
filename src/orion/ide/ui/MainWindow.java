@@ -29,7 +29,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import orion.ide.core.SettingsManager;
 import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;
@@ -51,10 +50,10 @@ public class MainWindow extends JFrame {
     private final SettingsManager settings = new SettingsManager();
     
     // Set project structure tree list model
-    public final TreeListModel structureTreeListModel;
+    private final TreeListModel structureTreeListModel;
     
     // New file name string
-    public static String newFileFullName;
+    private static String newFileFullName;
     
     // New file extension
     public static String newFileExtension;
@@ -1849,6 +1848,7 @@ public class MainWindow extends JFrame {
                 
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
                 editorPanel.setEditorSourceText("");
+                editorPanel.updateTextBuffer();
                 
                 editorWindow.setSize(600, 400);
                 editorWindow.add(editorPanel);
@@ -1867,7 +1867,7 @@ public class MainWindow extends JFrame {
             }
         }
     }//GEN-LAST:event_CreateNewFileButtonActionPerformed
-
+    
     // Save file by main menu item click : event
     private void SaveFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileItemActionPerformed
         try {
@@ -1930,7 +1930,7 @@ public class MainWindow extends JFrame {
             saveAllFiles();
         });
     }//GEN-LAST:event_SaveAllItemActionPerformed
-    
+   
     // Save current source code file : function
     private boolean saveTextFile() throws IOException {
         
@@ -1959,6 +1959,8 @@ public class MainWindow extends JFrame {
         try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
             fileWriter.write(sourceText);
             currentActiveWindow.putClientProperty("file", currentFile);
+            currentActiveWindow.setTitle(currentFile.getName());
+            editorPanel.updateTextBuffer();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -1976,7 +1978,13 @@ public class MainWindow extends JFrame {
         String sourceText = editorPanel.getSourceText();
         
         // Set current file name
-        String fileName = window.getTitle();
+        String fileName;
+        
+        if(window.getTitle().endsWith("*")) {
+            fileName = window.getTitle().substring(0, window.getTitle().length() - 1);
+        } else {
+            fileName = window.getTitle();
+        }
         
         // Set source files extensions filter
         SourceFileFilter fileFilter = new SourceFileFilter("Source files: (*.h, *.c, *.cpp, *.ui, *.ini)",
@@ -1997,6 +2005,8 @@ public class MainWindow extends JFrame {
             try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
                 fileWriter.write(sourceText);
                 window.putClientProperty("file", currentFile);
+                window.setTitle(currentFile.getName());
+                editorPanel.updateTextBuffer();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -2013,9 +2023,6 @@ public class MainWindow extends JFrame {
                     }
                 }
             }
-            
-            // Update current MDI window title
-            window.setTitle(currentFile.getName());
         } else {
             return false;
         }
@@ -2041,6 +2048,8 @@ public class MainWindow extends JFrame {
                 // Save source code text to file
                 try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
                     fileWriter.write(sourceText);
+                    editorWindows.setTitle(currentFile.getName());
+                    editorPanel.updateTextBuffer();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -2081,6 +2090,7 @@ public class MainWindow extends JFrame {
                 
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
                 editorPanel.setEditorSourceText(Files.readString(Path.of(currentFile.getPath())));
+                editorPanel.updateTextBuffer();
                 
                 editorWindow.setSize(600, 400);
                 editorWindow.add(editorPanel);

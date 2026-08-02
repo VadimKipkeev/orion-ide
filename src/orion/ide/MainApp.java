@@ -57,7 +57,7 @@ public class MainApp {
         uiThemeManager.init(currentThemeID);
         
         // Run code by timer
-        javax.swing.SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(() -> {
             
             // First show preloader window
             PreloaderWindow preloaderWindow = new PreloaderWindow();

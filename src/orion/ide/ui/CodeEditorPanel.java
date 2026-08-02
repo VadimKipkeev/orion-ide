@@ -21,6 +21,9 @@ package orion.ide.ui;
  * -----------------------------------------------------------------------------
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import javax.swing.JInternalFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
 /*
@@ -38,8 +41,8 @@ public class CodeEditorPanel extends javax.swing.JPanel {
      */
     private final String iconsFolder = MainWindow.iconsFolder;
     private final String fileExtension = MainWindow.newFileExtension;
-    
-    public boolean isFileModfield;
+    private String textBuffer = new String();
+    private boolean isFileModified;
     
     // Set toolbar buttons icons
     public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/go_to_view.svg", 16, 16);
@@ -58,11 +61,10 @@ public class CodeEditorPanel extends javax.swing.JPanel {
      * CLASS FIELDS SECTION END
      * -------------------------------------------------------------------------
      */
-
+    
     // Constructor
     public CodeEditorPanel() {
         initComponents();
-        this.isFileModfield = false;
         
         switch(fileExtension) {
             case ".h" -> {
@@ -95,12 +97,54 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         }
 
         this.add(editorTextAreaScroller);
+        
+        // Compare text buffer with editor text area by timer
+        new Timer(300, e -> checkFileModifiedStatus()).start();
+    }
+
+    // Update text buffer : method
+    public void updateTextBuffer() {
+        textBuffer = editorTextArea.getText();
+        isFileModified = isModified();
+    }
+    
+    // Check source text and text buffer to hidden symbols
+    private boolean isModified() {
+        String currentText = editorTextArea.getText().replace("\r\n", "\n").trim();
+        String currentBuffer = textBuffer.replace("\r\n", "\n").trim();
+        
+        return !currentText.equals(currentBuffer); // => true or false
+    }
+    
+    // Check file modified status : function
+    private boolean checkFileModifiedStatus() {
+        JInternalFrame currentWindow = (JInternalFrame) SwingUtilities.getAncestorOfClass(JInternalFrame.class, this);
+        
+        if(currentWindow == null) {
+            return false;
+        }
+        
+        String windowTitle = currentWindow.getTitle();
+        isFileModified = isModified();
+            
+        if(isFileModified && !windowTitle.endsWith("*")) {
+            currentWindow.setTitle(windowTitle + "*");
+            return true;
+        } else if(!isFileModified && windowTitle.endsWith("*")) {
+            currentWindow.setTitle(windowTitle.substring(0, windowTitle.length() - 1));
+            return false;
+        } else {
+            currentWindow.setTitle(windowTitle);
+            return false;
+        }
     }
     
     // Set editor text area source text : method
     public void setEditorSourceText(String sourceText) {
-        if(!sourceText.equals("")) {
+        if(sourceText != null && !sourceText.equals("")) {
             editorTextArea.setText(sourceText);
+            textBuffer = sourceText;
+            isFileModified = false;
         }
     }
     
