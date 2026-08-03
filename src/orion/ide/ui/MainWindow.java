@@ -22,6 +22,7 @@ package orion.ide.ui;
  */
 import javax.swing.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Component;
 import java.beans.PropertyVetoException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -51,6 +52,9 @@ public class MainWindow extends JFrame {
     
     // Set project structure tree list model
     private final TreeListModel structureTreeListModel;
+    
+    // Current editor theme style
+    private static String editorThemeStyle;
     
     // New file name string
     private static String newFileFullName;
@@ -151,6 +155,9 @@ public class MainWindow extends JFrame {
         this.structureTreeListModel = new TreeListModel(StructureTreeList, "");
         StructureTreeList.setCellRenderer(new TreeListIconRenderer());
         this.settings.init();
+        
+        // Set current editor theme style
+        editorThemeStyle = settings.getParam("Appearance", "currentEditorStyle");
     }
     
     // Get icons folder name by current theme type : function
@@ -410,7 +417,7 @@ public class MainWindow extends JFrame {
         SettingsWindow.setResizable(false);
         SettingsWindow.setSize(new java.awt.Dimension(800, 600));
 
-        WindowThemeListButton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VS Light theme", "VS Dark theme" }));
+        WindowThemeListButton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VS Light", "VS Dark" }));
 
         WindowThemeLabel.setLabelFor(WindowThemeListButton);
         WindowThemeLabel.setText("Window theme:");
@@ -420,7 +427,7 @@ public class MainWindow extends JFrame {
         ThemeNotificationLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         ThemeNotificationLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        EditorStyleListButton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light theme", "Dark theme", "Eclipse theme", "IDEA theme", "Visual Studio theme", "Monokai theme", "Solarized Light theme", "Solarized Dark theme" }));
+        EditorStyleListButton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light theme", "Dark theme", "Eclipse light", "IDEA light", "Visual Studio light", "Monokai dark", "Druid dark" }));
 
         EditorStyleLabel.setLabelFor(EditorStyleListButton);
         EditorStyleLabel.setText("Editor style:");
@@ -1726,6 +1733,22 @@ public class MainWindow extends JFrame {
         // Save settings params
         saveSettingsParams();
         
+        // Set current editor theme style
+        editorThemeStyle = settings.getParam("Appearance", "currentEditorStyle");
+        
+        // Update editor theme style for all opened MDI windows
+        SwingUtilities.invokeLater(() -> {
+            for(JInternalFrame editorWindows : EditorMDIFrame.getAllFrames()) {
+                
+                // Get code editor panel component
+                CodeEditorPanel editorPanel = (CodeEditorPanel) editorWindows.getContentPane().getComponent(0);
+                
+                // Update editor theme style
+                editorPanel.updateEditorTheme(editorThemeStyle);
+            }
+        });
+        
+        // Close settings window
         SettingsWindow.dispose();
     }//GEN-LAST:event_SaveSettingsButtonActionPerformed
 
@@ -1850,6 +1873,7 @@ public class MainWindow extends JFrame {
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
                 editorPanel.setEditorSourceText("");
                 editorPanel.updateTextBuffer();
+                editorPanel.updateEditorTheme(editorThemeStyle);
                 editorPanel.setEditorSyntaxStyle();
                 
                 editorWindow.setSize(600, 400);
@@ -2109,6 +2133,7 @@ public class MainWindow extends JFrame {
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
                 editorPanel.setEditorSourceText(Files.readString(Path.of(currentFile.getPath())));
                 editorPanel.updateTextBuffer();
+                editorPanel.updateEditorTheme(editorThemeStyle);
                 editorPanel.setEditorSyntaxStyle();
                 
                 editorWindow.setSize(600, 400);

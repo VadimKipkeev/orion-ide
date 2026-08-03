@@ -27,7 +27,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
-import orion.ide.core.SettingsManager;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -41,7 +40,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
-    private final SettingsManager settings = new SettingsManager();
     private final String iconsFolder = MainWindow.iconsFolder;
     private String fileExtension;
     private String textBuffer = new String();
@@ -68,11 +66,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     // Constructor
     public CodeEditorPanel() {
         initComponents();
-        this.settings.init();
-        
-        String currentEditorTheme = settings.getParam("Appearance", "currentEditorStyle");
-        updateEditorTheme(currentEditorTheme);
-        
+  
         this.add(editorTextAreaScroller);
         
         // Compare text buffer with editor text area by timer
@@ -146,6 +140,14 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 try {
                     Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
                     theme.apply(editorTextArea);
+                    
+                    SwingUtilities.updateComponentTreeUI(this.editorTextArea); 
+                    this.editorTextArea.invalidate();
+                    this.editorTextArea.validate();
+                    this.editorTextArea.repaint();
+                    
+                    System.out.println("Set editor theme style ID: " + currentTheme);
+                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -157,7 +159,15 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 
                 try {
                     Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
-                    theme.apply(editorTextArea);
+                    theme.apply(this.editorTextArea);
+                    
+                    SwingUtilities.updateComponentTreeUI(this.editorTextArea); 
+                    this.editorTextArea.invalidate();
+                    this.editorTextArea.validate();
+                    this.editorTextArea.repaint();
+                    
+                    System.out.println("Set editor theme style ID: " + currentTheme);
+                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -169,7 +179,15 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 
                 try {
                     Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
-                    theme.apply(editorTextArea);
+                    theme.apply(this.editorTextArea);
+                    
+                    SwingUtilities.updateComponentTreeUI(this.editorTextArea); 
+                    this.editorTextArea.invalidate();
+                    this.editorTextArea.validate();
+                    this.editorTextArea.repaint();
+                    
+                    System.out.println("Set editor theme style ID: " + currentTheme);
+                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -181,7 +199,15 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 
                 try {
                     Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
-                    theme.apply(editorTextArea);
+                    theme.apply(this.editorTextArea);
+                    
+                    SwingUtilities.updateComponentTreeUI(this.editorTextArea); 
+                    this.editorTextArea.invalidate();
+                    this.editorTextArea.validate();
+                    this.editorTextArea.repaint();
+                    
+                    System.out.println("Set editor theme style ID: " + currentTheme);
+                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -193,7 +219,15 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 
                 try {
                     Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
-                    theme.apply(editorTextArea);
+                    theme.apply(this.editorTextArea);
+                    
+                    SwingUtilities.updateComponentTreeUI(this.editorTextArea); 
+                    this.editorTextArea.invalidate();
+                    this.editorTextArea.validate();
+                    this.editorTextArea.repaint();
+                    
+                    System.out.println("Set editor theme style ID: " + currentTheme);
+                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -205,7 +239,15 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 
                 try {
                     Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
-                    theme.apply(editorTextArea);
+                    theme.apply(this.editorTextArea);
+                    
+                    SwingUtilities.updateComponentTreeUI(this.editorTextArea); 
+                    this.editorTextArea.invalidate();
+                    this.editorTextArea.validate();
+                    this.editorTextArea.repaint();
+                    
+                    System.out.println("Set editor theme style ID: " + currentTheme);
+                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -213,23 +255,19 @@ public class CodeEditorPanel extends javax.swing.JPanel {
             }
             
             case 6 -> {
-                String themeName = "solarized-light";
+                String themeName = "druid";
                 
                 try {
                     Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
-                    theme.apply(editorTextArea);
-                    break;
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            
-            case 7 -> {
-                String themeName = "solarized-dark";
-                
-                try {
-                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
-                    theme.apply(editorTextArea);
+                    theme.apply(this.editorTextArea);
+                    
+                    SwingUtilities.updateComponentTreeUI(this.editorTextArea); 
+                    this.editorTextArea.invalidate();
+                    this.editorTextArea.validate();
+                    this.editorTextArea.repaint();
+                    
+                    System.out.println("Set editor theme style ID: " + currentTheme);
+                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -241,7 +279,15 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 
                 try {
                     Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
-                    theme.apply(editorTextArea);
+                    theme.apply(this.editorTextArea);
+                    
+                    SwingUtilities.updateComponentTreeUI(this.editorTextArea); 
+                    this.editorTextArea.invalidate();
+                    this.editorTextArea.validate();
+                    this.editorTextArea.repaint();
+                    
+                    System.out.println("Set editor theme style ID: " + currentTheme);
+                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
