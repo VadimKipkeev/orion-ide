@@ -21,11 +21,13 @@ package orion.ide.ui;
  * -----------------------------------------------------------------------------
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.io.IOException;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
+import orion.ide.core.SettingsManager;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -39,8 +41,9 @@ public class CodeEditorPanel extends javax.swing.JPanel {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
+    private final SettingsManager settings = new SettingsManager();
     private final String iconsFolder = MainWindow.iconsFolder;
-    private final String fileExtension = MainWindow.newFileExtension;
+    private String fileExtension;
     private String textBuffer = new String();
     private boolean isFileModified;
     
@@ -65,6 +68,41 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     // Constructor
     public CodeEditorPanel() {
         initComponents();
+        this.settings.init();
+        
+        String currentEditorTheme = settings.getParam("Appearance", "currentEditorStyle");
+        updateEditorTheme(currentEditorTheme);
+        
+        this.add(editorTextAreaScroller);
+        
+        // Compare text buffer with editor text area by timer
+        new Timer(300, e -> checkFileModifiedStatus()).start();
+    }
+
+    // Update text buffer : method
+    public void updateTextBuffer() {
+        textBuffer = editorTextArea.getText();
+        isFileModified = isModified();
+    }
+    
+    // Set editor text area source text : method
+    public void setEditorSourceText(String sourceText) {
+        if(sourceText != null && !sourceText.equals("")) {
+            editorTextArea.setText(sourceText);
+            textBuffer = sourceText;
+            isFileModified = false;
+        }
+    }
+    
+    // Get source code text : method
+    public String getEditorSourceText() {
+        String sourceText = editorTextArea.getText();
+        return sourceText;
+    }
+    
+    // Set editor text area syntax highlighting style : method
+    public void setEditorSyntaxStyle() {
+        fileExtension = MainWindow.newFileExtension;
         
         switch(fileExtension) {
             case ".h" -> {
@@ -95,20 +133,125 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 break;
             }
         }
-
-        this.add(editorTextAreaScroller);
-        
-        // Compare text buffer with editor text area by timer
-        new Timer(300, e -> checkFileModifiedStatus()).start();
-    }
-
-    // Update text buffer : method
-    public void updateTextBuffer() {
-        textBuffer = editorTextArea.getText();
-        isFileModified = isModified();
     }
     
-    // Check source text and text buffer to hidden symbols
+    // Update editor theme : method
+    public void updateEditorTheme(String currentTheme) {
+        int currentThemeID = Integer.parseInt(currentTheme);
+        
+        switch(currentThemeID) {
+            case 0 -> {
+                String themeName = "default";
+                
+                try {
+                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
+                    theme.apply(editorTextArea);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+            case 1 -> {
+                String themeName = "dark";
+                
+                try {
+                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
+                    theme.apply(editorTextArea);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+                        
+            case 2 -> {
+                String themeName = "eclipse";
+                
+                try {
+                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
+                    theme.apply(editorTextArea);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+            case 3 -> {
+                String themeName = "idea";
+                
+                try {
+                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
+                    theme.apply(editorTextArea);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+            case 4 -> {
+                String themeName = "vs";
+                
+                try {
+                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
+                    theme.apply(editorTextArea);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+            case 5 -> {
+                String themeName = "monokai";
+                
+                try {
+                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
+                    theme.apply(editorTextArea);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+            case 6 -> {
+                String themeName = "solarized-light";
+                
+                try {
+                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
+                    theme.apply(editorTextArea);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+            case 7 -> {
+                String themeName = "solarized-dark";
+                
+                try {
+                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
+                    theme.apply(editorTextArea);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+            default -> {
+                String themeName = "default";
+                
+                try {
+                    Theme theme = Theme.load(getClass().getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + themeName + ".xml"));
+                    theme.apply(editorTextArea);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+ 
+    
+    // Check source text and text buffer to hidden symbols : function
     private boolean isModified() {
         String currentText = editorTextArea.getText().replace("\r\n", "\n").trim();
         String currentBuffer = textBuffer.replace("\r\n", "\n").trim();
@@ -137,21 +280,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
             currentWindow.setTitle(windowTitle);
             return false;
         }
-    }
-    
-    // Set editor text area source text : method
-    public void setEditorSourceText(String sourceText) {
-        if(sourceText != null && !sourceText.equals("")) {
-            editorTextArea.setText(sourceText);
-            textBuffer = sourceText;
-            isFileModified = false;
-        }
-    }
-    
-    // Get source code text : method
-    public String getSourceText() {
-        String sourceText = editorTextArea.getText();
-        return sourceText;
     }
 
     /**

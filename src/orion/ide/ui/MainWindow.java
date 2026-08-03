@@ -420,7 +420,7 @@ public class MainWindow extends JFrame {
         ThemeNotificationLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         ThemeNotificationLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        EditorStyleListButton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light theme", "Dark theme", "Solarized Light theme", "Solarized Dark theme", "Nord theme", "Midnight theme" }));
+        EditorStyleListButton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light theme", "Dark theme", "Eclipse theme", "IDEA theme", "Visual Studio theme", "Monokai theme", "Solarized Light theme", "Solarized Dark theme" }));
 
         EditorStyleLabel.setLabelFor(EditorStyleListButton);
         EditorStyleLabel.setText("Editor style:");
@@ -1836,6 +1836,7 @@ public class MainWindow extends JFrame {
         newFileFullName = NewFileNameTextInput.getText() + newFileExtension;
         
         if(!"".equals(NewFileNameTextInput.getText()) && !"".equals(newFileExtension)) {
+            
             // Close new file window
             NewFileWindow.dispose();
         
@@ -1849,6 +1850,7 @@ public class MainWindow extends JFrame {
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
                 editorPanel.setEditorSourceText("");
                 editorPanel.updateTextBuffer();
+                editorPanel.setEditorSyntaxStyle();
                 
                 editorWindow.setSize(600, 400);
                 editorWindow.add(editorPanel);
@@ -1953,13 +1955,15 @@ public class MainWindow extends JFrame {
         CodeEditorPanel editorPanel = (CodeEditorPanel) currentActiveWindow.getContentPane().getComponent(0);
         
         // Get source code text from code editor panel component
-        String sourceText = editorPanel.getSourceText();
+        String sourceText = editorPanel.getEditorSourceText();
         
         // Save source code text to file
         try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
             fileWriter.write(sourceText);
+            
             currentActiveWindow.putClientProperty("file", currentFile);
             currentActiveWindow.setTitle(currentFile.getName());
+            
             editorPanel.updateTextBuffer();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -1975,7 +1979,7 @@ public class MainWindow extends JFrame {
         CodeEditorPanel editorPanel = (CodeEditorPanel) window.getContentPane().getComponent(0);
         
         // Get source code text from code editor panel component
-        String sourceText = editorPanel.getSourceText();
+        String sourceText = editorPanel.getEditorSourceText();
         
         // Set current file name
         String fileName;
@@ -2004,9 +2008,21 @@ public class MainWindow extends JFrame {
             // Save source code text to file
             try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
                 fileWriter.write(sourceText);
+                
                 window.putClientProperty("file", currentFile);
                 window.setTitle(currentFile.getName());
+                
+                if(currentFile.getName().endsWith(".h"))
+                    newFileExtension = ".h";
+                else if(currentFile.getName().endsWith(".c"))
+                    newFileExtension = ".c";
+                else if(currentFile.getName().endsWith(".cpp"))
+                    newFileExtension = ".cpp";
+                else if(currentFile.getName().endsWith(".ini"))
+                    newFileExtension = ".ini";
+                
                 editorPanel.updateTextBuffer();
+                editorPanel.setEditorSyntaxStyle();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -2038,7 +2054,7 @@ public class MainWindow extends JFrame {
             CodeEditorPanel editorPanel = (CodeEditorPanel) editorWindows.getContentPane().getComponent(0);
         
             // Get source code text from code editor panel component
-            String sourceText = editorPanel.getSourceText();
+            String sourceText = editorPanel.getEditorSourceText();
             
             // Get current file
             File currentFile = (File) editorWindows.getClientProperty("file");
@@ -2048,7 +2064,9 @@ public class MainWindow extends JFrame {
                 // Save source code text to file
                 try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
                     fileWriter.write(sourceText);
+                    
                     editorWindows.setTitle(currentFile.getName());
+                    
                     editorPanel.updateTextBuffer();
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -2091,6 +2109,7 @@ public class MainWindow extends JFrame {
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
                 editorPanel.setEditorSourceText(Files.readString(Path.of(currentFile.getPath())));
                 editorPanel.updateTextBuffer();
+                editorPanel.setEditorSyntaxStyle();
                 
                 editorWindow.setSize(600, 400);
                 editorWindow.add(editorPanel);
