@@ -146,8 +146,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     this.editorTextArea.validate();
                     this.editorTextArea.repaint();
                     
-                    System.out.println("Set editor theme style ID: " + currentTheme);
-                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -165,8 +163,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     this.editorTextArea.invalidate();
                     this.editorTextArea.validate();
                     this.editorTextArea.repaint();
-                    
-                    System.out.println("Set editor theme style ID: " + currentTheme);
                     
                     break;
                 } catch (IOException ex) {
@@ -186,8 +182,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     this.editorTextArea.validate();
                     this.editorTextArea.repaint();
                     
-                    System.out.println("Set editor theme style ID: " + currentTheme);
-                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -205,8 +199,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     this.editorTextArea.invalidate();
                     this.editorTextArea.validate();
                     this.editorTextArea.repaint();
-                    
-                    System.out.println("Set editor theme style ID: " + currentTheme);
                     
                     break;
                 } catch (IOException ex) {
@@ -226,8 +218,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     this.editorTextArea.validate();
                     this.editorTextArea.repaint();
                     
-                    System.out.println("Set editor theme style ID: " + currentTheme);
-                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -245,8 +235,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     this.editorTextArea.invalidate();
                     this.editorTextArea.validate();
                     this.editorTextArea.repaint();
-                    
-                    System.out.println("Set editor theme style ID: " + currentTheme);
                     
                     break;
                 } catch (IOException ex) {
@@ -266,8 +254,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     this.editorTextArea.validate();
                     this.editorTextArea.repaint();
                     
-                    System.out.println("Set editor theme style ID: " + currentTheme);
-                    
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -285,8 +271,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     this.editorTextArea.invalidate();
                     this.editorTextArea.validate();
                     this.editorTextArea.repaint();
-                    
-                    System.out.println("Set editor theme style ID: " + currentTheme);
                     
                     break;
                 } catch (IOException ex) {

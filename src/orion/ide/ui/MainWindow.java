@@ -21,8 +21,9 @@ package orion.ide.ui;
  * -----------------------------------------------------------------------------
  */
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import java.awt.Component;
 import java.beans.PropertyVetoException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -191,6 +192,7 @@ public class MainWindow extends JFrame {
         SettingsWindow = new javax.swing.JDialog();
         SettingsTabs = new javax.swing.JTabbedPane();
         AppearanceSettingsPanel = new javax.swing.JPanel();
+        AppearanceSettingsLabel = new javax.swing.JLabel();
         WindowThemeListButton = new javax.swing.JComboBox<>();
         WindowThemeLabel = new javax.swing.JLabel();
         ThemeNotificationLabel = new javax.swing.JLabel();
@@ -199,6 +201,7 @@ public class MainWindow extends JFrame {
         EditorFontSizeSpinner = new javax.swing.JSpinner();
         EditorFontSizeLabel = new javax.swing.JLabel();
         GitSettingsPanel = new javax.swing.JPanel();
+        GitSettingsLabel = new javax.swing.JLabel();
         GitLoginTextInput = new javax.swing.JTextField();
         GitLoginLabel = new javax.swing.JLabel();
         GitPasswordLabel = new javax.swing.JLabel();
@@ -206,6 +209,7 @@ public class MainWindow extends JFrame {
         GitTokenTextInput = new javax.swing.JTextField();
         GitPasswordTextInput = new javax.swing.JPasswordField();
         BuildSettingsPanel = new javax.swing.JPanel();
+        BuildSettingsLabel = new javax.swing.JLabel();
         NeptuneSDKPathTextInput = new javax.swing.JTextField();
         NeptuneSDKPathLabel = new javax.swing.JLabel();
         NeptuneSDKPathButton = new javax.swing.JButton();
@@ -417,7 +421,11 @@ public class MainWindow extends JFrame {
         SettingsWindow.setResizable(false);
         SettingsWindow.setSize(new java.awt.Dimension(800, 600));
 
+        AppearanceSettingsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        AppearanceSettingsLabel.setText("Appearance settings");
+
         WindowThemeListButton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VS Light", "VS Dark" }));
+        WindowThemeListButton.addItemListener(this::WindowThemeListButtonItemStateChanged);
 
         WindowThemeLabel.setLabelFor(WindowThemeListButton);
         WindowThemeLabel.setText("Window theme:");
@@ -442,25 +450,31 @@ public class MainWindow extends JFrame {
             .addGroup(AppearanceSettingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AppearanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AppearanceSettingsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(AppearanceSettingsPanelLayout.createSequentialGroup()
-                        .addComponent(WindowThemeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(WindowThemeListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AppearanceSettingsPanelLayout.createSequentialGroup()
-                        .addGroup(AppearanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(EditorStyleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EditorFontSizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(AppearanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ThemeNotificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(EditorStyleListButton, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EditorFontSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(494, Short.MAX_VALUE))
+                        .addGroup(AppearanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AppearanceSettingsPanelLayout.createSequentialGroup()
+                                .addComponent(WindowThemeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(WindowThemeListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AppearanceSettingsPanelLayout.createSequentialGroup()
+                                .addGroup(AppearanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(EditorStyleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(EditorFontSizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(AppearanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ThemeNotificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .addComponent(EditorStyleListButton, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(EditorFontSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 488, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         AppearanceSettingsPanelLayout.setVerticalGroup(
             AppearanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AppearanceSettingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(AppearanceSettingsLabel)
+                .addGap(18, 18, 18)
                 .addGroup(AppearanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(WindowThemeListButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(WindowThemeLabel))
@@ -474,10 +488,13 @@ public class MainWindow extends JFrame {
                 .addGroup(AppearanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EditorFontSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EditorFontSizeLabel))
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         SettingsTabs.addTab("", appearSettingsIcon, AppearanceSettingsPanel, "Appearance settings");
+
+        GitSettingsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        GitSettingsLabel.setText("Git configuration");
 
         GitLoginTextInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         GitLoginTextInput.setToolTipText("Git login");
@@ -503,25 +520,32 @@ public class MainWindow extends JFrame {
             .addGroup(GitSettingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(GitSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GitSettingsPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(GitLoginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(GitLoginTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(GitSettingsPanelLayout.createSequentialGroup()
-                        .addComponent(GitPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(GitPasswordTextInput))
+                        .addComponent(GitSettingsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(GitSettingsPanelLayout.createSequentialGroup()
-                        .addComponent(GitTokenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(GitTokenTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34))
+                        .addGroup(GitSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GitSettingsPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(GitLoginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(GitLoginTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(GitSettingsPanelLayout.createSequentialGroup()
+                                .addComponent(GitPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(GitPasswordTextInput))
+                            .addGroup(GitSettingsPanelLayout.createSequentialGroup()
+                                .addComponent(GitTokenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(GitTokenTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(34, 34, 34))))
         );
         GitSettingsPanelLayout.setVerticalGroup(
             GitSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(GitSettingsPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(8, 8, 8)
+                .addComponent(GitSettingsLabel)
+                .addGap(18, 18, 18)
                 .addGroup(GitSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GitLoginTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(GitLoginLabel))
@@ -533,10 +557,13 @@ public class MainWindow extends JFrame {
                 .addGroup(GitSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GitTokenTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(GitTokenLabel))
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addContainerGap(312, Short.MAX_VALUE))
         );
 
-        SettingsTabs.addTab("", gitSettingsIcon, GitSettingsPanel, "Git module settings");
+        SettingsTabs.addTab("", gitSettingsIcon, GitSettingsPanel, "Git configuration");
+
+        BuildSettingsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        BuildSettingsLabel.setText("Build configuration");
 
         NeptuneSDKPathLabel.setText("Neptune LTE SDK path:");
 
@@ -555,24 +582,30 @@ public class MainWindow extends JFrame {
             .addGroup(BuildSettingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BuildSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BuildSettingsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(BuildSettingsPanelLayout.createSequentialGroup()
-                        .addComponent(NeptuneSDKPathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(NeptuneSDKPathTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(NeptuneSDKPathButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(BuildSettingsPanelLayout.createSequentialGroup()
-                        .addComponent(MCORESDKPathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(MCORESDKPathTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MCORESDKPathButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                        .addGroup(BuildSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(BuildSettingsPanelLayout.createSequentialGroup()
+                                .addComponent(NeptuneSDKPathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(NeptuneSDKPathTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(NeptuneSDKPathButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(BuildSettingsPanelLayout.createSequentialGroup()
+                                .addComponent(MCORESDKPathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(MCORESDKPathTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(MCORESDKPathButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 96, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         BuildSettingsPanelLayout.setVerticalGroup(
             BuildSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BuildSettingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(BuildSettingsLabel)
+                .addGap(18, 18, 18)
                 .addGroup(BuildSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NeptuneSDKPathTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NeptuneSDKPathLabel)
@@ -582,10 +615,10 @@ public class MainWindow extends JFrame {
                     .addComponent(MCORESDKPathTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MCORESDKPathLabel)
                     .addComponent(MCORESDKPathButton))
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
 
-        SettingsTabs.addTab("", buildSettingsIcon, BuildSettingsPanel, "Build settings");
+        SettingsTabs.addTab("", buildSettingsIcon, BuildSettingsPanel, "Build configuration");
 
         SaveSettingsButton.setText("Save");
         SaveSettingsButton.addActionListener(this::SaveSettingsButtonActionPerformed);
@@ -1825,31 +1858,52 @@ public class MainWindow extends JFrame {
     // When new file window is shown, set file name input to empty : event
     private void NewFileWindowComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_NewFileWindowComponentShown
         NewFileNameTextInput.setText("");
+        
+        // Set empty tooltips
+        if(!"".equals(NewFileNameTextInput.getText()) && !"".equals(newFileExtension)) {
+            NewFileNameTextInput.setToolTipText("");
+            CreateNewFileButton.setToolTipText("");
+        }
     }//GEN-LAST:event_NewFileWindowComponentShown
 
     // Set .h file extension by button click : event
     private void CHeaderFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CHeaderFileTypeButtonActionPerformed
         newFileExtension = ".h";
+        
+        // Set empty tooltip for create new file button
+        CreateNewFileButton.setToolTipText("");
     }//GEN-LAST:event_CHeaderFileTypeButtonActionPerformed
 
     // Set .c file extension by button click : event
     private void CSourceFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CSourceFileTypeButtonActionPerformed
         newFileExtension = ".c";
+        
+        // Set empty tooltip for create new file button
+        CreateNewFileButton.setToolTipText("");
     }//GEN-LAST:event_CSourceFileTypeButtonActionPerformed
 
     // Set .cpp file extension by button click : event
     private void CPPClassFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPPClassFileTypeButtonActionPerformed
         newFileExtension = ".cpp";
+        
+        // Set empty tooltip for create new file button
+        CreateNewFileButton.setToolTipText("");
     }//GEN-LAST:event_CPPClassFileTypeButtonActionPerformed
 
     // Set .ui file extension by button click : event
     private void FormDesignFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FormDesignFileTypeButtonActionPerformed
         newFileExtension = ".ui";
+        
+        // Set empty tooltip for create new file button
+        CreateNewFileButton.setToolTipText("");
     }//GEN-LAST:event_FormDesignFileTypeButtonActionPerformed
 
     // Set .ini file extension by button click : event
     private void INIConfigFileTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INIConfigFileTypeButtonActionPerformed
         newFileExtension = ".ini";
+        
+        // Set empty tooltip for create new file button
+        CreateNewFileButton.setToolTipText("");
     }//GEN-LAST:event_INIConfigFileTypeButtonActionPerformed
 
     // Create new file by "Create" button click : event
@@ -1891,8 +1945,43 @@ public class MainWindow extends JFrame {
                     System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                 }
             }
+        } else {
+            if("".equals(NewFileNameTextInput.getText())) {
+                
+                // Set empty tooltip for create new file button
+                CreateNewFileButton.setToolTipText("");
+                
+                // Show tooltip about empty file name text input
+                NewFileNameTextInput.setToolTipText("File name is not be empty!");
+                
+                Timer timer = new Timer(300, event -> showTooltip(NewFileNameTextInput));
+                timer.setRepeats(false);
+                timer.start();
+            } else if("".equals(newFileExtension)) {
+                
+                // Set empty tooltip for new file name text input
+                NewFileNameTextInput.setToolTipText("");
+                
+                // Show tooltip about change file type
+                CreateNewFileButton.setToolTipText("File type not changed!");
+                
+                Timer timer = new Timer(300, event -> showTooltip(CreateNewFileButton));
+                timer.setRepeats(false);
+                timer.start();
+            }
         }
     }//GEN-LAST:event_CreateNewFileButtonActionPerformed
+    
+    // Show tooltip by event handler : function
+    private static void showTooltip(JComponent component) {
+        ToolTipManager tooltipManager = ToolTipManager.sharedInstance();
+        
+        Point point = new Point(component.getWidth() / 2, component.getHeight() / 2);
+        
+        MouseEvent event = new MouseEvent(component, MouseEvent.MOUSE_MOVED, System.currentTimeMillis(), 0, point.x, point.y, 0, false);
+        
+        tooltipManager.mouseMoved(event);
+    }
     
     // Save file by main menu item click : event
     private void SaveFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileItemActionPerformed
@@ -1956,6 +2045,14 @@ public class MainWindow extends JFrame {
             saveAllFiles();
         });
     }//GEN-LAST:event_SaveAllItemActionPerformed
+
+    // Set editor dark theme if application dark theme changed : event
+    private void WindowThemeListButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_WindowThemeListButtonItemStateChanged
+        if(WindowThemeListButton.getSelectedIndex() == 0)
+            EditorStyleListButton.setSelectedIndex(0);
+        else if(WindowThemeListButton.getSelectedIndex() == 1)
+            EditorStyleListButton.setSelectedIndex(1);
+    }//GEN-LAST:event_WindowThemeListButtonItemStateChanged
    
     // Save current source code file : function
     private boolean saveTextFile() throws IOException {
@@ -2169,6 +2266,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JPanel AppStatusPanel;
     private javax.swing.JLabel AppTitleLabel;
     private javax.swing.JLabel AppVersionLabel;
+    private javax.swing.JLabel AppearanceSettingsLabel;
     private javax.swing.JPanel AppearanceSettingsPanel;
     private javax.swing.JMenu BookmarksMenu;
     private javax.swing.JButton BuildDebugButton;
@@ -2178,6 +2276,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JEditorPane BuildLogViewer;
     private javax.swing.JMenu BuildMenu;
     private javax.swing.JButton BuildReleaseButton;
+    private javax.swing.JLabel BuildSettingsLabel;
     private javax.swing.JPanel BuildSettingsPanel;
     private javax.swing.JToolBar BuildToolbar;
     private javax.swing.JButton CHeaderFileTypeButton;
@@ -2226,6 +2325,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JPasswordField GitPasswordTextInput;
     private javax.swing.JButton GitPullButton;
     private javax.swing.JButton GitPushButton;
+    private javax.swing.JLabel GitSettingsLabel;
     private javax.swing.JPanel GitSettingsPanel;
     private javax.swing.JLabel GitTokenLabel;
     private javax.swing.JTextField GitTokenTextInput;
