@@ -31,6 +31,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import orion.ide.core.SettingsManager;
 import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;
@@ -156,6 +158,14 @@ public class MainWindow extends JFrame {
         this.structureTreeListModel = new TreeListModel(StructureTreeList, "");
         StructureTreeList.setCellRenderer(new TreeListIconRenderer());
         this.settings.init();
+        
+        this.addWindowListener(new WindowAdapter() {
+            
+            @Override
+            public void windowClosing(WindowEvent e) {
+                handleMainWindowClosing();
+            }
+        });
         
         // Set current editor theme style
         editorThemeStyle = settings.getParam("Appearance", "currentEditorStyle");
@@ -796,7 +806,7 @@ public class MainWindow extends JFrame {
 
         NewFileWindow.getContentPane().add(NewFileSetupPanel, java.awt.BorderLayout.CENTER);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Orion IDE");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(240, 320));
@@ -1642,8 +1652,7 @@ public class MainWindow extends JFrame {
     
     // Close main window and exit from application : event
     private void QuitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitItemActionPerformed
-        this.dispose();
-        System.exit(0); // Exist from application process
+        handleMainWindowClosing();
     }//GEN-LAST:event_QuitItemActionPerformed
 
     // Set focus on project explorer frame : event 
@@ -1934,6 +1943,14 @@ public class MainWindow extends JFrame {
                 editorWindow.add(editorPanel);
                 editorWindow.setVisible(true);
                 editorWindow.putClientProperty("file", null);
+                editorWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                editorWindow.addInternalFrameListener(new InternalFrameAdapter() {
+                    
+                    @Override
+                    public void internalFrameClosing(InternalFrameEvent e) {
+                        handleEditorWindowClosing(editorWindow);
+                    }
+                });
         
                 EditorMDIFrame.add(editorWindow);
         
@@ -1983,10 +2000,83 @@ public class MainWindow extends JFrame {
         tooltipManager.mouseMoved(event);
     }
     
+    // Check editing files to saved : function
+    private void handleMainWindowClosing() {
+        JInternalFrame[] editorWindows = EditorMDIFrame.getAllFrames();
+        
+        for(JInternalFrame window : editorWindows) {
+            boolean isProceed = handleEditorWindowClosing(window);
+            
+            if(!isProceed) {
+                return;
+            }
+        }
+        
+        this.dispose();
+        System.exit(0);
+    }
+    
+    // Show dialog window for save file by editor window close button click : function
+    private boolean handleEditorWindowClosing(JInternalFrame window) {
+        JInternalFrame currentWindow = window;
+        CodeEditorPanel editorPanel = (CodeEditorPanel) currentWindow.getContentPane().getComponent(0);
+        
+        boolean isFileModified = editorPanel.isModified();
+        
+        // File is not modified, editor window close
+        if(!isFileModified) {
+            currentWindow.dispose();
+            return true;
+        }
+        
+        String fileName;
+        
+        if(currentWindow.getTitle().endsWith("*")) {
+            fileName = currentWindow.getTitle().substring(0, currentWindow.getTitle().length() - 1);
+        } else {
+            fileName = currentWindow.getTitle();
+        }
+            
+        // Show save dialog window
+        int result = JOptionPane.showConfirmDialog(currentWindow, "The file is not saved.\nSave file first?", "Save file " + fileName,
+                                                   JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        switch(result) {
+            
+            // Save file by "Yes" button click
+            case JOptionPane.YES_OPTION -> {
+                try{
+                    saveTextFile(currentWindow);
+                    currentWindow.dispose();
+                    return true;
+                } catch(IOException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(currentWindow, "Error saving file.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+            
+            // Close editor window by "No" button click
+            case JOptionPane.NO_OPTION -> {
+                currentWindow.dispose();
+                return true;
+            }
+            
+            // Do nothing
+            case JOptionPane.CANCEL_OPTION -> {
+                return false;
+            }
+            
+            default -> {
+                return false;
+            }
+        }
+    }
+    
     // Save file by main menu item click : event
     private void SaveFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileItemActionPerformed
         try {
-            saveTextFile();
+            saveTextFile(EditorMDIFrame.getSelectedFrame());
         } catch (IOException ex) {
             System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -1995,7 +2085,7 @@ public class MainWindow extends JFrame {
     // Save file by toolbar button click : event
     private void SaveFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileButtonActionPerformed
         try {
-            saveTextFile();
+            saveTextFile(EditorMDIFrame.getSelectedFrame());
         } catch (IOException ex) {
             System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -2055,10 +2145,10 @@ public class MainWindow extends JFrame {
     }//GEN-LAST:event_WindowThemeListButtonItemStateChanged
    
     // Save current source code file : function
-    private boolean saveTextFile() throws IOException {
+    private boolean saveTextFile(JInternalFrame window) throws IOException {
         
         // Get current MDI window in focus
-        JInternalFrame currentActiveWindow = EditorMDIFrame.getSelectedFrame();
+        JInternalFrame currentActiveWindow = window;
         
         if(currentActiveWindow == null)
             return false;
@@ -2237,6 +2327,14 @@ public class MainWindow extends JFrame {
                 editorWindow.add(editorPanel);
                 editorWindow.setVisible(true);
                 editorWindow.putClientProperty("file", currentFile);
+                editorWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                editorWindow.addInternalFrameListener(new InternalFrameAdapter() {
+                    
+                    @Override
+                    public void internalFrameClosing(InternalFrameEvent e) {
+                        handleEditorWindowClosing(editorWindow);
+                    }
+                });
         
                 EditorMDIFrame.add(editorWindow);
         

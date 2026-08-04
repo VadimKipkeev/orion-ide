@@ -281,8 +281,8 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     }
  
     
-    // Check source text and text buffer to hidden symbols : function
-    private boolean isModified() {
+    // Check source text and text buffer to hidden symbols : method
+    public boolean isModified() {
         String currentText = editorTextArea.getText().replace("\r\n", "\n").trim();
         String currentBuffer = textBuffer.replace("\r\n", "\n").trim();
         
