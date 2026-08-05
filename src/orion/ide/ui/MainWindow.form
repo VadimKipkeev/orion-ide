@@ -1335,6 +1335,57 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="WindowMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Window"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="CascadeWindowItem">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="cascadeWindowIcon" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Cascade"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator14">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="SplitHorizontallyWindowItem">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="splitHorizontallyWindowIcon" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Split horizontally"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="SplitVerticallyWindowItem">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="splitVerticallyWindowIcon" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Split vertically"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator15">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="CloseWindowItem">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="closeWindowIcon" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Close"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="CloseAllWindowItem">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="closeAllWindowIcon" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Close all"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="HelpMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Help"/>

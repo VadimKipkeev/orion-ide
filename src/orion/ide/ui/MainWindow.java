@@ -120,6 +120,13 @@ public class MainWindow extends JFrame {
     public final FlatSVGIcon uiDesignerToolsIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ui_designer_tools.svg", 16, 16);
     public final FlatSVGIcon resourcesManagerIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/resources_manager.svg", 16, 16);
     
+    // Window menu icons
+    public final FlatSVGIcon cascadeWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/cascade_window.svg", 16, 16);
+    public final FlatSVGIcon splitHorizontallyWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/split_h_window.svg", 16, 16);
+    public final FlatSVGIcon splitVerticallyWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/split_v_window.svg", 16, 16);
+    public final FlatSVGIcon closeWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/close_window.svg", 16, 16);
+    public final FlatSVGIcon closeAllWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/close_all_window.svg", 16, 16);
+    
     // Help menu icons
     public final FlatSVGIcon contentsHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/contents_help.svg", 16, 16);
     public final FlatSVGIcon samplesHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/samples_help.svg", 16, 16);
@@ -358,6 +365,14 @@ public class MainWindow extends JFrame {
         TerminalToolsItem = new javax.swing.JMenuItem();
         DesignerToolsItem = new javax.swing.JMenuItem();
         ResManagerToolsItem = new javax.swing.JMenuItem();
+        WindowMenu = new javax.swing.JMenu();
+        CascadeWindowItem = new javax.swing.JMenuItem();
+        MenuSeparator14 = new javax.swing.JPopupMenu.Separator();
+        SplitHorizontallyWindowItem = new javax.swing.JMenuItem();
+        SplitVerticallyWindowItem = new javax.swing.JMenuItem();
+        MenuSeparator15 = new javax.swing.JPopupMenu.Separator();
+        CloseWindowItem = new javax.swing.JMenuItem();
+        CloseAllWindowItem = new javax.swing.JMenuItem();
         HelpMenu = new javax.swing.JMenu();
         ContentsHelpItem = new javax.swing.JMenuItem();
         SamplesHelpItem = new javax.swing.JMenuItem();
@@ -1606,6 +1621,32 @@ public class MainWindow extends JFrame {
 
         MainMenubar.add(ToolsMenu);
 
+        WindowMenu.setText("Window");
+
+        CascadeWindowItem.setIcon(cascadeWindowIcon);
+        CascadeWindowItem.setText("Cascade");
+        WindowMenu.add(CascadeWindowItem);
+        WindowMenu.add(MenuSeparator14);
+
+        SplitHorizontallyWindowItem.setIcon(splitHorizontallyWindowIcon);
+        SplitHorizontallyWindowItem.setText("Split horizontally");
+        WindowMenu.add(SplitHorizontallyWindowItem);
+
+        SplitVerticallyWindowItem.setIcon(splitVerticallyWindowIcon);
+        SplitVerticallyWindowItem.setText("Split vertically");
+        WindowMenu.add(SplitVerticallyWindowItem);
+        WindowMenu.add(MenuSeparator15);
+
+        CloseWindowItem.setIcon(closeWindowIcon);
+        CloseWindowItem.setText("Close");
+        WindowMenu.add(CloseWindowItem);
+
+        CloseAllWindowItem.setIcon(closeAllWindowIcon);
+        CloseAllWindowItem.setText("Close all");
+        WindowMenu.add(CloseAllWindowItem);
+
+        MainMenubar.add(WindowMenu);
+
         HelpMenu.setText("Help");
 
         ContentsHelpItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
@@ -2038,7 +2079,7 @@ public class MainWindow extends JFrame {
         }
             
         // Show save dialog window
-        int result = JOptionPane.showConfirmDialog(currentWindow, "The file is not saved.\nSave file first?", "Save file " + fileName,
+        int result = JOptionPane.showConfirmDialog(currentWindow, "The file: " + fileName + " is not saved.\nSave file first?", "Save file confirm",
                                                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         
         switch(result) {
@@ -2051,7 +2092,7 @@ public class MainWindow extends JFrame {
                     return true;
                 } catch(IOException ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(currentWindow, "Error saving file.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(currentWindow, "Error saving file: " + fileName + "!", "Error message", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
             }
@@ -2382,8 +2423,11 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton CSourceFileTypeButton;
     private javax.swing.JButton CancelSettingsButton;
     private javax.swing.JLabel CapsStatusLabel;
+    private javax.swing.JMenuItem CascadeWindowItem;
     private javax.swing.JButton ClearBuildLogButton;
+    private javax.swing.JMenuItem CloseAllWindowItem;
     private javax.swing.JButton CloseNewFileWindowButton;
+    private javax.swing.JMenuItem CloseWindowItem;
     private javax.swing.JToolBar CommonToolbar;
     private javax.swing.JMenuItem ConfigBuildItem;
     private javax.swing.JButton ContentsHelpButton;
@@ -2444,6 +2488,8 @@ public class MainWindow extends JFrame {
     private javax.swing.JPopupMenu.Separator MenuSeparator11;
     private javax.swing.JPopupMenu.Separator MenuSeparator12;
     private javax.swing.JPopupMenu.Separator MenuSeparator13;
+    private javax.swing.JPopupMenu.Separator MenuSeparator14;
+    private javax.swing.JPopupMenu.Separator MenuSeparator15;
     private javax.swing.JPopupMenu.Separator MenuSeparator2;
     private javax.swing.JPopupMenu.Separator MenuSeparator3;
     private javax.swing.JPopupMenu.Separator MenuSeparator4;
@@ -2497,6 +2543,8 @@ public class MainWindow extends JFrame {
     private javax.swing.JTabbedPane SettingsTabs;
     private javax.swing.JDialog SettingsWindow;
     private javax.swing.JButton ShowAllMessageButton;
+    private javax.swing.JMenuItem SplitHorizontallyWindowItem;
+    private javax.swing.JMenuItem SplitVerticallyWindowItem;
     private javax.swing.JPanel StatusbarPanel;
     private javax.swing.JMenuItem StructInsertItem;
     private javax.swing.JTree StructureTreeList;
@@ -2520,6 +2568,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton UndoEditButton;
     private javax.swing.JMenuItem UndoEditItem;
     private javax.swing.JMenu ViewMenu;
+    private javax.swing.JMenu WindowMenu;
     private javax.swing.JLabel WindowThemeLabel;
     private javax.swing.JComboBox<String> WindowThemeListButton;
     private javax.swing.JMenuItem ZoomInViewItem;
