@@ -1346,9 +1346,11 @@
                   <Connection code="cascadeWindowIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cascade"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator14">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CascadeWindowItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SplitHorizontallyWindowItem">
               <Properties>
@@ -1356,6 +1358,7 @@
                   <Connection code="splitHorizontallyWindowIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Split horizontally"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SplitVerticallyWindowItem">
@@ -1364,9 +1367,10 @@
                   <Connection code="splitVerticallyWindowIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Split vertically"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator15">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator14">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="CloseWindowItem">
               <Properties>
@@ -1374,6 +1378,7 @@
                   <Connection code="closeWindowIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Close"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="CloseAllWindowItem">
@@ -1382,6 +1387,7 @@
                   <Connection code="closeAllWindowIcon" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Close all"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
           </SubComponents>

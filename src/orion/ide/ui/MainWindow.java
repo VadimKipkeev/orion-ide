@@ -176,6 +176,9 @@ public class MainWindow extends JFrame {
         
         // Set current editor theme style
         editorThemeStyle = settings.getParam("Appearance", "currentEditorStyle");
+        
+        // Set timer to check MDI windows count
+        new Timer(200, e -> compareMDIWindowsCount()).start();
     }
     
     // Get icons folder name by current theme type : function
@@ -367,10 +370,9 @@ public class MainWindow extends JFrame {
         ResManagerToolsItem = new javax.swing.JMenuItem();
         WindowMenu = new javax.swing.JMenu();
         CascadeWindowItem = new javax.swing.JMenuItem();
-        MenuSeparator14 = new javax.swing.JPopupMenu.Separator();
         SplitHorizontallyWindowItem = new javax.swing.JMenuItem();
         SplitVerticallyWindowItem = new javax.swing.JMenuItem();
-        MenuSeparator15 = new javax.swing.JPopupMenu.Separator();
+        MenuSeparator14 = new javax.swing.JPopupMenu.Separator();
         CloseWindowItem = new javax.swing.JMenuItem();
         CloseAllWindowItem = new javax.swing.JMenuItem();
         HelpMenu = new javax.swing.JMenu();
@@ -1625,24 +1627,29 @@ public class MainWindow extends JFrame {
 
         CascadeWindowItem.setIcon(cascadeWindowIcon);
         CascadeWindowItem.setText("Cascade");
+        CascadeWindowItem.setEnabled(false);
+        CascadeWindowItem.addActionListener(this::CascadeWindowItemActionPerformed);
         WindowMenu.add(CascadeWindowItem);
-        WindowMenu.add(MenuSeparator14);
 
         SplitHorizontallyWindowItem.setIcon(splitHorizontallyWindowIcon);
         SplitHorizontallyWindowItem.setText("Split horizontally");
+        SplitHorizontallyWindowItem.setEnabled(false);
         WindowMenu.add(SplitHorizontallyWindowItem);
 
         SplitVerticallyWindowItem.setIcon(splitVerticallyWindowIcon);
         SplitVerticallyWindowItem.setText("Split vertically");
+        SplitVerticallyWindowItem.setEnabled(false);
         WindowMenu.add(SplitVerticallyWindowItem);
-        WindowMenu.add(MenuSeparator15);
+        WindowMenu.add(MenuSeparator14);
 
         CloseWindowItem.setIcon(closeWindowIcon);
         CloseWindowItem.setText("Close");
+        CloseWindowItem.setEnabled(false);
         WindowMenu.add(CloseWindowItem);
 
         CloseAllWindowItem.setIcon(closeAllWindowIcon);
         CloseAllWindowItem.setText("Close all");
+        CloseAllWindowItem.setEnabled(false);
         WindowMenu.add(CloseAllWindowItem);
 
         MainMenubar.add(WindowMenu);
@@ -2184,7 +2191,78 @@ public class MainWindow extends JFrame {
         else if(WindowThemeListButton.getSelectedIndex() == 1)
             EditorStyleListButton.setSelectedIndex(1);
     }//GEN-LAST:event_WindowThemeListButtonItemStateChanged
-   
+
+    // Set cascade arrange windows by main menu item click : event
+    private void CascadeWindowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CascadeWindowItemActionPerformed
+        arrangeWindowsByCascade();
+    }//GEN-LAST:event_CascadeWindowItemActionPerformed
+    
+    // Control "Window" menu items state : function
+    private void compareMDIWindowsCount() {    
+        if(EditorMDIFrame.getAllFrames().length > 0) {
+            if(EditorMDIFrame.getAllFrames().length == 1) {
+                CascadeWindowItem.setEnabled(false);
+                SplitHorizontallyWindowItem.setEnabled(false);
+                SplitVerticallyWindowItem.setEnabled(false);
+                CloseWindowItem.setEnabled(true);
+                CloseAllWindowItem.setEnabled(false);
+            }
+                
+            if(EditorMDIFrame.getAllFrames().length == 2) {
+                CascadeWindowItem.setEnabled(true);
+                SplitHorizontallyWindowItem.setEnabled(true);
+                SplitVerticallyWindowItem.setEnabled(true);
+                CloseAllWindowItem.setEnabled(true);
+            }
+            
+            if(EditorMDIFrame.getAllFrames().length > 2) {
+                SplitHorizontallyWindowItem.setEnabled(false);
+                SplitVerticallyWindowItem.setEnabled(false);
+            }   
+        } else {
+            CascadeWindowItem.setEnabled(false);
+            SplitHorizontallyWindowItem.setEnabled(false);
+            SplitVerticallyWindowItem.setEnabled(false);
+            CloseWindowItem.setEnabled(false);
+            CloseAllWindowItem.setEnabled(false);
+        }
+    }
+    
+    // Set cascade arrange windows : function
+    private void arrangeWindowsByCascade() {
+        JInternalFrame[] allMDIWindows = EditorMDIFrame.getAllFrames();
+        
+        // Check windows count, less 2 windows, function not executing
+        if(allMDIWindows.length < 2) {
+            return;
+        }
+        
+        // Current window position
+        int currentXWinPos = (EditorMDIFrame.getWidth() / 2) - 320;
+        int currentYWinPos = 0;
+        
+        // Window position offsets
+        int positionOffset = 50;
+        
+        // Current window size
+        int currentWinWidth = 640;
+        int currentWinHeight = 480;
+        
+        for(JInternalFrame window : allMDIWindows) {
+            currentXWinPos = currentXWinPos + positionOffset;
+            currentYWinPos = currentYWinPos + positionOffset;
+            
+            try{
+                window.setIcon(false);
+                window.setMaximum(false);
+            } catch(PropertyVetoException ignored)  {}
+            
+            window.setSize(currentWinWidth, currentWinHeight);
+            window.setLocation(currentXWinPos, currentYWinPos);
+            window.toFront();
+        }
+    }
+    
     // Save current source code file : function
     private boolean saveTextFile(JInternalFrame window) throws IOException {
         
@@ -2228,71 +2306,76 @@ public class MainWindow extends JFrame {
     private boolean saveAsTextFile(JInternalFrame window) throws IOException {
         
         // Get code editor panel component
-        CodeEditorPanel editorPanel = (CodeEditorPanel) window.getContentPane().getComponent(0);
+        Component component = window.getContentPane().getComponent(0);
         
-        // Get source code text from code editor panel component
-        String sourceText = editorPanel.getEditorSourceText();
-        
-        // Set current file name
-        String fileName;
-        
-        if(window.getTitle().endsWith("*")) {
-            fileName = window.getTitle().substring(0, window.getTitle().length() - 1);
-        } else {
-            fileName = window.getTitle();
-        }
-        
-        // Set source files extensions filter
-        SourceFileFilter fileFilter = new SourceFileFilter("Source files: (*.h, *.c, *.cpp, *.ui, *.ini)",
-                                                           new String[] {"h", "c", "cpp", "ui", "ini"});
-        
-        // Create save as dialog window
-        JFileChooser fileChooserWindow = new JFileChooser();
-        fileChooserWindow.setDialogTitle("Save as");
-        fileChooserWindow.setSelectedFile(new File(fileName));
-        fileChooserWindow.setFileFilter(fileFilter);
-        fileChooserWindow.setApproveButtonText("Save");
-        
-        // Save selected file path from save as dialog window by "Save" button click
-        if(fileChooserWindow.showSaveDialog(window) == JFileChooser.APPROVE_OPTION) {
-            File currentFile = fileChooserWindow.getSelectedFile();
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
             
-            // Save source code text to file
-            try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
-                fileWriter.write(sourceText);
-                
-                window.putClientProperty("file", currentFile);
-                window.setTitle(currentFile.getName());
-                
-                if(currentFile.getName().endsWith(".h"))
-                    newFileExtension = ".h";
-                else if(currentFile.getName().endsWith(".c"))
-                    newFileExtension = ".c";
-                else if(currentFile.getName().endsWith(".cpp"))
-                    newFileExtension = ".cpp";
-                else if(currentFile.getName().endsWith(".ini"))
-                    newFileExtension = ".ini";
-                
-                editorPanel.updateTextBuffer();
-                editorPanel.setEditorSyntaxStyle();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            // Get source code text from code editor panel component
+            String sourceText = editorPanel.getEditorSourceText();
+            
+            // Set current file name
+            String fileName;
+            
+            if(window.getTitle().endsWith("*")) {
+                fileName = window.getTitle().substring(0, window.getTitle().length() - 1);
+            } else {
+                fileName = window.getTitle();
             }
             
-            // Add new file to project structure tree list
-            if(projectFilePath != null && !("").equals(projectFilePath)) {
-                if(structureTreeListModel.isLeaf(structureTreeListModel.getRoot())) {
-                    structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
-                } else {
-                    if(structureTreeListModel.getSelectedNode() == null) {
+            // Set source files extensions filter
+            SourceFileFilter fileFilter = new SourceFileFilter("Source files: (*.h, *.c, *.cpp, *.ui, *.ini)",
+                                                               new String[] {"h", "c", "cpp", "ui", "ini"});
+            
+            // Create save as dialog window
+            JFileChooser fileChooserWindow = new JFileChooser();
+            fileChooserWindow.setDialogTitle("Save as");
+            fileChooserWindow.setSelectedFile(new File(fileName));
+            fileChooserWindow.setFileFilter(fileFilter);
+            fileChooserWindow.setApproveButtonText("Save");
+            
+            // Save selected file path from save as dialog window by "Save" button click
+            if(fileChooserWindow.showSaveDialog(window) == JFileChooser.APPROVE_OPTION) {
+                File currentFile = fileChooserWindow.getSelectedFile();
+                
+                // Save source code text to file
+                try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
+                    fileWriter.write(sourceText);
+                    
+                    window.putClientProperty("file", currentFile);
+                    window.setTitle(currentFile.getName());
+                    
+                    if(currentFile.getName().endsWith(".h"))
+                        newFileExtension = ".h";
+                    else if(currentFile.getName().endsWith(".c"))
+                        newFileExtension = ".c";
+                    else if(currentFile.getName().endsWith(".cpp"))
+                        newFileExtension = ".cpp";
+                    else if(currentFile.getName().endsWith(".ini"))
+                        newFileExtension = ".ini";
+                    
+                    editorPanel.updateTextBuffer();
+                    editorPanel.setEditorSyntaxStyle();
+                
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                
+                // Add new file to project structure tree list
+                if(projectFilePath != null && !("").equals(projectFilePath)) {
+                    if(structureTreeListModel.isLeaf(structureTreeListModel.getRoot())) {
                         structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
                     } else {
-                        structureTreeListModel.addNodeByType(currentFile.getName(), false, currentFile);
+                        if(structureTreeListModel.getSelectedNode() == null) {
+                            structureTreeListModel.addFileToRoot(currentFile.getName(), currentFile);
+                        } else {
+                            structureTreeListModel.addNodeByType(currentFile.getName(), false, currentFile);
+                        }
                     }
                 }
+            } else {
+                return false;
             }
-        } else {
-            return false;
         }
         
         return true;
@@ -2489,7 +2572,6 @@ public class MainWindow extends JFrame {
     private javax.swing.JPopupMenu.Separator MenuSeparator12;
     private javax.swing.JPopupMenu.Separator MenuSeparator13;
     private javax.swing.JPopupMenu.Separator MenuSeparator14;
-    private javax.swing.JPopupMenu.Separator MenuSeparator15;
     private javax.swing.JPopupMenu.Separator MenuSeparator2;
     private javax.swing.JPopupMenu.Separator MenuSeparator3;
     private javax.swing.JPopupMenu.Separator MenuSeparator4;
