@@ -2271,7 +2271,7 @@ public class MainWindow extends JFrame {
         copyAction();
     }//GEN-LAST:event_CopyEditItemActionPerformed
 
-    // Paste text from buffer by main menu item click : event
+    // Paste saved text from buffer by main menu item click : event
     private void PasteEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasteEditItemActionPerformed
         pasteAction();
     }//GEN-LAST:event_PasteEditItemActionPerformed
@@ -2447,8 +2447,7 @@ public class MainWindow extends JFrame {
         // Get code editor panel component
         Component component = window.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             
             // Get source code text from code editor panel component
             String sourceText = editorPanel.getEditorSourceText();
@@ -2622,8 +2621,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.undoLastAction();
         } else {
             return false;
@@ -2638,8 +2636,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.redoLastAction();
         } else {
             return false;
@@ -2654,8 +2651,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.cutTextAction();
         } else {
             return false;
@@ -2670,8 +2666,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.copyTextAction();
         } else {
             return false;
@@ -2686,8 +2681,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.pasteTextAction();
         } else {
             return false;

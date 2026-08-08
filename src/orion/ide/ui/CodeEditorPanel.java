@@ -22,7 +22,6 @@ package orion.ide.ui;
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.io.IOException;
-import java.util.Locale;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -55,6 +54,13 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     public final FlatSVGIcon nextBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/next_bookmark.svg", 16, 16);
     public final FlatSVGIcon prevBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/prev_bookmark.svg", 16, 16);
     
+    // Set editor text area popup menu icons
+    public final FlatSVGIcon undoEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/undo_edit.svg", 16, 16);
+    public final FlatSVGIcon redoEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/redo_edit.svg", 16, 16);
+    public final FlatSVGIcon cutEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/cut_edit.svg", 16, 16);
+    public final FlatSVGIcon copyEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/copy_edit.svg", 16, 16);
+    public final FlatSVGIcon pasteEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/paste_edit.svg", 16, 16);
+    
     // Code editor view
     public RSyntaxTextArea editorTextArea = new RSyntaxTextArea();
     public RTextScrollPane editorTextAreaScroller = new RTextScrollPane(editorTextArea);
@@ -68,7 +74,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     public CodeEditorPanel() {
         initComponents();
   
-        editorTextArea.setPopupMenu(null); // Disable default popup menu
+        editorTextArea.setPopupMenu(EditorTextPopupMenu); // Set editor text area popup menu
         this.add(editorTextAreaScroller);
         
         // Compare text buffer with editor text area by timer
@@ -302,7 +308,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         editorTextArea.copy();
     }
  
-    // Paste text from buffer in editor text area
+    // Paste saved text from buffer in editor text area
     public void pasteTextAction() {
         editorTextArea.paste();
     }
@@ -347,6 +353,13 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        EditorTextPopupMenu = new javax.swing.JPopupMenu();
+        UndoActionItem = new javax.swing.JMenuItem();
+        RedoActionItem = new javax.swing.JMenuItem();
+        MenuSeparator13 = new javax.swing.JPopupMenu.Separator();
+        CutActionItem = new javax.swing.JMenuItem();
+        CopyActionItem = new javax.swing.JMenuItem();
+        PasteActionItem = new javax.swing.JMenuItem();
         CodeEditorToolbar = new javax.swing.JToolBar();
         FunctionsListLabel = new javax.swing.JLabel();
         FunctionsListButton = new javax.swing.JComboBox<>();
@@ -360,6 +373,37 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         NewBookmarkButton = new javax.swing.JButton();
         PrevBookmarkButton = new javax.swing.JButton();
         NextBookmarkButton = new javax.swing.JButton();
+
+        UndoActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        UndoActionItem.setIcon(undoEditIcon);
+        UndoActionItem.setText("Undo");
+        UndoActionItem.addActionListener(this::UndoActionItemActionPerformed);
+        EditorTextPopupMenu.add(UndoActionItem);
+
+        RedoActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        RedoActionItem.setIcon(redoEditIcon);
+        RedoActionItem.setText("Redo");
+        RedoActionItem.addActionListener(this::RedoActionItemActionPerformed);
+        EditorTextPopupMenu.add(RedoActionItem);
+        EditorTextPopupMenu.add(MenuSeparator13);
+
+        CutActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        CutActionItem.setIcon(cutEditIcon);
+        CutActionItem.setText("Cut");
+        CutActionItem.addActionListener(this::CutActionItemActionPerformed);
+        EditorTextPopupMenu.add(CutActionItem);
+
+        CopyActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        CopyActionItem.setIcon(copyEditIcon);
+        CopyActionItem.setText("Copy");
+        CopyActionItem.addActionListener(this::CopyActionItemActionPerformed);
+        EditorTextPopupMenu.add(CopyActionItem);
+
+        PasteActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        PasteActionItem.setIcon(pasteEditIcon);
+        PasteActionItem.setText("Paste");
+        PasteActionItem.addActionListener(this::PasteActionItemActionPerformed);
+        EditorTextPopupMenu.add(PasteActionItem);
 
         setLayout(new java.awt.BorderLayout());
 
@@ -446,19 +490,51 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         add(CodeEditorToolbar, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
+    // Undo last action by editor text area popup menu item click : event
+    private void UndoActionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoActionItemActionPerformed
+        this.undoLastAction();
+    }//GEN-LAST:event_UndoActionItemActionPerformed
+
+    // Redo last action by editor text area popup menu item click : event
+    private void RedoActionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoActionItemActionPerformed
+        this.redoLastAction();
+    }//GEN-LAST:event_RedoActionItemActionPerformed
+
+    // Cut selected text by editor text area popup menu item click : event
+    private void CutActionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CutActionItemActionPerformed
+        this.cutTextAction();
+    }//GEN-LAST:event_CutActionItemActionPerformed
+
+    // Copy selected text by editor text area popup menu item click : event
+    private void CopyActionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CopyActionItemActionPerformed
+        this.copyTextAction();
+    }//GEN-LAST:event_CopyActionItemActionPerformed
+
+    // Paste copied text from buffer by editor text area popup menu item click : event
+    private void PasteActionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasteActionItemActionPerformed
+        this.pasteTextAction();
+    }//GEN-LAST:event_PasteActionItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar CodeEditorToolbar;
+    private javax.swing.JMenuItem CopyActionItem;
+    private javax.swing.JMenuItem CutActionItem;
+    private javax.swing.JPopupMenu EditorTextPopupMenu;
     private javax.swing.JComboBox<String> FunctionsListButton;
     private javax.swing.JLabel FunctionsListLabel;
     private javax.swing.JButton GoToButton;
     private javax.swing.JButton InsertEnumButton;
     private javax.swing.JButton InsertFunctionButton;
     private javax.swing.JButton InsertStructureButton;
+    private javax.swing.JPopupMenu.Separator MenuSeparator13;
     private javax.swing.JButton NewBookmarkButton;
     private javax.swing.JButton NextBookmarkButton;
+    private javax.swing.JMenuItem PasteActionItem;
     private javax.swing.JButton PrevBookmarkButton;
+    private javax.swing.JMenuItem RedoActionItem;
     private javax.swing.JToolBar.Separator ToolbarSeparator10;
     private javax.swing.JToolBar.Separator ToolbarSeparator11;
     private javax.swing.JToolBar.Separator ToolbarSeparator12;
+    private javax.swing.JMenuItem UndoActionItem;
     // End of variables declaration//GEN-END:variables
 }
