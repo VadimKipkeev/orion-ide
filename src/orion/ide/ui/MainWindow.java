@@ -1634,22 +1634,26 @@ public class MainWindow extends JFrame {
         SplitHorizontallyWindowItem.setIcon(splitHorizontallyWindowIcon);
         SplitHorizontallyWindowItem.setText("Split horizontally");
         SplitHorizontallyWindowItem.setEnabled(false);
+        SplitHorizontallyWindowItem.addActionListener(this::SplitHorizontallyWindowItemActionPerformed);
         WindowMenu.add(SplitHorizontallyWindowItem);
 
         SplitVerticallyWindowItem.setIcon(splitVerticallyWindowIcon);
         SplitVerticallyWindowItem.setText("Split vertically");
         SplitVerticallyWindowItem.setEnabled(false);
+        SplitVerticallyWindowItem.addActionListener(this::SplitVerticallyWindowItemActionPerformed);
         WindowMenu.add(SplitVerticallyWindowItem);
         WindowMenu.add(MenuSeparator14);
 
         CloseWindowItem.setIcon(closeWindowIcon);
         CloseWindowItem.setText("Close");
         CloseWindowItem.setEnabled(false);
+        CloseWindowItem.addActionListener(this::CloseWindowItemActionPerformed);
         WindowMenu.add(CloseWindowItem);
 
         CloseAllWindowItem.setIcon(closeAllWindowIcon);
         CloseAllWindowItem.setText("Close all");
         CloseAllWindowItem.setEnabled(false);
+        CloseAllWindowItem.addActionListener(this::CloseAllWindowItemActionPerformed);
         WindowMenu.add(CloseAllWindowItem);
 
         MainMenubar.add(WindowMenu);
@@ -2064,7 +2068,7 @@ public class MainWindow extends JFrame {
         System.exit(0);
     }
     
-    // Show dialog window for save file by editor window close button click : function
+    // Show dialog window for save file by editor MDI window close button click : function
     private boolean handleEditorWindowClosing(JInternalFrame window) {
         JInternalFrame currentWindow = window;
         CodeEditorPanel editorPanel = (CodeEditorPanel) currentWindow.getContentPane().getComponent(0);
@@ -2117,6 +2121,19 @@ public class MainWindow extends JFrame {
             
             default -> {
                 return false;
+            }
+        }
+    }
+    
+    // Close all MDI windows : function
+    private void closeAllEditorWindows() {
+        JInternalFrame[] editorWindows = EditorMDIFrame.getAllFrames();
+        
+        for(JInternalFrame window : editorWindows) {
+            boolean isProceed = handleEditorWindowClosing(window);
+            
+            if(!isProceed) {
+                return;
             }
         }
     }
@@ -2192,10 +2209,30 @@ public class MainWindow extends JFrame {
             EditorStyleListButton.setSelectedIndex(1);
     }//GEN-LAST:event_WindowThemeListButtonItemStateChanged
 
-    // Set cascade arrange windows by main menu item click : event
+    // Set cascade arrange editor MDI windows by main menu item click : event
     private void CascadeWindowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CascadeWindowItemActionPerformed
         arrangeWindowsByCascade();
     }//GEN-LAST:event_CascadeWindowItemActionPerformed
+
+    // Set split horizontally editor MDI windows by main menu item click : event
+    private void SplitHorizontallyWindowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SplitHorizontallyWindowItemActionPerformed
+        splitWindowsByHorizontally();
+    }//GEN-LAST:event_SplitHorizontallyWindowItemActionPerformed
+
+    // Set split vertically editor MDI windows by main menu item click : event
+    private void SplitVerticallyWindowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SplitVerticallyWindowItemActionPerformed
+        splitWindowsByVertically();
+    }//GEN-LAST:event_SplitVerticallyWindowItemActionPerformed
+
+    // Close selected editor MDI window by main menu item click : event
+    private void CloseWindowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseWindowItemActionPerformed
+        handleEditorWindowClosing(EditorMDIFrame.getSelectedFrame());
+    }//GEN-LAST:event_CloseWindowItemActionPerformed
+
+    // Close all editor MDI windows by main menu item click : event
+    private void CloseAllWindowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseAllWindowItemActionPerformed
+        closeAllEditorWindows();
+    }//GEN-LAST:event_CloseAllWindowItemActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
@@ -2228,7 +2265,7 @@ public class MainWindow extends JFrame {
         }
     }
     
-    // Set cascade arrange windows : function
+    // Set cascade arrange editor MDI windows : function
     private void arrangeWindowsByCascade() {
         JInternalFrame[] allMDIWindows = EditorMDIFrame.getAllFrames();
         
@@ -2261,6 +2298,66 @@ public class MainWindow extends JFrame {
             window.setLocation(currentXWinPos, currentYWinPos);
             window.toFront();
         }
+    }
+    
+    // Split horizontally editor MDI windows : function
+    private void splitWindowsByHorizontally() {
+        JInternalFrame[] windows = EditorMDIFrame.getAllFrames();
+        
+        // Check MDI windows count, only with 2 windows code executed
+        if(windows.length != 2) {
+            return;
+        }
+        
+        try{
+                // Set not maximize left MDI window
+                windows[0].setIcon(false);
+                windows[0].setMaximum(false);
+                
+                // Set not maximize right MDI window
+                windows[1].setIcon(false);
+                windows[1].setMaximum(false);
+        } catch(PropertyVetoException ignored)  {}
+        
+        // Set left window size and position
+        windows[0].setSize(EditorMDIFrame.getWidth() / 2, EditorMDIFrame.getHeight());
+        windows[0].setLocation(0, 0);
+        windows[0].toFront();
+        
+        // Set right window size and position
+        windows[1].setSize(EditorMDIFrame.getWidth() / 2, EditorMDIFrame.getHeight());
+        windows[1].setLocation(EditorMDIFrame.getWidth() / 2, 0);
+        windows[1].toFront();
+    }
+    
+    // Split vertically editor MDI windows : function
+    private void splitWindowsByVertically() {
+        JInternalFrame[] windows = EditorMDIFrame.getAllFrames();
+        
+        // Check MDI windows count, only with 2 windows code executed
+        if(windows.length != 2) {
+            return;
+        }
+        
+        try{
+                // Set not maximize left MDI window
+                windows[0].setIcon(false);
+                windows[0].setMaximum(false);
+                
+                // Set not maximize right MDI window
+                windows[1].setIcon(false);
+                windows[1].setMaximum(false);
+        } catch(PropertyVetoException ignored)  {}
+        
+        // Set left window size and position
+        windows[0].setSize(EditorMDIFrame.getWidth(), EditorMDIFrame.getHeight() / 2);
+        windows[0].setLocation(0, 0);
+        windows[0].toFront();
+        
+        // Set right window size and position
+        windows[1].setSize(EditorMDIFrame.getWidth(), EditorMDIFrame.getHeight() / 2);
+        windows[1].setLocation(0, EditorMDIFrame.getHeight() / 2);
+        windows[1].toFront();
     }
     
     // Save current source code file : function

@@ -1360,6 +1360,9 @@
                 <Property name="text" type="java.lang.String" value="Split horizontally"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SplitHorizontallyWindowItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SplitVerticallyWindowItem">
               <Properties>
@@ -1369,6 +1372,9 @@
                 <Property name="text" type="java.lang.String" value="Split vertically"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SplitVerticallyWindowItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator14">
             </MenuItem>
@@ -1380,6 +1386,9 @@
                 <Property name="text" type="java.lang.String" value="Close"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CloseWindowItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="CloseAllWindowItem">
               <Properties>
@@ -1389,6 +1398,9 @@
                 <Property name="text" type="java.lang.String" value="Close all"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CloseAllWindowItemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
