@@ -22,6 +22,7 @@ package orion.ide.ui;
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.io.IOException;
+import java.util.Locale;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -67,6 +68,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     public CodeEditorPanel() {
         initComponents();
   
+        editorTextArea.setPopupMenu(null); // Disable default popup menu
         this.add(editorTextAreaScroller);
         
         // Compare text buffer with editor text area by timer
@@ -279,7 +281,31 @@ public class CodeEditorPanel extends javax.swing.JPanel {
             }
         }
     }
+    
+    // Undo editor text area : method
+    public void undoLastAction () {
+        editorTextArea.undoLastAction();
+    }
+    
+    // Redo editor text area : method
+    public void redoLastAction() {
+        editorTextArea.redoLastAction();
+    }
+    
+    // Cut selected text in editor text area : method
+    public void cutTextAction () {
+        editorTextArea.cut();
+    }
+    
+    // Copy selected text in editor text area : method
+    public void copyTextAction() {
+        editorTextArea.copy();
+    }
  
+    // Paste text from buffer in editor text area
+    public void pasteTextAction() {
+        editorTextArea.paste();
+    }
     
     // Check source text and text buffer to hidden symbols : method
     public boolean isModified() {

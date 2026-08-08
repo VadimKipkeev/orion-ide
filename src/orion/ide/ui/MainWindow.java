@@ -897,6 +897,7 @@ public class MainWindow extends JFrame {
         UndoEditButton.setMinimumSize(new java.awt.Dimension(24, 24));
         UndoEditButton.setPreferredSize(new java.awt.Dimension(24, 24));
         UndoEditButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        UndoEditButton.addActionListener(this::UndoEditButtonActionPerformed);
         CommonToolbar.add(UndoEditButton);
 
         RedoEditButton.setIcon(redoEditIcon);
@@ -907,6 +908,7 @@ public class MainWindow extends JFrame {
         RedoEditButton.setMinimumSize(new java.awt.Dimension(24, 24));
         RedoEditButton.setPreferredSize(new java.awt.Dimension(24, 24));
         RedoEditButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        RedoEditButton.addActionListener(this::RedoEditButtonActionPerformed);
         CommonToolbar.add(RedoEditButton);
         CommonToolbar.add(ToolbarSeparator3);
 
@@ -1461,27 +1463,32 @@ public class MainWindow extends JFrame {
         UndoEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         UndoEditItem.setIcon(undoEditIcon);
         UndoEditItem.setText("Undo");
+        UndoEditItem.addActionListener(this::UndoEditItemActionPerformed);
         EditMenu.add(UndoEditItem);
 
         RedoEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         RedoEditItem.setIcon(redoEditIcon);
         RedoEditItem.setText("Redo");
+        RedoEditItem.addActionListener(this::RedoEditItemActionPerformed);
         EditMenu.add(RedoEditItem);
         EditMenu.add(MenuSeparator4);
 
         CutEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         CutEditItem.setIcon(cutEditIcon);
         CutEditItem.setText("Cut");
+        CutEditItem.addActionListener(this::CutEditItemActionPerformed);
         EditMenu.add(CutEditItem);
 
         CopyEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         CopyEditItem.setIcon(copyEditIcon);
         CopyEditItem.setText("Copy");
+        CopyEditItem.addActionListener(this::CopyEditItemActionPerformed);
         EditMenu.add(CopyEditItem);
 
         PasteEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         PasteEditItem.setIcon(pasteEditIcon);
         PasteEditItem.setText("Paste");
+        PasteEditItem.addActionListener(this::PasteEditItemActionPerformed);
         EditMenu.add(PasteEditItem);
         EditMenu.add(MenuSeparator5);
 
@@ -2233,6 +2240,41 @@ public class MainWindow extends JFrame {
     private void CloseAllWindowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseAllWindowItemActionPerformed
         closeAllEditorWindows();
     }//GEN-LAST:event_CloseAllWindowItemActionPerformed
+
+    // Undo last action by main menu item click : event
+    private void UndoEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoEditItemActionPerformed
+        undoAction();
+    }//GEN-LAST:event_UndoEditItemActionPerformed
+
+    // Undo last action by toolbar button click : event
+    private void UndoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoEditButtonActionPerformed
+        undoAction();
+    }//GEN-LAST:event_UndoEditButtonActionPerformed
+
+    // Redo last action by main menu item click : event
+    private void RedoEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoEditItemActionPerformed
+        redoAction();
+    }//GEN-LAST:event_RedoEditItemActionPerformed
+
+    // Redo last action by toolbar button click : event 
+    private void RedoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoEditButtonActionPerformed
+        redoAction();
+    }//GEN-LAST:event_RedoEditButtonActionPerformed
+
+    // Cut selected text by main menu item click : event
+    private void CutEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CutEditItemActionPerformed
+        cutAction();
+    }//GEN-LAST:event_CutEditItemActionPerformed
+
+    // Copy selected text by main menu item click : event
+    private void CopyEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CopyEditItemActionPerformed
+        copyAction();
+    }//GEN-LAST:event_CopyEditItemActionPerformed
+
+    // Paste text from buffer by main menu item click : event
+    private void PasteEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasteEditItemActionPerformed
+        pasteAction();
+    }//GEN-LAST:event_PasteEditItemActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
@@ -2567,6 +2609,86 @@ public class MainWindow extends JFrame {
                     System.getLogger(MainWindow.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                 }
             
+        } else {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    // Undo action : function
+    private boolean undoAction() {
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.undoLastAction();
+        } else {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    // Redo action : function
+    private boolean redoAction() {
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.redoLastAction();
+        } else {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    // Cut action : function
+    private boolean cutAction() {
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.cutTextAction();
+        } else {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    // Copy action : function
+    private boolean copyAction() {
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.copyTextAction();
+        } else {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    // Paste action : function
+    private boolean pasteAction() {
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.pasteTextAction();
         } else {
             return false;
         }
