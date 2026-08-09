@@ -1,0 +1,11 @@
+Light icons:
+Dark #202020
+Green #11960D
+Blue #177CC9
+Gold #C49632
+
+Dark icons:
+Light #B6B6B6
+Green #94F591
+Blue #64AAE0
+Gold #FFDF9A

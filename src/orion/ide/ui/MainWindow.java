@@ -24,6 +24,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.ibm.icu.text.CharsetDetector;
+import com.ibm.icu.text.CharsetMatch;
 import java.beans.PropertyVetoException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -2015,6 +2017,9 @@ public class MainWindow extends JFrame {
         
                 editorWindow.toFront();
                 
+                EncodeStatusLabel.setText("NOT");
+                EncodeStatusLabel.setToolTipText("Text encoding information");
+                
                 try {
                     editorWindow.setSelected(true);
                 } catch (PropertyVetoException ex) {
@@ -2297,13 +2302,26 @@ public class MainWindow extends JFrame {
             if(EditorMDIFrame.getAllFrames().length > 2) {
                 SplitHorizontallyWindowItem.setEnabled(false);
                 SplitVerticallyWindowItem.setEnabled(false);
-            }   
+            }
+            
+            String currentFileEncode = (String) EditorMDIFrame.getSelectedFrame().getClientProperty("encoding");
+            
+            if(currentFileEncode != null) {
+                EncodeStatusLabel.setText(currentFileEncode);
+                EncodeStatusLabel.setToolTipText(currentFileEncode);
+            } else {
+                EncodeStatusLabel.setText("NOT");
+                EncodeStatusLabel.setToolTipText("Text encoding information");
+            }
         } else {
             CascadeWindowItem.setEnabled(false);
             SplitHorizontallyWindowItem.setEnabled(false);
             SplitVerticallyWindowItem.setEnabled(false);
             CloseWindowItem.setEnabled(false);
             CloseAllWindowItem.setEnabled(false);
+            
+            EncodeStatusLabel.setText("NOT");
+            EncodeStatusLabel.setToolTipText("Text encoding information");
         }
     }
     
@@ -2481,7 +2499,19 @@ public class MainWindow extends JFrame {
                     fileWriter.write(sourceText);
                     
                     window.putClientProperty("file", currentFile);
+                    
+                    // Detecting current file encode type
+                    CharsetDetector fileCharset = new CharsetDetector();
+                    fileCharset.setText(Files.readAllBytes(Path.of(currentFile.getPath())));
+                    CharsetMatch match = fileCharset.detect();
+                    String fileEncoding = match.getName();
+                    
+                    window.putClientProperty("encoding", fileEncoding);
                     window.setTitle(currentFile.getName());
+                    
+                    // Show current file encode type
+                    EncodeStatusLabel.setText(fileEncoding);
+                    EncodeStatusLabel.setToolTipText(fileEncoding);
                     
                     if(currentFile.getName().endsWith(".h"))
                         newFileExtension = ".h";
@@ -2567,6 +2597,12 @@ public class MainWindow extends JFrame {
         if(fileChooserWindow.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             File currentFile = fileChooserWindow.getSelectedFile();
             
+            // Detecting current file encode type
+            CharsetDetector fileCharset = new CharsetDetector();
+            fileCharset.setText(Files.readAllBytes(Path.of(currentFile.getPath())));
+            CharsetMatch match = fileCharset.detect();
+            String fileEncoding = match.getName();
+            
             if(currentFile.getName().endsWith(".h"))
                 newFileExtension = ".h";
             else if(currentFile.getName().endsWith(".c"))
@@ -2589,6 +2625,7 @@ public class MainWindow extends JFrame {
                 editorWindow.add(editorPanel);
                 editorWindow.setVisible(true);
                 editorWindow.putClientProperty("file", currentFile);
+                editorWindow.putClientProperty("encoding", fileEncoding);
                 editorWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 editorWindow.addInternalFrameListener(new InternalFrameAdapter() {
                     
@@ -2601,6 +2638,10 @@ public class MainWindow extends JFrame {
                 EditorMDIFrame.add(editorWindow);
         
                 editorWindow.toFront();
+                
+                // Show current file encode type
+                EncodeStatusLabel.setText(fileEncoding);
+                EncodeStatusLabel.setToolTipText(fileEncoding);
                 
                 try {
                     editorWindow.setSelected(true);
