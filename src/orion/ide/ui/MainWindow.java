@@ -27,12 +27,15 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 import java.beans.PropertyVetoException;
+import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -2599,12 +2602,22 @@ public class MainWindow extends JFrame {
         // Open selected file from open file dialog window by "Open" button click
         if(fileChooserWindow.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             File currentFile = fileChooserWindow.getSelectedFile();
+            Path filePath = currentFile.toPath();
             
             // Detecting current file encode type
-            CharsetDetector fileCharset = new CharsetDetector();
-            fileCharset.setText(Files.readAllBytes(Path.of(currentFile.getPath())));
-            CharsetMatch match = fileCharset.detect();
-            String fileEncoding = match.getName();
+            String fileEncoding;
+            
+            try(InputStream fileStream = new BufferedInputStream(Files.newInputStream(filePath))){
+                CharsetDetector fileCharset = new CharsetDetector();
+                fileCharset.setText(fileStream);
+                CharsetMatch match = fileCharset.detect();
+                fileEncoding = (match != null) ? match.getName() : "UTF-8";
+                
+                // Check file encoding for UTF-8 detected
+                if ("ISO-8859-1".equalsIgnoreCase(fileEncoding) || "US-ASCII".equalsIgnoreCase(fileEncoding)) {
+                    fileEncoding = "UTF-8";
+                }
+            }
             
             if(currentFile.getName().endsWith(".h"))
                 newFileExtension = ".h";
@@ -2619,7 +2632,7 @@ public class MainWindow extends JFrame {
                 JInternalFrame editorWindow = new JInternalFrame(currentFile.getName(), true, true, true, true);
                 
                 CodeEditorPanel editorPanel = new CodeEditorPanel();
-                editorPanel.setEditorSourceText(Files.readString(Path.of(currentFile.getPath())));
+                editorPanel.setEditorSourceText(Files.readString(filePath, Charset.forName(fileEncoding)));
                 editorPanel.updateTextBuffer();
                 editorPanel.updateEditorTheme(editorThemeStyle);
                 editorPanel.setEditorSyntaxStyle();
