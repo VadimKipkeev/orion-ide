@@ -29,8 +29,11 @@ import com.ibm.icu.text.CharsetMatch;
 import java.beans.PropertyVetoException;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.swing.event.InternalFrameAdapter;
@@ -2445,7 +2448,7 @@ public class MainWindow extends JFrame {
         String sourceText = editorPanel.getEditorSourceText();
         
         // Save source code text to file
-        try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
+        try(Writer fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(currentFile), StandardCharsets.UTF_8))) {
             fileWriter.write(sourceText);
             
             currentActiveWindow.putClientProperty("file", currentFile);
@@ -2495,7 +2498,7 @@ public class MainWindow extends JFrame {
                 File currentFile = fileChooserWindow.getSelectedFile();
                 
                 // Save source code text to file
-                try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
+                try(BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(currentFile), StandardCharsets.UTF_8))) {
                     fileWriter.write(sourceText);
                     
                     window.putClientProperty("file", currentFile);
@@ -2565,7 +2568,7 @@ public class MainWindow extends JFrame {
             if(currentFile != null) {
             
                 // Save source code text to file
-                try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(currentFile))) {
+                try(BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(currentFile), StandardCharsets.UTF_8))) {
                     fileWriter.write(sourceText);
                     
                     editorWindows.setTitle(currentFile.getName());
