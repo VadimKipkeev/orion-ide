@@ -1175,6 +1175,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Set default"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SetDefViewItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator9">
             </MenuItem>

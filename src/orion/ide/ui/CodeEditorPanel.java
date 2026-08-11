@@ -46,6 +46,9 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     private String textBuffer = new String();
     private boolean isFileModified;
     
+    // Editor text area font size used by default zoom size
+    public int defaultEditorFontSize;
+    
     // Set toolbar buttons icons
     public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/go_to_view.svg", 16, 16);
     public final FlatSVGIcon structureInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_structure.svg", 16, 16);
@@ -320,7 +323,10 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         CodeEditorTextAreaZoomListener zoomListener = new CodeEditorTextAreaZoomListener(editorTextArea);
         
         int currentSize = editorTextArea.getFont().getSize();
-        zoomListener.zoomToSize(currentSize + 1);
+        
+        if(currentSize <= 58) {
+            zoomListener.zoomToSize(currentSize + 2);
+        }
     }
     
     // Zoom out view editor text area : method
@@ -329,11 +335,18 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         
         int currentSize = editorTextArea.getFont().getSize();
         
-        if(currentSize < 9) {
-            return;
+        if(currentSize >= 10) {
+            zoomListener.zoomToSize(currentSize - 2);
         }
+    }
+    
+    // Default zoom view editor text area : method
+    public void setDefaultZoom() {
+        CodeEditorTextAreaZoomListener zoomListener = new CodeEditorTextAreaZoomListener(editorTextArea);
         
-        zoomListener.zoomToSize(currentSize - 1);
+        if(defaultEditorFontSize >= 8) {
+            zoomListener.zoomToSize(defaultEditorFontSize);
+        }
     }
     
     // Check source text and text buffer to hidden symbols : method

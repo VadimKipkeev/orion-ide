@@ -112,7 +112,7 @@ public class SettingsManager {
             fileWriter.newLine();
             fileWriter.write("currentEditorStyle = 0");
             fileWriter.newLine();
-            fileWriter.write("currentFontSize = 12");
+            fileWriter.write("currentFontSize = 14");
             fileWriter.newLine();
             fileWriter.write("[Git]");
             fileWriter.newLine();

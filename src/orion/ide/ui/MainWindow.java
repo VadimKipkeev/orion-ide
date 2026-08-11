@@ -67,6 +67,9 @@ public class MainWindow extends JFrame {
     // Current editor theme style
     private static String editorThemeStyle;
     
+    // Default editor text area font size global param
+    private static int editorFontSize;
+    
     // New file name string
     private static String newFileFullName;
     
@@ -184,6 +187,9 @@ public class MainWindow extends JFrame {
         
         // Set current editor theme style
         editorThemeStyle = settings.getParam("Appearance", "currentEditorStyle");
+        
+        // Set default editor text area font size
+        editorFontSize = Integer.parseInt(settings.getParam("Appearance", "currentFontSize"));
         
         // Set timer to check MDI windows count
         new Timer(200, e -> compareMDIWindowsCount()).start();
@@ -1549,6 +1555,7 @@ public class MainWindow extends JFrame {
         SetDefViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         SetDefViewItem.setIcon(setDefaultViewIcon);
         SetDefViewItem.setText("Set default");
+        SetDefViewItem.addActionListener(this::SetDefViewItemActionPerformed);
         ViewMenu.add(SetDefViewItem);
         ViewMenu.add(MenuSeparator9);
 
@@ -1858,6 +1865,9 @@ public class MainWindow extends JFrame {
                 editorPanel.updateEditorTheme(editorThemeStyle);
             }
         });
+
+        // Set default editor text area font size
+        editorFontSize = Integer.parseInt(settings.getParam("Appearance", "currentFontSize"));
         
         // Close settings window
         SettingsWindow.dispose();
@@ -1867,7 +1877,14 @@ public class MainWindow extends JFrame {
     private void saveSettingsParams() {
         settings.storeParam("Appearance", "currentTheme", Integer.toString(WindowThemeListButton.getSelectedIndex()));
         settings.storeParam("Appearance", "currentEditorStyle", Integer.toString(EditorStyleListButton.getSelectedIndex()));
-        settings.storeParam("Appearance", "currentFontSize", Integer.toString((int) EditorFontSizeSpinner.getValue()));
+        
+        if(8 <= (int) EditorFontSizeSpinner.getValue() && 60 >= (int) EditorFontSizeSpinner.getValue()) {
+            settings.storeParam("Appearance", "currentFontSize", Integer.toString((int) EditorFontSizeSpinner.getValue()));
+        } else if(8 > (int) EditorFontSizeSpinner.getValue()) {
+            settings.storeParam("Appearance", "currentFontSize", "8");
+        } else if(60 < (int) EditorFontSizeSpinner.getValue()) {
+            settings.storeParam("Appearance", "currentFontSize", "60");
+        }
         
         settings.storeParam("Git", "gitLogin", GitLoginTextInput.getText());
         settings.storeParam("Git", "gitPassword", String.valueOf(GitPasswordTextInput.getPassword()));
@@ -2007,6 +2024,8 @@ public class MainWindow extends JFrame {
                 editorPanel.updateTextBuffer();
                 editorPanel.updateEditorTheme(editorThemeStyle);
                 editorPanel.setEditorSyntaxStyle();
+                editorPanel.defaultEditorFontSize = editorFontSize;
+                editorPanel.setDefaultZoom();
                 
                 editorWindow.setSize(600, 400);
                 editorWindow.add(editorPanel);
@@ -2310,6 +2329,20 @@ public class MainWindow extends JFrame {
             editorPanel.zoomOutAction();
         }
     }//GEN-LAST:event_ZoomOutViewItemActionPerformed
+
+    // Set default zoom view editor text area by main menu item click : event
+    private void SetDefViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetDefViewItemActionPerformed
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        editorFontSize = Integer.parseInt(settings.getParam("Appearance", "currentFontSize"));
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.defaultEditorFontSize = editorFontSize;
+            editorPanel.setDefaultZoom();
+        }   
+    }//GEN-LAST:event_SetDefViewItemActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
@@ -2660,6 +2693,8 @@ public class MainWindow extends JFrame {
                 editorPanel.updateTextBuffer();
                 editorPanel.updateEditorTheme(editorThemeStyle);
                 editorPanel.setEditorSyntaxStyle();
+                editorPanel.defaultEditorFontSize = editorFontSize;
+                editorPanel.setDefaultZoom();
                 
                 editorWindow.setSize(600, 400);
                 editorWindow.add(editorPanel);
