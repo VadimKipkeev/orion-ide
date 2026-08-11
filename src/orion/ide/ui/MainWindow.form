@@ -1147,6 +1147,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Zoom in"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ZoomInViewItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ZoomOutViewItem">
               <Properties>
@@ -1158,6 +1161,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Zoom out"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ZoomOutViewItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SetDefViewItem">
               <Properties>

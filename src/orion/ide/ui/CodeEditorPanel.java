@@ -27,6 +27,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
+import orion.ide.core.CodeEditorTextAreaZoomListener;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -75,6 +76,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         initComponents();
   
         editorTextArea.setPopupMenu(EditorTextPopupMenu); // Set editor text area popup menu
+        editorTextArea.addMouseWheelListener(new CodeEditorTextAreaZoomListener(editorTextArea)); // Set editor text area mouse wheel scroll event listener
         this.add(editorTextAreaScroller);
         
         // Compare text buffer with editor text area by timer
@@ -311,6 +313,27 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     // Paste saved text from buffer in editor text area
     public void pasteTextAction() {
         editorTextArea.paste();
+    }
+    
+    // Zoom in view editor text area : method
+    public void zoomInAction() {
+        CodeEditorTextAreaZoomListener zoomListener = new CodeEditorTextAreaZoomListener(editorTextArea);
+        
+        int currentSize = editorTextArea.getFont().getSize();
+        zoomListener.zoomToSize(currentSize + 1);
+    }
+    
+    // Zoom out view editor text area : method
+    public void zoomOutAction() {
+        CodeEditorTextAreaZoomListener zoomListener = new CodeEditorTextAreaZoomListener(editorTextArea);
+        
+        int currentSize = editorTextArea.getFont().getSize();
+        
+        if(currentSize < 9) {
+            return;
+        }
+        
+        zoomListener.zoomToSize(currentSize - 1);
     }
     
     // Check source text and text buffer to hidden symbols : method

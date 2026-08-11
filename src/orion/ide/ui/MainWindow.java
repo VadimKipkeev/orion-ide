@@ -1537,11 +1537,13 @@ public class MainWindow extends JFrame {
         ZoomInViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_EQUALS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         ZoomInViewItem.setIcon(zoomInViewIcon);
         ZoomInViewItem.setText("Zoom in");
+        ZoomInViewItem.addActionListener(this::ZoomInViewItemActionPerformed);
         ViewMenu.add(ZoomInViewItem);
 
         ZoomOutViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_MINUS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         ZoomOutViewItem.setIcon(zoomOutViewIcon);
         ZoomOutViewItem.setText("Zoom out");
+        ZoomOutViewItem.addActionListener(this::ZoomOutViewItemActionPerformed);
         ViewMenu.add(ZoomOutViewItem);
 
         SetDefViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -2286,6 +2288,28 @@ public class MainWindow extends JFrame {
     private void PasteEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasteEditItemActionPerformed
         pasteAction();
     }//GEN-LAST:event_PasteEditItemActionPerformed
+
+    // Zoom in view editor text area by main menu item click : event
+    private void ZoomInViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZoomInViewItemActionPerformed
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.zoomInAction();
+        }
+    }//GEN-LAST:event_ZoomInViewItemActionPerformed
+
+    // Zoom out view editor text area by main menu item click : event
+    private void ZoomOutViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZoomOutViewItemActionPerformed
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.zoomOutAction();
+        }
+    }//GEN-LAST:event_ZoomOutViewItemActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
