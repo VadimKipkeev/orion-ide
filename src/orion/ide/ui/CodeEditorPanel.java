@@ -21,6 +21,8 @@ package orion.ide.ui;
  * -----------------------------------------------------------------------------
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
@@ -32,6 +34,7 @@ import javax.swing.Timer;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
 import orion.ide.core.CodeEditorTextAreaZoomListener;
+import orion.ide.core.NumericFieldHelper;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -85,6 +88,9 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         editorTextArea.setPopupMenu(EditorTextPopupMenu); // Set editor text area popup menu
         editorTextArea.addMouseWheelListener(new CodeEditorTextAreaZoomListener(editorTextArea)); // Set editor text area mouse wheel scroll event listener
         this.add(editorTextAreaScroller);
+        
+        // Set input filter for line number text field
+        NumericFieldHelper.makeNumericOnly(GoToLineTextInput);
         
         // Compare text buffer with editor text area by timer
         new Timer(300, e -> checkFileModifiedStatus()).start();
@@ -397,6 +403,16 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         return true;
     }
     
+    // Show go to dialog window : method
+    public void showGoToDialogWindow() {
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenX = (screenSize.width - GoToDialogWindow.getWidth()) / 2;
+        int screenY = (screenSize.height - GoToDialogWindow.getHeight()) / 2;
+        
+        GoToDialogWindow.setLocation(screenX, screenY);
+        GoToDialogWindow.setVisible(true);
+    }
+    
     // Check source text and text buffer to hidden symbols : method
     public boolean isModified() {
         String currentText = editorTextArea.getText().replace("\r\n", "\n").trim();
@@ -427,6 +443,53 @@ public class CodeEditorPanel extends javax.swing.JPanel {
             return false;
         }
     }
+    
+    // Go to line by number : function
+    private void goToLineByNumber(int lineNumber) {
+        try {
+            int lineIndex = lineNumber - 1;
+            
+            // Check this line on exists in editor text area
+            if(lineIndex < 0 || lineIndex >= editorTextArea.getLineCount()) {
+                JOptionPane.showMessageDialog(null, "Line " + String.valueOf(lineNumber) + " is not exist!");
+                return;
+            }
+            
+            int lineOffset = editorTextArea.getLineStartOffset(lineIndex);
+            
+            // Go to line
+            editorTextArea.setCaretPosition(lineOffset);
+            editorTextArea.requestFocusInWindow();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    // Go to line by string : function
+    private void goToLineByString(String textToFind) {
+        if(textToFind == null || textToFind.isEmpty()) {
+            return;
+        }
+        
+        // Set find context
+        SearchContext context = new SearchContext();
+        context.setSearchFor(textToFind);
+        context.setMatchCase(false); // Without case sensitive
+        context.setWholeWord(false); // Not search substring 
+        context.setSearchForward(true); // Search next position
+        context.setMarkAll(false); // Not markup all results
+        
+        // Find string
+        SearchResult result = SearchEngine.find(editorTextArea, context);
+        
+        // Find next position by result is false
+        if(!result.wasFound()) {
+            editorTextArea.setCaretPosition(0);
+            SearchEngine.find(editorTextArea, context);
+        }
+        
+        editorTextArea.requestFocusInWindow();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -444,6 +507,13 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         CutActionItem = new javax.swing.JMenuItem();
         CopyActionItem = new javax.swing.JMenuItem();
         PasteActionItem = new javax.swing.JMenuItem();
+        GoToDialogWindow = new javax.swing.JDialog();
+        GoToLineLabel = new javax.swing.JLabel();
+        GoToLineTextInput = new javax.swing.JTextField();
+        GoToLineButton = new javax.swing.JButton();
+        GoToStringLabel = new javax.swing.JLabel();
+        GoToStringTextInput = new javax.swing.JTextField();
+        GoToStringButton = new javax.swing.JButton();
         CodeEditorToolbar = new javax.swing.JToolBar();
         FunctionsListLabel = new javax.swing.JLabel();
         FunctionsListButton = new javax.swing.JComboBox<>();
@@ -489,6 +559,73 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         PasteActionItem.addActionListener(this::PasteActionItemActionPerformed);
         EditorTextPopupMenu.add(PasteActionItem);
 
+        GoToDialogWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        GoToDialogWindow.setTitle("Go to");
+        GoToDialogWindow.setIconImage(null);
+        GoToDialogWindow.setIconImages(null);
+        GoToDialogWindow.setMinimumSize(new java.awt.Dimension(720, 115));
+        GoToDialogWindow.setName("GoToDialogWindow"); // NOI18N
+        GoToDialogWindow.setPreferredSize(new java.awt.Dimension(720, 115));
+        GoToDialogWindow.setResizable(false);
+        GoToDialogWindow.setType(java.awt.Window.Type.POPUP);
+
+        GoToLineLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        GoToLineLabel.setLabelFor(GoToLineTextInput);
+        GoToLineLabel.setText("Go to line at №");
+
+        GoToLineTextInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        GoToLineTextInput.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        GoToLineButton.setText("Go to line");
+        GoToLineButton.addActionListener(this::GoToLineButtonActionPerformed);
+
+        GoToStringLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        GoToStringLabel.setLabelFor(GoToStringTextInput);
+        GoToStringLabel.setText("Go to string:");
+
+        GoToStringTextInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        GoToStringTextInput.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        GoToStringButton.setText("Go to string");
+        GoToStringButton.addActionListener(this::GoToStringButtonActionPerformed);
+
+        javax.swing.GroupLayout GoToDialogWindowLayout = new javax.swing.GroupLayout(GoToDialogWindow.getContentPane());
+        GoToDialogWindow.getContentPane().setLayout(GoToDialogWindowLayout);
+        GoToDialogWindowLayout.setHorizontalGroup(
+            GoToDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GoToDialogWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(GoToDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(GoToStringLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(GoToLineLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(GoToDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(GoToDialogWindowLayout.createSequentialGroup()
+                        .addComponent(GoToLineTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(GoToLineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GoToDialogWindowLayout.createSequentialGroup()
+                        .addComponent(GoToStringTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(GoToStringButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        GoToDialogWindowLayout.setVerticalGroup(
+            GoToDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GoToDialogWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(GoToDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GoToLineTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GoToLineButton)
+                    .addComponent(GoToLineLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(GoToDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GoToStringTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GoToStringButton)
+                    .addComponent(GoToStringLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         setLayout(new java.awt.BorderLayout());
 
         CodeEditorToolbar.setRollover(true);
@@ -508,6 +645,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         GoToButton.setMinimumSize(new java.awt.Dimension(24, 24));
         GoToButton.setPreferredSize(new java.awt.Dimension(24, 24));
         GoToButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        GoToButton.addActionListener(this::GoToButtonActionPerformed);
         CodeEditorToolbar.add(GoToButton);
         CodeEditorToolbar.add(ToolbarSeparator11);
 
@@ -599,6 +737,28 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         this.pasteTextAction();
     }//GEN-LAST:event_PasteActionItemActionPerformed
 
+    // Show go to dialog window by toolbar button click : event
+    private void GoToButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoToButtonActionPerformed
+        showGoToDialogWindow();
+    }//GEN-LAST:event_GoToButtonActionPerformed
+
+    // Go to line by number : event
+    private void GoToLineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoToLineButtonActionPerformed
+        goToLineByNumber(Integer.parseInt(GoToLineTextInput.getText()));
+        
+        GoToLineTextInput.setText("");
+        GoToStringTextInput.setText("");
+        GoToDialogWindow.setVisible(false);
+    }//GEN-LAST:event_GoToLineButtonActionPerformed
+
+    private void GoToStringButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoToStringButtonActionPerformed
+        goToLineByString(GoToStringTextInput.getText());
+        
+        GoToLineTextInput.setText("");
+        GoToStringTextInput.setText("");
+        GoToDialogWindow.setVisible(false);
+    }//GEN-LAST:event_GoToStringButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar CodeEditorToolbar;
     private javax.swing.JMenuItem CopyActionItem;
@@ -607,6 +767,13 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> FunctionsListButton;
     private javax.swing.JLabel FunctionsListLabel;
     private javax.swing.JButton GoToButton;
+    private javax.swing.JDialog GoToDialogWindow;
+    private javax.swing.JButton GoToLineButton;
+    private javax.swing.JLabel GoToLineLabel;
+    private javax.swing.JTextField GoToLineTextInput;
+    private javax.swing.JButton GoToStringButton;
+    private javax.swing.JLabel GoToStringLabel;
+    private javax.swing.JTextField GoToStringTextInput;
     private javax.swing.JButton InsertEnumButton;
     private javax.swing.JButton InsertFunctionButton;
     private javax.swing.JButton InsertStructureButton;

@@ -1563,6 +1563,7 @@ public class MainWindow extends JFrame {
 
         GoToViewItem.setIcon(goToViewIcon);
         GoToViewItem.setText("Go to...");
+        GoToViewItem.addActionListener(this::GoToViewItemActionPerformed);
         ViewMenu.add(GoToViewItem);
         ViewMenu.add(MenuSeparator10);
 
@@ -2367,6 +2368,17 @@ public class MainWindow extends JFrame {
             editorPanel.printTextAction();
         } 
     }//GEN-LAST:event_PrintFileItemActionPerformed
+
+    // Show go to dialog window by main menu item click : event
+    private void GoToViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoToViewItemActionPerformed
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.showGoToDialogWindow();
+        }
+    }//GEN-LAST:event_GoToViewItemActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    

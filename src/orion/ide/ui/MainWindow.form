@@ -1194,6 +1194,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Go to..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GoToViewItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="MenuSeparator10">
             </MenuItem>
