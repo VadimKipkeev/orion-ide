@@ -22,7 +22,11 @@ package orion.ide.ui;
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.io.IOException;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import org.fife.ui.rsyntaxtextarea.*;
@@ -347,6 +351,50 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         if(defaultEditorFontSize >= 8) {
             zoomListener.zoomToSize(defaultEditorFontSize);
         }
+    }
+    
+    // Print text action : method
+    public boolean printTextAction() {
+        PrinterJob printer = PrinterJob.getPrinterJob();
+        printer.setJobName("Print file");
+        
+        // Setup page format
+        PageFormat pageFormat = printer.defaultPage();
+        pageFormat.setOrientation(PageFormat.PORTRAIT);
+        
+        printer.setPrintable(editorTextArea, pageFormat);
+        
+        try {
+            printer.print();
+        } catch(PrinterException ex) {
+            JOptionPane.showMessageDialog(null, "Error at print process: " + ex.getMessage(), "Print error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
+    
+    // Show print text setup page : method
+    public boolean printTextSetupAction() {
+        PrinterJob printer = PrinterJob.getPrinterJob();
+        printer.setJobName("Print file");
+        
+        // Setup page format
+        PageFormat pageFormat = printer.defaultPage();
+        pageFormat.setOrientation(PageFormat.PORTRAIT);
+        
+        printer.setPrintable(editorTextArea, pageFormat);
+        
+        if(printer.printDialog()) {
+            try {
+                printer.print();
+            } catch(PrinterException ex) {
+                JOptionPane.showMessageDialog(null, "Error at print process: " + ex.getMessage(), "Print error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        
+        return true;
     }
     
     // Check source text and text buffer to hidden symbols : method

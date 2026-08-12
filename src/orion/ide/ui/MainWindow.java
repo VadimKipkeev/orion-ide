@@ -1457,10 +1457,12 @@ public class MainWindow extends JFrame {
         PrintFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         PrintFileItem.setIcon(printFileIcon);
         PrintFileItem.setText("Print");
+        PrintFileItem.addActionListener(this::PrintFileItemActionPerformed);
         FileMenu.add(PrintFileItem);
 
         PrintSetupItem.setIcon(printSetupIcon);
         PrintSetupItem.setText("Print setup...");
+        PrintSetupItem.addActionListener(this::PrintSetupItemActionPerformed);
         FileMenu.add(PrintSetupItem);
         FileMenu.add(MenuSeparator3);
 
@@ -2343,6 +2345,28 @@ public class MainWindow extends JFrame {
             editorPanel.setDefaultZoom();
         }   
     }//GEN-LAST:event_SetDefViewItemActionPerformed
+
+    // Show print text setup page by main menu item click : event
+    private void PrintSetupItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintSetupItemActionPerformed
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.printTextSetupAction();
+        }   
+    }//GEN-LAST:event_PrintSetupItemActionPerformed
+
+    // Print text by main menu item click : event
+    private void PrintFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintFileItemActionPerformed
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.printTextAction();
+        } 
+    }//GEN-LAST:event_PrintFileItemActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
