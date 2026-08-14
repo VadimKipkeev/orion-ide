@@ -27,10 +27,13 @@ import java.io.IOException;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.util.List;
+import java.util.TreeSet;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.text.BadLocationException;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
 import orion.ide.core.CodeEditorTextAreaZoomListener;
@@ -49,6 +52,8 @@ public class CodeEditorPanel extends javax.swing.JPanel {
      * -------------------------------------------------------------------------
      */
     private final String iconsFolder = MainWindow.iconsFolder;
+    private final Gutter bookmarksManager;
+    private final TreeSet<Integer> bookmarksList = new TreeSet<>();
     private String fileExtension;
     private String textBuffer = new String();
     private boolean isFileModified;
@@ -88,6 +93,11 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         editorTextArea.setPopupMenu(EditorTextPopupMenu); // Set editor text area popup menu
         editorTextArea.addMouseWheelListener(new CodeEditorTextAreaZoomListener(editorTextArea)); // Set editor text area mouse wheel scroll event listener
         this.add(editorTextAreaScroller);
+        
+        // Set bookmarks manager
+        this.bookmarksManager = editorTextAreaScroller.getGutter();
+        bookmarksManager.setBookmarkingEnabled(true);
+        bookmarksManager.setBookmarkIcon(newBookmarkIcon);
         
         // Set input filter for line number text field
         NumericFieldHelper.makeNumericOnly(GoToLineTextInput);
@@ -411,6 +421,39 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         
         GoToDialogWindow.setLocation(screenX, screenY);
         GoToDialogWindow.setVisible(true);
+    }
+    
+    // Create/delete new bookmark : method
+    public void toggleBookmarkAction() {
+        int selectedLine = editorTextArea.getCaretLineNumber();
+        
+        if(bookmarksList.contains(selectedLine)) {
+            bookmarksList.remove(selectedLine);
+            
+            try {
+                bookmarksManager.toggleBookmark(selectedLine);
+            } catch (BadLocationException ex) {
+                System.getLogger(CodeEditorPanel.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        } else {
+            bookmarksList.add(selectedLine);
+            
+            try {
+                bookmarksManager.toggleBookmark(selectedLine);
+            } catch (BadLocationException ex) {
+                System.getLogger(CodeEditorPanel.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        }
+    }
+    
+    // Go to next bookmark : method
+    public void nextBookmarkAction() {
+        
+    }
+    
+    // Get next bookmark : function
+    private Gutter. getNextBookmark(int line) {
+        List<Bookmark> list = bookmarksManager.getBookmarks();
     }
     
     // Check source text and text buffer to hidden symbols : method
