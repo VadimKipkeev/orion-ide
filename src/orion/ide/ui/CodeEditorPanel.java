@@ -446,16 +446,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         }
     }
     
-    // Go to next bookmark : method
-    public void nextBookmarkAction() {
-        
-    }
-    
-    // Get next bookmark : function
-    private Gutter. getNextBookmark(int line) {
-        List<Bookmark> list = bookmarksManager.getBookmarks();
-    }
-    
     // Check source text and text buffer to hidden symbols : method
     public boolean isModified() {
         String currentText = editorTextArea.getText().replace("\r\n", "\n").trim();
@@ -608,7 +598,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         GoToDialogWindow.setIconImages(null);
         GoToDialogWindow.setMinimumSize(new java.awt.Dimension(720, 115));
         GoToDialogWindow.setName("GoToDialogWindow"); // NOI18N
-        GoToDialogWindow.setPreferredSize(new java.awt.Dimension(720, 115));
         GoToDialogWindow.setResizable(false);
         GoToDialogWindow.setType(java.awt.Window.Type.POPUP);
 
@@ -730,6 +719,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         NewBookmarkButton.setMaximumSize(new java.awt.Dimension(24, 24));
         NewBookmarkButton.setMinimumSize(new java.awt.Dimension(24, 24));
         NewBookmarkButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        NewBookmarkButton.addActionListener(this::NewBookmarkButtonActionPerformed);
         CodeEditorToolbar.add(NewBookmarkButton);
 
         PrevBookmarkButton.setIcon(prevBookmarkIcon);
@@ -801,6 +791,11 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         GoToStringTextInput.setText("");
         GoToDialogWindow.setVisible(false);
     }//GEN-LAST:event_GoToStringButtonActionPerformed
+
+    // Create/delete bookmark by toolbar button click
+    private void NewBookmarkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookmarkButtonActionPerformed
+        toggleBookmarkAction();
+    }//GEN-LAST:event_NewBookmarkButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar CodeEditorToolbar;
