@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.util.List;
 import java.util.TreeSet;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -97,7 +96,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         // Set bookmarks manager
         this.bookmarksManager = editorTextAreaScroller.getGutter();
         bookmarksManager.setBookmarkingEnabled(true);
-        bookmarksManager.setBookmarkIcon(newBookmarkIcon);
+        bookmarksManager.setBookmarkIcon(newBookmarkIcon); // Set bookmark icon
         
         // Set input filter for line number text field
         NumericFieldHelper.makeNumericOnly(GoToLineTextInput);
@@ -446,6 +445,104 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         }
     }
     
+    // Go to next bookmark : method
+    public void goToNextBookmark() {
+        int currentLine = editorTextArea.getCaretLineNumber();
+        GutterIconInfo[] bookmarks = bookmarksManager.getBookmarks();
+        
+        if(bookmarks.length == 0) {
+            return;
+        }
+        
+        int nextLine = -1;
+        int firstLine = Integer.MAX_VALUE;
+        
+        for(GutterIconInfo info : bookmarks) {
+            int bookmarkLine = getLineOfBookmark(info);
+            
+            if(bookmarkLine == -1) {
+                continue;
+            }
+            
+            if(bookmarkLine < firstLine) {
+                firstLine = bookmarkLine;
+            }
+            
+            if(bookmarkLine > currentLine) {
+                if(nextLine == -1 || bookmarkLine < nextLine) {
+                    nextLine = bookmarkLine;
+                }
+            }
+        }
+        
+        if(nextLine == -1) {
+            nextLine = firstLine;
+        }
+        
+        moveCaretToLine(nextLine);
+    }
+    
+    // Go to previous bookmark : method
+    public void goToPrevBookmark() {
+        int currentLine = editorTextArea.getCaretLineNumber();
+        GutterIconInfo[] bookmarks = bookmarksManager.getBookmarks();
+        
+        if(bookmarks.length == 0) {
+            return;
+        }
+        
+        int prevLine = -1;
+        int lastLine = -1;
+        
+        for(GutterIconInfo info : bookmarks) {
+            int bookmarkLine = getLineOfBookmark(info);
+            
+            if(bookmarkLine == -1) {
+                continue;
+            }
+            
+            if(bookmarkLine > lastLine) {
+                lastLine = bookmarkLine;
+            }
+            
+            if(bookmarkLine < currentLine) {
+                if(prevLine == -1 || bookmarkLine > prevLine) {
+                    prevLine = bookmarkLine;
+                }
+            }
+        }
+        
+        if(prevLine == -1) {
+            prevLine = lastLine;
+        }
+        
+        moveCaretToLine(prevLine);
+    }
+    
+    // Get string from GutterIconInfo object : function
+    private int getLineOfBookmark(GutterIconInfo object) {
+        try {
+            return editorTextArea.getLineOfOffset(object.getMarkedOffset());
+        } catch (BadLocationException ex) {
+            ex.printStackTrace();
+            return -1;
+        }
+    }
+    
+    // Move cursor to line : function
+    private void moveCaretToLine(int line) {
+        if(line < 0 || line >= editorTextArea.getLineCount()) {
+            return;
+        }
+        
+        try {
+            int lineOffset = editorTextArea.getLineStartOffset(line);
+            editorTextArea.setCaretPosition(lineOffset);
+        } catch (BadLocationException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     // Check source text and text buffer to hidden symbols : method
     public boolean isModified() {
         String currentText = editorTextArea.getText().replace("\r\n", "\n").trim();
@@ -730,6 +827,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         PrevBookmarkButton.setMinimumSize(new java.awt.Dimension(24, 24));
         PrevBookmarkButton.setPreferredSize(new java.awt.Dimension(24, 24));
         PrevBookmarkButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        PrevBookmarkButton.addActionListener(this::PrevBookmarkButtonActionPerformed);
         CodeEditorToolbar.add(PrevBookmarkButton);
 
         NextBookmarkButton.setIcon(nextBookmarkIcon);
@@ -740,6 +838,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         NextBookmarkButton.setMinimumSize(new java.awt.Dimension(24, 24));
         NextBookmarkButton.setPreferredSize(new java.awt.Dimension(24, 24));
         NextBookmarkButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        NextBookmarkButton.addActionListener(this::NextBookmarkButtonActionPerformed);
         CodeEditorToolbar.add(NextBookmarkButton);
 
         add(CodeEditorToolbar, java.awt.BorderLayout.PAGE_START);
@@ -792,10 +891,20 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         GoToDialogWindow.setVisible(false);
     }//GEN-LAST:event_GoToStringButtonActionPerformed
 
-    // Create/delete bookmark by toolbar button click
+    // Create/delete bookmark by toolbar button click : event
     private void NewBookmarkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookmarkButtonActionPerformed
         toggleBookmarkAction();
     }//GEN-LAST:event_NewBookmarkButtonActionPerformed
+
+    // Go to previous bookmark by toolbar button click : event
+    private void PrevBookmarkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevBookmarkButtonActionPerformed
+        goToPrevBookmark();
+    }//GEN-LAST:event_PrevBookmarkButtonActionPerformed
+
+    // Go to next bookmark by toolbar button click : event
+    private void NextBookmarkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextBookmarkButtonActionPerformed
+        goToNextBookmark();
+    }//GEN-LAST:event_NextBookmarkButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar CodeEditorToolbar;

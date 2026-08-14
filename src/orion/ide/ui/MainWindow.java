@@ -1519,15 +1519,18 @@ public class MainWindow extends JFrame {
         NewBookmarkItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         NewBookmarkItem.setIcon(newBookmarkIcon);
         NewBookmarkItem.setText("New");
+        NewBookmarkItem.addActionListener(this::NewBookmarkItemActionPerformed);
         BookmarksMenu.add(NewBookmarkItem);
         BookmarksMenu.add(MenuSeparator8);
 
         PrevBookmarkItem.setIcon(prevBookmarkIcon);
         PrevBookmarkItem.setText("Preview");
+        PrevBookmarkItem.addActionListener(this::PrevBookmarkItemActionPerformed);
         BookmarksMenu.add(PrevBookmarkItem);
 
         NextBookmarkItem.setIcon(nextBookmarkIcon);
         NextBookmarkItem.setText("Next");
+        NextBookmarkItem.addActionListener(this::NextBookmarkItemActionPerformed);
         BookmarksMenu.add(NextBookmarkItem);
 
         EditMenu.add(BookmarksMenu);
@@ -2379,6 +2382,39 @@ public class MainWindow extends JFrame {
             editorPanel.showGoToDialogWindow();
         }
     }//GEN-LAST:event_GoToViewItemActionPerformed
+
+    // Create/delete bookmark by main menu item click : event
+    private void NewBookmarkItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookmarkItemActionPerformed
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.toggleBookmarkAction();
+        }
+    }//GEN-LAST:event_NewBookmarkItemActionPerformed
+
+    // Go to previous bookmark by main menu item click : event
+    private void PrevBookmarkItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevBookmarkItemActionPerformed
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.goToPrevBookmark();
+        }
+    }//GEN-LAST:event_PrevBookmarkItemActionPerformed
+
+    // Go to next bookmark by main menu item click : event
+    private void NextBookmarkItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextBookmarkItemActionPerformed
+        JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        Component component = currentWindow.getContentPane().getComponent(0);
+        
+        if(component instanceof CodeEditorPanel) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+            editorPanel.goToNextBookmark();
+        }
+    }//GEN-LAST:event_NextBookmarkItemActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
