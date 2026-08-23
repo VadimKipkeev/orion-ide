@@ -2281,37 +2281,86 @@ public class MainWindow extends JFrame {
 
     // Undo last action by main menu item click : event
     private void UndoEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoEditItemActionPerformed
-        undoAction();
+        Component window = EditorMDIFrame.getSelectedFrame();
+        
+        // Check selected editor MDI window to exist
+        if(window != null) {
+            if(window instanceof JInternalFrame) {
+                undoAction();
+            }
+        }
     }//GEN-LAST:event_UndoEditItemActionPerformed
 
     // Undo last action by toolbar button click : event
     private void UndoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoEditButtonActionPerformed
-        undoAction();
+        Component window = EditorMDIFrame.getSelectedFrame();
+        
+        // Check selected editor MDI window to exist
+        if(window != null) {
+            if(window instanceof JInternalFrame) {
+                undoAction();
+            }
+        }
     }//GEN-LAST:event_UndoEditButtonActionPerformed
 
     // Redo last action by main menu item click : event
     private void RedoEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoEditItemActionPerformed
-        redoAction();
+        Component window = EditorMDIFrame.getSelectedFrame();
+        
+        // Check selected editor MDI window to exist
+        if(window != null) {
+            if(window instanceof JInternalFrame) {
+                redoAction();
+            }
+        }
     }//GEN-LAST:event_RedoEditItemActionPerformed
 
     // Redo last action by toolbar button click : event 
     private void RedoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoEditButtonActionPerformed
-        redoAction();
+        Component window = EditorMDIFrame.getSelectedFrame();
+        
+        // Check selected editor MDI window to exist
+        if(window != null) {
+            if(window instanceof JInternalFrame) {
+                redoAction();
+            }
+        }
     }//GEN-LAST:event_RedoEditButtonActionPerformed
 
     // Cut selected text by main menu item click : event
     private void CutEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CutEditItemActionPerformed
-        cutAction();
+        Component window = EditorMDIFrame.getSelectedFrame();
+        
+        // Check selected editor MDI window to exist
+        if(window != null) {
+            if(window instanceof JInternalFrame) {
+                cutAction();
+            }
+        }
     }//GEN-LAST:event_CutEditItemActionPerformed
 
     // Copy selected text by main menu item click : event
     private void CopyEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CopyEditItemActionPerformed
-        copyAction();
+        Component window = EditorMDIFrame.getSelectedFrame();
+        
+        // Check selected editor MDI window to exist
+        if(window != null) {
+            if(window instanceof JInternalFrame) {
+                copyAction();
+            }
+        }
     }//GEN-LAST:event_CopyEditItemActionPerformed
 
     // Paste saved text from buffer by main menu item click : event
     private void PasteEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasteEditItemActionPerformed
-        pasteAction();
+        Component window = EditorMDIFrame.getSelectedFrame();
+        
+        // Check selected editor MDI window to exist
+        if(window != null) {
+            if(window instanceof JInternalFrame) {
+                pasteAction();
+            }
+        }
     }//GEN-LAST:event_PasteEditItemActionPerformed
 
     // Zoom in view editor text area by main menu item click : event
