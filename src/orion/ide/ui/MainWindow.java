@@ -2366,6 +2366,11 @@ public class MainWindow extends JFrame {
     // Zoom in view editor text area by main menu item click : event
     private void ZoomInViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZoomInViewItemActionPerformed
         JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentWindow == null) {
+            return;
+        }
+        
         Component component = currentWindow.getContentPane().getComponent(0);
         
         if(component instanceof CodeEditorPanel) {
@@ -2377,6 +2382,11 @@ public class MainWindow extends JFrame {
     // Zoom out view editor text area by main menu item click : event
     private void ZoomOutViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZoomOutViewItemActionPerformed
         JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentWindow == null) {
+            return;
+        }
+        
         Component component = currentWindow.getContentPane().getComponent(0);
         
         if(component instanceof CodeEditorPanel) {
@@ -2388,6 +2398,11 @@ public class MainWindow extends JFrame {
     // Set default zoom view editor text area by main menu item click : event
     private void SetDefViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetDefViewItemActionPerformed
         JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentWindow == null) {
+            return;
+        }
+        
         Component component = currentWindow.getContentPane().getComponent(0);
         
         editorFontSize = Integer.parseInt(settings.getParam("Appearance", "currentFontSize"));
@@ -2402,6 +2417,11 @@ public class MainWindow extends JFrame {
     // Show print text setup page by main menu item click : event
     private void PrintSetupItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintSetupItemActionPerformed
         JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentWindow == null) {
+            return;
+        }
+        
         Component component = currentWindow.getContentPane().getComponent(0);
         
         if(component instanceof CodeEditorPanel) {
@@ -2413,6 +2433,11 @@ public class MainWindow extends JFrame {
     // Print text by main menu item click : event
     private void PrintFileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintFileItemActionPerformed
         JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentWindow == null) {
+            return;
+        }
+        
         Component component = currentWindow.getContentPane().getComponent(0);
         
         if(component instanceof CodeEditorPanel) {
@@ -2424,6 +2449,11 @@ public class MainWindow extends JFrame {
     // Show go to dialog window by main menu item click : event
     private void GoToViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoToViewItemActionPerformed
         JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentWindow == null) {
+            return;
+        }
+        
         Component component = currentWindow.getContentPane().getComponent(0);
         
         if(component instanceof CodeEditorPanel) {
@@ -2435,6 +2465,11 @@ public class MainWindow extends JFrame {
     // Create/delete bookmark by main menu item click : event
     private void NewBookmarkItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookmarkItemActionPerformed
         JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentWindow == null) {
+            return;
+        }
+        
         Component component = currentWindow.getContentPane().getComponent(0);
         
         if(component instanceof CodeEditorPanel) {
@@ -2446,6 +2481,11 @@ public class MainWindow extends JFrame {
     // Go to previous bookmark by main menu item click : event
     private void PrevBookmarkItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevBookmarkItemActionPerformed
         JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentWindow == null) {
+            return;
+        }
+        
         Component component = currentWindow.getContentPane().getComponent(0);
         
         if(component instanceof CodeEditorPanel) {
@@ -2457,6 +2497,11 @@ public class MainWindow extends JFrame {
     // Go to next bookmark by main menu item click : event
     private void NextBookmarkItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextBookmarkItemActionPerformed
         JInternalFrame currentWindow = EditorMDIFrame.getSelectedFrame();
+        
+        if(currentWindow == null) {
+            return;
+        }
+        
         Component component = currentWindow.getContentPane().getComponent(0);
         
         if(component instanceof CodeEditorPanel) {
