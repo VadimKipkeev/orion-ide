@@ -21,12 +21,15 @@ package orion.ide.ui;
  * -----------------------------------------------------------------------------
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -47,6 +50,34 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     
     /*
      * -------------------------------------------------------------------------
+     * Internal range class
+     * -------------------------------------------------------------------------
+     */
+    private static class Range {
+        
+        /*
+         * ---------------------------------------------------------------------
+         * CLASS FIELDS SECTION BEGIN
+         * ---------------------------------------------------------------------
+        */
+        final int start;
+        final int end;
+        /*
+         * ---------------------------------------------------------------------
+         * CLASS FIELDS SECTION END
+         * ---------------------------------------------------------------------
+         */
+        
+        // Constructor
+        Range(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+    }
+    
+    
+    /*
+     * -------------------------------------------------------------------------
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
@@ -56,6 +87,11 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     private String fileExtension;
     private String textBuffer = new String();
     private boolean isFileModified;
+    
+    // Search fields
+    private List<Range> searchListArray = new ArrayList<>();
+    private int currentFindIndex = -1;
+    private SmartHighlightPainter selectionResultColor = new SmartHighlightPainter(new Color(255, 255, 0, 120));
     
     // Editor text area font size used by default zoom size
     public int defaultEditorFontSize;
@@ -541,6 +577,19 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         } catch (BadLocationException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    // Find all word enterings in editor text area : method
+    public void findAll(String word) {
+        if(word == null || word == "") {
+            return;
+        }
+        
+        // Remove all words highlights
+        editorTextArea.removeAllLineHighlights();
+        editorTextArea.getHighlighter().removeAllHighlights();
+        searchListArray.clear();
+        currentFindIndex = -1;
     }
     
     // Check source text and text buffer to hidden symbols : method

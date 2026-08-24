@@ -264,6 +264,18 @@ public class MainWindow extends JFrame {
         INIConfigFileTypeButton = new javax.swing.JButton();
         CreateNewFileButton = new javax.swing.JButton();
         CloseNewFileWindowButton = new javax.swing.JButton();
+        FindAndReplaceWindow = new javax.swing.JDialog();
+        FindAndReplacePanel = new javax.swing.JTabbedPane();
+        FindInFileTab = new javax.swing.JPanel();
+        FindInputText = new javax.swing.JTextField();
+        FindInputLabel = new javax.swing.JLabel();
+        FindNextButton = new javax.swing.JButton();
+        FindPreviewButton = new javax.swing.JButton();
+        FindButton = new javax.swing.JButton();
+        ReplaceInputText = new javax.swing.JTextField();
+        ReplaceInputLabel = new javax.swing.JLabel();
+        ReplaceAllButton = new javax.swing.JButton();
+        ReplaceButton = new javax.swing.JButton();
         MainToolbarsPanel = new javax.swing.JPanel();
         CommonToolbar = new javax.swing.JToolBar();
         NewFileButton = new javax.swing.JButton();
@@ -837,6 +849,108 @@ public class MainWindow extends JFrame {
 
         NewFileWindow.getContentPane().add(NewFileSetupPanel, java.awt.BorderLayout.CENTER);
 
+        FindAndReplaceWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        FindAndReplaceWindow.setTitle("Find and replace");
+        FindAndReplaceWindow.setMaximumSize(new java.awt.Dimension(680, 250));
+        FindAndReplaceWindow.setMinimumSize(new java.awt.Dimension(680, 250));
+        FindAndReplaceWindow.setName("FindAndReplaceWindow"); // NOI18N
+        FindAndReplaceWindow.setPreferredSize(new java.awt.Dimension(680, 250));
+        FindAndReplaceWindow.setResizable(false);
+        FindAndReplaceWindow.setType(java.awt.Window.Type.POPUP);
+
+        FindAndReplacePanel.setName("FindInFile"); // NOI18N
+
+        FindInFileTab.setPreferredSize(new java.awt.Dimension(640, 200));
+
+        FindInputLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        FindInputLabel.setText("Find word:");
+        FindInputLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        FindNextButton.setText("Next");
+        FindNextButton.setToolTipText("Find next");
+
+        FindPreviewButton.setText("Preview");
+        FindPreviewButton.setToolTipText("Find preview");
+
+        FindButton.setText("Find");
+        FindButton.setToolTipText("Find");
+
+        ReplaceInputLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ReplaceInputLabel.setText("Replace word:");
+        ReplaceInputLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        ReplaceAllButton.setText("Replace all");
+        ReplaceAllButton.setToolTipText("Replace all");
+
+        ReplaceButton.setText("Replace");
+        ReplaceButton.setToolTipText("Replace");
+
+        javax.swing.GroupLayout FindInFileTabLayout = new javax.swing.GroupLayout(FindInFileTab);
+        FindInFileTab.setLayout(FindInFileTabLayout);
+        FindInFileTabLayout.setHorizontalGroup(
+            FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FindInFileTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FindInFileTabLayout.createSequentialGroup()
+                        .addGroup(FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FindInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ReplaceInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ReplaceInputText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+                            .addComponent(FindInputText, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FindInFileTabLayout.createSequentialGroup()
+                        .addGap(0, 397, Short.MAX_VALUE)
+                        .addGroup(FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FindInFileTabLayout.createSequentialGroup()
+                                .addComponent(FindButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(FindPreviewButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FindNextButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FindInFileTabLayout.createSequentialGroup()
+                                .addComponent(ReplaceButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ReplaceAllButton)))))
+                .addContainerGap())
+        );
+        FindInFileTabLayout.setVerticalGroup(
+            FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FindInFileTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FindInputText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FindInputLabel))
+                .addGap(18, 18, 18)
+                .addGroup(FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FindNextButton)
+                    .addComponent(FindPreviewButton)
+                    .addComponent(FindButton))
+                .addGap(18, 18, 18)
+                .addGroup(FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ReplaceInputText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ReplaceInputLabel))
+                .addGap(18, 18, 18)
+                .addGroup(FindInFileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ReplaceAllButton)
+                    .addComponent(ReplaceButton))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        FindAndReplacePanel.addTab("Find in file", null, FindInFileTab, "Find in file");
+
+        javax.swing.GroupLayout FindAndReplaceWindowLayout = new javax.swing.GroupLayout(FindAndReplaceWindow.getContentPane());
+        FindAndReplaceWindow.getContentPane().setLayout(FindAndReplaceWindowLayout);
+        FindAndReplaceWindowLayout.setHorizontalGroup(
+            FindAndReplaceWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(FindAndReplacePanel)
+        );
+        FindAndReplaceWindowLayout.setVerticalGroup(
+            FindAndReplaceWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(FindAndReplacePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Orion IDE");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -934,6 +1048,7 @@ public class MainWindow extends JFrame {
         FindAndReplaceButton.setMinimumSize(new java.awt.Dimension(24, 24));
         FindAndReplaceButton.setPreferredSize(new java.awt.Dimension(24, 24));
         FindAndReplaceButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        FindAndReplaceButton.addActionListener(this::FindAndReplaceButtonActionPerformed);
         CommonToolbar.add(FindAndReplaceButton);
 
         MainToolbarsPanel.add(CommonToolbar);
@@ -1511,6 +1626,7 @@ public class MainWindow extends JFrame {
         FindEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         FindEditItem.setIcon(findAndReplaceIcon);
         FindEditItem.setText("Find and replace...");
+        FindEditItem.addActionListener(this::FindEditItemActionPerformed);
         EditMenu.add(FindEditItem);
         EditMenu.add(MenuSeparator6);
 
@@ -2509,6 +2625,18 @@ public class MainWindow extends JFrame {
             editorPanel.goToNextBookmark();
         }
     }//GEN-LAST:event_NextBookmarkItemActionPerformed
+
+    // Show find and replace dialog window by main menu item click : event
+    private void FindEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindEditItemActionPerformed
+        FindAndReplaceWindow.setLocationRelativeTo(null);
+        FindAndReplaceWindow.setVisible(true);
+    }//GEN-LAST:event_FindEditItemActionPerformed
+
+    // Show find and replace dialog window by toolbar button click : event
+    private void FindAndReplaceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindAndReplaceButtonActionPerformed
+        FindAndReplaceWindow.setLocationRelativeTo(null);
+        FindAndReplaceWindow.setVisible(true);
+    }//GEN-LAST:event_FindAndReplaceButtonActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
@@ -3029,7 +3157,15 @@ public class MainWindow extends JFrame {
     private javax.swing.JTree FilesTreeList;
     private javax.swing.JScrollPane FilesTreeScroller;
     private javax.swing.JButton FindAndReplaceButton;
+    private javax.swing.JTabbedPane FindAndReplacePanel;
+    private javax.swing.JDialog FindAndReplaceWindow;
+    private javax.swing.JButton FindButton;
     private javax.swing.JMenuItem FindEditItem;
+    private javax.swing.JPanel FindInFileTab;
+    private javax.swing.JLabel FindInputLabel;
+    private javax.swing.JTextField FindInputText;
+    private javax.swing.JButton FindNextButton;
+    private javax.swing.JButton FindPreviewButton;
     private javax.swing.JButton FormDesignFileTypeButton;
     private javax.swing.JSplitPane FrameSplitPanel;
     private javax.swing.JMenuItem FunctInsertItem;
@@ -3107,6 +3243,10 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton RedoEditButton;
     private javax.swing.JMenuItem RedoEditItem;
     private javax.swing.JMenuItem ReleaseBuildItem;
+    private javax.swing.JButton ReplaceAllButton;
+    private javax.swing.JButton ReplaceButton;
+    private javax.swing.JLabel ReplaceInputLabel;
+    private javax.swing.JTextField ReplaceInputText;
     private javax.swing.JMenuItem ResManagerToolsItem;
     private javax.swing.JMenuItem SamplesHelpItem;
     private javax.swing.JMenuItem SaveAllItem;
