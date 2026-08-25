@@ -860,6 +860,9 @@
           <Value id="POPUP"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="FindAndReplaceWindowClosing"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -979,18 +982,27 @@
                     <Property name="text" type="java.lang.String" value="Next"/>
                     <Property name="toolTipText" type="java.lang.String" value="Find next"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FindNextButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="FindPreviewButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Preview"/>
                     <Property name="toolTipText" type="java.lang.String" value="Find preview"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FindPreviewButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="FindButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Find"/>
                     <Property name="toolTipText" type="java.lang.String" value="Find"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FindButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="ReplaceInputText">
                 </Component>
@@ -1006,12 +1018,18 @@
                     <Property name="text" type="java.lang.String" value="Replace all"/>
                     <Property name="toolTipText" type="java.lang.String" value="Replace all"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReplaceAllButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="ReplaceButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Replace"/>
                     <Property name="toolTipText" type="java.lang.String" value="Replace"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReplaceButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

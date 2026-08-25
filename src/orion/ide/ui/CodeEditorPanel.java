@@ -21,15 +21,12 @@ package orion.ide.ui;
  * -----------------------------------------------------------------------------
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeSet;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -40,6 +37,7 @@ import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
 import orion.ide.core.CodeEditorTextAreaZoomListener;
 import orion.ide.core.NumericFieldHelper;
+import orion.ide.core.FindingManager;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -47,35 +45,7 @@ import orion.ide.core.NumericFieldHelper;
  */
 
 public class CodeEditorPanel extends javax.swing.JPanel {
-    
-    /*
-     * -------------------------------------------------------------------------
-     * Internal range class
-     * -------------------------------------------------------------------------
-     */
-    private static class Range {
-        
-        /*
-         * ---------------------------------------------------------------------
-         * CLASS FIELDS SECTION BEGIN
-         * ---------------------------------------------------------------------
-        */
-        final int start;
-        final int end;
-        /*
-         * ---------------------------------------------------------------------
-         * CLASS FIELDS SECTION END
-         * ---------------------------------------------------------------------
-         */
-        
-        // Constructor
-        Range(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
-    
-    
+
     /*
      * -------------------------------------------------------------------------
      * CLASS FIELDS SECTION BEGIN
@@ -84,14 +54,10 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     private final String iconsFolder = MainWindow.iconsFolder;
     private final Gutter bookmarksManager;
     private final TreeSet<Integer> bookmarksList = new TreeSet<>();
+    FindingManager fmanager;
     private String fileExtension;
     private String textBuffer = new String();
     private boolean isFileModified;
-    
-    // Search fields
-    private List<Range> searchListArray = new ArrayList<>();
-    private int currentFindIndex = -1;
-    private SmartHighlightPainter selectionResultColor = new SmartHighlightPainter(new Color(255, 255, 0, 120));
     
     // Editor text area font size used by default zoom size
     public int defaultEditorFontSize;
@@ -133,6 +99,9 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         this.bookmarksManager = editorTextAreaScroller.getGutter();
         bookmarksManager.setBookmarkingEnabled(true);
         bookmarksManager.setBookmarkIcon(newBookmarkIcon); // Set bookmark icon
+        
+        // Set finding manager
+        this.fmanager = new FindingManager(editorTextArea);
         
         // Set input filter for line number text field
         NumericFieldHelper.makeNumericOnly(GoToLineTextInput);
@@ -579,18 +548,67 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         }
     }
     
-    // Find all word enterings in editor text area : method
-    public void findAll(String word) {
-        if(word == null || word == "") {
+    // Find text action : method
+    public void findTextAction(String findWord) {
+        boolean result = fmanager.findContext(findWord);
+        
+        // Show message dialog window by can't finding
+        if(!result) {
+            JOptionPane.showMessageDialog(null, "The word " + findWord + " is missing!", "Find text", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Find next text action : method
+    public void findNextTextAction() {
+        boolean result = fmanager.findNext();
+        
+        // Show message dialog window by not find line of text
+        if(!result) {
+            JOptionPane.showMessageDialog(null, "Not find next result!", "Find text", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Find preview text action : method
+    public void findPreviewTextAction() {
+        boolean result = fmanager.findPreview();
+        
+        // Show message dialog window by not find line of text
+        if(!result) {
+            JOptionPane.showMessageDialog(null, "Not find preview result!", "Find text", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Replace text action : method
+    public void replaceTextAction(String targetWord, String replaceWord) {
+        boolean result = fmanager.replaceText(targetWord, replaceWord);
+        
+        // Show message dialog window by action result status
+        if(!result) {
+            JOptionPane.showMessageDialog(null, "Not find target text for replace!", "Replace text", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        // Remove all words highlights
-        editorTextArea.removeAllLineHighlights();
-        editorTextArea.getHighlighter().removeAllHighlights();
-        searchListArray.clear();
-        currentFindIndex = -1;
+        JOptionPane.showMessageDialog(null, "Text replace is success!", "Replace text", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    // Replace all text action : method
+    public void replaceAllTextAction(String targetWord, String replaceWord) {
+        int result = fmanager.replaceAllText(targetWord, replaceWord);
+        
+        // Show message dialog window by action result count
+        if(result <= 0) {
+            JOptionPane.showMessageDialog(null, "Not find target text for replace!", "Replace text", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(null, "The " + String.valueOf(result) + " strings is replaced.", "Replace text", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    // Remove text selection after finding : method
+    public void removeFindSelection() {
+        fmanager.setTextMark(false);
+    }
+    
     
     // Check source text and text buffer to hidden symbols : method
     public boolean isModified() {

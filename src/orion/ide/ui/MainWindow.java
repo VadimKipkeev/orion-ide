@@ -857,6 +857,11 @@ public class MainWindow extends JFrame {
         FindAndReplaceWindow.setPreferredSize(new java.awt.Dimension(680, 250));
         FindAndReplaceWindow.setResizable(false);
         FindAndReplaceWindow.setType(java.awt.Window.Type.POPUP);
+        FindAndReplaceWindow.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                FindAndReplaceWindowClosing(evt);
+            }
+        });
 
         FindAndReplacePanel.setName("FindInFile"); // NOI18N
 
@@ -868,12 +873,15 @@ public class MainWindow extends JFrame {
 
         FindNextButton.setText("Next");
         FindNextButton.setToolTipText("Find next");
+        FindNextButton.addActionListener(this::FindNextButtonActionPerformed);
 
         FindPreviewButton.setText("Preview");
         FindPreviewButton.setToolTipText("Find preview");
+        FindPreviewButton.addActionListener(this::FindPreviewButtonActionPerformed);
 
         FindButton.setText("Find");
         FindButton.setToolTipText("Find");
+        FindButton.addActionListener(this::FindButtonActionPerformed);
 
         ReplaceInputLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ReplaceInputLabel.setText("Replace word:");
@@ -881,9 +889,11 @@ public class MainWindow extends JFrame {
 
         ReplaceAllButton.setText("Replace all");
         ReplaceAllButton.setToolTipText("Replace all");
+        ReplaceAllButton.addActionListener(this::ReplaceAllButtonActionPerformed);
 
         ReplaceButton.setText("Replace");
         ReplaceButton.setToolTipText("Replace");
+        ReplaceButton.addActionListener(this::ReplaceButtonActionPerformed);
 
         javax.swing.GroupLayout FindInFileTabLayout = new javax.swing.GroupLayout(FindInFileTab);
         FindInFileTab.setLayout(FindInFileTabLayout);
@@ -2637,6 +2647,145 @@ public class MainWindow extends JFrame {
         FindAndReplaceWindow.setLocationRelativeTo(null);
         FindAndReplaceWindow.setVisible(true);
     }//GEN-LAST:event_FindAndReplaceButtonActionPerformed
+
+    // Find text in current editor MDI window by button click : event
+    private void FindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindButtonActionPerformed
+        if(FindInputText.getText() == null || "".equals(FindInputText.getText())) {
+            FindInputText.setToolTipText("Enter text first!");
+            showTooltip(FindInputText);
+            
+            return;
+        }
+        
+        FindInputText.setToolTipText("");
+        
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+            editorPanel.findTextAction(FindInputText.getText());
+        }
+    }//GEN-LAST:event_FindButtonActionPerformed
+
+    // Find next line of text in current editor MDI window by button click : event
+    private void FindNextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindNextButtonActionPerformed
+        if(FindInputText.getText() == null || "".equals(FindInputText.getText())) {
+            FindInputText.setToolTipText("Enter text first!");
+            showTooltip(FindInputText);
+            
+            return;
+        }
+        
+        FindInputText.setToolTipText("");
+        
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+            editorPanel.findNextTextAction();
+        }
+    }//GEN-LAST:event_FindNextButtonActionPerformed
+
+    // Find previous line of text in current editor MDI window by button click : event
+    private void FindPreviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindPreviewButtonActionPerformed
+        if(FindInputText.getText() == null || "".equals(FindInputText.getText())) {
+            FindInputText.setToolTipText("Enter text first!");
+            showTooltip(FindInputText);
+            
+            return;
+        }
+        
+        FindInputText.setToolTipText("");
+        
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+            editorPanel.findPreviewTextAction();
+        }
+    }//GEN-LAST:event_FindPreviewButtonActionPerformed
+
+    // Replace selected text in current editor MDI window by button click : event
+    private void ReplaceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReplaceButtonActionPerformed
+        if(FindInputText.getText() == null || "".equals(FindInputText.getText())) {
+            FindInputText.setToolTipText("Enter text first!");
+            showTooltip(FindInputText);
+            
+            return;
+        }
+        
+        if(ReplaceInputText.getText() == null || "".equals(ReplaceInputText.getText())) {
+            ReplaceInputText.setToolTipText("Enter text first!");
+            showTooltip(ReplaceInputText);
+            
+            return;
+        }
+        
+        if((FindInputText.getText() == null && ReplaceInputText.getText() == null)
+            || ("".equals(FindInputText.getText()) && "".equals(ReplaceInputText.getText()))) {
+            JOptionPane.showMessageDialog(null, "Target text and replacing text is not be empty", "Replace text", JOptionPane.ERROR_MESSAGE);
+            
+            return;
+        }
+        
+        FindInputText.setToolTipText("");
+        ReplaceInputText.setToolTipText("");
+        
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+            editorPanel.replaceTextAction(FindInputText.getText(), ReplaceInputText.getText());
+            
+            FindAndReplaceWindow.dispose();
+        }
+    }//GEN-LAST:event_ReplaceButtonActionPerformed
+
+    // Replace all target text in editor MDI window by button click : event
+    private void ReplaceAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReplaceAllButtonActionPerformed
+        if(FindInputText.getText() == null || "".equals(FindInputText.getText())) {
+            FindInputText.setToolTipText("Enter text first!");
+            showTooltip(FindInputText);
+            
+            return;
+        }
+        
+        if(ReplaceInputText.getText() == null || "".equals(ReplaceInputText.getText())) {
+            ReplaceInputText.setToolTipText("Enter text first!");
+            showTooltip(ReplaceInputText);
+            
+            return;
+        }
+        
+        if((FindInputText.getText() == null && ReplaceInputText.getText() == null)
+            || ("".equals(FindInputText.getText()) && "".equals(ReplaceInputText.getText()))) {
+            JOptionPane.showMessageDialog(null, "Target text and replacing text is not be empty", "Replace text", JOptionPane.ERROR_MESSAGE);
+            
+            return;
+        }
+        
+        FindInputText.setToolTipText("");
+        ReplaceInputText.setToolTipText("");
+        
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+            editorPanel.replaceAllTextAction(FindInputText.getText(), ReplaceInputText.getText());
+            
+            FindAndReplaceWindow.dispose();
+        }
+    }//GEN-LAST:event_ReplaceAllButtonActionPerformed
+
+    // Remove text selection by find and replace window is closing : event
+    private void FindAndReplaceWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FindAndReplaceWindowClosing
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+            editorPanel.removeFindSelection();
+        }
+    }//GEN-LAST:event_FindAndReplaceWindowClosing
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
