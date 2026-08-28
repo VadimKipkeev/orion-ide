@@ -689,7 +689,7 @@ public class MainWindow extends JFrame {
                 .addComponent(CancelSettingsButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SaveSettingsButton)
-                .addGap(26, 26, 26))
+                .addGap(20, 20, 20))
         );
         SettingsWindowLayout.setVerticalGroup(
             SettingsWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -851,10 +851,11 @@ public class MainWindow extends JFrame {
 
         FindAndReplaceWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         FindAndReplaceWindow.setTitle("Find and replace");
-        FindAndReplaceWindow.setMaximumSize(new java.awt.Dimension(680, 250));
-        FindAndReplaceWindow.setMinimumSize(new java.awt.Dimension(680, 250));
+        FindAndReplaceWindow.setMaximumSize(new java.awt.Dimension(680, 226));
+        FindAndReplaceWindow.setMinimumSize(new java.awt.Dimension(680, 226));
+        FindAndReplaceWindow.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         FindAndReplaceWindow.setName("FindAndReplaceWindow"); // NOI18N
-        FindAndReplaceWindow.setPreferredSize(new java.awt.Dimension(680, 250));
+        FindAndReplaceWindow.setPreferredSize(new java.awt.Dimension(680, 226));
         FindAndReplaceWindow.setResizable(false);
         FindAndReplaceWindow.setType(java.awt.Window.Type.POPUP);
         FindAndReplaceWindow.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -2638,12 +2639,16 @@ public class MainWindow extends JFrame {
 
     // Show find and replace dialog window by main menu item click : event
     private void FindEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindEditItemActionPerformed
+        FindInputText.setText("");
+        ReplaceInputText.setText("");
         FindAndReplaceWindow.setLocationRelativeTo(null);
         FindAndReplaceWindow.setVisible(true);
     }//GEN-LAST:event_FindEditItemActionPerformed
 
     // Show find and replace dialog window by toolbar button click : event
     private void FindAndReplaceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindAndReplaceButtonActionPerformed
+        FindInputText.setText("");
+        ReplaceInputText.setText("");
         FindAndReplaceWindow.setLocationRelativeTo(null);
         FindAndReplaceWindow.setVisible(true);
     }//GEN-LAST:event_FindAndReplaceButtonActionPerformed
@@ -2707,29 +2712,12 @@ public class MainWindow extends JFrame {
 
     // Replace selected text in current editor MDI window by button click : event
     private void ReplaceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReplaceButtonActionPerformed
-        if(FindInputText.getText() == null || "".equals(FindInputText.getText())) {
-            FindInputText.setToolTipText("Enter text first!");
-            showTooltip(FindInputText);
-            
-            return;
-        }
-        
-        if(ReplaceInputText.getText() == null || "".equals(ReplaceInputText.getText())) {
-            ReplaceInputText.setToolTipText("Enter text first!");
-            showTooltip(ReplaceInputText);
-            
-            return;
-        }
-        
-        if((FindInputText.getText() == null && ReplaceInputText.getText() == null)
-            || ("".equals(FindInputText.getText()) && "".equals(ReplaceInputText.getText()))) {
+        if((FindInputText.getText() == null || ReplaceInputText.getText() == null)
+            || ("".equals(FindInputText.getText()) || "".equals(ReplaceInputText.getText()))) {
             JOptionPane.showMessageDialog(null, "Target text and replacing text is not be empty", "Replace text", JOptionPane.ERROR_MESSAGE);
             
             return;
         }
-        
-        FindInputText.setToolTipText("");
-        ReplaceInputText.setToolTipText("");
         
         Component component = EditorMDIFrame.getSelectedFrame();
         
@@ -2743,29 +2731,12 @@ public class MainWindow extends JFrame {
 
     // Replace all target text in editor MDI window by button click : event
     private void ReplaceAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReplaceAllButtonActionPerformed
-        if(FindInputText.getText() == null || "".equals(FindInputText.getText())) {
-            FindInputText.setToolTipText("Enter text first!");
-            showTooltip(FindInputText);
-            
-            return;
-        }
-        
-        if(ReplaceInputText.getText() == null || "".equals(ReplaceInputText.getText())) {
-            ReplaceInputText.setToolTipText("Enter text first!");
-            showTooltip(ReplaceInputText);
-            
-            return;
-        }
-        
-        if((FindInputText.getText() == null && ReplaceInputText.getText() == null)
-            || ("".equals(FindInputText.getText()) && "".equals(ReplaceInputText.getText()))) {
+        if((FindInputText.getText() == null || ReplaceInputText.getText() == null)
+            || ("".equals(FindInputText.getText()) || "".equals(ReplaceInputText.getText()))) {
             JOptionPane.showMessageDialog(null, "Target text and replacing text is not be empty", "Replace text", JOptionPane.ERROR_MESSAGE);
             
             return;
         }
-        
-        FindInputText.setToolTipText("");
-        ReplaceInputText.setToolTipText("");
         
         Component component = EditorMDIFrame.getSelectedFrame();
         

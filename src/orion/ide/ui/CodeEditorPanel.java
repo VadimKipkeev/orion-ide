@@ -761,6 +761,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         GoToDialogWindow.setIconImage(null);
         GoToDialogWindow.setIconImages(null);
         GoToDialogWindow.setMinimumSize(new java.awt.Dimension(720, 115));
+        GoToDialogWindow.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         GoToDialogWindow.setName("GoToDialogWindow"); // NOI18N
         GoToDialogWindow.setResizable(false);
         GoToDialogWindow.setType(java.awt.Window.Type.POPUP);
