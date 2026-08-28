@@ -2223,11 +2223,11 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="CapsStatusLabel">
+            <Component class="javax.swing.JLabel" name="CaretPositionLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="OFF"/>
-                <Property name="toolTipText" type="java.lang.String" value="Caps Lock status"/>
+                <Property name="text" type="java.lang.String" value="NONE"/>
+                <Property name="toolTipText" type="java.lang.String" value="Cursor position"/>
                 <Property name="alignmentY" type="float" value="0.0"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -2243,6 +2243,9 @@
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Cursor position"/>
+              </AccessibilityProperties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                   <BorderConstraints direction="West"/>
@@ -2262,8 +2265,8 @@
             <Component class="javax.swing.JLabel" name="EncodeStatusLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="NOT"/>
-                <Property name="toolTipText" type="java.lang.String" value="Text encoding information"/>
+                <Property name="text" type="java.lang.String" value="NONE"/>
+                <Property name="toolTipText" type="java.lang.String" value="Text encoding"/>
                 <Property name="alignmentY" type="float" value="0.0"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>

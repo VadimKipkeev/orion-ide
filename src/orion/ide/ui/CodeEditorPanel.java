@@ -609,6 +609,18 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         fmanager.setTextMark(false);
     }
     
+    // Get caret line and column position : method
+    public String getCaretPosition() {
+        String lineNumber;
+        String columnNumber;
+        String result;
+        
+        lineNumber = String.valueOf(editorTextArea.getCaretLineNumber() + 1);
+        columnNumber = String.valueOf(editorTextArea.getCaretOffsetFromLineStart() + 1);
+        result = lineNumber + ":" + columnNumber;
+        
+        return result;
+    }
     
     // Check source text and text buffer to hidden symbols : method
     public boolean isModified() {

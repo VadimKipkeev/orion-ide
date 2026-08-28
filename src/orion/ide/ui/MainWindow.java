@@ -193,6 +193,9 @@ public class MainWindow extends JFrame {
         
         // Set timer to check MDI windows count
         new Timer(200, e -> compareMDIWindowsCount()).start();
+        
+        // Set timer to show caret position in selected editor MDI window
+        new Timer(100, e -> showCaretPosition()).start();
     }
     
     // Get icons folder name by current theme type : function
@@ -297,7 +300,7 @@ public class MainWindow extends JFrame {
         AppStatusPanel = new javax.swing.JPanel();
         AppStatusLabel = new javax.swing.JLabel();
         AppIndicationPanel = new javax.swing.JPanel();
-        CapsStatusLabel = new javax.swing.JLabel();
+        CaretPositionLabel = new javax.swing.JLabel();
         ToolbarSeparator6 = new javax.swing.JSeparator();
         EncodeStatusLabel = new javax.swing.JLabel();
         FrameSplitPanel = new javax.swing.JSplitPane();
@@ -1158,25 +1161,26 @@ public class MainWindow extends JFrame {
         AppIndicationPanel.setVerifyInputWhenFocusTarget(false);
         AppIndicationPanel.setLayout(new java.awt.BorderLayout());
 
-        CapsStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CapsStatusLabel.setText("OFF");
-        CapsStatusLabel.setToolTipText("Caps Lock status");
-        CapsStatusLabel.setAlignmentY(0.0F);
-        CapsStatusLabel.setFocusable(false);
-        CapsStatusLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        CapsStatusLabel.setMaximumSize(new java.awt.Dimension(48, 26));
-        CapsStatusLabel.setMinimumSize(new java.awt.Dimension(48, 26));
-        CapsStatusLabel.setPreferredSize(new java.awt.Dimension(48, 26));
-        CapsStatusLabel.setRequestFocusEnabled(false);
-        CapsStatusLabel.setVerifyInputWhenFocusTarget(false);
-        AppIndicationPanel.add(CapsStatusLabel, java.awt.BorderLayout.WEST);
+        CaretPositionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CaretPositionLabel.setText("NONE");
+        CaretPositionLabel.setToolTipText("Cursor position");
+        CaretPositionLabel.setAlignmentY(0.0F);
+        CaretPositionLabel.setFocusable(false);
+        CaretPositionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CaretPositionLabel.setMaximumSize(new java.awt.Dimension(48, 26));
+        CaretPositionLabel.setMinimumSize(new java.awt.Dimension(48, 26));
+        CaretPositionLabel.setPreferredSize(new java.awt.Dimension(48, 26));
+        CaretPositionLabel.setRequestFocusEnabled(false);
+        CaretPositionLabel.setVerifyInputWhenFocusTarget(false);
+        AppIndicationPanel.add(CaretPositionLabel, java.awt.BorderLayout.WEST);
+        CaretPositionLabel.getAccessibleContext().setAccessibleDescription("Cursor position");
 
         ToolbarSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
         AppIndicationPanel.add(ToolbarSeparator6, java.awt.BorderLayout.CENTER);
 
         EncodeStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        EncodeStatusLabel.setText("NOT");
-        EncodeStatusLabel.setToolTipText("Text encoding information");
+        EncodeStatusLabel.setText("NONE");
+        EncodeStatusLabel.setToolTipText("Text encoding");
         EncodeStatusLabel.setAlignmentY(0.0F);
         EncodeStatusLabel.setFocusable(false);
         EncodeStatusLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -2177,8 +2181,8 @@ public class MainWindow extends JFrame {
         
                 editorWindow.toFront();
                 
-                EncodeStatusLabel.setText("NOT");
-                EncodeStatusLabel.setToolTipText("Text encoding information");
+                EncodeStatusLabel.setText("NONE");
+                EncodeStatusLabel.setToolTipText("Text encoding");
                 
                 try {
                     editorWindow.setSelected(true);
@@ -2500,8 +2504,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.zoomInAction();
         }
     }//GEN-LAST:event_ZoomInViewItemActionPerformed
@@ -2516,8 +2519,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.zoomOutAction();
         }
     }//GEN-LAST:event_ZoomOutViewItemActionPerformed
@@ -2534,8 +2536,7 @@ public class MainWindow extends JFrame {
         
         editorFontSize = Integer.parseInt(settings.getParam("Appearance", "currentFontSize"));
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.defaultEditorFontSize = editorFontSize;
             editorPanel.setDefaultZoom();
         }   
@@ -2551,8 +2552,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.printTextSetupAction();
         }   
     }//GEN-LAST:event_PrintSetupItemActionPerformed
@@ -2567,8 +2567,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.printTextAction();
         } 
     }//GEN-LAST:event_PrintFileItemActionPerformed
@@ -2583,8 +2582,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.showGoToDialogWindow();
         }
     }//GEN-LAST:event_GoToViewItemActionPerformed
@@ -2599,8 +2597,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.toggleBookmarkAction();
         }
     }//GEN-LAST:event_NewBookmarkItemActionPerformed
@@ -2615,8 +2612,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.goToPrevBookmark();
         }
     }//GEN-LAST:event_PrevBookmarkItemActionPerformed
@@ -2631,8 +2627,7 @@ public class MainWindow extends JFrame {
         
         Component component = currentWindow.getContentPane().getComponent(0);
         
-        if(component instanceof CodeEditorPanel) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) component;
+        if(component instanceof CodeEditorPanel editorPanel) {
             editorPanel.goToNextBookmark();
         }
     }//GEN-LAST:event_NextBookmarkItemActionPerformed
@@ -2666,8 +2661,8 @@ public class MainWindow extends JFrame {
         
         Component component = EditorMDIFrame.getSelectedFrame();
         
-        if(component instanceof JInternalFrame) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
             editorPanel.findTextAction(FindInputText.getText());
         }
     }//GEN-LAST:event_FindButtonActionPerformed
@@ -2685,8 +2680,8 @@ public class MainWindow extends JFrame {
         
         Component component = EditorMDIFrame.getSelectedFrame();
         
-        if(component instanceof JInternalFrame) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
             editorPanel.findNextTextAction();
         }
     }//GEN-LAST:event_FindNextButtonActionPerformed
@@ -2704,8 +2699,8 @@ public class MainWindow extends JFrame {
         
         Component component = EditorMDIFrame.getSelectedFrame();
         
-        if(component instanceof JInternalFrame) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
             editorPanel.findPreviewTextAction();
         }
     }//GEN-LAST:event_FindPreviewButtonActionPerformed
@@ -2721,8 +2716,8 @@ public class MainWindow extends JFrame {
         
         Component component = EditorMDIFrame.getSelectedFrame();
         
-        if(component instanceof JInternalFrame) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
             editorPanel.replaceTextAction(FindInputText.getText(), ReplaceInputText.getText());
             
             FindAndReplaceWindow.dispose();
@@ -2740,8 +2735,8 @@ public class MainWindow extends JFrame {
         
         Component component = EditorMDIFrame.getSelectedFrame();
         
-        if(component instanceof JInternalFrame) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
             editorPanel.replaceAllTextAction(FindInputText.getText(), ReplaceInputText.getText());
             
             FindAndReplaceWindow.dispose();
@@ -2752,8 +2747,8 @@ public class MainWindow extends JFrame {
     private void FindAndReplaceWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FindAndReplaceWindowClosing
         Component component = EditorMDIFrame.getSelectedFrame();
         
-        if(component instanceof JInternalFrame) {
-            CodeEditorPanel editorPanel = (CodeEditorPanel) ((JInternalFrame) component).getContentPane().getComponent(0);
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
             editorPanel.removeFindSelection();
         }
     }//GEN-LAST:event_FindAndReplaceWindowClosing
@@ -2787,8 +2782,8 @@ public class MainWindow extends JFrame {
                 EncodeStatusLabel.setText(currentFileEncode);
                 EncodeStatusLabel.setToolTipText(currentFileEncode);
             } else {
-                EncodeStatusLabel.setText("NOT");
-                EncodeStatusLabel.setToolTipText("Text encoding information");
+                EncodeStatusLabel.setText("NONE");
+                EncodeStatusLabel.setToolTipText("Text encoding");
             }
         } else {
             CascadeWindowItem.setEnabled(false);
@@ -2797,8 +2792,20 @@ public class MainWindow extends JFrame {
             CloseWindowItem.setEnabled(false);
             CloseAllWindowItem.setEnabled(false);
             
-            EncodeStatusLabel.setText("NOT");
-            EncodeStatusLabel.setToolTipText("Text encoding information");
+            EncodeStatusLabel.setText("NONE");
+            EncodeStatusLabel.setToolTipText("Text encoding");
+        }
+    }
+    
+    // Show current caret position in selected editor MDI window : function
+    private void showCaretPosition() {
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
+            CaretPositionLabel.setText(editorPanel.getCaretPosition());
+        } else {
+            CaretPositionLabel.setText("NONE");
         }
     }
     
@@ -3248,7 +3255,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JButton CPPClassFileTypeButton;
     private javax.swing.JButton CSourceFileTypeButton;
     private javax.swing.JButton CancelSettingsButton;
-    private javax.swing.JLabel CapsStatusLabel;
+    private javax.swing.JLabel CaretPositionLabel;
     private javax.swing.JMenuItem CascadeWindowItem;
     private javax.swing.JButton ClearBuildLogButton;
     private javax.swing.JMenuItem CloseAllWindowItem;
