@@ -42,6 +42,7 @@ import org.fife.ui.rtextarea.*;
 import orion.ide.core.CodeEditorTextAreaZoomListener;
 import orion.ide.core.NumericFieldHelper;
 import orion.ide.core.FindingManager;
+import orion.ide.core.CFunctionParser;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -109,6 +110,9 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         
         // Set input filter for line number text field
         NumericFieldHelper.makeNumericOnly(GoToLineTextInput);
+        
+        // Parse C functions and add to list
+        SwingUtilities.invokeLater(() -> new CFunctionParser(editorTextArea, FunctionsListButton));
         
         // Compare text buffer with editor text area by timer
         new Timer(300, e -> checkFileModifiedStatus()).start();
