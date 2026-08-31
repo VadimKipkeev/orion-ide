@@ -902,6 +902,12 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         }
     }
     
+    // Show templates window : method
+    public void showTemplatesWindow() {
+        TemplatesWindow.setLocationRelativeTo(null);
+        TemplatesWindow.setVisible(true);
+    }
+    
     // Check source text and text buffer to hidden symbols : method
     public boolean isModified() {
         String currentText = editorTextArea.getText().replace("\r\n", "\n").trim();
@@ -1003,6 +1009,18 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         GoToStringLabel = new javax.swing.JLabel();
         GoToStringTextInput = new javax.swing.JTextField();
         GoToStringButton = new javax.swing.JButton();
+        TemplatesWindow = new javax.swing.JDialog();
+        TemplateListLabel = new javax.swing.JLabel();
+        TemplateListScroller = new javax.swing.JScrollPane();
+        TemplateList = new javax.swing.JList<>();
+        NewTemplateButton = new javax.swing.JButton();
+        DeleteTemplateButton = new javax.swing.JButton();
+        InsertTemplateButton = new javax.swing.JButton();
+        NewTemplateWindow = new javax.swing.JDialog();
+        TemplateNameLabel = new javax.swing.JLabel();
+        TemplateNameTextInput = new javax.swing.JTextField();
+        SaveTemplateButton = new javax.swing.JButton();
+        CancelButton = new javax.swing.JButton();
         CodeEditorToolbar = new javax.swing.JToolBar();
         FunctionsListLabel = new javax.swing.JLabel();
         FunctionsListButton = new javax.swing.JComboBox<>();
@@ -1113,6 +1131,119 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     .addComponent(GoToStringButton)
                     .addComponent(GoToStringLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+        );
+
+        TemplatesWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        TemplatesWindow.setTitle("Templates");
+        TemplatesWindow.setMinimumSize(new java.awt.Dimension(640, 480));
+        TemplatesWindow.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        TemplatesWindow.setName("TemplatesWindow"); // NOI18N
+        TemplatesWindow.setType(java.awt.Window.Type.POPUP);
+
+        TemplateListLabel.setLabelFor(TemplateList);
+        TemplateListLabel.setText("Template list");
+
+        TemplateList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TemplateListScroller.setViewportView(TemplateList);
+
+        NewTemplateButton.setText("New");
+        NewTemplateButton.setToolTipText("Add new template");
+        NewTemplateButton.addActionListener(this::NewTemplateButtonActionPerformed);
+
+        DeleteTemplateButton.setText("Delete");
+        DeleteTemplateButton.setToolTipText("Delete template");
+
+        InsertTemplateButton.setText("Insert");
+        InsertTemplateButton.setToolTipText("Insert template");
+
+        javax.swing.GroupLayout TemplatesWindowLayout = new javax.swing.GroupLayout(TemplatesWindow.getContentPane());
+        TemplatesWindow.getContentPane().setLayout(TemplatesWindowLayout);
+        TemplatesWindowLayout.setHorizontalGroup(
+            TemplatesWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TemplatesWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(TemplatesWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TemplatesWindowLayout.createSequentialGroup()
+                        .addComponent(TemplateListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(TemplateListScroller))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TemplatesWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(InsertTemplateButton)
+                    .addComponent(DeleteTemplateButton)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TemplatesWindowLayout.createSequentialGroup()
+                        .addComponent(NewTemplateButton)
+                        .addContainerGap())))
+        );
+        TemplatesWindowLayout.setVerticalGroup(
+            TemplatesWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TemplatesWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TemplateListLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TemplatesWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TemplatesWindowLayout.createSequentialGroup()
+                        .addComponent(NewTemplateButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DeleteTemplateButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(InsertTemplateButton))
+                    .addComponent(TemplateListScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        NewTemplateWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        NewTemplateWindow.setTitle("New template");
+        NewTemplateWindow.setMaximumSize(new java.awt.Dimension(640, 115));
+        NewTemplateWindow.setMinimumSize(new java.awt.Dimension(640, 115));
+        NewTemplateWindow.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        NewTemplateWindow.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        NewTemplateWindow.setName("NewTemplateWindow"); // NOI18N
+        NewTemplateWindow.setPreferredSize(new java.awt.Dimension(640, 115));
+        NewTemplateWindow.setResizable(false);
+        NewTemplateWindow.setType(java.awt.Window.Type.POPUP);
+
+        TemplateNameLabel.setLabelFor(TemplateNameTextInput);
+        TemplateNameLabel.setText("Template name:");
+        TemplateNameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        SaveTemplateButton.setText("Save");
+        SaveTemplateButton.setToolTipText("Save template");
+        SaveTemplateButton.setFocusCycleRoot(true);
+
+        CancelButton.setText("Cancel");
+        CancelButton.addActionListener(this::CancelButtonActionPerformed);
+
+        javax.swing.GroupLayout NewTemplateWindowLayout = new javax.swing.GroupLayout(NewTemplateWindow.getContentPane());
+        NewTemplateWindow.getContentPane().setLayout(NewTemplateWindowLayout);
+        NewTemplateWindowLayout.setHorizontalGroup(
+            NewTemplateWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NewTemplateWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NewTemplateWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NewTemplateWindowLayout.createSequentialGroup()
+                        .addComponent(TemplateNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TemplateNameTextInput, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NewTemplateWindowLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(CancelButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SaveTemplateButton)))
+                .addContainerGap())
+        );
+        NewTemplateWindowLayout.setVerticalGroup(
+            NewTemplateWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NewTemplateWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NewTemplateWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TemplateNameLabel)
+                    .addComponent(TemplateNameTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(NewTemplateWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaveTemplateButton)
+                    .addComponent(CancelButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setLayout(new java.awt.BorderLayout());
@@ -1284,10 +1415,23 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         addCFunctionSnippet();
     }//GEN-LAST:event_InsertFunctionButtonActionPerformed
 
+    // Show new template window by "New" button click : event
+    private void NewTemplateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewTemplateButtonActionPerformed
+        NewTemplateWindow.setLocationRelativeTo(null);
+        NewTemplateWindow.setVisible(true);
+    }//GEN-LAST:event_NewTemplateButtonActionPerformed
+
+    // Close new template window by "Cancel" button click : event
+    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
+        NewTemplateWindow.dispose();
+    }//GEN-LAST:event_CancelButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CancelButton;
     private javax.swing.JToolBar CodeEditorToolbar;
     private javax.swing.JMenuItem CopyActionItem;
     private javax.swing.JMenuItem CutActionItem;
+    private javax.swing.JButton DeleteTemplateButton;
     private javax.swing.JPopupMenu EditorTextPopupMenu;
     private javax.swing.JComboBox<String> FunctionsListButton;
     private javax.swing.JLabel FunctionsListLabel;
@@ -1302,12 +1446,22 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     private javax.swing.JButton InsertEnumButton;
     private javax.swing.JButton InsertFunctionButton;
     private javax.swing.JButton InsertStructureButton;
+    private javax.swing.JButton InsertTemplateButton;
     private javax.swing.JPopupMenu.Separator MenuSeparator13;
     private javax.swing.JButton NewBookmarkButton;
+    private javax.swing.JButton NewTemplateButton;
+    private javax.swing.JDialog NewTemplateWindow;
     private javax.swing.JButton NextBookmarkButton;
     private javax.swing.JMenuItem PasteActionItem;
     private javax.swing.JButton PrevBookmarkButton;
     private javax.swing.JMenuItem RedoActionItem;
+    private javax.swing.JButton SaveTemplateButton;
+    private javax.swing.JList<String> TemplateList;
+    private javax.swing.JLabel TemplateListLabel;
+    private javax.swing.JScrollPane TemplateListScroller;
+    private javax.swing.JLabel TemplateNameLabel;
+    private javax.swing.JTextField TemplateNameTextInput;
+    private javax.swing.JDialog TemplatesWindow;
     private javax.swing.JToolBar.Separator ToolbarSeparator10;
     private javax.swing.JToolBar.Separator ToolbarSeparator11;
     private javax.swing.JToolBar.Separator ToolbarSeparator12;

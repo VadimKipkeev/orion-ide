@@ -1734,6 +1734,7 @@ public class MainWindow extends JFrame {
         TemplateInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK));
         TemplateInsertItem.setIcon(templateInsertIcon);
         TemplateInsertItem.setText("Template...");
+        TemplateInsertItem.addActionListener(this::TemplateInsertItemActionPerformed);
         InsertMenu.add(TemplateInsertItem);
 
         MainMenubar.add(InsertMenu);
@@ -2782,6 +2783,16 @@ public class MainWindow extends JFrame {
             editorPanel.addCFunctionSnippet();
         }
     }//GEN-LAST:event_FunctInsertItemActionPerformed
+
+    // Show templates window by main menu item click : event
+    private void TemplateInsertItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TemplateInsertItemActionPerformed
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
+            editorPanel.showTemplatesWindow();
+        }
+    }//GEN-LAST:event_TemplateInsertItemActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
