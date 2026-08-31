@@ -719,6 +719,185 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         }
     }
     
+    // Add C enumeration snippet to editor text area : method
+    public void addCEnumSnippet() {
+        
+        // C struct snippet
+        String snippet = """
+                         typedef enum {
+                           ${FIELD_1},
+                           ${FIELD_2},
+                           ${FIELD_3},
+                           ${FIELD_4},
+                         } ${ENUM_NAME}_T;
+                         """;
+        
+        editorTextArea.replaceSelection(snippet);
+        
+        String[] tags = {"${FIELD_1}", "${FIELD_2}", "${FIELD_3}", "${FIELD_4}", "${ENUM_NAME}"};
+        java.util.List<javax.swing.text.Position> placeholders = new java.util.ArrayList<>();
+        
+        String text = editorTextArea.getText();
+        
+        try {
+            for(String tag : tags) {
+                int index = text.indexOf(tag);
+                
+                if(index >= 0) {
+                    placeholders.add(editorTextArea.getDocument().createPosition(index));
+                }
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        final int[] current = {0};
+        final boolean[] snippetMode = {true};
+        
+        // Show snippet highlight
+        Highlighter highlighter = editorTextArea.getHighlighter();
+        final Object[] highlightTag = {null};
+        
+        HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(new Color(255, 230, 140));
+        
+        Runnable applyHighlight = () -> {
+            try {
+                if(highlightTag[0] != null)
+                    highlighter.removeHighlight(highlightTag[0]);
+                
+                int position = placeholders.get(current[0]).getOffset();
+                highlightTag[0] = highlighter.addHighlight(position, position + tags[current[0]].length(), painter);
+            } catch(Exception ignored) {}
+        };
+        
+        // Set control mode keys listeners
+        editorTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                
+                // Press ESC key for exit edit snippet mode
+                if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
+                    snippetMode[0] = false;
+                    
+                    if(highlightTag[0] != null)
+                        highlighter.removeHighlight(highlightTag[0]);
+                    
+                    return;
+                }
+                
+                // Press TAB key for go to next placeholder
+                if(snippetMode[0] && e.getKeyCode() == java.awt.event.KeyEvent.VK_TAB) {
+                    e.consume();
+                    
+                    current[0] = (current[0] + 1) % placeholders.size();
+                    
+                    int position = placeholders.get(current[0]).getOffset();
+                    editorTextArea.setCaretPosition(position);
+                    editorTextArea.select(position, position + tags[current[0]].length());
+                    
+                    applyHighlight.run();
+                }
+            }
+        });
+        
+        // Go to first placeholder and highlight
+        if(!placeholders.isEmpty()) {
+            int position = placeholders.get(0).getOffset();
+            
+            editorTextArea.setCaretPosition(position);
+            editorTextArea.select(position, position + tags[0].length());
+            
+            applyHighlight.run();
+        }
+    }
+    
+    // Add C function snippet to editor text area : method
+    public void addCFunctionSnippet() {
+        
+        // C struct snippet
+        String snippet = "${func_type_1} ${FUNC_TYPE_2} ${FuncName}(${arg_1}, ${arg_2});";
+        
+        editorTextArea.replaceSelection(snippet);
+        
+        String[] tags = {"${func_type_1}", "${FUNC_TYPE_2}", "${FuncName}", "${arg_1}", "${arg_2}"};
+        java.util.List<javax.swing.text.Position> placeholders = new java.util.ArrayList<>();
+        
+        String text = editorTextArea.getText();
+        
+        try {
+            for(String tag : tags) {
+                int index = text.indexOf(tag);
+                
+                if(index >= 0) {
+                    placeholders.add(editorTextArea.getDocument().createPosition(index));
+                }
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        final int[] current = {0};
+        final boolean[] snippetMode = {true};
+        
+        // Show snippet highlight
+        Highlighter highlighter = editorTextArea.getHighlighter();
+        final Object[] highlightTag = {null};
+        
+        HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(new Color(255, 230, 140));
+        
+        Runnable applyHighlight = () -> {
+            try {
+                if(highlightTag[0] != null)
+                    highlighter.removeHighlight(highlightTag[0]);
+                
+                int position = placeholders.get(current[0]).getOffset();
+                highlightTag[0] = highlighter.addHighlight(position, position + tags[current[0]].length(), painter);
+            } catch(Exception ignored) {}
+        };
+        
+        // Set control mode keys listeners
+        editorTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                
+                // Press ESC key for exit edit snippet mode
+                if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
+                    snippetMode[0] = false;
+                    
+                    if(highlightTag[0] != null)
+                        highlighter.removeHighlight(highlightTag[0]);
+                    
+                    return;
+                }
+                
+                // Press TAB key for go to next placeholder
+                if(snippetMode[0] && e.getKeyCode() == java.awt.event.KeyEvent.VK_TAB) {
+                    e.consume();
+                    
+                    current[0] = (current[0] + 1) % placeholders.size();
+                    
+                    int position = placeholders.get(current[0]).getOffset();
+                    editorTextArea.setCaretPosition(position);
+                    editorTextArea.select(position, position + tags[current[0]].length());
+                    
+                    applyHighlight.run();
+                }
+            }
+        });
+        
+        // Go to first placeholder and highlight
+        if(!placeholders.isEmpty()) {
+            int position = placeholders.get(0).getOffset();
+            
+            editorTextArea.setCaretPosition(position);
+            editorTextArea.select(position, position + tags[0].length());
+            
+            applyHighlight.run();
+        }
+    }
+    
     // Check source text and text buffer to hidden symbols : method
     public boolean isModified() {
         String currentText = editorTextArea.getText().replace("\r\n", "\n").trim();
@@ -974,6 +1153,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         InsertEnumButton.setMinimumSize(new java.awt.Dimension(24, 24));
         InsertEnumButton.setPreferredSize(new java.awt.Dimension(24, 24));
         InsertEnumButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        InsertEnumButton.addActionListener(this::InsertEnumButtonActionPerformed);
         CodeEditorToolbar.add(InsertEnumButton);
 
         InsertFunctionButton.setIcon(functionInsertIcon);
@@ -984,6 +1164,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         InsertFunctionButton.setMinimumSize(new java.awt.Dimension(24, 24));
         InsertFunctionButton.setPreferredSize(new java.awt.Dimension(24, 24));
         InsertFunctionButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        InsertFunctionButton.addActionListener(this::InsertFunctionButtonActionPerformed);
         CodeEditorToolbar.add(InsertFunctionButton);
         CodeEditorToolbar.add(ToolbarSeparator12);
 
@@ -1088,6 +1269,16 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     private void InsertStructureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertStructureButtonActionPerformed
         addCStructSnippet();
     }//GEN-LAST:event_InsertStructureButtonActionPerformed
+
+    // Add C enumeration snippet by toolbar button click : event
+    private void InsertEnumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertEnumButtonActionPerformed
+        addCEnumSnippet();
+    }//GEN-LAST:event_InsertEnumButtonActionPerformed
+
+    // Add C function snippet by toolbar button click : event
+    private void InsertFunctionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertFunctionButtonActionPerformed
+        addCFunctionSnippet();
+    }//GEN-LAST:event_InsertFunctionButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar CodeEditorToolbar;

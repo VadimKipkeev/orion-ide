@@ -854,11 +854,9 @@ public class MainWindow extends JFrame {
 
         FindAndReplaceWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         FindAndReplaceWindow.setTitle("Find and replace");
-        FindAndReplaceWindow.setMaximumSize(new java.awt.Dimension(680, 226));
         FindAndReplaceWindow.setMinimumSize(new java.awt.Dimension(680, 226));
         FindAndReplaceWindow.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         FindAndReplaceWindow.setName("FindAndReplaceWindow"); // NOI18N
-        FindAndReplaceWindow.setPreferredSize(new java.awt.Dimension(680, 226));
         FindAndReplaceWindow.setResizable(false);
         FindAndReplaceWindow.setType(java.awt.Window.Type.POPUP);
         FindAndReplaceWindow.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1173,7 +1171,6 @@ public class MainWindow extends JFrame {
         CaretPositionLabel.setRequestFocusEnabled(false);
         CaretPositionLabel.setVerifyInputWhenFocusTarget(false);
         AppIndicationPanel.add(CaretPositionLabel, java.awt.BorderLayout.WEST);
-        CaretPositionLabel.getAccessibleContext().setAccessibleDescription("Cursor position");
 
         ToolbarSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
         AppIndicationPanel.add(ToolbarSeparator6, java.awt.BorderLayout.CENTER);
@@ -1718,16 +1715,19 @@ public class MainWindow extends JFrame {
         StructInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
         StructInsertItem.setIcon(structureInsertIcon);
         StructInsertItem.setText("Structure");
+        StructInsertItem.addActionListener(this::StructInsertItemActionPerformed);
         InsertMenu.add(StructInsertItem);
 
         EnumInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
         EnumInsertItem.setIcon(enumerationInsertIcon);
         EnumInsertItem.setText("Enumeration");
+        EnumInsertItem.addActionListener(this::EnumInsertItemActionPerformed);
         InsertMenu.add(EnumInsertItem);
 
         FunctInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_DOWN_MASK));
         FunctInsertItem.setIcon(functionInsertIcon);
         FunctInsertItem.setText("Function");
+        FunctInsertItem.addActionListener(this::FunctInsertItemActionPerformed);
         InsertMenu.add(FunctInsertItem);
         InsertMenu.add(MenuSeparator11);
 
@@ -2752,6 +2752,36 @@ public class MainWindow extends JFrame {
             editorPanel.removeFindSelection();
         }
     }//GEN-LAST:event_FindAndReplaceWindowClosing
+
+    // Add C structure snippet by main menu item click : event
+    private void StructInsertItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StructInsertItemActionPerformed
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
+            editorPanel.addCStructSnippet();
+        }
+    }//GEN-LAST:event_StructInsertItemActionPerformed
+
+    // Add C enumeration snippet by main menu item click : event
+    private void EnumInsertItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnumInsertItemActionPerformed
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
+            editorPanel.addCEnumSnippet();
+        }
+    }//GEN-LAST:event_EnumInsertItemActionPerformed
+
+    // Add C function snippet by main menu item click : event
+    private void FunctInsertItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FunctInsertItemActionPerformed
+        Component component = EditorMDIFrame.getSelectedFrame();
+        
+        if(component instanceof JInternalFrame jInternalFrame) {
+            CodeEditorPanel editorPanel = (CodeEditorPanel) jInternalFrame.getContentPane().getComponent(0);
+            editorPanel.addCFunctionSnippet();
+        }
+    }//GEN-LAST:event_FunctInsertItemActionPerformed
     
     // Control "Window" menu items state : function
     private void compareMDIWindowsCount() {    
