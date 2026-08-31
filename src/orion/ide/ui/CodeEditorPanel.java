@@ -21,6 +21,7 @@ package orion.ide.ui;
  * -----------------------------------------------------------------------------
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -33,6 +34,9 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.HighlightPainter;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
 import orion.ide.core.CodeEditorTextAreaZoomListener;
@@ -622,6 +626,99 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         return result;
     }
     
+    // Add C structure snippet to editor text area : method
+    public void addCStructSnippet() {
+        
+        // C struct snippet
+        String snippet = """
+                         typedef struct {
+                           ${FIELD_TYPE_1} ${fieldName1};
+                           ${FIELD_TYPE_2} ${fieldName2};
+                           ${FIELD_TYPE_3} ${fieldName3};
+                           ${FIELD_TYPE_4} ${fieldName4};
+                         } ${STRUCT_NAME}_T;
+                         """;
+        
+        editorTextArea.replaceSelection(snippet);
+        
+        String[] tags = {"${FIELD_TYPE_1}", "${fieldName1}", "${FIELD_TYPE_2}", "${fieldName2}", "${FIELD_TYPE_3}", "${fieldName3}", "${FIELD_TYPE_4}", "${fieldName4}", "${STRUCT_NAME}"};
+        java.util.List<javax.swing.text.Position> placeholders = new java.util.ArrayList<>();
+        
+        String text = editorTextArea.getText();
+        
+        try {
+            for(String tag : tags) {
+                int index = text.indexOf(tag);
+                
+                if(index >= 0) {
+                    placeholders.add(editorTextArea.getDocument().createPosition(index));
+                }
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        final int[] current = {0};
+        final boolean[] snippetMode = {true};
+        
+        // Show snippet highlight
+        Highlighter highlighter = editorTextArea.getHighlighter();
+        final Object[] highlightTag = {null};
+        
+        HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(new Color(255, 230, 140));
+        
+        Runnable applyHighlight = () -> {
+            try {
+                if(highlightTag[0] != null)
+                    highlighter.removeHighlight(highlightTag[0]);
+                
+                int position = placeholders.get(current[0]).getOffset();
+                highlightTag[0] = highlighter.addHighlight(position, position + tags[current[0]].length(), painter);
+            } catch(Exception ignored) {}
+        };
+        
+        // Set control mode keys listeners
+        editorTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                
+                // Press ESC key for exit edit snippet mode
+                if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
+                    snippetMode[0] = false;
+                    
+                    if(highlightTag[0] != null)
+                        highlighter.removeHighlight(highlightTag[0]);
+                    
+                    return;
+                }
+                
+                // Press TAB key for go to next placeholder
+                if(snippetMode[0] && e.getKeyCode() == java.awt.event.KeyEvent.VK_TAB) {
+                    e.consume();
+                    
+                    current[0] = (current[0] + 1) % placeholders.size();
+                    
+                    int position = placeholders.get(current[0]).getOffset();
+                    editorTextArea.setCaretPosition(position);
+                    editorTextArea.select(position, position + tags[current[0]].length());
+                    
+                    applyHighlight.run();
+                }
+            }
+        });
+        
+        // Go to first placeholder and highlight
+        if(!placeholders.isEmpty()) {
+            int position = placeholders.get(0).getOffset();
+            
+            editorTextArea.setCaretPosition(position);
+            editorTextArea.select(position, position + tags[0].length());
+            
+            applyHighlight.run();
+        }
+    }
+    
     // Check source text and text buffer to hidden symbols : method
     public boolean isModified() {
         String currentText = editorTextArea.getText().replace("\r\n", "\n").trim();
@@ -866,6 +963,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         InsertStructureButton.setMinimumSize(new java.awt.Dimension(24, 24));
         InsertStructureButton.setPreferredSize(new java.awt.Dimension(24, 24));
         InsertStructureButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        InsertStructureButton.addActionListener(this::InsertStructureButtonActionPerformed);
         CodeEditorToolbar.add(InsertStructureButton);
 
         InsertEnumButton.setIcon(enumerationInsertIcon);
@@ -985,6 +1083,11 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     private void NextBookmarkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextBookmarkButtonActionPerformed
         goToNextBookmark();
     }//GEN-LAST:event_NextBookmarkButtonActionPerformed
+
+    // Add C structure snippet by toolbar button click : event
+    private void InsertStructureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertStructureButtonActionPerformed
+        addCStructSnippet();
+    }//GEN-LAST:event_InsertStructureButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar CodeEditorToolbar;
