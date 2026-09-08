@@ -23,12 +23,21 @@ package orion.ide.ui;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.TreeSet;
+import javax.swing.DefaultListModel;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -658,7 +667,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     placeholders.add(editorTextArea.getDocument().createPosition(index));
                 }
             }
-        } catch(Exception ex) {
+        } catch(BadLocationException ex) {
             ex.printStackTrace();
         }
         
@@ -678,7 +687,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 
                 int position = placeholders.get(current[0]).getOffset();
                 highlightTag[0] = highlighter.addHighlight(position, position + tags[current[0]].length(), painter);
-            } catch(Exception ignored) {}
+            } catch(BadLocationException ignored) {}
         };
         
         // Set control mode keys listeners
@@ -751,7 +760,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     placeholders.add(editorTextArea.getDocument().createPosition(index));
                 }
             }
-        } catch(Exception ex) {
+        } catch(BadLocationException ex) {
             ex.printStackTrace();
         }
         
@@ -771,7 +780,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 
                 int position = placeholders.get(current[0]).getOffset();
                 highlightTag[0] = highlighter.addHighlight(position, position + tags[current[0]].length(), painter);
-            } catch(Exception ignored) {}
+            } catch(BadLocationException ignored) {}
         };
         
         // Set control mode keys listeners
@@ -837,7 +846,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                     placeholders.add(editorTextArea.getDocument().createPosition(index));
                 }
             }
-        } catch(Exception ex) {
+        } catch(BadLocationException ex) {
             ex.printStackTrace();
         }
         
@@ -857,7 +866,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
                 
                 int position = placeholders.get(current[0]).getOffset();
                 highlightTag[0] = highlighter.addHighlight(position, position + tags[current[0]].length(), painter);
-            } catch(Exception ignored) {}
+            } catch(BadLocationException ignored) {}
         };
         
         // Set control mode keys listeners
@@ -904,6 +913,8 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     
     // Show templates window : method
     public void showTemplatesWindow() {
+        loadTemplateList();
+        
         TemplatesWindow.setLocationRelativeTo(null);
         TemplatesWindow.setVisible(true);
     }
@@ -955,7 +966,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
             // Go to line
             editorTextArea.setCaretPosition(lineOffset);
             editorTextArea.requestFocusInWindow();
-        } catch(Exception ex) {
+        } catch(HeadlessException | BadLocationException ex) {
             ex.printStackTrace();
         }
     }
@@ -1152,9 +1163,11 @@ public class CodeEditorPanel extends javax.swing.JPanel {
 
         DeleteTemplateButton.setText("Delete");
         DeleteTemplateButton.setToolTipText("Delete template");
+        DeleteTemplateButton.addActionListener(this::DeleteTemplateButtonActionPerformed);
 
         InsertTemplateButton.setText("Insert");
         InsertTemplateButton.setToolTipText("Insert template");
+        InsertTemplateButton.addActionListener(this::InsertTemplateButtonActionPerformed);
 
         javax.swing.GroupLayout TemplatesWindowLayout = new javax.swing.GroupLayout(TemplatesWindow.getContentPane());
         TemplatesWindow.getContentPane().setLayout(TemplatesWindowLayout);
@@ -1210,6 +1223,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         SaveTemplateButton.setText("Save");
         SaveTemplateButton.setToolTipText("Save template");
         SaveTemplateButton.setFocusCycleRoot(true);
+        SaveTemplateButton.addActionListener(this::SaveTemplateButtonActionPerformed);
 
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(this::CancelButtonActionPerformed);
@@ -1426,6 +1440,155 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         NewTemplateWindow.dispose();
     }//GEN-LAST:event_CancelButtonActionPerformed
 
+    // Save current source code as template : event
+    private void SaveTemplateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveTemplateButtonActionPerformed
+        
+        // Templates folder path
+        File templatesPath = new File(System.getProperty("user.home") + "/Orion IDE/Templates/");
+        
+        if(!templatesPath.exists()) {
+            templatesPath.mkdirs();
+        }
+        
+        // Set template file
+        String fileName = TemplateNameTextInput.getText();
+        File templateFile = new File(templatesPath, fileName + ".tpl");
+            
+        // Get source code text from editor text area
+        String sourceText = editorTextArea.getText();
+            
+        // Save source code text to template file
+        try(Writer fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(templateFile), StandardCharsets.UTF_8))) {
+            fileWriter.write(sourceText);
+            
+            NewTemplateWindow.dispose();
+            loadTemplateList();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_SaveTemplateButtonActionPerformed
+
+    // Delete template by button click : event
+    private void DeleteTemplateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteTemplateButtonActionPerformed
+        
+        // Set current template
+        String currentTemplate = TemplateList.getSelectedValue();
+        
+        // Show message dialog about template not selected
+        if(currentTemplate == null) {
+            JOptionPane.showMessageDialog(null, "Please, choose template for deleting.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Show confirm dialog before template deleting
+        int responseDeleting = JOptionPane.showConfirmDialog(
+                null,
+                "You want deleting this template \"" + currentTemplate + "\"?",
+                "Confirm deleting",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+        
+        // Nothing to do by "No" answer
+        if(responseDeleting != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        // Set selected template file path
+        File templateFilePath = new File(System.getProperty("user.home") + "/Orion IDE/Templates/" + currentTemplate + ".tpl");
+        
+        // Deleting selected template
+        if(templateFilePath.exists()) {
+            if(templateFilePath.delete()) {
+                DefaultListModel<String> model = (DefaultListModel<String>) TemplateList.getModel();
+                model.removeElement(currentTemplate);
+            } else {
+                JOptionPane.showMessageDialog(null, "Template file is not exist", "Error", JOptionPane.ERROR_MESSAGE);
+                
+                DefaultListModel<String> model = (DefaultListModel<String>) TemplateList.getModel();
+                model.removeElement(currentTemplate);
+            }
+        }
+    }//GEN-LAST:event_DeleteTemplateButtonActionPerformed
+
+    // Insert source text from template to editor text area by button click : event
+    private void InsertTemplateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertTemplateButtonActionPerformed
+                
+        // Set current template
+        String currentTemplate = TemplateList.getSelectedValue();
+        
+        // Show message dialog about template not selected
+        if(currentTemplate == null) {
+            JOptionPane.showMessageDialog(null, "Please, choose template for inserting.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Show confirm dialog before template inserting
+        int responseInserting = JOptionPane.showConfirmDialog(
+                null,
+                "If you confirm, all text into editor will be replaced!",
+                "Confirm inserting",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+        
+        // Nothing to do by "No" answer
+        if(responseInserting != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        // Set selected template file path
+        File templateFilePath = new File(System.getProperty("user.home") + "/Orion IDE/Templates/" + currentTemplate + ".tpl");
+        
+        // Insert source code from selected template
+        if(templateFilePath.exists()) {
+            String content;
+            
+            try {
+                content = Files.readString(templateFilePath.toPath(), StandardCharsets.UTF_8);
+                editorTextArea.setText(content);
+                
+                TemplatesWindow.dispose();
+            } catch (IOException ex) {
+                System.getLogger(CodeEditorPanel.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Template file is not exist", "Error", JOptionPane.ERROR_MESSAGE);
+                
+            DefaultListModel<String> model = (DefaultListModel<String>) TemplateList.getModel();
+            model.removeElement(currentTemplate);
+        }
+    }//GEN-LAST:event_InsertTemplateButtonActionPerformed
+
+    // Load templates list : function
+    private void loadTemplateList() {
+        
+        // Templates folder path
+        File templatesPath = new File(System.getProperty("user.home") + "/Orion IDE/Templates/");
+        
+        // Set template list model
+        DefaultListModel<String> templateListModel = new DefaultListModel<>();
+        
+        if(templatesPath.exists() && templatesPath.isDirectory()) {
+            
+            // Get all template files list by .tpl extension
+            File[] templateFiles = templatesPath.listFiles((dir, name) -> name.toLowerCase().endsWith(".tpl"));
+            
+            if(templateFiles != null) {
+                for(File file : templateFiles) {
+                    String template = file.getName();
+                    String templateName = template.substring(0, template.lastIndexOf("."));
+                    
+                    // Add templates to list model
+                    templateListModel.addElement(templateName);
+                }
+            }
+        }
+        
+        // Assign template list with model
+        TemplateList.setModel(templateListModel);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JToolBar CodeEditorToolbar;

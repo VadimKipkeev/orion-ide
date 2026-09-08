@@ -308,12 +308,18 @@
             <Property name="text" type="java.lang.String" value="Delete"/>
             <Property name="toolTipText" type="java.lang.String" value="Delete template"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteTemplateButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="InsertTemplateButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Insert"/>
             <Property name="toolTipText" type="java.lang.String" value="Insert template"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InsertTemplateButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -401,6 +407,9 @@
             <Property name="toolTipText" type="java.lang.String" value="Save template"/>
             <Property name="focusCycleRoot" type="boolean" value="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveTemplateButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="CancelButton">
           <Properties>
