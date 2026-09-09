@@ -89,13 +89,16 @@ public class IconProvider {
         return iconCache.computeIfAbsent(cacheKey, (String key) -> {
             try {
                 FlatSVGIcon svgIcon = new FlatSVGIcon(fullPath);
+                
                 if (width > 0 && height > 0) {
-                    return svgIcon.derive(width, height);
+                    svgIcon = svgIcon.derive(width, height);
                 }
+
                 return svgIcon;
             } catch (Exception e) {
-                System.err.println("Error SVG loading (" + themeFolder.trim() + "): " + fullPath);
+                System.err.println("Error SVG icon loading (" + themeFolder.trim() + "): " + fullPath);
             }
+            return null;
         });
     }
     
