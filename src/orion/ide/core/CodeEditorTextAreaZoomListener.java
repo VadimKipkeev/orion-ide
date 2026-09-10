@@ -7,11 +7,11 @@
  */
 
 /*
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Code editor text area zoom event listener class
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Implements zoom in and zoom out methods
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  */
 package orion.ide.core;
 
@@ -39,7 +39,14 @@ public class CodeEditorTextAreaZoomListener implements MouseWheelListener {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
     private final RSyntaxTextArea editorTextArea;
+
     private static final int MIN_FONT_SIZE = 8; // Minimal font size constant
     private static final int MAX_FONT_SIZE = 60; // Maximized font size constant
     /*
@@ -48,6 +55,12 @@ public class CodeEditorTextAreaZoomListener implements MouseWheelListener {
      * -------------------------------------------------------------------------
      */
     
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS METHODS
+     * -------------------------------------------------------------------------
+     */
+
     // Constructor
     public CodeEditorTextAreaZoomListener(RSyntaxTextArea textArea) {
         this.editorTextArea = textArea;

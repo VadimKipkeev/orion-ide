@@ -7,11 +7,11 @@
  */
 
 /*
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Tree list model class
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Add new item, insert, rename, delete item and set item icon methods
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  */
 package orion.ide.core;
 
@@ -38,6 +38,12 @@ public class TreeListModel extends DefaultTreeModel {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
     private final JTree treeList;
     /*
      * -------------------------------------------------------------------------
@@ -46,9 +52,9 @@ public class TreeListModel extends DefaultTreeModel {
      */
     
     /*
-     ***************************************************************************
+     * -------------------------------------------------------------------------
      * Internal node data class
-     ***************************************************************************
+     * -------------------------------------------------------------------------
      */
     public static class NodeData {
         
@@ -57,8 +63,15 @@ public class TreeListModel extends DefaultTreeModel {
          * INTERNAL CLASS FIELDS SECTION BEGIN
          * ---------------------------------------------------------------------
          */
+
+        /*
+         * -------------------------------------------------------------------------
+         * PUBLIC INTERNAL CLASS FIELDS
+         * -------------------------------------------------------------------------
+         */
         public String nodeName;
         public boolean isFolder;
+        
         public File fileParam;
         /*
          * ---------------------------------------------------------------------
@@ -66,6 +79,12 @@ public class TreeListModel extends DefaultTreeModel {
          * ---------------------------------------------------------------------
          */
         
+        /*
+         * -------------------------------------------------------------------------
+         * PUBLIC INTERNAL CLASS METHODS
+         * -------------------------------------------------------------------------
+         */
+
         // Internal class constructor
         public NodeData(String nodeName, boolean isFolder, File fileParam) {
             this.nodeName = nodeName;
@@ -79,6 +98,12 @@ public class TreeListModel extends DefaultTreeModel {
         }
     }
     
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS METHODS
+     * -------------------------------------------------------------------------
+     */
+
     // Constructor
     public TreeListModel(JTree treeList, String rootName) {
         super(new DefaultMutableTreeNode(new NodeData(rootName, true, null)));
@@ -140,31 +165,8 @@ public class TreeListModel extends DefaultTreeModel {
         // Parent node always is folder
         return addNode(parentNode, nodeName, isFolder, file);
     }
-    
-    // Add new node : function
-    private DefaultMutableTreeNode addNode(DefaultMutableTreeNode parentNode, String nodeName, boolean isFolder, File file) {
-        
-        // Check new node to exists
-        if(file != null) {
-            DefaultMutableTreeNode existingNode = findChildByFile(parentNode, file);
-            
-            if(existingNode != null) {
-                return existingNode;
-            }
-        }
-        
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(new NodeData(nodeName, isFolder, file));
-        
-        // Using is EDT for treads savety
-        SwingUtilities.invokeLater(() -> {
-            insertNodeInto(node, parentNode, parentNode.getChildCount());
-            expandList(parentNode);
-        });
-        
-        return node;
-    }
-    
-    // Check node type to folder : method
+
+        // Check node type to folder : method
     public boolean isFolder(DefaultMutableTreeNode node) {
         if(node == null)
             return false;
@@ -243,6 +245,35 @@ public class TreeListModel extends DefaultTreeModel {
         }
         
         return (DefaultMutableTreeNode) path.getLastPathComponent();
+    }
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FUNCTIONS
+     * -------------------------------------------------------------------------
+     */
+    
+    // Add new node : function
+    private DefaultMutableTreeNode addNode(DefaultMutableTreeNode parentNode, String nodeName, boolean isFolder, File file) {
+        
+        // Check new node to exists
+        if(file != null) {
+            DefaultMutableTreeNode existingNode = findChildByFile(parentNode, file);
+            
+            if(existingNode != null) {
+                return existingNode;
+            }
+        }
+        
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(new NodeData(nodeName, isFolder, file));
+        
+        // Using is EDT for treads savety
+        SwingUtilities.invokeLater(() -> {
+            insertNodeInto(node, parentNode, parentNode.getChildCount());
+            expandList(parentNode);
+        });
+        
+        return node;
     }
     
     // Find already existed node for not dublicate nodes : function

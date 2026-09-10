@@ -7,11 +7,11 @@
  */
 
 /*
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * JFileChooser file filter class for source files
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Create file filter fo extensions: .h, .c, .cpp, .ui, .ini
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  */
 package orion.ide.core;
 
@@ -19,7 +19,7 @@ package orion.ide.core;
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
-*/
+ */
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 /*
@@ -35,6 +35,12 @@ public class SourceFileFilter extends FileFilter {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
     private final String filterDescription;
     private final String[] filterExtArray;
     /*
@@ -43,6 +49,12 @@ public class SourceFileFilter extends FileFilter {
      * -------------------------------------------------------------------------
      */
     
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS METHODS
+     * -------------------------------------------------------------------------
+     */
+
     // Constructor for single file extension
     public SourceFileFilter(String filterDescription, String filterExtension) {
         this.filterDescription = filterDescription;

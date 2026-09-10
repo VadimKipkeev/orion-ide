@@ -7,11 +7,11 @@
  */
 
 /*
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Application main window class
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Controled all sub windows and panels
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  */
 package orion.ide.ui;
 
@@ -20,11 +20,11 @@ package orion.ide.ui;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import java.awt.*;
-import java.awt.event.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
+import java.awt.*;
+import java.awt.event.*;
 import java.beans.PropertyVetoException;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -59,6 +59,217 @@ public class MainWindow extends JFrame {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
+
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
+    
+    // New file extension
+    public static String newFileExtension;
+    
+    // Project file path string
+    public static String projectFilePath = "";
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AboutDialogOkButton;
+    private javax.swing.JDialog AboutDialogWindow;
+    private javax.swing.JMenuItem AboutHelpItem;
+    private javax.swing.JScrollPane AppDescriptionScroller;
+    private javax.swing.JTextArea AppDescriptionText;
+    private javax.swing.JPanel AppIndicationPanel;
+    private javax.swing.JLabel AppStatusLabel;
+    private javax.swing.JPanel AppStatusPanel;
+    private javax.swing.JLabel AppTitleLabel;
+    private javax.swing.JLabel AppVersionLabel;
+    private javax.swing.JLabel AppearanceSettingsLabel;
+    private javax.swing.JPanel AppearanceSettingsPanel;
+    private javax.swing.JMenu BookmarksMenu;
+    private javax.swing.JButton BuildDebugButton;
+    private javax.swing.JPanel BuildLogPanel;
+    private javax.swing.JScrollPane BuildLogScroller;
+    private javax.swing.JToolBar BuildLogToolbar;
+    private javax.swing.JEditorPane BuildLogViewer;
+    private javax.swing.JMenu BuildMenu;
+    private javax.swing.JButton BuildReleaseButton;
+    private javax.swing.JLabel BuildSettingsLabel;
+    private javax.swing.JPanel BuildSettingsPanel;
+    private javax.swing.JToolBar BuildToolbar;
+    private javax.swing.JButton CHeaderFileTypeButton;
+    private javax.swing.JButton CPPClassFileTypeButton;
+    private javax.swing.JButton CSourceFileTypeButton;
+    private javax.swing.JButton CancelSettingsButton;
+    private javax.swing.JLabel CaretPositionLabel;
+    private javax.swing.JMenuItem CascadeWindowItem;
+    private javax.swing.JButton ClearBuildLogButton;
+    private javax.swing.JMenuItem CloseAllWindowItem;
+    private javax.swing.JButton CloseNewFileWindowButton;
+    private javax.swing.JMenuItem CloseWindowItem;
+    private javax.swing.JToolBar CommonToolbar;
+    private javax.swing.JMenuItem ConfigBuildItem;
+    private javax.swing.JButton ContentsHelpButton;
+    private javax.swing.JMenuItem ContentsHelpItem;
+    private javax.swing.JMenuItem CopyEditItem;
+    private javax.swing.JButton CreateNewFileButton;
+    private javax.swing.JMenuItem CutEditItem;
+    private javax.swing.JMenuItem DebugBuildItem;
+    private javax.swing.JMenuItem DesignerToolsItem;
+    private javax.swing.JMenu EditMenu;
+    private javax.swing.JLabel EditorFontSizeLabel;
+    private javax.swing.JSpinner EditorFontSizeSpinner;
+    private javax.swing.JDesktopPane EditorMDIFrame;
+    private javax.swing.JSplitPane EditorSplitPanel;
+    private javax.swing.JLabel EditorStyleLabel;
+    private javax.swing.JComboBox<String> EditorStyleListButton;
+    private javax.swing.JLabel EncodeStatusLabel;
+    private javax.swing.JMenuItem EnumInsertItem;
+    private javax.swing.JButton ErrorsFilterButton;
+    private javax.swing.JMenu FileMenu;
+    private javax.swing.JTree FilesTreeList;
+    private javax.swing.JScrollPane FilesTreeScroller;
+    private javax.swing.JButton FindAndReplaceButton;
+    private javax.swing.JTabbedPane FindAndReplacePanel;
+    private javax.swing.JDialog FindAndReplaceWindow;
+    private javax.swing.JButton FindButton;
+    private javax.swing.JMenuItem FindEditItem;
+    private javax.swing.JPanel FindInFileTab;
+    private javax.swing.JLabel FindInputLabel;
+    private javax.swing.JTextField FindInputText;
+    private javax.swing.JButton FindNextButton;
+    private javax.swing.JButton FindPreviewButton;
+    private javax.swing.JButton FormDesignFileTypeButton;
+    private javax.swing.JSplitPane FrameSplitPanel;
+    private javax.swing.JMenuItem FunctInsertItem;
+    private javax.swing.JButton GitCheckoutButton;
+    private javax.swing.JButton GitCommitButton;
+    private javax.swing.JButton GitFetchButton;
+    private javax.swing.JLabel GitLoginLabel;
+    private javax.swing.JTextField GitLoginTextInput;
+    private javax.swing.JScrollPane GitOutputScroller;
+    private javax.swing.JEditorPane GitOutputViewer;
+    private javax.swing.JPanel GitPanel;
+    private javax.swing.JLabel GitPasswordLabel;
+    private javax.swing.JPasswordField GitPasswordTextInput;
+    private javax.swing.JButton GitPullButton;
+    private javax.swing.JButton GitPushButton;
+    private javax.swing.JLabel GitSettingsLabel;
+    private javax.swing.JPanel GitSettingsPanel;
+    private javax.swing.JLabel GitTokenLabel;
+    private javax.swing.JTextField GitTokenTextInput;
+    private javax.swing.JToolBar GitToolbar;
+    private javax.swing.JMenuItem GitToolsItem;
+    private javax.swing.JMenuItem GoToViewItem;
+    private javax.swing.JMenu HelpMenu;
+    private javax.swing.JButton INIConfigFileTypeButton;
+    private javax.swing.JMenu InsertMenu;
+    private javax.swing.JMenuItem InstallPkgBuildItem;
+    private javax.swing.JButton MCORESDKPathButton;
+    private javax.swing.JLabel MCORESDKPathLabel;
+    private javax.swing.JTextField MCORESDKPathTextInput;
+    private javax.swing.JMenuBar MainMenubar;
+    private javax.swing.JPanel MainToolbarsPanel;
+    private javax.swing.JPopupMenu.Separator MenuSeparator1;
+    private javax.swing.JPopupMenu.Separator MenuSeparator10;
+    private javax.swing.JPopupMenu.Separator MenuSeparator11;
+    private javax.swing.JPopupMenu.Separator MenuSeparator12;
+    private javax.swing.JPopupMenu.Separator MenuSeparator13;
+    private javax.swing.JPopupMenu.Separator MenuSeparator14;
+    private javax.swing.JPopupMenu.Separator MenuSeparator2;
+    private javax.swing.JPopupMenu.Separator MenuSeparator3;
+    private javax.swing.JPopupMenu.Separator MenuSeparator4;
+    private javax.swing.JPopupMenu.Separator MenuSeparator5;
+    private javax.swing.JPopupMenu.Separator MenuSeparator6;
+    private javax.swing.JPopupMenu.Separator MenuSeparator7;
+    private javax.swing.JPopupMenu.Separator MenuSeparator8;
+    private javax.swing.JPopupMenu.Separator MenuSeparator9;
+    private javax.swing.JButton NeptuneSDKPathButton;
+    private javax.swing.JLabel NeptuneSDKPathLabel;
+    private javax.swing.JTextField NeptuneSDKPathTextInput;
+    private javax.swing.JMenuItem NewBookmarkItem;
+    private javax.swing.JButton NewFileButton;
+    private javax.swing.JMenuItem NewFileItem;
+    private javax.swing.JLabel NewFileNameLabel;
+    private javax.swing.JTextField NewFileNameTextInput;
+    private javax.swing.JPanel NewFileSetupPanel;
+    private javax.swing.JDialog NewFileWindow;
+    private javax.swing.JLabel NewFileWindowTitleLabel;
+    private javax.swing.JMenuItem NewProjectItem;
+    private javax.swing.JMenuItem NextBookmarkItem;
+    private javax.swing.JButton OpenFileButton;
+    private javax.swing.JMenuItem OpenFileItem;
+    private javax.swing.JMenuItem OpenProjectItem;
+    private javax.swing.JInternalFrame OutputFrame;
+    private javax.swing.JTabbedPane OutputFrameTabs;
+    private javax.swing.JCheckBoxMenuItem OutputWindowItem;
+    private javax.swing.JMenuItem PasteEditItem;
+    private javax.swing.JMenuItem PrevBookmarkItem;
+    private javax.swing.JMenuItem PrintFileItem;
+    private javax.swing.JMenuItem PrintSetupItem;
+    private javax.swing.JInternalFrame ProjectExplorerFrame;
+    private javax.swing.JCheckBoxMenuItem ProjectExplorerItem;
+    private javax.swing.JTabbedPane ProjectExplorerTabs;
+    private javax.swing.JPanel ProjectFilesPanel;
+    private javax.swing.JPanel ProjectStructurePanel;
+    private javax.swing.JMenuItem QuitItem;
+    private javax.swing.JButton RedoEditButton;
+    private javax.swing.JMenuItem RedoEditItem;
+    private javax.swing.JMenuItem ReleaseBuildItem;
+    private javax.swing.JButton ReplaceAllButton;
+    private javax.swing.JButton ReplaceButton;
+    private javax.swing.JLabel ReplaceInputLabel;
+    private javax.swing.JTextField ReplaceInputText;
+    private javax.swing.JMenuItem ResManagerToolsItem;
+    private javax.swing.JMenuItem SamplesHelpItem;
+    private javax.swing.JMenuItem SaveAllItem;
+    private javax.swing.JMenuItem SaveAsFileItem;
+    private javax.swing.JButton SaveFileButton;
+    private javax.swing.JMenuItem SaveFileItem;
+    private javax.swing.JMenuItem SaveProjectItem;
+    private javax.swing.JButton SaveSettingsButton;
+    private javax.swing.JMenuItem SetDefViewItem;
+    private javax.swing.JMenuItem SettingsItem;
+    private javax.swing.JTabbedPane SettingsTabs;
+    private javax.swing.JDialog SettingsWindow;
+    private javax.swing.JButton ShowAllMessageButton;
+    private javax.swing.JMenuItem SplitHorizontallyWindowItem;
+    private javax.swing.JMenuItem SplitVerticallyWindowItem;
+    private javax.swing.JPanel StatusbarPanel;
+    private javax.swing.JMenuItem StructInsertItem;
+    private javax.swing.JTree StructureTreeList;
+    private javax.swing.JScrollPane StructureTreeScroller;
+    private javax.swing.JMenuItem TemplateInsertItem;
+    private javax.swing.JButton TerminalButton;
+    private javax.swing.JPanel TerminalPanel;
+    private javax.swing.JScrollPane TerminalScroller;
+    private javax.swing.JMenuItem TerminalToolsItem;
+    private javax.swing.JEditorPane TerminalViewer;
+    private javax.swing.JLabel ThemeNotificationLabel;
+    private javax.swing.JToolBar.Separator ToolbarSeparator1;
+    private javax.swing.JToolBar.Separator ToolbarSeparator2;
+    private javax.swing.JToolBar.Separator ToolbarSeparator3;
+    private javax.swing.JToolBar.Separator ToolbarSeparator5;
+    private javax.swing.JSeparator ToolbarSeparator6;
+    private javax.swing.JToolBar.Separator ToolbarSeparator7;
+    private javax.swing.JToolBar.Separator ToolbarSeparator8;
+    private javax.swing.JToolBar.Separator ToolbarSeparator9;
+    private javax.swing.JMenu ToolsMenu;
+    private javax.swing.JButton UndoEditButton;
+    private javax.swing.JMenuItem UndoEditItem;
+    private javax.swing.JMenu ViewMenu;
+    private javax.swing.JMenu WindowMenu;
+    private javax.swing.JLabel WindowThemeLabel;
+    private javax.swing.JComboBox<String> WindowThemeListButton;
+    private javax.swing.JMenuItem ZoomInViewItem;
+    private javax.swing.JMenuItem ZoomOutViewItem;
+    // End of variables declaration//GEN-END:variables
+
     // Settings control object
     private final SettingsManager settings = new SettingsManager();
     
@@ -73,18 +284,18 @@ public class MainWindow extends JFrame {
     
     // New file name string
     private static String newFileFullName;
-    
-    // New file extension
-    public static String newFileExtension;
-    
-    // Project file path string
-    public static String projectFilePath = "";
     /*
      * -------------------------------------------------------------------------
      * CLASS FIELDS SECTION END
      * -------------------------------------------------------------------------
      */
-    
+ 
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS METHODS
+     * -------------------------------------------------------------------------
+     */
+
     // Constructor
     public MainWindow() {
         initComponents();
@@ -112,6 +323,12 @@ public class MainWindow extends JFrame {
         // Set timer to show caret position in selected editor MDI window
         new Timer(100, e -> showCaretPosition()).start();
     }
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FUNCTIONS
+     * -------------------------------------------------------------------------
+     */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -3182,196 +3399,4 @@ public class MainWindow extends JFrame {
         
         return true;
     }
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AboutDialogOkButton;
-    private javax.swing.JDialog AboutDialogWindow;
-    private javax.swing.JMenuItem AboutHelpItem;
-    private javax.swing.JScrollPane AppDescriptionScroller;
-    private javax.swing.JTextArea AppDescriptionText;
-    private javax.swing.JPanel AppIndicationPanel;
-    private javax.swing.JLabel AppStatusLabel;
-    private javax.swing.JPanel AppStatusPanel;
-    private javax.swing.JLabel AppTitleLabel;
-    private javax.swing.JLabel AppVersionLabel;
-    private javax.swing.JLabel AppearanceSettingsLabel;
-    private javax.swing.JPanel AppearanceSettingsPanel;
-    private javax.swing.JMenu BookmarksMenu;
-    private javax.swing.JButton BuildDebugButton;
-    private javax.swing.JPanel BuildLogPanel;
-    private javax.swing.JScrollPane BuildLogScroller;
-    private javax.swing.JToolBar BuildLogToolbar;
-    private javax.swing.JEditorPane BuildLogViewer;
-    private javax.swing.JMenu BuildMenu;
-    private javax.swing.JButton BuildReleaseButton;
-    private javax.swing.JLabel BuildSettingsLabel;
-    private javax.swing.JPanel BuildSettingsPanel;
-    private javax.swing.JToolBar BuildToolbar;
-    private javax.swing.JButton CHeaderFileTypeButton;
-    private javax.swing.JButton CPPClassFileTypeButton;
-    private javax.swing.JButton CSourceFileTypeButton;
-    private javax.swing.JButton CancelSettingsButton;
-    private javax.swing.JLabel CaretPositionLabel;
-    private javax.swing.JMenuItem CascadeWindowItem;
-    private javax.swing.JButton ClearBuildLogButton;
-    private javax.swing.JMenuItem CloseAllWindowItem;
-    private javax.swing.JButton CloseNewFileWindowButton;
-    private javax.swing.JMenuItem CloseWindowItem;
-    private javax.swing.JToolBar CommonToolbar;
-    private javax.swing.JMenuItem ConfigBuildItem;
-    private javax.swing.JButton ContentsHelpButton;
-    private javax.swing.JMenuItem ContentsHelpItem;
-    private javax.swing.JMenuItem CopyEditItem;
-    private javax.swing.JButton CreateNewFileButton;
-    private javax.swing.JMenuItem CutEditItem;
-    private javax.swing.JMenuItem DebugBuildItem;
-    private javax.swing.JMenuItem DesignerToolsItem;
-    private javax.swing.JMenu EditMenu;
-    private javax.swing.JLabel EditorFontSizeLabel;
-    private javax.swing.JSpinner EditorFontSizeSpinner;
-    private javax.swing.JDesktopPane EditorMDIFrame;
-    private javax.swing.JSplitPane EditorSplitPanel;
-    private javax.swing.JLabel EditorStyleLabel;
-    private javax.swing.JComboBox<String> EditorStyleListButton;
-    private javax.swing.JLabel EncodeStatusLabel;
-    private javax.swing.JMenuItem EnumInsertItem;
-    private javax.swing.JButton ErrorsFilterButton;
-    private javax.swing.JMenu FileMenu;
-    private javax.swing.JTree FilesTreeList;
-    private javax.swing.JScrollPane FilesTreeScroller;
-    private javax.swing.JButton FindAndReplaceButton;
-    private javax.swing.JTabbedPane FindAndReplacePanel;
-    private javax.swing.JDialog FindAndReplaceWindow;
-    private javax.swing.JButton FindButton;
-    private javax.swing.JMenuItem FindEditItem;
-    private javax.swing.JPanel FindInFileTab;
-    private javax.swing.JLabel FindInputLabel;
-    private javax.swing.JTextField FindInputText;
-    private javax.swing.JButton FindNextButton;
-    private javax.swing.JButton FindPreviewButton;
-    private javax.swing.JButton FormDesignFileTypeButton;
-    private javax.swing.JSplitPane FrameSplitPanel;
-    private javax.swing.JMenuItem FunctInsertItem;
-    private javax.swing.JButton GitCheckoutButton;
-    private javax.swing.JButton GitCommitButton;
-    private javax.swing.JButton GitFetchButton;
-    private javax.swing.JLabel GitLoginLabel;
-    private javax.swing.JTextField GitLoginTextInput;
-    private javax.swing.JScrollPane GitOutputScroller;
-    private javax.swing.JEditorPane GitOutputViewer;
-    private javax.swing.JPanel GitPanel;
-    private javax.swing.JLabel GitPasswordLabel;
-    private javax.swing.JPasswordField GitPasswordTextInput;
-    private javax.swing.JButton GitPullButton;
-    private javax.swing.JButton GitPushButton;
-    private javax.swing.JLabel GitSettingsLabel;
-    private javax.swing.JPanel GitSettingsPanel;
-    private javax.swing.JLabel GitTokenLabel;
-    private javax.swing.JTextField GitTokenTextInput;
-    private javax.swing.JToolBar GitToolbar;
-    private javax.swing.JMenuItem GitToolsItem;
-    private javax.swing.JMenuItem GoToViewItem;
-    private javax.swing.JMenu HelpMenu;
-    private javax.swing.JButton INIConfigFileTypeButton;
-    private javax.swing.JMenu InsertMenu;
-    private javax.swing.JMenuItem InstallPkgBuildItem;
-    private javax.swing.JButton MCORESDKPathButton;
-    private javax.swing.JLabel MCORESDKPathLabel;
-    private javax.swing.JTextField MCORESDKPathTextInput;
-    private javax.swing.JMenuBar MainMenubar;
-    private javax.swing.JPanel MainToolbarsPanel;
-    private javax.swing.JPopupMenu.Separator MenuSeparator1;
-    private javax.swing.JPopupMenu.Separator MenuSeparator10;
-    private javax.swing.JPopupMenu.Separator MenuSeparator11;
-    private javax.swing.JPopupMenu.Separator MenuSeparator12;
-    private javax.swing.JPopupMenu.Separator MenuSeparator13;
-    private javax.swing.JPopupMenu.Separator MenuSeparator14;
-    private javax.swing.JPopupMenu.Separator MenuSeparator2;
-    private javax.swing.JPopupMenu.Separator MenuSeparator3;
-    private javax.swing.JPopupMenu.Separator MenuSeparator4;
-    private javax.swing.JPopupMenu.Separator MenuSeparator5;
-    private javax.swing.JPopupMenu.Separator MenuSeparator6;
-    private javax.swing.JPopupMenu.Separator MenuSeparator7;
-    private javax.swing.JPopupMenu.Separator MenuSeparator8;
-    private javax.swing.JPopupMenu.Separator MenuSeparator9;
-    private javax.swing.JButton NeptuneSDKPathButton;
-    private javax.swing.JLabel NeptuneSDKPathLabel;
-    private javax.swing.JTextField NeptuneSDKPathTextInput;
-    private javax.swing.JMenuItem NewBookmarkItem;
-    private javax.swing.JButton NewFileButton;
-    private javax.swing.JMenuItem NewFileItem;
-    private javax.swing.JLabel NewFileNameLabel;
-    private javax.swing.JTextField NewFileNameTextInput;
-    private javax.swing.JPanel NewFileSetupPanel;
-    private javax.swing.JDialog NewFileWindow;
-    private javax.swing.JLabel NewFileWindowTitleLabel;
-    private javax.swing.JMenuItem NewProjectItem;
-    private javax.swing.JMenuItem NextBookmarkItem;
-    private javax.swing.JButton OpenFileButton;
-    private javax.swing.JMenuItem OpenFileItem;
-    private javax.swing.JMenuItem OpenProjectItem;
-    private javax.swing.JInternalFrame OutputFrame;
-    private javax.swing.JTabbedPane OutputFrameTabs;
-    private javax.swing.JCheckBoxMenuItem OutputWindowItem;
-    private javax.swing.JMenuItem PasteEditItem;
-    private javax.swing.JMenuItem PrevBookmarkItem;
-    private javax.swing.JMenuItem PrintFileItem;
-    private javax.swing.JMenuItem PrintSetupItem;
-    private javax.swing.JInternalFrame ProjectExplorerFrame;
-    private javax.swing.JCheckBoxMenuItem ProjectExplorerItem;
-    private javax.swing.JTabbedPane ProjectExplorerTabs;
-    private javax.swing.JPanel ProjectFilesPanel;
-    private javax.swing.JPanel ProjectStructurePanel;
-    private javax.swing.JMenuItem QuitItem;
-    private javax.swing.JButton RedoEditButton;
-    private javax.swing.JMenuItem RedoEditItem;
-    private javax.swing.JMenuItem ReleaseBuildItem;
-    private javax.swing.JButton ReplaceAllButton;
-    private javax.swing.JButton ReplaceButton;
-    private javax.swing.JLabel ReplaceInputLabel;
-    private javax.swing.JTextField ReplaceInputText;
-    private javax.swing.JMenuItem ResManagerToolsItem;
-    private javax.swing.JMenuItem SamplesHelpItem;
-    private javax.swing.JMenuItem SaveAllItem;
-    private javax.swing.JMenuItem SaveAsFileItem;
-    private javax.swing.JButton SaveFileButton;
-    private javax.swing.JMenuItem SaveFileItem;
-    private javax.swing.JMenuItem SaveProjectItem;
-    private javax.swing.JButton SaveSettingsButton;
-    private javax.swing.JMenuItem SetDefViewItem;
-    private javax.swing.JMenuItem SettingsItem;
-    private javax.swing.JTabbedPane SettingsTabs;
-    private javax.swing.JDialog SettingsWindow;
-    private javax.swing.JButton ShowAllMessageButton;
-    private javax.swing.JMenuItem SplitHorizontallyWindowItem;
-    private javax.swing.JMenuItem SplitVerticallyWindowItem;
-    private javax.swing.JPanel StatusbarPanel;
-    private javax.swing.JMenuItem StructInsertItem;
-    private javax.swing.JTree StructureTreeList;
-    private javax.swing.JScrollPane StructureTreeScroller;
-    private javax.swing.JMenuItem TemplateInsertItem;
-    private javax.swing.JButton TerminalButton;
-    private javax.swing.JPanel TerminalPanel;
-    private javax.swing.JScrollPane TerminalScroller;
-    private javax.swing.JMenuItem TerminalToolsItem;
-    private javax.swing.JEditorPane TerminalViewer;
-    private javax.swing.JLabel ThemeNotificationLabel;
-    private javax.swing.JToolBar.Separator ToolbarSeparator1;
-    private javax.swing.JToolBar.Separator ToolbarSeparator2;
-    private javax.swing.JToolBar.Separator ToolbarSeparator3;
-    private javax.swing.JToolBar.Separator ToolbarSeparator5;
-    private javax.swing.JSeparator ToolbarSeparator6;
-    private javax.swing.JToolBar.Separator ToolbarSeparator7;
-    private javax.swing.JToolBar.Separator ToolbarSeparator8;
-    private javax.swing.JToolBar.Separator ToolbarSeparator9;
-    private javax.swing.JMenu ToolsMenu;
-    private javax.swing.JButton UndoEditButton;
-    private javax.swing.JMenuItem UndoEditItem;
-    private javax.swing.JMenu ViewMenu;
-    private javax.swing.JMenu WindowMenu;
-    private javax.swing.JLabel WindowThemeLabel;
-    private javax.swing.JComboBox<String> WindowThemeListButton;
-    private javax.swing.JMenuItem ZoomInViewItem;
-    private javax.swing.JMenuItem ZoomOutViewItem;
-    // End of variables declaration//GEN-END:variables
 }

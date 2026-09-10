@@ -7,11 +7,11 @@
  */
 
 /*
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * C function parser class
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Parse code block to function and add this to function list
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  */
 package orion.ide.core;
 
@@ -45,10 +45,18 @@ public class CFunctionParser {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
     private RSyntaxTextArea textArea;
     private JComboBox<FunctionItem> functionList;
+    
     private boolean isListUpdate = false;
     private boolean isCaretUpdate = false;
+    
     private final List<FunctionItem> functionArray = new ArrayList<>();
     /*
      * -------------------------------------------------------------------------
@@ -57,9 +65,9 @@ public class CFunctionParser {
      */
     
     /*
-     *******************************************************************************
+     * -------------------------------------------------------------------------
      * Function item internal class
-     *******************************************************************************
+     * -------------------------------------------------------------------------
      */
     private static class FunctionItem {
         
@@ -76,6 +84,11 @@ public class CFunctionParser {
          * -------------------------------------------------------------------------
          */
         
+        /* -------------------------------------------------------------------------
+         * PUBLIC INTERNAL CLASS METHODS
+         * -------------------------------------------------------------------------
+         */
+
         // Internal constructor
         public FunctionItem(String name, int position) {
             this.name = name;
@@ -89,6 +102,12 @@ public class CFunctionParser {
         }
     }
     
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS METHODS
+     * -------------------------------------------------------------------------
+     */
+
     // Constructor
     public CFunctionParser(RSyntaxTextArea textArea, JComboBox functionList) {
         this.textArea = textArea;
@@ -159,6 +178,12 @@ public class CFunctionParser {
         
         
     }
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FUNCTIONS
+     * -------------------------------------------------------------------------
+     */
     
     // Parsing functions with regex strings : function
     private void parseFunctions() {

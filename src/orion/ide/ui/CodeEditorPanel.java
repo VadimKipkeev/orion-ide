@@ -7,11 +7,11 @@
  */
 
 /*
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Code editor panel class
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Editor UI control methods
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  */
 package orion.ide.ui;
 
@@ -20,15 +20,14 @@ package orion.ide.ui;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
-import java.io.IOException;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,6 +36,7 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.TreeSet;
+import javax.naming.directory.SearchResult;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.JInternalFrame;
@@ -49,7 +49,6 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.HighlightPainter;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
-import orion.ide.ui.IconProvider;
 import orion.ide.core.CodeEditorTextAreaZoomListener;
 import orion.ide.core.NumericFieldHelper;
 import orion.ide.core.FindingManager;
@@ -67,12 +66,12 @@ public class CodeEditorPanel extends javax.swing.JPanel {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
-    private final Gutter bookmarksManager;
-    private final TreeSet<Integer> bookmarksList = new TreeSet<>();
-    FindingManager fmanager;
-    private String fileExtension;
-    private String textBuffer = new String();
-    private boolean isFileModified;
+
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
     
     // Editor text area font size used by default zoom size
     public int defaultEditorFontSize;
@@ -80,12 +79,76 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     // Code editor view
     public RSyntaxTextArea editorTextArea = new RSyntaxTextArea();
     public RTextScrollPane editorTextAreaScroller = new RTextScrollPane(editorTextArea);
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CancelButton;
+    private javax.swing.JToolBar CodeEditorToolbar;
+    private javax.swing.JMenuItem CopyActionItem;
+    private javax.swing.JMenuItem CutActionItem;
+    private javax.swing.JButton DeleteTemplateButton;
+    private javax.swing.JPopupMenu EditorTextPopupMenu;
+    private javax.swing.JComboBox<String> FunctionsListButton;
+    private javax.swing.JLabel FunctionsListLabel;
+    private javax.swing.JButton GoToButton;
+    private javax.swing.JDialog GoToDialogWindow;
+    private javax.swing.JButton GoToLineButton;
+    private javax.swing.JLabel GoToLineLabel;
+    private javax.swing.JTextField GoToLineTextInput;
+    private javax.swing.JButton GoToStringButton;
+    private javax.swing.JLabel GoToStringLabel;
+    private javax.swing.JTextField GoToStringTextInput;
+    private javax.swing.JButton InsertEnumButton;
+    private javax.swing.JButton InsertFunctionButton;
+    private javax.swing.JButton InsertStructureButton;
+    private javax.swing.JButton InsertTemplateButton;
+    private javax.swing.JPopupMenu.Separator MenuSeparator13;
+    private javax.swing.JButton NewBookmarkButton;
+    private javax.swing.JButton NewTemplateButton;
+    private javax.swing.JDialog NewTemplateWindow;
+    private javax.swing.JButton NextBookmarkButton;
+    private javax.swing.JMenuItem PasteActionItem;
+    private javax.swing.JButton PrevBookmarkButton;
+    private javax.swing.JMenuItem RedoActionItem;
+    private javax.swing.JButton SaveTemplateButton;
+    private javax.swing.JList<String> TemplateList;
+    private javax.swing.JLabel TemplateListLabel;
+    private javax.swing.JScrollPane TemplateListScroller;
+    private javax.swing.JLabel TemplateNameLabel;
+    private javax.swing.JTextField TemplateNameTextInput;
+    private javax.swing.JDialog TemplatesWindow;
+    private javax.swing.JToolBar.Separator ToolbarSeparator10;
+    private javax.swing.JToolBar.Separator ToolbarSeparator11;
+    private javax.swing.JToolBar.Separator ToolbarSeparator12;
+    private javax.swing.JMenuItem UndoActionItem;
+    // End of variables declaration//GEN-END:variables
+
+    private final Gutter bookmarksManager;
+    private final TreeSet<Integer> bookmarksList = new TreeSet<>();
+    
+    FindingManager fmanager;
+    
+    private String fileExtension;
+    private String textBuffer = new String();
+    
+    private boolean isFileModified;
     /*
      * -------------------------------------------------------------------------
      * CLASS FIELDS SECTION END
      * -------------------------------------------------------------------------
      */
     
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS METHODS
+     * -------------------------------------------------------------------------
+     */
+
     // Constructor
     public CodeEditorPanel() {
         initComponents();
@@ -526,30 +589,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         moveCaretToLine(prevLine);
     }
     
-    // Get string from GutterIconInfo object : function
-    private int getLineOfBookmark(GutterIconInfo object) {
-        try {
-            return editorTextArea.getLineOfOffset(object.getMarkedOffset());
-        } catch (BadLocationException ex) {
-            ex.printStackTrace();
-            return -1;
-        }
-    }
-    
-    // Move cursor to line : function
-    private void moveCaretToLine(int line) {
-        if(line < 0 || line >= editorTextArea.getLineCount()) {
-            return;
-        }
-        
-        try {
-            int lineOffset = editorTextArea.getLineStartOffset(line);
-            editorTextArea.setCaretPosition(lineOffset);
-        } catch (BadLocationException ex) {
-            ex.printStackTrace();
-        }
-    }
-    
     // Find text action : method
     public void findTextAction(String findWord) {
         boolean result = fmanager.findContext(findWord);
@@ -911,6 +950,36 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         
         return !currentText.equals(currentBuffer); // => true or false
     }
+
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FUNCTIONS
+     * -------------------------------------------------------------------------
+     */
+
+    // Get string from GutterIconInfo object : function
+    private int getLineOfBookmark(GutterIconInfo object) {
+        try {
+            return editorTextArea.getLineOfOffset(object.getMarkedOffset());
+        } catch (BadLocationException ex) {
+            ex.printStackTrace();
+            return -1;
+        }
+    }
+    
+    // Move cursor to line : function
+    private void moveCaretToLine(int line) {
+        if(line < 0 || line >= editorTextArea.getLineCount()) {
+            return;
+        }
+        
+        try {
+            int lineOffset = editorTextArea.getLineStartOffset(line);
+            editorTextArea.setCaretPosition(lineOffset);
+        } catch (BadLocationException ex) {
+            ex.printStackTrace();
+        }
+    }
     
     // Wrapper for get icon resources from icon provider : function
     private static Icon getIcon(String name) {
@@ -984,12 +1053,14 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         context.setMarkAll(false); // Not markup all results
         
         // Find string
-        SearchResult result = SearchEngine.find(editorTextArea, context);
+        SearchResult result;
+        result = SearchEngine.find(editorTextArea, context);
         
         // Find next position by result is false
         if(!result.wasFound()) {
             editorTextArea.setCaretPosition(0);
             SearchEngine.find(editorTextArea, context);
+        } else {
         }
         
         editorTextArea.requestFocusInWindow();
@@ -1584,46 +1655,4 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         // Assign template list with model
         TemplateList.setModel(templateListModel);
     }
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelButton;
-    private javax.swing.JToolBar CodeEditorToolbar;
-    private javax.swing.JMenuItem CopyActionItem;
-    private javax.swing.JMenuItem CutActionItem;
-    private javax.swing.JButton DeleteTemplateButton;
-    private javax.swing.JPopupMenu EditorTextPopupMenu;
-    private javax.swing.JComboBox<String> FunctionsListButton;
-    private javax.swing.JLabel FunctionsListLabel;
-    private javax.swing.JButton GoToButton;
-    private javax.swing.JDialog GoToDialogWindow;
-    private javax.swing.JButton GoToLineButton;
-    private javax.swing.JLabel GoToLineLabel;
-    private javax.swing.JTextField GoToLineTextInput;
-    private javax.swing.JButton GoToStringButton;
-    private javax.swing.JLabel GoToStringLabel;
-    private javax.swing.JTextField GoToStringTextInput;
-    private javax.swing.JButton InsertEnumButton;
-    private javax.swing.JButton InsertFunctionButton;
-    private javax.swing.JButton InsertStructureButton;
-    private javax.swing.JButton InsertTemplateButton;
-    private javax.swing.JPopupMenu.Separator MenuSeparator13;
-    private javax.swing.JButton NewBookmarkButton;
-    private javax.swing.JButton NewTemplateButton;
-    private javax.swing.JDialog NewTemplateWindow;
-    private javax.swing.JButton NextBookmarkButton;
-    private javax.swing.JMenuItem PasteActionItem;
-    private javax.swing.JButton PrevBookmarkButton;
-    private javax.swing.JMenuItem RedoActionItem;
-    private javax.swing.JButton SaveTemplateButton;
-    private javax.swing.JList<String> TemplateList;
-    private javax.swing.JLabel TemplateListLabel;
-    private javax.swing.JScrollPane TemplateListScroller;
-    private javax.swing.JLabel TemplateNameLabel;
-    private javax.swing.JTextField TemplateNameTextInput;
-    private javax.swing.JDialog TemplatesWindow;
-    private javax.swing.JToolBar.Separator ToolbarSeparator10;
-    private javax.swing.JToolBar.Separator ToolbarSeparator11;
-    private javax.swing.JToolBar.Separator ToolbarSeparator12;
-    private javax.swing.JMenuItem UndoActionItem;
-    // End of variables declaration//GEN-END:variables
 }

@@ -7,11 +7,11 @@
  */
 
 /*
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Icon provider class
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Control icons UI resources
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  */
 package orion.ide.ui;
 
@@ -22,10 +22,10 @@ package orion.ide.ui;
  */
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import javax.swing.Icon;
-import javax.swing.UIManager;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.Icon;
+import javax.swing.UIManager;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -40,6 +40,12 @@ public class IconProvider {
      * -------------------------------------------------------------------------
      */
     
+    /*
+     * -------------------------------------------------------------------------
+     * PRIVATE CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
+
     // Base icon files path
     private static final String BASE_PATH = "resources/icons/";
     
@@ -60,8 +66,14 @@ public class IconProvider {
      */
 
     /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS METHODS
+     * -------------------------------------------------------------------------
+     */
+
+    /*
      * This is anonimus class, not contains constructor method
-    */
+     */
     
     // Get icon by default size : method
     public static Icon getIcon(String name) {

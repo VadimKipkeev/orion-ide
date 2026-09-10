@@ -7,11 +7,11 @@
  */
 
 /*
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Theme manager class
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  * Control application FlatLaf Swing themes
- *******************************************************************************
+ * -----------------------------------------------------------------------------
  */
 package orion.ide.ui;
 
@@ -20,9 +20,9 @@ package orion.ide.ui;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
+import com.formdev.flatlaf.FlatLaf;
 import javax.swing.UIManager;
 import javax.swing.LookAndFeel;
-import com.formdev.flatlaf.FlatLaf;
 import orion.ide.ui.theme.FlatLafVSLight;
 import orion.ide.ui.theme.FlatLafVSDark;
 /*
@@ -38,6 +38,13 @@ public class ThemeManager {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
+
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS FIELDS
+     * -------------------------------------------------------------------------
+     */
+
     // Current theme name
     public static String currentThemeName;
     /*
@@ -46,6 +53,12 @@ public class ThemeManager {
      * -------------------------------------------------------------------------
      */
     
+    /*
+     * -------------------------------------------------------------------------
+     * PUBLIC CLASS METHODS
+     * -------------------------------------------------------------------------
+     */
+
     // FlatLaf theme init : method
     public final boolean init(int themeID) {
         
