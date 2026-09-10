@@ -21,9 +21,11 @@ package orion.ide.core;
  */
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Component;
+import javax.swing.Icon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import orion.ide.ui.IconProvider;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -37,13 +39,13 @@ public class TreeListIconRenderer extends DefaultTreeCellRenderer {
      * -------------------------------------------------------------------------
      */
     // Set node types icons
-    public final FlatSVGIcon folderTreeIcon;
-    public final FlatSVGIcon hFileTreeIcon;
-    public final FlatSVGIcon cFileTreeIcon;
-    public final FlatSVGIcon cppFileTreeIcon;
-    public final FlatSVGIcon imageFileTreeIcon;
-    public final FlatSVGIcon uiFileTreeIcon;
-    public final FlatSVGIcon iniFileTreeIcon;
+    public final Icon folderTreeIcon;
+    public final Icon hFileTreeIcon;
+    public final Icon cFileTreeIcon;
+    public final Icon cppFileTreeIcon;
+    public final Icon imageFileTreeIcon;
+    public final Icon uiFileTreeIcon;
+    public final Icon iniFileTreeIcon;
     /*
      * -------------------------------------------------------------------------
      * CLASS FIELDS SECTION END
@@ -52,13 +54,13 @@ public class TreeListIconRenderer extends DefaultTreeCellRenderer {
     
     // Constructor
     public TreeListIconRenderer() {
-        folderTreeIcon = new FlatSVGIcon("resources/icons/commons/folder.svg", 16, 16);
-        hFileTreeIcon = new FlatSVGIcon("resources/icons/commons/c_header_file.svg", 16, 16);
-        cFileTreeIcon = new FlatSVGIcon("resources/icons/commons/c_source_file.svg", 16, 16);
-        cppFileTreeIcon = new FlatSVGIcon("resources/icons/commons/cpp_class_file.svg", 16, 16);
-        imageFileTreeIcon = new FlatSVGIcon("resources/icons/commons/image_file.svg", 16, 16);
-        uiFileTreeIcon = new FlatSVGIcon("resources/icons/commons/form_design_file.svg", 16, 16);
-        iniFileTreeIcon = new FlatSVGIcon("resources/icons/commons/ini_file.svg", 16, 16);
+        folderTreeIcon = IconProvider.getIcon("folder", 16);
+        hFileTreeIcon = IconProvider.getIcon("c_header_file.svg", 16);
+        cFileTreeIcon = IconProvider.getIcon("c_source_file.svg", 16);
+        cppFileTreeIcon = IconProvider.getIcon("cpp_class_file.svg", 16);
+        imageFileTreeIcon = IconProvider.getIcon("image_file.svg", 16);
+        uiFileTreeIcon = IconProvider.getIcon("form_design_file.svg", 16);
+        iniFileTreeIcon = IconProvider.getIcon("ini_file.svg", 16);
     }
     
     // Renderer tree list cell : method

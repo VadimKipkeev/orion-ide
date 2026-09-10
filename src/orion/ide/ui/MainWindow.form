@@ -159,7 +159,7 @@
                   <JTabbedPaneConstraints tabName="" toolTip="Appearance settings">
                     <Property name="tabTitle" type="java.lang.String" value=""/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="appearSettingsIcon" type="code"/>
+                      <Connection code="getIcon(&quot;appearance_settings&quot;, 24)" type="code"/>
                     </Property>
                     <Property name="tabToolTip" type="java.lang.String" value="Appearance settings"/>
                   </JTabbedPaneConstraints>
@@ -318,7 +318,7 @@
                   <JTabbedPaneConstraints tabName="" toolTip="Git configuration">
                     <Property name="tabTitle" type="java.lang.String" value=""/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="gitSettingsIcon" type="code"/>
+                      <Connection code="getIcon(&quot;git_settings&quot;, 24)" type="code"/>
                     </Property>
                     <Property name="tabToolTip" type="java.lang.String" value="Git configuration"/>
                   </JTabbedPaneConstraints>
@@ -443,7 +443,7 @@
                   <JTabbedPaneConstraints tabName="" toolTip="Build configuration">
                     <Property name="tabTitle" type="java.lang.String" value=""/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="buildSettingsIcon" type="code"/>
+                      <Connection code="getIcon(&quot;build_settings&quot;, 24)" type="code"/>
                     </Property>
                     <Property name="tabToolTip" type="java.lang.String" value="Build configuration"/>
                   </JTabbedPaneConstraints>
@@ -683,7 +683,7 @@
             <Component class="javax.swing.JButton" name="CHeaderFileTypeButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="cHeaderFileTypeIcon" type="code"/>
+                  <Connection code="getIcon(&quot;c_header_file&quot;, 32)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="C/C++ header"/>
                 <Property name="toolTipText" type="java.lang.String" value="C/C++ header file"/>
@@ -711,7 +711,7 @@
             <Component class="javax.swing.JButton" name="CSourceFileTypeButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="cSourceFileTypeIcon" type="code"/>
+                  <Connection code="getIcon(&quot;c_source_file&quot;, 32)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="C source"/>
                 <Property name="toolTipText" type="java.lang.String" value="C source file"/>
@@ -739,7 +739,7 @@
             <Component class="javax.swing.JButton" name="CPPClassFileTypeButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="cppClassFileTypeIcon" type="code"/>
+                  <Connection code="getIcon(&quot;cpp_class_file&quot;, 32)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="C++ class"/>
                 <Property name="toolTipText" type="java.lang.String" value="C++ class file"/>
@@ -767,7 +767,7 @@
             <Component class="javax.swing.JButton" name="FormDesignFileTypeButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="uiFormFileTypeIcon" type="code"/>
+                  <Connection code="getIcon(&quot;form_design_file&quot;, 32)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Form design"/>
                 <Property name="toolTipText" type="java.lang.String" value="Form design file"/>
@@ -796,7 +796,7 @@
             <Component class="javax.swing.JButton" name="INIConfigFileTypeButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="iniFileTypeIcon" type="code"/>
+                  <Connection code="getIcon(&quot;ini_file&quot;, 32)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="INI config"/>
                 <Property name="toolTipText" type="java.lang.String" value="INI config file"/>
@@ -1047,7 +1047,7 @@
                   <KeyStroke key="Ctrl+N"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="newFileIcon" type="code"/>
+                  <Connection code="getIcon(&quot;new_file&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="New..."/>
               </Properties>
@@ -1061,7 +1061,7 @@
                   <KeyStroke key="Ctrl+O"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="openFileIcon" type="code"/>
+                  <Connection code="getIcon(&quot;open_file&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Open..."/>
               </Properties>
@@ -1075,7 +1075,7 @@
                   <KeyStroke key="Ctrl+S"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="saveFileIcon" type="code"/>
+                  <Connection code="getIcon(&quot;save_file&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
@@ -1089,7 +1089,7 @@
                   <KeyStroke key="Shift+Ctrl+S"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="saveAsIcon" type="code"/>
+                  <Connection code="getIcon(&quot;save_as&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Save as..."/>
               </Properties>
@@ -1105,7 +1105,7 @@
                   <KeyStroke key="Ctrl+Alt+N"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="newProjectIcon" type="code"/>
+                  <Connection code="getIcon(&quot;new_project&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="New project..."/>
               </Properties>
@@ -1116,7 +1116,7 @@
                   <KeyStroke key="Ctrl+Alt+O"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="openProjectIcon" type="code"/>
+                  <Connection code="getIcon(&quot;open_project&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Open project..."/>
               </Properties>
@@ -1127,7 +1127,7 @@
                   <KeyStroke key="Ctrl+Alt+S"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="saveProjectIcon" type="code"/>
+                  <Connection code="getIcon(&quot;save_project&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Save project"/>
               </Properties>
@@ -1135,7 +1135,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="SaveAllItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="saveAllIcon" type="code"/>
+                  <Connection code="getIcon(&quot;save_all&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Save all"/>
               </Properties>
@@ -1151,7 +1151,7 @@
                   <KeyStroke key="Ctrl+P"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="printFileIcon" type="code"/>
+                  <Connection code="getIcon(&quot;print_file&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Print"/>
               </Properties>
@@ -1162,7 +1162,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="PrintSetupItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="printSetupIcon" type="code"/>
+                  <Connection code="getIcon(&quot;print_setup&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Print setup..."/>
               </Properties>
@@ -1178,7 +1178,7 @@
                   <KeyStroke key="Alt+F4"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="quitAppIcon" type="code"/>
+                  <Connection code="getIcon(&quot;quit_app&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Quit"/>
               </Properties>
@@ -1199,7 +1199,7 @@
                   <KeyStroke key="Ctrl+Z"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="undoEditIcon" type="code"/>
+                  <Connection code="getIcon(&quot;undo_edit&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Undo"/>
               </Properties>
@@ -1213,7 +1213,7 @@
                   <KeyStroke key="Ctrl+Y"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="redoEditIcon" type="code"/>
+                  <Connection code="getIcon(&quot;redo_edit&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Redo"/>
               </Properties>
@@ -1229,7 +1229,7 @@
                   <KeyStroke key="Ctrl+X"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="cutEditIcon" type="code"/>
+                  <Connection code="getIcon(&quot;cut_edit&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cut"/>
               </Properties>
@@ -1243,7 +1243,7 @@
                   <KeyStroke key="Ctrl+C"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="copyEditIcon" type="code"/>
+                  <Connection code="getIcon(&quot;copy_edit&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Copy"/>
               </Properties>
@@ -1257,7 +1257,7 @@
                   <KeyStroke key="Ctrl+V"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="pasteEditIcon" type="code"/>
+                  <Connection code="getIcon(&quot;paste_edit&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Paste"/>
               </Properties>
@@ -1273,7 +1273,7 @@
                   <KeyStroke key="Ctrl+F"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="findAndReplaceIcon" type="code"/>
+                  <Connection code="getIcon(&quot;find_and_replace&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Find and replace..."/>
               </Properties>
@@ -1294,7 +1294,7 @@
                       <KeyStroke key="Shift+Ctrl+B"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="newBookmarkIcon" type="code"/>
+                      <Connection code="getIcon(&quot;new_bookmark&quot;, 16)" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="New"/>
                   </Properties>
@@ -1307,7 +1307,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="PrevBookmarkItem">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="prevBookmarkIcon" type="code"/>
+                      <Connection code="getIcon(&quot;prev_bookmark&quot;, 16)" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Preview"/>
                   </Properties>
@@ -1318,7 +1318,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="NextBookmarkItem">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="nextBookmarkIcon" type="code"/>
+                      <Connection code="getIcon(&quot;next_bookmark&quot;, 16)" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Next"/>
                   </Properties>
@@ -1333,7 +1333,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="SettingsItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="settingsAppIcon" type="code"/>
+                  <Connection code="getIcon(&quot;settings_app&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Settings..."/>
               </Properties>
@@ -1354,7 +1354,7 @@
                   <KeyStroke key="Ctrl+EQUALS"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="zoomInViewIcon" type="code"/>
+                  <Connection code="getIcon(&quot;zoom_in&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Zoom in"/>
               </Properties>
@@ -1368,7 +1368,7 @@
                   <KeyStroke key="Ctrl+MINUS"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="zoomOutViewIcon" type="code"/>
+                  <Connection code="getIcon(&quot;zoom_out&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Zoom out"/>
               </Properties>
@@ -1382,7 +1382,7 @@
                   <KeyStroke key="Ctrl+0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="setDefaultViewIcon" type="code"/>
+                  <Connection code="getIcon(&quot;set_def_view&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Set default"/>
               </Properties>
@@ -1395,7 +1395,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="GoToViewItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="goToViewIcon" type="code"/>
+                  <Connection code="getIcon(&quot;go_to_view&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Go to..."/>
               </Properties>
@@ -1436,7 +1436,7 @@
                   <KeyStroke key="Alt+S"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="structureInsertIcon" type="code"/>
+                  <Connection code="getIcon(&quot;ins_structure&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Structure"/>
               </Properties>
@@ -1450,7 +1450,7 @@
                   <KeyStroke key="Alt+E"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="enumerationInsertIcon" type="code"/>
+                  <Connection code="getIcon(&quot;ins_enum&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Enumeration"/>
               </Properties>
@@ -1464,7 +1464,7 @@
                   <KeyStroke key="Alt+F"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="functionInsertIcon" type="code"/>
+                  <Connection code="getIcon(&quot;ins_function&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Function"/>
               </Properties>
@@ -1480,7 +1480,7 @@
                   <KeyStroke key="Alt+T"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="templateInsertIcon" type="code"/>
+                  <Connection code="getIcon(&quot;ins_template&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Template..."/>
               </Properties>
@@ -1501,7 +1501,7 @@
                   <KeyStroke key="F11"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="releaseBuildIcon" type="code"/>
+                  <Connection code="getIcon(&quot;release_build&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Release"/>
               </Properties>
@@ -1512,7 +1512,7 @@
                   <KeyStroke key="Shift+F11"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="debugBuildIcon" type="code"/>
+                  <Connection code="getIcon(&quot;debug_build&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Debug"/>
               </Properties>
@@ -1520,7 +1520,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="InstallPkgBuildItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="installPackageBuildIcon" type="code"/>
+                  <Connection code="getIcon(&quot;install_package_build&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Install package"/>
               </Properties>
@@ -1530,7 +1530,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="ConfigBuildItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="configBuildIcon" type="code"/>
+                  <Connection code="getIcon(&quot;config_build&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Configure..."/>
               </Properties>
@@ -1545,7 +1545,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="GitToolsItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="gitToolsIcon" type="code"/>
+                  <Connection code="getIcon(&quot;git_tools&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Git"/>
               </Properties>
@@ -1559,7 +1559,7 @@
                   <KeyStroke key="Shift+Ctrl+T"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="terminalToolsIcon" type="code"/>
+                  <Connection code="getIcon(&quot;terminal_tools&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Terminal"/>
               </Properties>
@@ -1570,7 +1570,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="DesignerToolsItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="uiDesignerToolsIcon" type="code"/>
+                  <Connection code="getIcon(&quot;ui_designer_tools&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="UI designer"/>
               </Properties>
@@ -1578,7 +1578,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="ResManagerToolsItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="resourcesManagerIcon" type="code"/>
+                  <Connection code="getIcon(&quot;resources_manager&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Resources manager..."/>
               </Properties>
@@ -1593,7 +1593,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="CascadeWindowItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="cascadeWindowIcon" type="code"/>
+                  <Connection code="getIcon(&quot;cascade_window&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cascade"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -1605,7 +1605,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="SplitHorizontallyWindowItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="splitHorizontallyWindowIcon" type="code"/>
+                  <Connection code="getIcon(&quot;split_h_window&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Split horizontally"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -1617,7 +1617,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="SplitVerticallyWindowItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="splitVerticallyWindowIcon" type="code"/>
+                  <Connection code="getIcon(&quot;split_v_window&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Split vertically"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -1631,7 +1631,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="CloseWindowItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="closeWindowIcon" type="code"/>
+                  <Connection code="getIcon(&quot;close_window&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Close"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -1643,7 +1643,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="CloseAllWindowItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="closeAllWindowIcon" type="code"/>
+                  <Connection code="getIcon(&quot;close_all_window&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Close all"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -1665,7 +1665,7 @@
                   <KeyStroke key="F1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="contentsHelpIcon" type="code"/>
+                  <Connection code="getIcon(&quot;contents_help&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Contents..."/>
               </Properties>
@@ -1673,7 +1673,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="SamplesHelpItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="samplesHelpIcon" type="code"/>
+                  <Connection code="getIcon(&quot;samples_help&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Samples"/>
               </Properties>
@@ -1683,7 +1683,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="AboutHelpItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="aboutHelpIcon" type="code"/>
+                  <Connection code="getIcon(&quot;about_help&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="About..."/>
               </Properties>
@@ -1773,7 +1773,7 @@
             <Component class="javax.swing.JButton" name="NewFileButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="newFileIcon" type="code"/>
+                  <Connection code="getIcon(&quot;new_file&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Create new file"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1796,7 +1796,7 @@
             <Component class="javax.swing.JButton" name="OpenFileButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="openFileIcon" type="code"/>
+                  <Connection code="getIcon(&quot;open_file&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Open file"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1819,7 +1819,7 @@
             <Component class="javax.swing.JButton" name="SaveFileButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="saveFileIcon" type="code"/>
+                  <Connection code="getIcon(&quot;save_file&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Save file"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1844,7 +1844,7 @@
             <Component class="javax.swing.JButton" name="ContentsHelpButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="contentsHelpIcon" type="code"/>
+                  <Connection code="getIcon(&quot;contents_help&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Show help manual"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1866,7 +1866,7 @@
             <Component class="javax.swing.JButton" name="UndoEditButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="undoEditIcon" type="code"/>
+                  <Connection code="getIcon(&quot;undo_edit&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Undo"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1889,7 +1889,7 @@
             <Component class="javax.swing.JButton" name="RedoEditButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="redoEditIcon" type="code"/>
+                  <Connection code="getIcon(&quot;redo_edit&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Redo"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1914,7 +1914,7 @@
             <Component class="javax.swing.JButton" name="FindAndReplaceButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="findAndReplaceIcon" type="code"/>
+                  <Connection code="getIcon(&quot;find_and_replace&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Find and replace text"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1957,7 +1957,7 @@
             <Component class="javax.swing.JButton" name="BuildReleaseButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="releaseBuildIcon" type="code"/>
+                  <Connection code="getIcon(&quot;release_build&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Build project (release)"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1977,7 +1977,7 @@
             <Component class="javax.swing.JButton" name="BuildDebugButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="debugBuildIcon" type="code"/>
+                  <Connection code="getIcon(&quot;debug_build&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Build project (debug)"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1999,7 +1999,7 @@
             <Component class="javax.swing.JButton" name="TerminalButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="terminalToolsIcon" type="code"/>
+                  <Connection code="getIcon(&quot;terminal_tools&quot;, 16)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Show terminal window"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -2578,7 +2578,7 @@
                             <Component class="javax.swing.JButton" name="ShowAllMessageButton">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                  <Connection code="showAllLogIcon" type="code"/>
+                                  <Connection code="getIcon(&quot;show_all_log&quot;, 16)" type="code"/>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Show all build log messages"/>
                                 <Property name="alignmentX" type="float" value="0.5"/>
@@ -2600,7 +2600,7 @@
                             <Component class="javax.swing.JButton" name="ErrorsFilterButton">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                  <Connection code="showErrorsLogIcon" type="code"/>
+                                  <Connection code="getIcon(&quot;show_errors_log&quot;, 16)" type="code"/>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Show only errors build log messages"/>
                                 <Property name="alignmentX" type="float" value="0.5"/>
@@ -2628,7 +2628,7 @@
                             <Component class="javax.swing.JButton" name="ClearBuildLogButton">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                  <Connection code="clearBuildLogIcon" type="code"/>
+                                  <Connection code="getIcon(&quot;clear_build_log&quot;, 16)" type="code"/>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Clear build log data"/>
                                 <Property name="alignmentX" type="float" value="0.5"/>
@@ -2763,7 +2763,7 @@
                             <Component class="javax.swing.JButton" name="GitCommitButton">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                  <Connection code="gitCommitIcon" type="code"/>
+                                  <Connection code="getIcon(&quot;git_commit&quot;, 16)" type="code"/>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Commit changes"/>
                                 <Property name="focusable" type="boolean" value="false"/>
@@ -2785,7 +2785,7 @@
                             <Component class="javax.swing.JButton" name="GitFetchButton">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                  <Connection code="gitFetchIcon" type="code"/>
+                                  <Connection code="getIcon(&quot;git_fetch&quot;, 16)" type="code"/>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Fetch from current branch"/>
                                 <Property name="focusable" type="boolean" value="false"/>
@@ -2805,7 +2805,7 @@
                             <Component class="javax.swing.JButton" name="GitPullButton">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                  <Connection code="gitPullIcon" type="code"/>
+                                  <Connection code="getIcon(&quot;git_pull&quot;, 16)" type="code"/>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Pull from current branch"/>
                                 <Property name="focusable" type="boolean" value="false"/>
@@ -2825,7 +2825,7 @@
                             <Component class="javax.swing.JButton" name="GitCheckoutButton">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                  <Connection code="gitCheckoutIcon" type="code"/>
+                                  <Connection code="getIcon(&quot;git_checkout&quot;, 16)" type="code"/>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Checkout files"/>
                                 <Property name="focusable" type="boolean" value="false"/>
@@ -2847,7 +2847,7 @@
                             <Component class="javax.swing.JButton" name="GitPushButton">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                  <Connection code="gitPushIcon" type="code"/>
+                                  <Connection code="getIcon(&quot;git_push&quot;, 16)" type="code"/>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Push to current branch"/>
                                 <Property name="focusable" type="boolean" value="false"/>

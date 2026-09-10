@@ -20,7 +20,6 @@ package orion.ide.ui;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
@@ -39,8 +38,10 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import orion.ide.ui.IconProvider;
 import orion.ide.core.SettingsManager;
 import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;
@@ -78,92 +79,6 @@ public class MainWindow extends JFrame {
     
     // Project file path string
     public static String projectFilePath = "";
-
-    // Set FlatLaf SVG icons
-    public static String iconsFolder = getIconsFolder(); // Icons folder by current theme type
-    
-    // File menu icons
-    public final FlatSVGIcon newFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_file.svg", 16, 16);
-    public final FlatSVGIcon openFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/open_file.svg", 16, 16);
-    public final FlatSVGIcon saveFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/save_file.svg", 16, 16);
-    public final FlatSVGIcon saveAsIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/save_as.svg", 16, 16);
-    public final FlatSVGIcon newProjectIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_project.svg", 16, 16);
-    public final FlatSVGIcon openProjectIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/open_project.svg", 16, 16);
-    public final FlatSVGIcon saveProjectIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/save_project.svg", 16, 16);
-    public final FlatSVGIcon saveAllIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/save_all.svg", 16, 16);
-    public final FlatSVGIcon printFileIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/print_file.svg", 16, 16);
-    public final FlatSVGIcon printSetupIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/print_setup.svg", 16, 16);
-    public final FlatSVGIcon quitAppIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/quit_app.svg", 16, 16);
-    
-    // Edit menu icons
-    public final FlatSVGIcon undoEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/undo_edit.svg", 16, 16);
-    public final FlatSVGIcon redoEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/redo_edit.svg", 16, 16);
-    public final FlatSVGIcon cutEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/cut_edit.svg", 16, 16);
-    public final FlatSVGIcon copyEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/copy_edit.svg", 16, 16);
-    public final FlatSVGIcon pasteEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/paste_edit.svg", 16, 16);
-    public final FlatSVGIcon findAndReplaceIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/find_and_replace.svg", 16, 16);
-    public final FlatSVGIcon newBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_bookmark.svg", 16, 16);
-    public final FlatSVGIcon nextBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/next_bookmark.svg", 16, 16);
-    public final FlatSVGIcon prevBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/prev_bookmark.svg", 16, 16);
-    public final FlatSVGIcon settingsAppIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/settings_app.svg", 16, 16);
-    
-    // View menu icons
-    public final FlatSVGIcon zoomInViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/zoom_in.svg", 16, 16);
-    public final FlatSVGIcon zoomOutViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/zoom_out.svg", 16, 16);
-    public final FlatSVGIcon setDefaultViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/set_def_view.svg", 16, 16);
-    public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/go_to_view.svg", 16, 16);
-    
-    // Insert menu icons
-    public final FlatSVGIcon structureInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_structure.svg", 16, 16);
-    public final FlatSVGIcon enumerationInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_enum.svg", 16, 16);
-    public final FlatSVGIcon functionInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_function.svg", 16, 16);
-    public final FlatSVGIcon templateInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_template.svg", 16, 16);
-    
-    // Build menu icons
-    public final FlatSVGIcon releaseBuildIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/release_build.svg", 16, 16);
-    public final FlatSVGIcon debugBuildIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/debug_build.svg", 16, 16);
-    public final FlatSVGIcon installPackageBuildIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/install_package_build.svg", 16, 16);
-    public final FlatSVGIcon configBuildIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/config_build.svg", 16, 16);
-    
-    // Tools menu icons
-    public final FlatSVGIcon gitToolsIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/git_tools.svg", 16, 16);
-    public final FlatSVGIcon terminalToolsIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/terminal_tools.svg", 16, 16);
-    public final FlatSVGIcon uiDesignerToolsIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ui_designer_tools.svg", 16, 16);
-    public final FlatSVGIcon resourcesManagerIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/resources_manager.svg", 16, 16);
-    
-    // Window menu icons
-    public final FlatSVGIcon cascadeWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/cascade_window.svg", 16, 16);
-    public final FlatSVGIcon splitHorizontallyWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/split_h_window.svg", 16, 16);
-    public final FlatSVGIcon splitVerticallyWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/split_v_window.svg", 16, 16);
-    public final FlatSVGIcon closeWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/close_window.svg", 16, 16);
-    public final FlatSVGIcon closeAllWindowIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/close_all_window.svg", 16, 16);
-    
-    // Help menu icons
-    public final FlatSVGIcon contentsHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/contents_help.svg", 16, 16);
-    public final FlatSVGIcon samplesHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/samples_help.svg", 16, 16);
-    public final FlatSVGIcon aboutHelpIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/about_help.svg", 16, 16);
-    
-    // Output window icons
-    public final FlatSVGIcon showAllLogIcon = new FlatSVGIcon("resources/icons/commons/show_all_log.svg", 16, 16);
-    public final FlatSVGIcon showErrorsLogIcon = new FlatSVGIcon("resources/icons/commons/show_errors_log.svg", 16, 16);
-    public final FlatSVGIcon clearBuildLogIcon = new FlatSVGIcon("resources/icons/commons/clear_build_log.svg", 16, 16);
-    public final FlatSVGIcon gitCommitIcon = new FlatSVGIcon("resources/icons/commons/git_commit.svg", 16, 16);
-    public final FlatSVGIcon gitFetchIcon = new FlatSVGIcon("resources/icons/commons/git_fetch.svg", 16, 16);
-    public final FlatSVGIcon gitPullIcon = new FlatSVGIcon("resources/icons/commons/git_pull.svg", 16, 16);
-    public final FlatSVGIcon gitCheckoutIcon = new FlatSVGIcon("resources/icons/commons/git_checkout.svg", 16, 16);
-    public final FlatSVGIcon gitPushIcon = new FlatSVGIcon("resources/icons/commons/git_push.svg", 16, 16);
-    
-    // Settings window icons
-    public final FlatSVGIcon appearSettingsIcon = new FlatSVGIcon("resources/icons/commons/appearance_settings.svg", 24, 24);
-    public final FlatSVGIcon gitSettingsIcon = new FlatSVGIcon("resources/icons/commons/git_settings.svg", 24, 24);
-    public final FlatSVGIcon buildSettingsIcon = new FlatSVGIcon("resources/icons/commons/build_settings.svg", 24, 24);
-
-    // File types icons
-    public final FlatSVGIcon cHeaderFileTypeIcon = new FlatSVGIcon("resources/icons/commons/c_header_file.svg", 32, 32);
-    public final FlatSVGIcon cSourceFileTypeIcon = new FlatSVGIcon("resources/icons/commons/c_source_file.svg", 32, 32);
-    public final FlatSVGIcon cppClassFileTypeIcon = new FlatSVGIcon("resources/icons/commons/cpp_class_file.svg", 32, 32);
-    public final FlatSVGIcon uiFormFileTypeIcon = new FlatSVGIcon("resources/icons/commons/form_design_file.svg", 32, 32);
-    public final FlatSVGIcon iniFileTypeIcon = new FlatSVGIcon("resources/icons/commons/ini_file.svg", 32, 32);
     /*
      * -------------------------------------------------------------------------
      * CLASS FIELDS SECTION END
@@ -196,19 +111,6 @@ public class MainWindow extends JFrame {
         
         // Set timer to show caret position in selected editor MDI window
         new Timer(100, e -> showCaretPosition()).start();
-    }
-    
-    // Get icons folder name by current theme type : function
-    private static String getIconsFolder() {
-        String folder;
-        
-        if(!ThemeManager.getCurrentThemeType()) {
-            folder = "light";
-        } else {
-            folder = "dark";
-        }
-        
-        return folder;
     }
 
     /**
@@ -547,7 +449,7 @@ public class MainWindow extends JFrame {
                 .addContainerGap(290, Short.MAX_VALUE))
         );
 
-        SettingsTabs.addTab("", appearSettingsIcon, AppearanceSettingsPanel, "Appearance settings");
+        SettingsTabs.addTab("", getIcon("appearance_settings", 24), AppearanceSettingsPanel, "Appearance settings");
 
         GitSettingsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         GitSettingsLabel.setText("Git configuration");
@@ -616,7 +518,7 @@ public class MainWindow extends JFrame {
                 .addContainerGap(312, Short.MAX_VALUE))
         );
 
-        SettingsTabs.addTab("", gitSettingsIcon, GitSettingsPanel, "Git configuration");
+        SettingsTabs.addTab("", getIcon("git_settings", 24), GitSettingsPanel, "Git configuration");
 
         BuildSettingsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         BuildSettingsLabel.setText("Build configuration");
@@ -674,7 +576,7 @@ public class MainWindow extends JFrame {
                 .addContainerGap(352, Short.MAX_VALUE))
         );
 
-        SettingsTabs.addTab("", buildSettingsIcon, BuildSettingsPanel, "Build configuration");
+        SettingsTabs.addTab("", getIcon("build_settings", 24), BuildSettingsPanel, "Build configuration");
 
         SaveSettingsButton.setText("Save");
         SaveSettingsButton.addActionListener(this::SaveSettingsButtonActionPerformed);
@@ -726,7 +628,7 @@ public class MainWindow extends JFrame {
         NewFileNameLabel.setLabelFor(NewFileNameTextInput);
         NewFileNameLabel.setText("Enter file name:");
 
-        CHeaderFileTypeButton.setIcon(cHeaderFileTypeIcon);
+        CHeaderFileTypeButton.setIcon(getIcon("c_header_file", 32));
         CHeaderFileTypeButton.setText("C/C++ header");
         CHeaderFileTypeButton.setToolTipText("C/C++ header file");
         CHeaderFileTypeButton.setBorder(null);
@@ -739,7 +641,7 @@ public class MainWindow extends JFrame {
         CHeaderFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         CHeaderFileTypeButton.addActionListener(this::CHeaderFileTypeButtonActionPerformed);
 
-        CSourceFileTypeButton.setIcon(cSourceFileTypeIcon);
+        CSourceFileTypeButton.setIcon(getIcon("c_source_file", 32));
         CSourceFileTypeButton.setText("C source");
         CSourceFileTypeButton.setToolTipText("C source file");
         CSourceFileTypeButton.setBorder(null);
@@ -752,7 +654,7 @@ public class MainWindow extends JFrame {
         CSourceFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         CSourceFileTypeButton.addActionListener(this::CSourceFileTypeButtonActionPerformed);
 
-        CPPClassFileTypeButton.setIcon(cppClassFileTypeIcon);
+        CPPClassFileTypeButton.setIcon(getIcon("cpp_class_file", 32));
         CPPClassFileTypeButton.setText("C++ class");
         CPPClassFileTypeButton.setToolTipText("C++ class file");
         CPPClassFileTypeButton.setBorder(null);
@@ -765,7 +667,7 @@ public class MainWindow extends JFrame {
         CPPClassFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         CPPClassFileTypeButton.addActionListener(this::CPPClassFileTypeButtonActionPerformed);
 
-        FormDesignFileTypeButton.setIcon(uiFormFileTypeIcon);
+        FormDesignFileTypeButton.setIcon(getIcon("form_design_file", 32));
         FormDesignFileTypeButton.setText("Form design");
         FormDesignFileTypeButton.setToolTipText("Form design file");
         FormDesignFileTypeButton.setBorder(null);
@@ -779,7 +681,7 @@ public class MainWindow extends JFrame {
         FormDesignFileTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         FormDesignFileTypeButton.addActionListener(this::FormDesignFileTypeButtonActionPerformed);
 
-        INIConfigFileTypeButton.setIcon(iniFileTypeIcon);
+        INIConfigFileTypeButton.setIcon(getIcon("ini_file", 32));
         INIConfigFileTypeButton.setText("INI config");
         INIConfigFileTypeButton.setToolTipText("INI config file");
         INIConfigFileTypeButton.setBorder(null);
@@ -984,7 +886,7 @@ public class MainWindow extends JFrame {
         CommonToolbar.setName(""); // NOI18N
         CommonToolbar.setPreferredSize(new java.awt.Dimension(200, 26));
 
-        NewFileButton.setIcon(newFileIcon);
+        NewFileButton.setIcon(getIcon("new_file", 16));
         NewFileButton.setToolTipText("Create new file");
         NewFileButton.setFocusable(false);
         NewFileButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -995,7 +897,7 @@ public class MainWindow extends JFrame {
         NewFileButton.addActionListener(this::NewFileButtonActionPerformed);
         CommonToolbar.add(NewFileButton);
 
-        OpenFileButton.setIcon(openFileIcon);
+        OpenFileButton.setIcon(getIcon("open_file", 16));
         OpenFileButton.setToolTipText("Open file");
         OpenFileButton.setFocusable(false);
         OpenFileButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1006,7 +908,7 @@ public class MainWindow extends JFrame {
         OpenFileButton.addActionListener(this::OpenFileButtonActionPerformed);
         CommonToolbar.add(OpenFileButton);
 
-        SaveFileButton.setIcon(saveFileIcon);
+        SaveFileButton.setIcon(getIcon("save_file", 16));
         SaveFileButton.setToolTipText("Save file");
         SaveFileButton.setFocusable(false);
         SaveFileButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1018,7 +920,7 @@ public class MainWindow extends JFrame {
         CommonToolbar.add(SaveFileButton);
         CommonToolbar.add(ToolbarSeparator1);
 
-        ContentsHelpButton.setIcon(contentsHelpIcon);
+        ContentsHelpButton.setIcon(getIcon("contents_help", 16));
         ContentsHelpButton.setToolTipText("Show help manual");
         ContentsHelpButton.setFocusable(false);
         ContentsHelpButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1029,7 +931,7 @@ public class MainWindow extends JFrame {
         CommonToolbar.add(ContentsHelpButton);
         CommonToolbar.add(ToolbarSeparator2);
 
-        UndoEditButton.setIcon(undoEditIcon);
+        UndoEditButton.setIcon(getIcon("undo_edit", 16));
         UndoEditButton.setToolTipText("Undo");
         UndoEditButton.setFocusable(false);
         UndoEditButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1040,7 +942,7 @@ public class MainWindow extends JFrame {
         UndoEditButton.addActionListener(this::UndoEditButtonActionPerformed);
         CommonToolbar.add(UndoEditButton);
 
-        RedoEditButton.setIcon(redoEditIcon);
+        RedoEditButton.setIcon(getIcon("redo_edit", 16));
         RedoEditButton.setToolTipText("Redo");
         RedoEditButton.setFocusable(false);
         RedoEditButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1052,7 +954,7 @@ public class MainWindow extends JFrame {
         CommonToolbar.add(RedoEditButton);
         CommonToolbar.add(ToolbarSeparator3);
 
-        FindAndReplaceButton.setIcon(findAndReplaceIcon);
+        FindAndReplaceButton.setIcon(getIcon("find_and_replace", 16));
         FindAndReplaceButton.setToolTipText("Find and replace text");
         FindAndReplaceButton.setFocusable(false);
         FindAndReplaceButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1072,7 +974,7 @@ public class MainWindow extends JFrame {
         BuildToolbar.setName(""); // NOI18N
         BuildToolbar.setPreferredSize(new java.awt.Dimension(95, 26));
 
-        BuildReleaseButton.setIcon(releaseBuildIcon);
+        BuildReleaseButton.setIcon(getIcon("release_build", 16));
         BuildReleaseButton.setToolTipText("Build project (release)");
         BuildReleaseButton.setFocusable(false);
         BuildReleaseButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1082,7 +984,7 @@ public class MainWindow extends JFrame {
         BuildReleaseButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BuildToolbar.add(BuildReleaseButton);
 
-        BuildDebugButton.setIcon(debugBuildIcon);
+        BuildDebugButton.setIcon(getIcon("debug_build", 16));
         BuildDebugButton.setToolTipText("Build project (debug)");
         BuildDebugButton.setFocusable(false);
         BuildDebugButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1093,7 +995,7 @@ public class MainWindow extends JFrame {
         BuildToolbar.add(BuildDebugButton);
         BuildToolbar.add(ToolbarSeparator5);
 
-        TerminalButton.setIcon(terminalToolsIcon);
+        TerminalButton.setIcon(getIcon("terminal_tools", 16));
         TerminalButton.setToolTipText("Show terminal window");
         TerminalButton.setFocusable(false);
         TerminalButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1332,7 +1234,7 @@ public class MainWindow extends JFrame {
         BuildLogToolbar.setName(""); // NOI18N
         BuildLogToolbar.setPreferredSize(new java.awt.Dimension(32, 100));
 
-        ShowAllMessageButton.setIcon(showAllLogIcon);
+        ShowAllMessageButton.setIcon(getIcon("show_all_log", 16));
         ShowAllMessageButton.setToolTipText("Show all build log messages");
         ShowAllMessageButton.setAlignmentX(0.5F);
         ShowAllMessageButton.setAlignmentY(0.0F);
@@ -1344,7 +1246,7 @@ public class MainWindow extends JFrame {
         ShowAllMessageButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BuildLogToolbar.add(ShowAllMessageButton);
 
-        ErrorsFilterButton.setIcon(showErrorsLogIcon);
+        ErrorsFilterButton.setIcon(getIcon("show_errors_log", 16));
         ErrorsFilterButton.setToolTipText("Show only errors build log messages");
         ErrorsFilterButton.setAlignmentX(0.5F);
         ErrorsFilterButton.setAlignmentY(0.0F);
@@ -1360,7 +1262,7 @@ public class MainWindow extends JFrame {
         ToolbarSeparator7.setAlignmentY(0.0F);
         BuildLogToolbar.add(ToolbarSeparator7);
 
-        ClearBuildLogButton.setIcon(clearBuildLogIcon);
+        ClearBuildLogButton.setIcon(getIcon("clear_build_log", 16));
         ClearBuildLogButton.setToolTipText("Clear build log data");
         ClearBuildLogButton.setAlignmentX(0.5F);
         ClearBuildLogButton.setAlignmentY(0.0F);
@@ -1423,7 +1325,7 @@ public class MainWindow extends JFrame {
         GitToolbar.setMinimumSize(new java.awt.Dimension(4, 26));
         GitToolbar.setPreferredSize(new java.awt.Dimension(100, 26));
 
-        GitCommitButton.setIcon(gitCommitIcon);
+        GitCommitButton.setIcon(getIcon("git_commit", 16));
         GitCommitButton.setToolTipText("Commit changes");
         GitCommitButton.setFocusable(false);
         GitCommitButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1434,7 +1336,7 @@ public class MainWindow extends JFrame {
         GitToolbar.add(GitCommitButton);
         GitToolbar.add(ToolbarSeparator8);
 
-        GitFetchButton.setIcon(gitFetchIcon);
+        GitFetchButton.setIcon(getIcon("git_fetch", 16));
         GitFetchButton.setToolTipText("Fetch from current branch");
         GitFetchButton.setFocusable(false);
         GitFetchButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1444,7 +1346,7 @@ public class MainWindow extends JFrame {
         GitFetchButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         GitToolbar.add(GitFetchButton);
 
-        GitPullButton.setIcon(gitPullIcon);
+        GitPullButton.setIcon(getIcon("git_pull", 16));
         GitPullButton.setToolTipText("Pull from current branch");
         GitPullButton.setFocusable(false);
         GitPullButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1454,7 +1356,7 @@ public class MainWindow extends JFrame {
         GitPullButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         GitToolbar.add(GitPullButton);
 
-        GitCheckoutButton.setIcon(gitCheckoutIcon);
+        GitCheckoutButton.setIcon(getIcon("git_checkout", 16));
         GitCheckoutButton.setToolTipText("Checkout files");
         GitCheckoutButton.setFocusable(false);
         GitCheckoutButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1465,7 +1367,7 @@ public class MainWindow extends JFrame {
         GitToolbar.add(GitCheckoutButton);
         GitToolbar.add(ToolbarSeparator9);
 
-        GitPushButton.setIcon(gitPushIcon);
+        GitPushButton.setIcon(getIcon("git_push", 16));
         GitPushButton.setToolTipText("Push to current branch");
         GitPushButton.setFocusable(false);
         GitPushButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1536,65 +1438,65 @@ public class MainWindow extends JFrame {
         FileMenu.setText("File");
 
         NewFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        NewFileItem.setIcon(newFileIcon);
+        NewFileItem.setIcon(getIcon("new_file", 16));
         NewFileItem.setText("New...");
         NewFileItem.addActionListener(this::NewFileItemActionPerformed);
         FileMenu.add(NewFileItem);
 
         OpenFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        OpenFileItem.setIcon(openFileIcon);
+        OpenFileItem.setIcon(getIcon("open_file", 16));
         OpenFileItem.setText("Open...");
         OpenFileItem.addActionListener(this::OpenFileItemActionPerformed);
         FileMenu.add(OpenFileItem);
 
         SaveFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        SaveFileItem.setIcon(saveFileIcon);
+        SaveFileItem.setIcon(getIcon("save_file", 16));
         SaveFileItem.setText("Save");
         SaveFileItem.addActionListener(this::SaveFileItemActionPerformed);
         FileMenu.add(SaveFileItem);
 
         SaveAsFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        SaveAsFileItem.setIcon(saveAsIcon);
+        SaveAsFileItem.setIcon(getIcon("save_as", 16));
         SaveAsFileItem.setText("Save as...");
         SaveAsFileItem.addActionListener(this::SaveAsFileItemActionPerformed);
         FileMenu.add(SaveAsFileItem);
         FileMenu.add(MenuSeparator1);
 
         NewProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        NewProjectItem.setIcon(newProjectIcon);
+        NewProjectItem.setIcon(getIcon("new_project", 16));
         NewProjectItem.setText("New project...");
         FileMenu.add(NewProjectItem);
 
         OpenProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        OpenProjectItem.setIcon(openProjectIcon);
+        OpenProjectItem.setIcon(getIcon("open_project", 16));
         OpenProjectItem.setText("Open project...");
         FileMenu.add(OpenProjectItem);
 
         SaveProjectItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        SaveProjectItem.setIcon(saveProjectIcon);
+        SaveProjectItem.setIcon(getIcon("save_project", 16));
         SaveProjectItem.setText("Save project");
         FileMenu.add(SaveProjectItem);
 
-        SaveAllItem.setIcon(saveAllIcon);
+        SaveAllItem.setIcon(getIcon("save_all", 16));
         SaveAllItem.setText("Save all");
         SaveAllItem.addActionListener(this::SaveAllItemActionPerformed);
         FileMenu.add(SaveAllItem);
         FileMenu.add(MenuSeparator2);
 
         PrintFileItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        PrintFileItem.setIcon(printFileIcon);
+        PrintFileItem.setIcon(getIcon("print_file", 16));
         PrintFileItem.setText("Print");
         PrintFileItem.addActionListener(this::PrintFileItemActionPerformed);
         FileMenu.add(PrintFileItem);
 
-        PrintSetupItem.setIcon(printSetupIcon);
+        PrintSetupItem.setIcon(getIcon("print_setup", 16));
         PrintSetupItem.setText("Print setup...");
         PrintSetupItem.addActionListener(this::PrintSetupItemActionPerformed);
         FileMenu.add(PrintSetupItem);
         FileMenu.add(MenuSeparator3);
 
         QuitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        QuitItem.setIcon(quitAppIcon);
+        QuitItem.setIcon(getIcon("quit_app", 16));
         QuitItem.setText("Quit");
         QuitItem.addActionListener(this::QuitItemActionPerformed);
         FileMenu.add(QuitItem);
@@ -1604,39 +1506,39 @@ public class MainWindow extends JFrame {
         EditMenu.setText("Edit");
 
         UndoEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        UndoEditItem.setIcon(undoEditIcon);
+        UndoEditItem.setIcon(getIcon("undo_edit", 16));
         UndoEditItem.setText("Undo");
         UndoEditItem.addActionListener(this::UndoEditItemActionPerformed);
         EditMenu.add(UndoEditItem);
 
         RedoEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        RedoEditItem.setIcon(redoEditIcon);
+        RedoEditItem.setIcon(getIcon("redo_edit", 16));
         RedoEditItem.setText("Redo");
         RedoEditItem.addActionListener(this::RedoEditItemActionPerformed);
         EditMenu.add(RedoEditItem);
         EditMenu.add(MenuSeparator4);
 
         CutEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        CutEditItem.setIcon(cutEditIcon);
+        CutEditItem.setIcon(getIcon("cut_edit", 16));
         CutEditItem.setText("Cut");
         CutEditItem.addActionListener(this::CutEditItemActionPerformed);
         EditMenu.add(CutEditItem);
 
         CopyEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        CopyEditItem.setIcon(copyEditIcon);
+        CopyEditItem.setIcon(getIcon("copy_edit", 16));
         CopyEditItem.setText("Copy");
         CopyEditItem.addActionListener(this::CopyEditItemActionPerformed);
         EditMenu.add(CopyEditItem);
 
         PasteEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        PasteEditItem.setIcon(pasteEditIcon);
+        PasteEditItem.setIcon(getIcon("paste_edit", 16));
         PasteEditItem.setText("Paste");
         PasteEditItem.addActionListener(this::PasteEditItemActionPerformed);
         EditMenu.add(PasteEditItem);
         EditMenu.add(MenuSeparator5);
 
         FindEditItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        FindEditItem.setIcon(findAndReplaceIcon);
+        FindEditItem.setIcon(getIcon("find_and_replace", 16));
         FindEditItem.setText("Find and replace...");
         FindEditItem.addActionListener(this::FindEditItemActionPerformed);
         EditMenu.add(FindEditItem);
@@ -1645,18 +1547,18 @@ public class MainWindow extends JFrame {
         BookmarksMenu.setText("Bookmarks");
 
         NewBookmarkItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        NewBookmarkItem.setIcon(newBookmarkIcon);
+        NewBookmarkItem.setIcon(getIcon("new_bookmark", 16));
         NewBookmarkItem.setText("New");
         NewBookmarkItem.addActionListener(this::NewBookmarkItemActionPerformed);
         BookmarksMenu.add(NewBookmarkItem);
         BookmarksMenu.add(MenuSeparator8);
 
-        PrevBookmarkItem.setIcon(prevBookmarkIcon);
+        PrevBookmarkItem.setIcon(getIcon("prev_bookmark", 16));
         PrevBookmarkItem.setText("Preview");
         PrevBookmarkItem.addActionListener(this::PrevBookmarkItemActionPerformed);
         BookmarksMenu.add(PrevBookmarkItem);
 
-        NextBookmarkItem.setIcon(nextBookmarkIcon);
+        NextBookmarkItem.setIcon(getIcon("next_bookmark", 16));
         NextBookmarkItem.setText("Next");
         NextBookmarkItem.addActionListener(this::NextBookmarkItemActionPerformed);
         BookmarksMenu.add(NextBookmarkItem);
@@ -1664,7 +1566,7 @@ public class MainWindow extends JFrame {
         EditMenu.add(BookmarksMenu);
         EditMenu.add(MenuSeparator7);
 
-        SettingsItem.setIcon(settingsAppIcon);
+        SettingsItem.setIcon(getIcon("settings_app", 16));
         SettingsItem.setText("Settings...");
         SettingsItem.addActionListener(this::SettingsItemActionPerformed);
         EditMenu.add(SettingsItem);
@@ -1674,25 +1576,25 @@ public class MainWindow extends JFrame {
         ViewMenu.setText("View");
 
         ZoomInViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_EQUALS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        ZoomInViewItem.setIcon(zoomInViewIcon);
+        ZoomInViewItem.setIcon(getIcon("zoom_in", 16));
         ZoomInViewItem.setText("Zoom in");
         ZoomInViewItem.addActionListener(this::ZoomInViewItemActionPerformed);
         ViewMenu.add(ZoomInViewItem);
 
         ZoomOutViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_MINUS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        ZoomOutViewItem.setIcon(zoomOutViewIcon);
+        ZoomOutViewItem.setIcon(getIcon("zoom_out", 16));
         ZoomOutViewItem.setText("Zoom out");
         ZoomOutViewItem.addActionListener(this::ZoomOutViewItemActionPerformed);
         ViewMenu.add(ZoomOutViewItem);
 
         SetDefViewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        SetDefViewItem.setIcon(setDefaultViewIcon);
+        SetDefViewItem.setIcon(getIcon("set_def_view", 16));
         SetDefViewItem.setText("Set default");
         SetDefViewItem.addActionListener(this::SetDefViewItemActionPerformed);
         ViewMenu.add(SetDefViewItem);
         ViewMenu.add(MenuSeparator9);
 
-        GoToViewItem.setIcon(goToViewIcon);
+        GoToViewItem.setIcon(getIcon("go_to_view", 16));
         GoToViewItem.setText("Go to...");
         GoToViewItem.addActionListener(this::GoToViewItemActionPerformed);
         ViewMenu.add(GoToViewItem);
@@ -1713,26 +1615,26 @@ public class MainWindow extends JFrame {
         InsertMenu.setText("Insert");
 
         StructInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        StructInsertItem.setIcon(structureInsertIcon);
+        StructInsertItem.setIcon(getIcon("ins_structure", 16));
         StructInsertItem.setText("Structure");
         StructInsertItem.addActionListener(this::StructInsertItemActionPerformed);
         InsertMenu.add(StructInsertItem);
 
         EnumInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        EnumInsertItem.setIcon(enumerationInsertIcon);
+        EnumInsertItem.setIcon(getIcon("ins_enum", 16));
         EnumInsertItem.setText("Enumeration");
         EnumInsertItem.addActionListener(this::EnumInsertItemActionPerformed);
         InsertMenu.add(EnumInsertItem);
 
         FunctInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        FunctInsertItem.setIcon(functionInsertIcon);
+        FunctInsertItem.setIcon(getIcon("ins_function", 16));
         FunctInsertItem.setText("Function");
         FunctInsertItem.addActionListener(this::FunctInsertItemActionPerformed);
         InsertMenu.add(FunctInsertItem);
         InsertMenu.add(MenuSeparator11);
 
         TemplateInsertItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        TemplateInsertItem.setIcon(templateInsertIcon);
+        TemplateInsertItem.setIcon(getIcon("ins_template", 16));
         TemplateInsertItem.setText("Template...");
         TemplateInsertItem.addActionListener(this::TemplateInsertItemActionPerformed);
         InsertMenu.add(TemplateInsertItem);
@@ -1742,21 +1644,21 @@ public class MainWindow extends JFrame {
         BuildMenu.setText("Build");
 
         ReleaseBuildItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, 0));
-        ReleaseBuildItem.setIcon(releaseBuildIcon);
+        ReleaseBuildItem.setIcon(getIcon("release_build", 16));
         ReleaseBuildItem.setText("Release");
         BuildMenu.add(ReleaseBuildItem);
 
         DebugBuildItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        DebugBuildItem.setIcon(debugBuildIcon);
+        DebugBuildItem.setIcon(getIcon("debug_build", 16));
         DebugBuildItem.setText("Debug");
         BuildMenu.add(DebugBuildItem);
 
-        InstallPkgBuildItem.setIcon(installPackageBuildIcon);
+        InstallPkgBuildItem.setIcon(getIcon("install_package_build", 16));
         InstallPkgBuildItem.setText("Install package");
         BuildMenu.add(InstallPkgBuildItem);
         BuildMenu.add(MenuSeparator12);
 
-        ConfigBuildItem.setIcon(configBuildIcon);
+        ConfigBuildItem.setIcon(getIcon("config_build", 16));
         ConfigBuildItem.setText("Configure...");
         BuildMenu.add(ConfigBuildItem);
 
@@ -1764,22 +1666,22 @@ public class MainWindow extends JFrame {
 
         ToolsMenu.setText("Tools");
 
-        GitToolsItem.setIcon(gitToolsIcon);
+        GitToolsItem.setIcon(getIcon("git_tools", 16));
         GitToolsItem.setText("Git");
         GitToolsItem.addActionListener(this::GitToolsItemActionPerformed);
         ToolsMenu.add(GitToolsItem);
 
         TerminalToolsItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        TerminalToolsItem.setIcon(terminalToolsIcon);
+        TerminalToolsItem.setIcon(getIcon("terminal_tools", 16));
         TerminalToolsItem.setText("Terminal");
         TerminalToolsItem.addActionListener(this::TerminalToolsItemActionPerformed);
         ToolsMenu.add(TerminalToolsItem);
 
-        DesignerToolsItem.setIcon(uiDesignerToolsIcon);
+        DesignerToolsItem.setIcon(getIcon("ui_designer_tools", 16));
         DesignerToolsItem.setText("UI designer");
         ToolsMenu.add(DesignerToolsItem);
 
-        ResManagerToolsItem.setIcon(resourcesManagerIcon);
+        ResManagerToolsItem.setIcon(getIcon("resources_manager", 16));
         ResManagerToolsItem.setText("Resources manager...");
         ToolsMenu.add(ResManagerToolsItem);
 
@@ -1787,32 +1689,32 @@ public class MainWindow extends JFrame {
 
         WindowMenu.setText("Window");
 
-        CascadeWindowItem.setIcon(cascadeWindowIcon);
+        CascadeWindowItem.setIcon(getIcon("cascade_window", 16));
         CascadeWindowItem.setText("Cascade");
         CascadeWindowItem.setEnabled(false);
         CascadeWindowItem.addActionListener(this::CascadeWindowItemActionPerformed);
         WindowMenu.add(CascadeWindowItem);
 
-        SplitHorizontallyWindowItem.setIcon(splitHorizontallyWindowIcon);
+        SplitHorizontallyWindowItem.setIcon(getIcon("split_h_window", 16));
         SplitHorizontallyWindowItem.setText("Split horizontally");
         SplitHorizontallyWindowItem.setEnabled(false);
         SplitHorizontallyWindowItem.addActionListener(this::SplitHorizontallyWindowItemActionPerformed);
         WindowMenu.add(SplitHorizontallyWindowItem);
 
-        SplitVerticallyWindowItem.setIcon(splitVerticallyWindowIcon);
+        SplitVerticallyWindowItem.setIcon(getIcon("split_v_window", 16));
         SplitVerticallyWindowItem.setText("Split vertically");
         SplitVerticallyWindowItem.setEnabled(false);
         SplitVerticallyWindowItem.addActionListener(this::SplitVerticallyWindowItemActionPerformed);
         WindowMenu.add(SplitVerticallyWindowItem);
         WindowMenu.add(MenuSeparator14);
 
-        CloseWindowItem.setIcon(closeWindowIcon);
+        CloseWindowItem.setIcon(getIcon("close_window", 16));
         CloseWindowItem.setText("Close");
         CloseWindowItem.setEnabled(false);
         CloseWindowItem.addActionListener(this::CloseWindowItemActionPerformed);
         WindowMenu.add(CloseWindowItem);
 
-        CloseAllWindowItem.setIcon(closeAllWindowIcon);
+        CloseAllWindowItem.setIcon(getIcon("close_all_window", 16));
         CloseAllWindowItem.setText("Close all");
         CloseAllWindowItem.setEnabled(false);
         CloseAllWindowItem.addActionListener(this::CloseAllWindowItemActionPerformed);
@@ -1823,16 +1725,16 @@ public class MainWindow extends JFrame {
         HelpMenu.setText("Help");
 
         ContentsHelpItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        ContentsHelpItem.setIcon(contentsHelpIcon);
+        ContentsHelpItem.setIcon(getIcon("contents_help", 16));
         ContentsHelpItem.setText("Contents...");
         HelpMenu.add(ContentsHelpItem);
 
-        SamplesHelpItem.setIcon(samplesHelpIcon);
+        SamplesHelpItem.setIcon(getIcon("samples_help", 16));
         SamplesHelpItem.setText("Samples");
         HelpMenu.add(SamplesHelpItem);
         HelpMenu.add(MenuSeparator13);
 
-        AboutHelpItem.setIcon(aboutHelpIcon);
+        AboutHelpItem.setIcon(getIcon("about_help", 16));
         AboutHelpItem.setText("About...");
         AboutHelpItem.addActionListener(this::AboutHelpItemActionPerformed);
         HelpMenu.add(AboutHelpItem);
@@ -1852,6 +1754,19 @@ public class MainWindow extends JFrame {
         showAboutDialogWindow();
     }//GEN-LAST:event_AboutHelpItemActionPerformed
 
+    // Wrapper for get icon resources from icon provider : function
+    private static Icon getIcon(String name) {
+        return IconProvider.getIcon(name);
+    }
+    
+    private static Icon getIcon(String name, int size) {
+        return IconProvider.getIcon(name, size);
+    }
+    
+    private static Icon getIcon(String name, int width, int height) {
+        return IconProvider.getIcon(name, width, height);
+    }
+    
     // Show about application dialog window : function
     private void showAboutDialogWindow() {
         AboutDialogWindow.setSize(455, 250); // Set window size

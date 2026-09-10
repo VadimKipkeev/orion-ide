@@ -38,6 +38,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.TreeSet;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -48,6 +49,7 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.HighlightPainter;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
+import orion.ide.ui.IconProvider;
 import orion.ide.core.CodeEditorTextAreaZoomListener;
 import orion.ide.core.NumericFieldHelper;
 import orion.ide.core.FindingManager;
@@ -65,7 +67,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
      * CLASS FIELDS SECTION BEGIN
      * -------------------------------------------------------------------------
      */
-    private final String iconsFolder = MainWindow.iconsFolder;
     private final Gutter bookmarksManager;
     private final TreeSet<Integer> bookmarksList = new TreeSet<>();
     FindingManager fmanager;
@@ -75,22 +76,6 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     
     // Editor text area font size used by default zoom size
     public int defaultEditorFontSize;
-    
-    // Set toolbar buttons icons
-    public final FlatSVGIcon goToViewIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/go_to_view.svg", 16, 16);
-    public final FlatSVGIcon structureInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_structure.svg", 16, 16);
-    public final FlatSVGIcon enumerationInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_enum.svg", 16, 16);
-    public final FlatSVGIcon functionInsertIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/ins_function.svg", 16, 16);
-    public final FlatSVGIcon newBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/new_bookmark.svg", 16, 16);
-    public final FlatSVGIcon nextBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/next_bookmark.svg", 16, 16);
-    public final FlatSVGIcon prevBookmarkIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/prev_bookmark.svg", 16, 16);
-    
-    // Set editor text area popup menu icons
-    public final FlatSVGIcon undoEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/undo_edit.svg", 16, 16);
-    public final FlatSVGIcon redoEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/redo_edit.svg", 16, 16);
-    public final FlatSVGIcon cutEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/cut_edit.svg", 16, 16);
-    public final FlatSVGIcon copyEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/copy_edit.svg", 16, 16);
-    public final FlatSVGIcon pasteEditIcon = new FlatSVGIcon("resources/icons/" + iconsFolder + "/paste_edit.svg", 16, 16);
     
     // Code editor view
     public RSyntaxTextArea editorTextArea = new RSyntaxTextArea();
@@ -112,7 +97,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         // Set bookmarks manager
         this.bookmarksManager = editorTextAreaScroller.getGutter();
         bookmarksManager.setBookmarkingEnabled(true);
-        bookmarksManager.setBookmarkIcon(newBookmarkIcon); // Set bookmark icon
+        bookmarksManager.setBookmarkIcon(getIcon("new_bookmark", 16)); // Set bookmark icon
         
         // Set finding manager
         this.fmanager = new FindingManager(editorTextArea);
@@ -927,6 +912,19 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         return !currentText.equals(currentBuffer); // => true or false
     }
     
+    // Wrapper for get icon resources from icon provider : function
+    private static Icon getIcon(String name) {
+        return IconProvider.getIcon(name);
+    }
+    
+    private static Icon getIcon(String name, int size) {
+        return IconProvider.getIcon(name, size);
+    }
+    
+    private static Icon getIcon(String name, int width, int height) {
+        return IconProvider.getIcon(name, width, height);
+    }
+    
     // Check file modified status : function
     private boolean checkFileModifiedStatus() {
         JInternalFrame currentWindow = (JInternalFrame) SwingUtilities.getAncestorOfClass(JInternalFrame.class, this);
@@ -1047,32 +1045,32 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         NextBookmarkButton = new javax.swing.JButton();
 
         UndoActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        UndoActionItem.setIcon(undoEditIcon);
+        UndoActionItem.setIcon(getIcon("undo_edit", 16));
         UndoActionItem.setText("Undo");
         UndoActionItem.addActionListener(this::UndoActionItemActionPerformed);
         EditorTextPopupMenu.add(UndoActionItem);
 
         RedoActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        RedoActionItem.setIcon(redoEditIcon);
+        RedoActionItem.setIcon(getIcon("redo_edit", 16));
         RedoActionItem.setText("Redo");
         RedoActionItem.addActionListener(this::RedoActionItemActionPerformed);
         EditorTextPopupMenu.add(RedoActionItem);
         EditorTextPopupMenu.add(MenuSeparator13);
 
         CutActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        CutActionItem.setIcon(cutEditIcon);
+        CutActionItem.setIcon(getIcon("cut_edit", 16));
         CutActionItem.setText("Cut");
         CutActionItem.addActionListener(this::CutActionItemActionPerformed);
         EditorTextPopupMenu.add(CutActionItem);
 
         CopyActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        CopyActionItem.setIcon(copyEditIcon);
+        CopyActionItem.setIcon(getIcon("copy_edit", 16));
         CopyActionItem.setText("Copy");
         CopyActionItem.addActionListener(this::CopyActionItemActionPerformed);
         EditorTextPopupMenu.add(CopyActionItem);
 
         PasteActionItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        PasteActionItem.setIcon(pasteEditIcon);
+        PasteActionItem.setIcon(getIcon("paste_edit", 16));
         PasteActionItem.setText("Paste");
         PasteActionItem.addActionListener(this::PasteActionItemActionPerformed);
         EditorTextPopupMenu.add(PasteActionItem);
@@ -1207,12 +1205,10 @@ public class CodeEditorPanel extends javax.swing.JPanel {
 
         NewTemplateWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         NewTemplateWindow.setTitle("New template");
-        NewTemplateWindow.setMaximumSize(new java.awt.Dimension(640, 115));
         NewTemplateWindow.setMinimumSize(new java.awt.Dimension(640, 115));
         NewTemplateWindow.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         NewTemplateWindow.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         NewTemplateWindow.setName("NewTemplateWindow"); // NOI18N
-        NewTemplateWindow.setPreferredSize(new java.awt.Dimension(640, 115));
         NewTemplateWindow.setResizable(false);
         NewTemplateWindow.setType(java.awt.Window.Type.POPUP);
 
@@ -1271,7 +1267,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         CodeEditorToolbar.add(FunctionsListButton);
         CodeEditorToolbar.add(ToolbarSeparator10);
 
-        GoToButton.setIcon(goToViewIcon);
+        GoToButton.setIcon(getIcon("go_to_view", 16));
         GoToButton.setToolTipText("Go to");
         GoToButton.setFocusable(false);
         GoToButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1283,7 +1279,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         CodeEditorToolbar.add(GoToButton);
         CodeEditorToolbar.add(ToolbarSeparator11);
 
-        InsertStructureButton.setIcon(structureInsertIcon);
+        InsertStructureButton.setIcon(getIcon("ins_structure", 16));
         InsertStructureButton.setToolTipText("Insert structure");
         InsertStructureButton.setFocusable(false);
         InsertStructureButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1294,7 +1290,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         InsertStructureButton.addActionListener(this::InsertStructureButtonActionPerformed);
         CodeEditorToolbar.add(InsertStructureButton);
 
-        InsertEnumButton.setIcon(enumerationInsertIcon);
+        InsertEnumButton.setIcon(getIcon("ins_enum", 16));
         InsertEnumButton.setToolTipText("Insert enumeration");
         InsertEnumButton.setFocusable(false);
         InsertEnumButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1305,7 +1301,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         InsertEnumButton.addActionListener(this::InsertEnumButtonActionPerformed);
         CodeEditorToolbar.add(InsertEnumButton);
 
-        InsertFunctionButton.setIcon(functionInsertIcon);
+        InsertFunctionButton.setIcon(getIcon("ins_function", 16));
         InsertFunctionButton.setToolTipText("Insert function");
         InsertFunctionButton.setFocusable(false);
         InsertFunctionButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1317,7 +1313,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         CodeEditorToolbar.add(InsertFunctionButton);
         CodeEditorToolbar.add(ToolbarSeparator12);
 
-        NewBookmarkButton.setIcon(newBookmarkIcon);
+        NewBookmarkButton.setIcon(getIcon("new_bookmark", 16));
         NewBookmarkButton.setToolTipText("Add new bookmark");
         NewBookmarkButton.setFocusable(false);
         NewBookmarkButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1327,7 +1323,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         NewBookmarkButton.addActionListener(this::NewBookmarkButtonActionPerformed);
         CodeEditorToolbar.add(NewBookmarkButton);
 
-        PrevBookmarkButton.setIcon(prevBookmarkIcon);
+        PrevBookmarkButton.setIcon(getIcon("prev_bookmark", 16));
         PrevBookmarkButton.setToolTipText("Preview bookmark");
         PrevBookmarkButton.setFocusable(false);
         PrevBookmarkButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1338,7 +1334,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         PrevBookmarkButton.addActionListener(this::PrevBookmarkButtonActionPerformed);
         CodeEditorToolbar.add(PrevBookmarkButton);
 
-        NextBookmarkButton.setIcon(nextBookmarkIcon);
+        NextBookmarkButton.setIcon(getIcon("next_bookmark", 16));
         NextBookmarkButton.setToolTipText("Next bookmark");
         NextBookmarkButton.setFocusable(false);
         NextBookmarkButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
