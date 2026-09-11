@@ -20,9 +20,6 @@ package orion.ide.ui;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import com.formdev.flatlaf.extras.FlatSVGIcon;
-import com.ibm.icu.text.CharsetDetector;
-import com.ibm.icu.text.CharsetMatch;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyVetoException;
@@ -41,7 +38,8 @@ import java.nio.file.Path;
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
-import orion.ide.ui.IconProvider;
+import com.ibm.icu.text.CharsetDetector;
+import com.ibm.icu.text.CharsetMatch;
 import orion.ide.core.SettingsManager;
 import orion.ide.core.TreeListIconRenderer;
 import orion.ide.core.TreeListModel;

@@ -111,7 +111,8 @@ public class SettingsManager {
     // Write new settings file by template : function
     private static void writeSettingsByTemplate() {
         
-        /* Settings file template:
+        /**
+         * Settings file template:
          * [Appearance]
          * currentTheme = 0
          * currentEditorStyle = 0

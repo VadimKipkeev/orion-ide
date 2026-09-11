@@ -20,9 +20,9 @@ package orion.ide.core;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 import javax.swing.*;
 import javax.swing.tree.*;
 /*
@@ -65,9 +65,9 @@ public class TreeListModel extends DefaultTreeModel {
          */
 
         /*
-         * -------------------------------------------------------------------------
+         * ---------------------------------------------------------------------
          * PUBLIC INTERNAL CLASS FIELDS
-         * -------------------------------------------------------------------------
+         * ---------------------------------------------------------------------
          */
         public String nodeName;
         public boolean isFolder;
@@ -80,9 +80,9 @@ public class TreeListModel extends DefaultTreeModel {
          */
         
         /*
-         * -------------------------------------------------------------------------
+         * ---------------------------------------------------------------------
          * PUBLIC INTERNAL CLASS METHODS
-         * -------------------------------------------------------------------------
+         * ---------------------------------------------------------------------
          */
 
         // Internal class constructor
@@ -166,15 +166,15 @@ public class TreeListModel extends DefaultTreeModel {
         return addNode(parentNode, nodeName, isFolder, file);
     }
 
-        // Check node type to folder : method
+    // Check node type to folder : method
     public boolean isFolder(DefaultMutableTreeNode node) {
         if(node == null)
             return false;
         
         Object userObject = node.getUserObject();
         
-        if(userObject instanceof NodeData) {
-            return ((NodeData) userObject).isFolder; // => true
+        if(userObject instanceof NodeData nodeData) {
+            return nodeData.isFolder; // => true
         }
         
         return false;
@@ -187,8 +187,8 @@ public class TreeListModel extends DefaultTreeModel {
         
         Object userObject = node.getUserObject();
         
-        if(userObject instanceof NodeData) {
-            return !((NodeData) userObject).isFolder; // => false
+        if(userObject instanceof NodeData nodeData) {
+            return !nodeData.isFolder; // => false
         }
         
         return false;
@@ -201,8 +201,8 @@ public class TreeListModel extends DefaultTreeModel {
         Object userObject = node.getUserObject();
         
         // Using is EDT for treads savety
-        if(userObject instanceof NodeData) {
-            ((NodeData) userObject).nodeName = nodeName;
+        if(userObject instanceof NodeData nodeData) {
+            nodeData.nodeName = nodeName;
             SwingUtilities.invokeLater(() -> nodeChanged(node));
         }
     }
@@ -285,8 +285,7 @@ public class TreeListModel extends DefaultTreeModel {
             DefaultMutableTreeNode child = (DefaultMutableTreeNode) parentNode.getChildAt(i);
             Object userObject = child.getUserObject();
             
-            if(userObject instanceof NodeData) {
-                NodeData data = (NodeData) userObject;
+            if(userObject instanceof NodeData data) {
                 
                 if(data.fileParam != null && data.fileParam.getAbsolutePath().equals(file.getAbsolutePath())) {
                     return child;

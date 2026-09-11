@@ -20,11 +20,11 @@ package orion.ide.core;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import javax.swing.JTextField;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import javax.swing.JTextField;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -34,9 +34,9 @@ import javax.swing.text.DocumentFilter;
 public class NumericFieldHelper {
 
     /*
-     * -----------------------------------------------------------------------------
+     * -------------------------------------------------------------------------
      * PUBLIC CLASS METHODS
-     * -----------------------------------------------------------------------------
+     * -------------------------------------------------------------------------
      */    
     
     // Init : method

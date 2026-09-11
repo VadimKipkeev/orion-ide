@@ -36,7 +36,6 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.TreeSet;
-import javax.naming.directory.SearchResult;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.JInternalFrame;
@@ -131,7 +130,7 @@ public class CodeEditorPanel extends javax.swing.JPanel {
     private final Gutter bookmarksManager;
     private final TreeSet<Integer> bookmarksList = new TreeSet<>();
     
-    FindingManager fmanager;
+    private final FindingManager fmanager;
     
     private String fileExtension;
     private String textBuffer = new String();
@@ -1053,14 +1052,12 @@ public class CodeEditorPanel extends javax.swing.JPanel {
         context.setMarkAll(false); // Not markup all results
         
         // Find string
-        SearchResult result;
-        result = SearchEngine.find(editorTextArea, context);
+        SearchResult result = SearchEngine.find(editorTextArea, context);
         
         // Find next position by result is false
         if(!result.wasFound()) {
             editorTextArea.setCaretPosition(0);
             SearchEngine.find(editorTextArea, context);
-        } else {
         }
         
         editorTextArea.requestFocusInWindow();

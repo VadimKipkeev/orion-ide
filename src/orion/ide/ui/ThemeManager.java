@@ -20,9 +20,9 @@ package orion.ide.ui;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import com.formdev.flatlaf.FlatLaf;
 import javax.swing.UIManager;
 import javax.swing.LookAndFeel;
+import com.formdev.flatlaf.FlatLaf;
 import orion.ide.ui.theme.FlatLafVSLight;
 import orion.ide.ui.theme.FlatLafVSDark;
 /*

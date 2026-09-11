@@ -20,10 +20,10 @@ package orion.ide.core;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchResult;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -56,6 +56,7 @@ public class FindingManager {
      * PUBLIC CLASS METHODS
      * -------------------------------------------------------------------------
      */
+    
     // Constructor
     public FindingManager(RSyntaxTextArea textArea) {
         this.textArea = textArea;

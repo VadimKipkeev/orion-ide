@@ -19,7 +19,6 @@ package orion.ide.core;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Component;
 import javax.swing.Icon;
 import javax.swing.JTree;

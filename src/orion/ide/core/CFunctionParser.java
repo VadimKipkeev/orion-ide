@@ -20,18 +20,16 @@ package orion.ide.core;
  * IMPORTS SECTION BEGIN
  * -----------------------------------------------------------------------------
  */
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 /*
  * -----------------------------------------------------------------------------
  * IMPORTS SECTION END
@@ -72,21 +70,21 @@ public class CFunctionParser {
     private static class FunctionItem {
         
         /*
-         * -------------------------------------------------------------------------
+         * ---------------------------------------------------------------------
          * INTERNAL CLASS FIELDS SECTION BEGIN
-         * -------------------------------------------------------------------------
+         * ---------------------------------------------------------------------
          */
         String name;
         int position;
         /*
-         * -------------------------------------------------------------------------
+         * ---------------------------------------------------------------------
          * INTERNAL CLASS FIELDS SECTION END
-         * -------------------------------------------------------------------------
+         * ---------------------------------------------------------------------
          */
         
-        /* -------------------------------------------------------------------------
+        /* ---------------------------------------------------------------------
          * PUBLIC INTERNAL CLASS METHODS
-         * -------------------------------------------------------------------------
+         * ---------------------------------------------------------------------
          */
 
         // Internal constructor
