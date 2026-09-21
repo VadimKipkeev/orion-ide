@@ -252,6 +252,7 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem SaveFileItem;
     private javax.swing.JMenuItem SaveProjectItem;
     private javax.swing.JButton SaveSettingsButton;
+    private javax.swing.JButton SelectProjectFolderButton;
     private javax.swing.JMenuItem SetDefViewItem;
     private javax.swing.JMenuItem SettingsItem;
     private javax.swing.JTabbedPane SettingsTabs;
@@ -441,6 +442,7 @@ public class MainWindow extends JFrame {
         AHIAppTypeButton = new javax.swing.JToggleButton();
         GFXAppTypeButton = new javax.swing.JToggleButton();
         SharedLibraryTypeButton = new javax.swing.JToggleButton();
+        SelectProjectFolderButton = new javax.swing.JButton();
         ProjectTypeButtonGroup = new javax.swing.ButtonGroup();
         MainToolbarsPanel = new javax.swing.JPanel();
         CommonToolbar = new javax.swing.JToolBar();
@@ -1164,12 +1166,11 @@ public class MainWindow extends JFrame {
         ProjectPlatformLabel.setText("Choose target platform:");
 
         ProjectPlatformList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "ARMv4 : Neptune LTE", "ARMv4 : Neptune LTE2", "M-CORE : Rainbow PoG" };
+            String[] strings = { "P2K | ARMv4 | Neptune LTE | C650", "P2K | ARMv4 | Neptune LTE | SLVR L6, TRIPLETS", "P2K | ARMv4 | Neptune LTE | E398, ROKR E1", "P2K | ARMv4 | Neptune LTE2 | SLVR L7, V360, RAZR V3i", "P2K | ARM v4 | Neptune LTE2 | SLVR L7e, KRZR K1, RIZR Z3", "P2K | M-CORE | Rainbow PoG | E770v, RAZR V3x" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         ProjectPlatformList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        ProjectPlatformList.setSelectedIndex(0);
         ProjectPlatformListScroller.setViewportView(ProjectPlatformList);
 
         javax.swing.GroupLayout ProjectPlatformTabPanelLayout = new javax.swing.GroupLayout(ProjectPlatformTabPanel);
@@ -1188,7 +1189,7 @@ public class MainWindow extends JFrame {
                 .addContainerGap()
                 .addComponent(ProjectPlatformLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ProjectPlatformListScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addComponent(ProjectPlatformListScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1197,28 +1198,28 @@ public class MainWindow extends JFrame {
         ProjectTypeLabel.setText("Choose project type:");
 
         ProjectTypeButtonGroup.add(UISAppTypeButton);
-        UISAppTypeButton.setText("UIS App");
+        UISAppTypeButton.setIcon(getIcon("uis_app_type", 32));
         UISAppTypeButton.setToolTipText("Synergy UIS application");
         UISAppTypeButton.setMaximumSize(new java.awt.Dimension(64, 64));
         UISAppTypeButton.setMinimumSize(new java.awt.Dimension(64, 64));
         UISAppTypeButton.setPreferredSize(new java.awt.Dimension(64, 64));
 
         ProjectTypeButtonGroup.add(BackgroundAppTypeButton);
+        BackgroundAppTypeButton.setIcon(getIcon("background_app_type", 32));
         BackgroundAppTypeButton.setSelected(true);
-        BackgroundAppTypeButton.setText("BG App");
         BackgroundAppTypeButton.setToolTipText("Background application");
         BackgroundAppTypeButton.setMaximumSize(new java.awt.Dimension(64, 64));
         BackgroundAppTypeButton.setMinimumSize(new java.awt.Dimension(64, 64));
         BackgroundAppTypeButton.setPreferredSize(new java.awt.Dimension(64, 64));
 
         ProjectTypeButtonGroup.add(CanvasAppTypeButton);
-        CanvasAppTypeButton.setText("Canvas App");
+        CanvasAppTypeButton.setIcon(getIcon("canvas_app_type", 32));
         CanvasAppTypeButton.setToolTipText("Canvas application");
         CanvasAppTypeButton.setMaximumSize(new java.awt.Dimension(64, 64));
         CanvasAppTypeButton.setMinimumSize(new java.awt.Dimension(64, 64));
 
         ProjectTypeButtonGroup.add(AHIAppTypeButton);
-        AHIAppTypeButton.setText("ATI App");
+        AHIAppTypeButton.setIcon(getIcon("ati_app_type", 32, 23));
         AHIAppTypeButton.setToolTipText("ATI Imagion graphics application");
         AHIAppTypeButton.setEnabled(false);
         AHIAppTypeButton.setMaximumSize(new java.awt.Dimension(64, 64));
@@ -1226,7 +1227,7 @@ public class MainWindow extends JFrame {
         AHIAppTypeButton.setPreferredSize(new java.awt.Dimension(64, 64));
 
         ProjectTypeButtonGroup.add(GFXAppTypeButton);
-        GFXAppTypeButton.setText("nVidia App");
+        GFXAppTypeButton.setIcon(getIcon("nvidia_app_type", 32));
         GFXAppTypeButton.setToolTipText("nVidia GoForce graphics application");
         GFXAppTypeButton.setEnabled(false);
         GFXAppTypeButton.setMaximumSize(new java.awt.Dimension(64, 64));
@@ -1234,7 +1235,7 @@ public class MainWindow extends JFrame {
         GFXAppTypeButton.setPreferredSize(new java.awt.Dimension(64, 64));
 
         ProjectTypeButtonGroup.add(SharedLibraryTypeButton);
-        SharedLibraryTypeButton.setText("SO Library");
+        SharedLibraryTypeButton.setIcon(getIcon("shared_library_type", 32));
         SharedLibraryTypeButton.setToolTipText("Shared library");
         SharedLibraryTypeButton.setEnabled(false);
         SharedLibraryTypeButton.setMaximumSize(new java.awt.Dimension(64, 64));
@@ -1247,10 +1248,10 @@ public class MainWindow extends JFrame {
             ProjectTypeTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProjectTypeTabPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ProjectTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ProjectTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(ProjectTypeTabPanelLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(40, 40, 40)
                 .addGroup(ProjectTypeTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ProjectTypeTabPanelLayout.createSequentialGroup()
                         .addComponent(GFXAppTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1264,14 +1265,14 @@ public class MainWindow extends JFrame {
                         .addComponent(CanvasAppTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AHIAppTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ProjectTypeTabPanelLayout.setVerticalGroup(
             ProjectTypeTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProjectTypeTabPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ProjectTypeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ProjectTypeTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UISAppTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BackgroundAppTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1281,10 +1282,13 @@ public class MainWindow extends JFrame {
                 .addGroup(ProjectTypeTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GFXAppTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SharedLibraryTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         NewProjectTabs.addTab("Type", null, ProjectTypeTabPanel, "Project type");
+
+        SelectProjectFolderButton.setText("...");
+        SelectProjectFolderButton.setToolTipText("Select project folder");
 
         javax.swing.GroupLayout NewProjectSetupPanelLayout = new javax.swing.GroupLayout(NewProjectSetupPanel);
         NewProjectSetupPanel.setLayout(NewProjectSetupPanelLayout);
@@ -1293,8 +1297,8 @@ public class MainWindow extends JFrame {
             .addGroup(NewProjectSetupPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(NewProjectSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(NewProjectNameTextInput)
                     .addComponent(NewProjectNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(NewProjectTabs)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NewProjectSetupPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(CloseNewProjectWindowButton)
@@ -1304,7 +1308,10 @@ public class MainWindow extends JFrame {
                         .addComponent(NextTabButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CreateNewProjectButton))
-                    .addComponent(NewProjectTabs))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NewProjectSetupPanelLayout.createSequentialGroup()
+                        .addComponent(NewProjectNameTextInput)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SelectProjectFolderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         NewProjectSetupPanelLayout.setVerticalGroup(
@@ -1312,8 +1319,10 @@ public class MainWindow extends JFrame {
             .addGroup(NewProjectSetupPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(NewProjectNameLabel)
-                .addGap(2, 2, 2)
-                .addComponent(NewProjectNameTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(NewProjectSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(NewProjectNameTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SelectProjectFolderButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NewProjectTabs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3194,6 +3203,58 @@ public class MainWindow extends JFrame {
         NextTabButton.setEnabled(false);
         CreateNewProjectButton.setEnabled(true);
         
+        // Activate project type buttons by selected project platform
+        switch(ProjectPlatformList.getSelectedIndex()) {
+            case 0 -> { // C650 project platform
+                AHIAppTypeButton.setEnabled(false);
+                GFXAppTypeButton.setEnabled(false);
+                SharedLibraryTypeButton.setEnabled(false);
+                break;
+            }
+            
+            case 1 -> { // SLVR L6, TRIPLETS project platform
+                AHIAppTypeButton.setEnabled(true);
+                GFXAppTypeButton.setEnabled(false);
+                SharedLibraryTypeButton.setEnabled(false);
+                break;
+            }
+            
+            case 2 -> { // E398, ROKR E1 project platform
+                AHIAppTypeButton.setEnabled(true);
+                GFXAppTypeButton.setEnabled(false);
+                SharedLibraryTypeButton.setEnabled(true);
+                break;
+            }
+            
+            case 3 -> { // SLVR L7, V360, RAZR V3i project platform
+                AHIAppTypeButton.setEnabled(true);
+                GFXAppTypeButton.setEnabled(false);
+                SharedLibraryTypeButton.setEnabled(true);
+                break;
+            }
+            
+            case 4 -> { // SLVR L7e, KRZR K1, RIZR Z3 project platform
+                AHIAppTypeButton.setEnabled(true);
+                GFXAppTypeButton.setEnabled(false);
+                SharedLibraryTypeButton.setEnabled(true);
+                break;
+            }
+            
+            case 5 -> { // E770v, RAZR V3x project platform
+                AHIAppTypeButton.setEnabled(false);
+                GFXAppTypeButton.setEnabled(true);
+                SharedLibraryTypeButton.setEnabled(false);
+                break;
+            }
+            
+            default -> { // Default project platform
+                AHIAppTypeButton.setEnabled(false);
+                GFXAppTypeButton.setEnabled(false);
+                SharedLibraryTypeButton.setEnabled(false);
+                break;
+            }
+        }
+        
         NewProjectTabs.setSelectedComponent(ProjectTypeTabPanel);
     }//GEN-LAST:event_NextTabButtonActionPerformed
 
@@ -3202,6 +3263,8 @@ public class MainWindow extends JFrame {
         NewProjectNameTextInput.setText("");
         ProjectPlatformList.setSelectedIndex(0);
         BackgroundAppTypeButton.setSelected(true);
+        NextTabButton.setEnabled(true);
+        BackTabButton.setEnabled(false);
         NewProjectTabs.setSelectedComponent(ProjectPlatformTabPanel);
         
         NewProjectWindow.setLocationRelativeTo(null);
